@@ -7,15 +7,16 @@
 </head>
 <body>
 
-  <div class="header">
-    <h1>HAYSA Field Availability</h1>
-    <div class="controls">
-      <input type="date" id="dateInput">
-      <button id="loadBtn">Load Availability</button>
-    </div>
+  <div class="nav">
+    <button data-view="day">Day</button>
+    <button data-view="week">Week</button>
+    <button data-view="month">Month</button>
+    <button data-view="search">Search</button>
   </div>
 
-  <div id="results"></div>
+  <div id="view-container">
+    <!-- Views will be injected here -->
+  </div>
 
   <script src="calendar.js"></script>
 </body>
