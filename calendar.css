@@ -57,3 +57,42 @@ body {
   border-radius: 4px;
   color: #990000;
 }
+
+
+
+.week-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.week-day-card {
+  background: white;
+  padding: 15px;
+  width: 180px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.week-day-card:hover {
+  background: #eef6ff;
+}
+
+.week-day-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.week-day-empty {
+  background: #ffe5e5;
+  padding: 6px;
+  border-radius: 4px;
+  color: #990000;
+}
+
+.week-day-summary {
+  background: #d9ffd9;
+  padding: 6px;
+  border-radius: 4px;
+}
