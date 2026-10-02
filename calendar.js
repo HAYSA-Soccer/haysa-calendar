@@ -1,5 +1,20 @@
-const API_BASE = "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec";
+/****************************************************
+ * STATIC JSON CACHE (updated hourly by GitHub)
+ ****************************************************/
+const STATIC_JSON_URL = "https://haysa-soccer.github.io/HAYSA-Home-Games/data/availability.json";
+let cachedFull = null;
 
+async function loadStaticAvailability() {
+  if (cachedFull) return cachedFull;
+
+  const response = await fetch(STATIC_JSON_URL);
+  cachedFull = await response.json();
+  return cachedFull;
+}
+
+/****************************************************
+ * NAVIGATION
+ ****************************************************/
 document.querySelectorAll('.nav button').forEach(btn => {
   btn.addEventListener('click', () => switchView(btn.dataset.view));
 });
@@ -14,9 +29,9 @@ function switchView(view) {
   if (view === "search") renderSearchView();
 }
 
-/******************************
+/****************************************************
  * DAY VIEW
- ******************************/
+ ****************************************************/
 function renderDayView() {
   const container = document.getElementById("view-container");
 
@@ -39,9 +54,11 @@ async function loadDayAvailability() {
     return;
   }
 
-  const url = `${API_BASE}?mode=day&date=${date}`;
-  const response = await fetch(url);
-  const data = await response.json();
+  const full = await loadStaticAvailability();
+
+  // For now, show today's availability (full.day)
+  // Later we can map any selected date to full.month or full.week
+  const data = full.day;
 
   const container = document.getElementById("dayResults");
   container.innerHTML = `<h3>Availability for ${date}</h3>`;
@@ -75,59 +92,32 @@ async function loadDayAvailability() {
   });
 }
 
-
-/******************************
+/****************************************************
  * WEEK VIEW
- ******************************/
+ ****************************************************/
 function renderWeekView() {
   const container = document.getElementById("view-container");
 
   container.innerHTML = `
     <h2>Week View</h2>
-    <div class="controls">
-      <input type="date" id="weekInput">
-      <button id="weekLoadBtn">Load Week</button>
-    </div>
+    <p>This week's availability (auto-loaded from static JSON)</p>
     <div id="weekResults"></div>
   `;
 
-  document.getElementById("weekLoadBtn").addEventListener("click", loadWeekAvailability);
+  loadWeekAvailability();
 }
 
 async function loadWeekAvailability() {
-  const startDate = document.getElementById("weekInput").value;
+  const full = await loadStaticAvailability();
+  const data = full.week;
 
-  if (!startDate) {
-    alert("Please select a starting date.");
-    return;
-  }
-
-  // Compute end date = start + 6 days
-  const start = new Date(startDate);
-  const end = new Date(start);
-  end.setDate(start.getDate() + 6);
-
-  const startStr = formatDate(start);
-  const endStr = formatDate(end);
-
-  const url = `${API_BASE}?mode=range&start=${startStr}&end=${endStr}`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    renderWeekGrid(data, startStr, endStr);
-
-  } catch (err) {
-    console.error(err);
-    alert("Error loading week availability.");
-  }
+  renderWeekGrid(data);
 }
 
-function renderWeekGrid(data, startStr, endStr) {
+function renderWeekGrid(data) {
   const container = document.getElementById("weekResults");
   container.innerHTML = `
-    <h3>Availability for ${startStr} → ${endStr}</h3>
+    <h3>This Week's Availability</h3>
     <div class="week-grid"></div>
   `;
 
@@ -174,10 +164,7 @@ function showDayDetail(date, fields) {
     <div id="weekDetail"></div>
   `;
 
-  document.getElementById("backToWeek").addEventListener("click", () => {
-    // Reload week view from the date input
-    loadWeekAvailability();
-  });
+  document.getElementById("backToWeek").addEventListener("click", loadWeekAvailability);
 
   const detail = document.getElementById("weekDetail");
 
@@ -210,32 +197,24 @@ function showDayDetail(date, fields) {
   });
 }
 
-/******************************
- * Helper: format date YYYY-MM-DD
- ******************************/
-function formatDate(d) {
-  return d.toISOString().split("T")[0];
-}
-
-
-/******************************
+/****************************************************
  * MONTH VIEW (placeholder)
- ******************************/
+ ****************************************************/
 function renderMonthView() {
   const container = document.getElementById("view-container");
   container.innerHTML = `
     <h2>Month View</h2>
-    <p>Month calendar grid coming next — powered by ?mode=month.</p>
+    <p>Month calendar grid coming next — powered by static JSON.</p>
   `;
 }
 
-/******************************
+/****************************************************
  * SEARCH VIEW (placeholder)
- ******************************/
+ ****************************************************/
 function renderSearchView() {
   const container = document.getElementById("view-container");
   container.innerHTML = `
     <h2>Search</h2>
-    <p>Search tools coming next — find fields available at specific times.</p>
+    <p>Search tools coming next — using static JSON.</p>
   `;
 }
