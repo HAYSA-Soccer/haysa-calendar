@@ -15,8 +15,9 @@ jobs:
 
       - name: Fetch availability JSON from Apps Script
         run: |
-          curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=full" \
+          curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=full_season" \
             -o data/availability.json
+
 
       - name: Commit and push if changed
         run: |
