@@ -19,7 +19,7 @@ jobs:
         id: season
         run: |
           echo "Fetching season window..."
-          SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=season_window")
+          SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
           echo "RAW JSON: $SEASON_JSON"
           echo "season_start=$(echo $SEASON_JSON | jq -r '.season_start')" >> $GITHUB_OUTPUT
           echo "season_end=$(echo $SEASON_JSON | jq -r '.season_end')" >> $GITHUB_OUTPUT
@@ -40,7 +40,7 @@ jobs:
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             echo "Fetching $CURRENT"
 
-            DAY_DATA=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=day&date=$CURRENT")
+            DAY_DATA=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
 
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
 
