@@ -8,10 +8,10 @@ on:
     - cron: "0 * * * *"
   workflow_dispatch:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -26,7 +26,6 @@ jobs:
 
           RAW=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
 
-          # Extract JSON from <pre>...</pre>
           SEASON_JSON=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
 
           echo "RAW JSON: $SEASON_JSON"
