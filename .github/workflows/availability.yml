@@ -24,13 +24,11 @@ jobs:
         run: |
           echo "Fetching season window..."
 
-          # Minimal diagnostic: capture raw output
           SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
 
           echo "RAW JSON:"
           echo "$SEASON_JSON"
 
-          # Parse (may be empty)
           START=$(echo "$SEASON_JSON" | jq -r '.season_start' 2>/dev/null || echo "")
           END=$(echo "$SEASON_JSON" | jq -r '.season_end' 2>/dev/null || echo "")
 
