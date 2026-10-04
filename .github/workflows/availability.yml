@@ -8,72 +8,70 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Install jq
-      run: sudo apt-get install -y jq
+      - name: Install jq
+        run: sudo apt-get install -y jq
 
-    - name: Fetch season window
-      id: season
-      run: |
-        echo "Fetching season window..."
-        SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=season_window")
-        echo "RAW JSON: $SEASON_JSON"
-        echo "season_start=$(echo $SEASON_JSON | jq -r '.season_start')" >> $GITHUB_OUTPUT
-        echo "season_end=$(echo $SEASON_JSON | jq -r '.season_end')" >> $GITHUB_OUTPUT
+      - name: Fetch season window
+        id: season
+        run: |
+          echo "Fetching season window..."
+          SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=season_window")
+          echo "RAW JSON: $SEASON_JSON"
+          echo "season_start=$(echo $SEASON_JSON | jq -r '.season_start')" >> $GITHUB_OUTPUT
+          echo "season_end=$(echo $SEASON_JSON | jq -r '.season_end')" >> $GITHUB_OUTPUT
 
+      - name: Build availability JSON
+        run: |
+          START="${{ steps.season.outputs.season_start }}"
+          END="${{ steps.season.outputs.season_end }}"
 
-    - name: Build availability JSON
-      run: |
-        START="${{ steps.season.outputs.season_start }}"
-        END="${{ steps.season.outputs.season_end }}"
+          echo "Building availability from $START to $END"
 
-        echo "Building availability from $START to $END"
+          DAYS_JSON="{}"
+          WEEKS_JSON="{}"
+          MONTHS_JSON="{}"
 
-        DAYS_JSON="{}"
-        WEEKS_JSON="{}"
-        MONTHS_JSON="{}"
+          CURRENT="$START"
 
-        CURRENT="$START"
+          while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
+            echo "Fetching $CURRENT"
 
-        while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
-          echo "Fetching $CURRENT"
+            DAY_DATA=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=day&date=$CURRENT")
 
-          DAY_DATA=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=day&date=$CURRENT")
+            DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
 
-          DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
+            WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
+            WEEKS_JSON=$(echo "$WEEKS_JSON" | jq --arg w "$WEEK_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
+              .[$w] = (.[$w] // {}) | .[$w][$d] = $v
+            ')
 
-          WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
-          WEEKS_JSON=$(echo "$WEEKS_JSON" | jq --arg w "$WEEK_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
-            .[$w] = (.[$w] // {}) | .[$w][$d] = $v
-          ')
+            MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
+            MONTHS_JSON=$(echo "$MONTHS_JSON" | jq --arg m "$MONTH_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
+              .[$m] = (.[$m] // {}) | .[$m][$d] = $v
+            ')
 
-          MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
-          MONTHS_JSON=$(echo "$MONTHS_JSON" | jq --arg m "$MONTH_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
-            .[$m] = (.[$m] // {}) | .[$m][$d] = $v
-          ')
+            CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
+          done
 
-          CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
-        done
+          FINAL_JSON=$(jq -n \
+            --arg start "$START" \
+            --arg end "$END" \
+            --argjson days "$DAYS_JSON" \
+            --argjson weeks "$WEEKS_JSON" \
+            --argjson months "$MONTHS_JSON" \
+            '{season_start: $start, season_end: $end, days: $days, weeks: $weeks, months: $months}'
+          )
 
-        FINAL_JSON=$(jq -n \
-          --arg start "$START" \
-          --arg end "$END" \
-          --argjson days "$DAYS_JSON" \
-          --argjson weeks "$WEEKS_JSON" \
-          --argjson months "$MONTHS_JSON" \
-          '{season_start: $start, season_end: $end, days: $days, weeks: $weeks, months: $months}'
-        )
+          echo "$FINAL_JSON" > data/availability.json
 
-        echo "$FINAL_JSON" > data/availability.json
-
-    - name: Commit updated JSON
-      run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-        git add data/availability.json
-        git commit -m "Updated availability.json" || echo "No changes to commit"
-        git push
+      - name: Commit updated JSON
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data/availability.json
+          git commit -m "Updated availability.json" || echo "No changes to commit"
+          git push
