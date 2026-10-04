@@ -19,9 +19,12 @@ jobs:
     - name: Fetch season window
       id: season
       run: |
+        echo "Fetching season window..."
         SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxHYEJxV8KgtBc5u43H4B19912ZvPuvY0ifb_nrQFhQhy31VYiNALJNVhdQQnS9FPEa/exec?mode=season_window")
+        echo "RAW JSON: $SEASON_JSON"
         echo "season_start=$(echo $SEASON_JSON | jq -r '.season_start')" >> $GITHUB_OUTPUT
         echo "season_end=$(echo $SEASON_JSON | jq -r '.season_end')" >> $GITHUB_OUTPUT
+
 
     - name: Build availability JSON
       run: |
