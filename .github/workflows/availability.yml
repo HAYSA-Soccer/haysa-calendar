@@ -19,41 +19,18 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Debug: Ping endpoint
-        run: |
-          echo "=== PING TEST ==="
-          curl -v "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=ping" || true
-          echo "=== END PING ==="
-
       - name: Fetch season window
         id: season
         run: |
           echo "Fetching season window..."
 
-          echo "=== CURL VERBOSE ==="
-          curl -v -o season_raw.txt \
-            "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window" || true
-          echo "=== END VERBOSE ==="
+          # Minimal diagnostic: capture raw output
+          SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
 
-          echo "=== RAW BODY ==="
-          cat season_raw.txt
-          echo "=== END RAW BODY ==="
+          echo "RAW JSON:"
+          echo "$SEASON_JSON"
 
-          SEASON_JSON=$(cat season_raw.txt)
-
-          echo "RAW JSON (parsed): $SEASON_JSON"
-
-          # Capture status code
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
-
-          echo "HTTP STATUS: $STATUS"
-
-          if [ "$STATUS" != "200" ]; then
-            echo "ERROR: Non-200 status code"
-          fi
-
-          # Try parsing JSON
+          # Parse (may be empty)
           START=$(echo "$SEASON_JSON" | jq -r '.season_start' 2>/dev/null || echo "")
           END=$(echo "$SEASON_JSON" | jq -r '.season_end' 2>/dev/null || echo "")
 
@@ -71,7 +48,7 @@ jobs:
           echo "Building availability from $START to $END"
 
           if [ -z "$START" ] || [ -z "$END" ]; then
-            echo "ERROR: START or END is empty — stopping early."
+            echo "ERROR: START or END is empty — stopping."
             exit 1
           fi
 
@@ -84,11 +61,7 @@ jobs:
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             echo "Fetching $CURRENT"
 
-            RAW_DAY=$(curl -s \
-              "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
-
-            echo "RAW DAY: $RAW_DAY"
-
+            RAW_DAY=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
