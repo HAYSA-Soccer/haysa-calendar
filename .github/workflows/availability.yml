@@ -24,7 +24,6 @@ jobs:
         run: |
           echo "Fetching season window..."
 
-          # Follow redirects and capture status
           SEASON_JSON=$(curl -sSL -w '\nHTTP_STATUS:%{http_code}\n' \
             "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
 
@@ -69,7 +68,7 @@ jobs:
             echo "Fetching $CURRENT"
 
             RAW_DAY=$(curl -sSL \
-              "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
+              "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=full_day&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
