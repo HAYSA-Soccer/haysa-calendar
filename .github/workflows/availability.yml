@@ -19,10 +19,16 @@ jobs:
         id: season
         run: |
           echo "Fetching season window..."
-          SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
+
+          RAW=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
+
+          # Extract JSON from <pre>...</pre>
+          SEASON_JSON=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
+
           echo "RAW JSON: $SEASON_JSON"
-          echo "season_start=$(echo $SEASON_JSON | jq -r '.season_start')" >> $GITHUB_OUTPUT
-          echo "season_end=$(echo $SEASON_JSON | jq -r '.season_end')" >> $GITHUB_OUTPUT
+
+          echo "season_start=$(echo "$SEASON_JSON" | jq -r '.season_start')" >> $GITHUB_OUTPUT
+          echo "season_end=$(echo "$SEASON_JSON" | jq -r '.season_end')" >> $GITHUB_OUTPUT
 
       - name: Build availability JSON
         run: |
@@ -40,7 +46,8 @@ jobs:
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             echo "Fetching $CURRENT"
 
-            DAY_DATA=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
+            RAW_DAY=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
+            DAY_DATA=$(echo "$RAW_DAY" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
 
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
 
