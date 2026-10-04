@@ -24,13 +24,22 @@ jobs:
         run: |
           echo "Fetching season window..."
 
-          SEASON_JSON=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
+          # Follow redirects and capture status
+          SEASON_JSON=$(curl -sSL -w '\nHTTP_STATUS:%{http_code}\n' \
+            "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
 
-          echo "RAW JSON:"
+          echo "RAW RESPONSE:"
           echo "$SEASON_JSON"
 
-          START=$(echo "$SEASON_JSON" | jq -r '.season_start' 2>/dev/null || echo "")
-          END=$(echo "$SEASON_JSON" | jq -r '.season_end' 2>/dev/null || echo "")
+          STATUS=$(echo "$SEASON_JSON" | sed -n 's/^HTTP_STATUS://p')
+          BODY=$(echo "$SEASON_JSON" | sed '/^HTTP_STATUS:/d')
+
+          echo "HTTP STATUS: $STATUS"
+          echo "RAW JSON BODY:"
+          echo "$BODY"
+
+          START=$(echo "$BODY" | jq -r '.season_start' 2>/dev/null || echo "")
+          END=$(echo "$BODY" | jq -r '.season_end' 2>/dev/null || echo "")
 
           echo "Parsed START: $START"
           echo "Parsed END: $END"
@@ -59,7 +68,8 @@ jobs:
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             echo "Fetching $CURRENT"
 
-            RAW_DAY=$(curl -s "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
+            RAW_DAY=$(curl -sSL \
+              "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=day&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
