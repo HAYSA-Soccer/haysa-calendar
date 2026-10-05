@@ -4,77 +4,77 @@
   "fields": [
     {
       "id": "H-HST",
-      "name": "H-HST",
+      "name": "Holbrook High School Turf (Full)",
       "complex": "TURF"
     },
     {
       "id": "H-HST1",
-      "name": "H-HST1",
+      "name": "Holbrook High School Turf 1",
       "complex": "TURF"
     },
     {
       "id": "H-HST2",
-      "name": "H-HST2",
+      "name": "Holbrook High School Turf 2",
       "complex": "TURF"
     },
     {
       "id": "H-Su1",
-      "name": "H-Su1",
+      "name": "Sumner Field 1 (Full)",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-Su1A",
-      "name": "H-Su1A",
+      "name": "Sumner Field 1A",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-Su1B",
-      "name": "H-Su1B",
+      "name": "Sumner Field 1B",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-Su2",
-      "name": "H-Su2",
+      "name": "Sumner Field 2 (Full)",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-Su2A",
-      "name": "H-Su2A",
+      "name": "Sumner Field 2A",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-Su2B",
-      "name": "H-Su2B",
+      "name": "Sumner Field 2B",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-SJ3",
-      "name": "H-SJ3",
+      "name": "Sumner Field 3 (Full)",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-SJ3A",
-      "name": "H-SJ3A",
+      "name": "Sumner Field 3A",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-SJ3B",
-      "name": "H-SJ3B",
+      "name": "Sumner Field 3B",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-SJ4",
-      "name": "H-SJ4",
+      "name": "Sumner Field 4 (Full)",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-SJ4A",
-      "name": "H-SJ4A",
+      "name": "Sumner Field 4A",
       "complex": "SUMNER/SEAN JOYCE"
     },
     {
       "id": "H-SJ4B",
-      "name": "H-SJ4B",
+      "name": "Sumner Field 4B",
       "complex": "SUMNER/SEAN JOYCE"
     }
   ],
@@ -105,77 +105,77 @@
       "fields": [
         {
           "id": "H-HST",
-          "name": "H-HST",
+          "name": "Holbrook High School Turf (Full)",
           "complex": "TURF"
         },
         {
           "id": "H-HST1",
-          "name": "H-HST1",
+          "name": "Holbrook High School Turf 1",
           "complex": "TURF"
         },
         {
           "id": "H-HST2",
-          "name": "H-HST2",
+          "name": "Holbrook High School Turf 2",
           "complex": "TURF"
         },
         {
           "id": "H-Su1",
-          "name": "H-Su1",
+          "name": "Sumner Field 1 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su1A",
-          "name": "H-Su1A",
+          "name": "Sumner Field 1A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su1B",
-          "name": "H-Su1B",
+          "name": "Sumner Field 1B",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su2",
-          "name": "H-Su2",
+          "name": "Sumner Field 2 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su2A",
-          "name": "H-Su2A",
+          "name": "Sumner Field 2A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su2B",
-          "name": "H-Su2B",
+          "name": "Sumner Field 2B",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ3",
-          "name": "H-SJ3",
+          "name": "Sumner Field 3 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ3A",
-          "name": "H-SJ3A",
+          "name": "Sumner Field 3A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ3B",
-          "name": "H-SJ3B",
+          "name": "Sumner Field 3B",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ4",
-          "name": "H-SJ4",
+          "name": "Sumner Field 4 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ4A",
-          "name": "H-SJ4A",
+          "name": "Sumner Field 4A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ4B",
-          "name": "H-SJ4B",
+          "name": "Sumner Field 4B",
           "complex": "SUMNER/SEAN JOYCE"
         }
       ],
@@ -616,77 +616,77 @@
       "fields": [
         {
           "id": "H-HST",
-          "name": "H-HST",
+          "name": "Holbrook High School Turf (Full)",
           "complex": "TURF"
         },
         {
           "id": "H-HST1",
-          "name": "H-HST1",
+          "name": "Holbrook High School Turf 1",
           "complex": "TURF"
         },
         {
           "id": "H-HST2",
-          "name": "H-HST2",
+          "name": "Holbrook High School Turf 2",
           "complex": "TURF"
         },
         {
           "id": "H-Su1",
-          "name": "H-Su1",
+          "name": "Sumner Field 1 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su1A",
-          "name": "H-Su1A",
+          "name": "Sumner Field 1A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su1B",
-          "name": "H-Su1B",
+          "name": "Sumner Field 1B",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su2",
-          "name": "H-Su2",
+          "name": "Sumner Field 2 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su2A",
-          "name": "H-Su2A",
+          "name": "Sumner Field 2A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-Su2B",
-          "name": "H-Su2B",
+          "name": "Sumner Field 2B",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ3",
-          "name": "H-SJ3",
+          "name": "Sumner Field 3 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ3A",
-          "name": "H-SJ3A",
+          "name": "Sumner Field 3A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ3B",
-          "name": "H-SJ3B",
+          "name": "Sumner Field 3B",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ4",
-          "name": "H-SJ4",
+          "name": "Sumner Field 4 (Full)",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ4A",
-          "name": "H-SJ4A",
+          "name": "Sumner Field 4A",
           "complex": "SUMNER/SEAN JOYCE"
         },
         {
           "id": "H-SJ4B",
-          "name": "H-SJ4B",
+          "name": "Sumner Field 4B",
           "complex": "SUMNER/SEAN JOYCE"
         }
       ],
@@ -740,77 +740,77 @@
         "fields": [
           {
             "id": "H-HST",
-            "name": "H-HST",
+            "name": "Holbrook High School Turf (Full)",
             "complex": "TURF"
           },
           {
             "id": "H-HST1",
-            "name": "H-HST1",
+            "name": "Holbrook High School Turf 1",
             "complex": "TURF"
           },
           {
             "id": "H-HST2",
-            "name": "H-HST2",
+            "name": "Holbrook High School Turf 2",
             "complex": "TURF"
           },
           {
             "id": "H-Su1",
-            "name": "H-Su1",
+            "name": "Sumner Field 1 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1A",
-            "name": "H-Su1A",
+            "name": "Sumner Field 1A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1B",
-            "name": "H-Su1B",
+            "name": "Sumner Field 1B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2",
-            "name": "H-Su2",
+            "name": "Sumner Field 2 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2A",
-            "name": "H-Su2A",
+            "name": "Sumner Field 2A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2B",
-            "name": "H-Su2B",
+            "name": "Sumner Field 2B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3",
-            "name": "H-SJ3",
+            "name": "Sumner Field 3 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3A",
-            "name": "H-SJ3A",
+            "name": "Sumner Field 3A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3B",
-            "name": "H-SJ3B",
+            "name": "Sumner Field 3B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4",
-            "name": "H-SJ4",
+            "name": "Sumner Field 4 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4A",
-            "name": "H-SJ4A",
+            "name": "Sumner Field 4A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4B",
-            "name": "H-SJ4B",
+            "name": "Sumner Field 4B",
             "complex": "SUMNER/SEAN JOYCE"
           }
         ],
@@ -1253,77 +1253,77 @@
         "fields": [
           {
             "id": "H-HST",
-            "name": "H-HST",
+            "name": "Holbrook High School Turf (Full)",
             "complex": "TURF"
           },
           {
             "id": "H-HST1",
-            "name": "H-HST1",
+            "name": "Holbrook High School Turf 1",
             "complex": "TURF"
           },
           {
             "id": "H-HST2",
-            "name": "H-HST2",
+            "name": "Holbrook High School Turf 2",
             "complex": "TURF"
           },
           {
             "id": "H-Su1",
-            "name": "H-Su1",
+            "name": "Sumner Field 1 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1A",
-            "name": "H-Su1A",
+            "name": "Sumner Field 1A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1B",
-            "name": "H-Su1B",
+            "name": "Sumner Field 1B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2",
-            "name": "H-Su2",
+            "name": "Sumner Field 2 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2A",
-            "name": "H-Su2A",
+            "name": "Sumner Field 2A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2B",
-            "name": "H-Su2B",
+            "name": "Sumner Field 2B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3",
-            "name": "H-SJ3",
+            "name": "Sumner Field 3 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3A",
-            "name": "H-SJ3A",
+            "name": "Sumner Field 3A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3B",
-            "name": "H-SJ3B",
+            "name": "Sumner Field 3B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4",
-            "name": "H-SJ4",
+            "name": "Sumner Field 4 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4A",
-            "name": "H-SJ4A",
+            "name": "Sumner Field 4A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4B",
-            "name": "H-SJ4B",
+            "name": "Sumner Field 4B",
             "complex": "SUMNER/SEAN JOYCE"
           }
         ],
@@ -1378,77 +1378,77 @@
         "fields": [
           {
             "id": "H-HST",
-            "name": "H-HST",
+            "name": "Holbrook High School Turf (Full)",
             "complex": "TURF"
           },
           {
             "id": "H-HST1",
-            "name": "H-HST1",
+            "name": "Holbrook High School Turf 1",
             "complex": "TURF"
           },
           {
             "id": "H-HST2",
-            "name": "H-HST2",
+            "name": "Holbrook High School Turf 2",
             "complex": "TURF"
           },
           {
             "id": "H-Su1",
-            "name": "H-Su1",
+            "name": "Sumner Field 1 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1A",
-            "name": "H-Su1A",
+            "name": "Sumner Field 1A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1B",
-            "name": "H-Su1B",
+            "name": "Sumner Field 1B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2",
-            "name": "H-Su2",
+            "name": "Sumner Field 2 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2A",
-            "name": "H-Su2A",
+            "name": "Sumner Field 2A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2B",
-            "name": "H-Su2B",
+            "name": "Sumner Field 2B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3",
-            "name": "H-SJ3",
+            "name": "Sumner Field 3 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3A",
-            "name": "H-SJ3A",
+            "name": "Sumner Field 3A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3B",
-            "name": "H-SJ3B",
+            "name": "Sumner Field 3B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4",
-            "name": "H-SJ4",
+            "name": "Sumner Field 4 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4A",
-            "name": "H-SJ4A",
+            "name": "Sumner Field 4A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4B",
-            "name": "H-SJ4B",
+            "name": "Sumner Field 4B",
             "complex": "SUMNER/SEAN JOYCE"
           }
         ],
@@ -1889,77 +1889,77 @@
         "fields": [
           {
             "id": "H-HST",
-            "name": "H-HST",
+            "name": "Holbrook High School Turf (Full)",
             "complex": "TURF"
           },
           {
             "id": "H-HST1",
-            "name": "H-HST1",
+            "name": "Holbrook High School Turf 1",
             "complex": "TURF"
           },
           {
             "id": "H-HST2",
-            "name": "H-HST2",
+            "name": "Holbrook High School Turf 2",
             "complex": "TURF"
           },
           {
             "id": "H-Su1",
-            "name": "H-Su1",
+            "name": "Sumner Field 1 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1A",
-            "name": "H-Su1A",
+            "name": "Sumner Field 1A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su1B",
-            "name": "H-Su1B",
+            "name": "Sumner Field 1B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2",
-            "name": "H-Su2",
+            "name": "Sumner Field 2 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2A",
-            "name": "H-Su2A",
+            "name": "Sumner Field 2A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-Su2B",
-            "name": "H-Su2B",
+            "name": "Sumner Field 2B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3",
-            "name": "H-SJ3",
+            "name": "Sumner Field 3 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3A",
-            "name": "H-SJ3A",
+            "name": "Sumner Field 3A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ3B",
-            "name": "H-SJ3B",
+            "name": "Sumner Field 3B",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4",
-            "name": "H-SJ4",
+            "name": "Sumner Field 4 (Full)",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4A",
-            "name": "H-SJ4A",
+            "name": "Sumner Field 4A",
             "complex": "SUMNER/SEAN JOYCE"
           },
           {
             "id": "H-SJ4B",
-            "name": "H-SJ4B",
+            "name": "Sumner Field 4B",
             "complex": "SUMNER/SEAN JOYCE"
           }
         ],
