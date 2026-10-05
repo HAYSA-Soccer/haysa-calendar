@@ -2,21 +2,81 @@
   "season_start": "2026-10-10",
   "season_end": "2026-10-11",
   "fields": [
-    "H-HST",
-    "H-HST1",
-    "H-HST2",
-    "H-Su1",
-    "H-Su1A",
-    "H-Su1B",
-    "H-Su2",
-    "H-Su2A",
-    "H-Su2B",
-    "H-SJ3",
-    "H-SJ3A",
-    "H-SJ3B",
-    "H-SJ4",
-    "H-SJ4A",
-    "H-SJ4B"
+    {
+      "id": "H-HST",
+      "name": "H-HST",
+      "complex": "TURF"
+    },
+    {
+      "id": "H-HST1",
+      "name": "H-HST1",
+      "complex": "TURF"
+    },
+    {
+      "id": "H-HST2",
+      "name": "H-HST2",
+      "complex": "TURF"
+    },
+    {
+      "id": "H-Su1",
+      "name": "H-Su1",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-Su1A",
+      "name": "H-Su1A",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-Su1B",
+      "name": "H-Su1B",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-Su2",
+      "name": "H-Su2",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-Su2A",
+      "name": "H-Su2A",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-Su2B",
+      "name": "H-Su2B",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-SJ3",
+      "name": "H-SJ3",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-SJ3A",
+      "name": "H-SJ3A",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-SJ3B",
+      "name": "H-SJ3B",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-SJ4",
+      "name": "H-SJ4",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-SJ4A",
+      "name": "H-SJ4A",
+      "complex": "SUMNER/SEAN JOYCE"
+    },
+    {
+      "id": "H-SJ4B",
+      "name": "H-SJ4B",
+      "complex": "SUMNER/SEAN JOYCE"
+    }
   ],
   "complexes": {
     "TURF": [
@@ -43,21 +103,81 @@
     "2026-10-10": {
       "date": "2026-10-10",
       "fields": [
-        "H-HST",
-        "H-HST1",
-        "H-HST2",
-        "H-Su1",
-        "H-Su1A",
-        "H-Su1B",
-        "H-Su2",
-        "H-Su2A",
-        "H-Su2B",
-        "H-SJ3",
-        "H-SJ3A",
-        "H-SJ3B",
-        "H-SJ4",
-        "H-SJ4A",
-        "H-SJ4B"
+        {
+          "id": "H-HST",
+          "name": "H-HST",
+          "complex": "TURF"
+        },
+        {
+          "id": "H-HST1",
+          "name": "H-HST1",
+          "complex": "TURF"
+        },
+        {
+          "id": "H-HST2",
+          "name": "H-HST2",
+          "complex": "TURF"
+        },
+        {
+          "id": "H-Su1",
+          "name": "H-Su1",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su1A",
+          "name": "H-Su1A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su1B",
+          "name": "H-Su1B",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su2",
+          "name": "H-Su2",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su2A",
+          "name": "H-Su2A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su2B",
+          "name": "H-Su2B",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ3",
+          "name": "H-SJ3",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ3A",
+          "name": "H-SJ3A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ3B",
+          "name": "H-SJ3B",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ4",
+          "name": "H-SJ4",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ4A",
+          "name": "H-SJ4A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ4B",
+          "name": "H-SJ4B",
+          "complex": "SUMNER/SEAN JOYCE"
+        }
       ],
       "complexes": {
         "TURF": [
@@ -494,21 +614,81 @@
     "2026-10-11": {
       "date": "2026-10-11",
       "fields": [
-        "H-HST",
-        "H-HST1",
-        "H-HST2",
-        "H-Su1",
-        "H-Su1A",
-        "H-Su1B",
-        "H-Su2",
-        "H-Su2A",
-        "H-Su2B",
-        "H-SJ3",
-        "H-SJ3A",
-        "H-SJ3B",
-        "H-SJ4",
-        "H-SJ4A",
-        "H-SJ4B"
+        {
+          "id": "H-HST",
+          "name": "H-HST",
+          "complex": "TURF"
+        },
+        {
+          "id": "H-HST1",
+          "name": "H-HST1",
+          "complex": "TURF"
+        },
+        {
+          "id": "H-HST2",
+          "name": "H-HST2",
+          "complex": "TURF"
+        },
+        {
+          "id": "H-Su1",
+          "name": "H-Su1",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su1A",
+          "name": "H-Su1A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su1B",
+          "name": "H-Su1B",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su2",
+          "name": "H-Su2",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su2A",
+          "name": "H-Su2A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-Su2B",
+          "name": "H-Su2B",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ3",
+          "name": "H-SJ3",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ3A",
+          "name": "H-SJ3A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ3B",
+          "name": "H-SJ3B",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ4",
+          "name": "H-SJ4",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ4A",
+          "name": "H-SJ4A",
+          "complex": "SUMNER/SEAN JOYCE"
+        },
+        {
+          "id": "H-SJ4B",
+          "name": "H-SJ4B",
+          "complex": "SUMNER/SEAN JOYCE"
+        }
       ],
       "complexes": {
         "TURF": [
@@ -558,21 +738,81 @@
       "2026-10-10": {
         "date": "2026-10-10",
         "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2",
-          "H-Su1",
-          "H-Su1A",
-          "H-Su1B",
-          "H-Su2",
-          "H-Su2A",
-          "H-Su2B",
-          "H-SJ3",
-          "H-SJ3A",
-          "H-SJ3B",
-          "H-SJ4",
-          "H-SJ4A",
-          "H-SJ4B"
+          {
+            "id": "H-HST",
+            "name": "H-HST",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST1",
+            "name": "H-HST1",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST2",
+            "name": "H-HST2",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-Su1",
+            "name": "H-Su1",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1A",
+            "name": "H-Su1A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1B",
+            "name": "H-Su1B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2",
+            "name": "H-Su2",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2A",
+            "name": "H-Su2A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2B",
+            "name": "H-Su2B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3",
+            "name": "H-SJ3",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3A",
+            "name": "H-SJ3A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3B",
+            "name": "H-SJ3B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4",
+            "name": "H-SJ4",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4A",
+            "name": "H-SJ4A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4B",
+            "name": "H-SJ4B",
+            "complex": "SUMNER/SEAN JOYCE"
+          }
         ],
         "complexes": {
           "TURF": [
@@ -1011,21 +1251,81 @@
       "2026-10-11": {
         "date": "2026-10-11",
         "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2",
-          "H-Su1",
-          "H-Su1A",
-          "H-Su1B",
-          "H-Su2",
-          "H-Su2A",
-          "H-Su2B",
-          "H-SJ3",
-          "H-SJ3A",
-          "H-SJ3B",
-          "H-SJ4",
-          "H-SJ4A",
-          "H-SJ4B"
+          {
+            "id": "H-HST",
+            "name": "H-HST",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST1",
+            "name": "H-HST1",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST2",
+            "name": "H-HST2",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-Su1",
+            "name": "H-Su1",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1A",
+            "name": "H-Su1A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1B",
+            "name": "H-Su1B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2",
+            "name": "H-Su2",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2A",
+            "name": "H-Su2A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2B",
+            "name": "H-Su2B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3",
+            "name": "H-SJ3",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3A",
+            "name": "H-SJ3A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3B",
+            "name": "H-SJ3B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4",
+            "name": "H-SJ4",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4A",
+            "name": "H-SJ4A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4B",
+            "name": "H-SJ4B",
+            "complex": "SUMNER/SEAN JOYCE"
+          }
         ],
         "complexes": {
           "TURF": [
@@ -1076,21 +1376,81 @@
       "2026-10-10": {
         "date": "2026-10-10",
         "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2",
-          "H-Su1",
-          "H-Su1A",
-          "H-Su1B",
-          "H-Su2",
-          "H-Su2A",
-          "H-Su2B",
-          "H-SJ3",
-          "H-SJ3A",
-          "H-SJ3B",
-          "H-SJ4",
-          "H-SJ4A",
-          "H-SJ4B"
+          {
+            "id": "H-HST",
+            "name": "H-HST",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST1",
+            "name": "H-HST1",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST2",
+            "name": "H-HST2",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-Su1",
+            "name": "H-Su1",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1A",
+            "name": "H-Su1A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1B",
+            "name": "H-Su1B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2",
+            "name": "H-Su2",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2A",
+            "name": "H-Su2A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2B",
+            "name": "H-Su2B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3",
+            "name": "H-SJ3",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3A",
+            "name": "H-SJ3A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3B",
+            "name": "H-SJ3B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4",
+            "name": "H-SJ4",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4A",
+            "name": "H-SJ4A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4B",
+            "name": "H-SJ4B",
+            "complex": "SUMNER/SEAN JOYCE"
+          }
         ],
         "complexes": {
           "TURF": [
@@ -1527,21 +1887,81 @@
       "2026-10-11": {
         "date": "2026-10-11",
         "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2",
-          "H-Su1",
-          "H-Su1A",
-          "H-Su1B",
-          "H-Su2",
-          "H-Su2A",
-          "H-Su2B",
-          "H-SJ3",
-          "H-SJ3A",
-          "H-SJ3B",
-          "H-SJ4",
-          "H-SJ4A",
-          "H-SJ4B"
+          {
+            "id": "H-HST",
+            "name": "H-HST",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST1",
+            "name": "H-HST1",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-HST2",
+            "name": "H-HST2",
+            "complex": "TURF"
+          },
+          {
+            "id": "H-Su1",
+            "name": "H-Su1",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1A",
+            "name": "H-Su1A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su1B",
+            "name": "H-Su1B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2",
+            "name": "H-Su2",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2A",
+            "name": "H-Su2A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-Su2B",
+            "name": "H-Su2B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3",
+            "name": "H-SJ3",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3A",
+            "name": "H-SJ3A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ3B",
+            "name": "H-SJ3B",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4",
+            "name": "H-SJ4",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4A",
+            "name": "H-SJ4A",
+            "complex": "SUMNER/SEAN JOYCE"
+          },
+          {
+            "id": "H-SJ4B",
+            "name": "H-SJ4B",
+            "complex": "SUMNER/SEAN JOYCE"
+          }
         ],
         "complexes": {
           "TURF": [
