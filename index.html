@@ -18,8 +18,10 @@
     <button data-view="month">Month</button>
     <button data-view="search">Search</button>
   </nav>
-
-  <!-- Scheduling mode + enhanced view -->
+  
+  <!-- Complex filters -->
+  <div id="complex-filters" class="complex-filter-bar"></div>
+  
   <section class="mode-bar">
     <div class="mode-controls">
       <label for="schedModeSelect">Scheduling Mode:</label>
@@ -28,11 +30,12 @@
         <option value="game">Game</option>
       </select>
     </div>
-
+  
     <button id="enhancedDayBtn" class="enhanced-btn">
       Enhanced Day View
     </button>
   </section>
+
 
   <!-- Main content -->
   <main id="view-container">
