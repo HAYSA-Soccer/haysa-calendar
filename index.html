@@ -11,6 +11,58 @@
     <h1>HAYSA Field Availability</h1>
   </header>
 
+  <!-- Main navigation -->
+  <nav class="nav">
+    <button data-view="day">Day</button>
+    <button data-view="week">Week</button>
+    <button data-view="month">Month</button>
+    <button data-view="search">Search</button>
+  </nav>
+
+  <!-- Scheduling mode + enhanced view controls -->
+  <section class="mode-bar">
+    <label>
+      Scheduling Mode:
+      <select id="schedModeSelect">
+        <option value="practice">Practice</option>
+        <option value="game">Game</option>
+      </select>
+    </label>
+
+    <button id="enhancedDayBtn">Enhanced Day View</button>
+  </section>
+
+  <main id="view-container">
+    <!-- Views injected here -->
+  </main>
+
+  <script src="calendar.js"></script>
+  <script>
+    // Hook up the enhanced day view button
+    document.getElementById("enhancedDayBtn").addEventListener("click", () => {
+      if (typeof renderEnhancedDayView === "function") {
+        renderEnhancedDayView();
+      } else {
+        alert("Enhanced Day View is not yet available.");
+      }
+    });
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HAYSA Field Availability</title>
+  <link rel="stylesheet" href="calendar.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>HAYSA Field Availability</h1>
+  </header>
+
   <nav class="nav">
     <button data-view="day">Day</button>
     <button data-view="week">Week</button>
