@@ -166,3 +166,38 @@ body {
   filter: brightness(1.05);
 }
 
+
+
+.mode-bar {
+  background: #eef2f7;
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.mode-bar label {
+  font-size: 16px;
+}
+
+#schedModeSelect {
+  padding: 6px;
+  font-size: 16px;
+}
+
+#enhancedDayBtn {
+  background: #0055aa;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#enhancedDayBtn:hover {
+  background: #0077dd;
+}
+
+
