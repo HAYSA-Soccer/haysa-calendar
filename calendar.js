@@ -1,3 +1,125 @@
+const API_BASE = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+
+async function fetchLiveAvailability(dateStr, schedMode) {
+  const url = `${API_BASE}?mode=day&date=${dateStr}&sched_mode=${schedMode}`;
+  const res = await fetch(url);
+  return res.json();
+}
+
+async function fetchEvents(dateStr) {
+  const url = `${API_BASE}?mode=events_for_date&date=${dateStr}`;
+  const res = await fetch(url);
+  return res.json();
+}
+
+
+
+function mergeAvailabilityAndEvents(avail, events) {
+  const merged = {};
+
+  Object.keys(avail).forEach(fieldId => {
+    const freeSlots = avail[fieldId].map(w => ({
+      start: w.start,
+      end: w.end,
+      type: "free",
+      title: ""
+    }));
+
+    const eventSlots = (events[fieldId] || []).map(ev => ({
+      start: ev.start,
+      end: ev.end,
+      type: ev.type,   // "game", "practice", "block"
+      title: ev.title
+    }));
+
+    merged[fieldId] = [...freeSlots, ...eventSlots].sort(
+      (a, b) => a.start.localeCompare(b.start)
+    );
+  });
+
+  return merged;
+}
+
+
+function getStyle(type) {
+  switch (type) {
+    case "game": return { cls: "block-game", badge: "G" };
+    case "practice": return { cls: "block-practice", badge: "P" };
+    case "block": return { cls: "block-block", badge: "B" };
+    default: return { cls: "block-free", badge: "" };
+  }
+}
+
+function renderEnhancedField(fieldId, slots, container) {
+  const card = document.createElement("div");
+  card.className = "field-card";
+
+  const title = document.createElement("div");
+  title.className = "field-title";
+  title.textContent = fieldId;
+  card.appendChild(title);
+
+  slots.forEach(slot => {
+    const { cls, badge } = getStyle(slot.type);
+
+    const div = document.createElement("div");
+    div.className = `block-slot ${cls}`;
+    div.textContent = `${slot.start} – ${slot.end}`;
+
+    if (badge) {
+      const badgeSpan = document.createElement("span");
+      badgeSpan.className = "block-badge";
+      badgeSpan.textContent = `[${badge}]`;
+      div.appendChild(badgeSpan);
+    }
+
+    if (slot.title) {
+      div.title = slot.title; // hover tooltip
+    }
+
+    card.appendChild(div);
+  });
+
+  container.appendChild(card);
+}
+
+
+
+async function renderEnhancedDayView() {
+  const container = document.getElementById("view-container");
+
+  const dateStr = currentDate || new Date().toISOString().split("T")[0];
+  const schedMode = document.getElementById("schedModeSelect").value;
+
+  container.innerHTML = `
+    <h2>Enhanced Day View</h2>
+    <div class="controls">
+      <button id="prevDay">← Previous</button>
+      <span>${dateStr}</span>
+      <button id="nextDay">Next →</button>
+    </div>
+    <div id="enhancedDayResults"></div>
+  `;
+
+  document.getElementById("prevDay").onclick = () => navigateDay(-1);
+  document.getElementById("nextDay").onclick = () => navigateDay(1);
+
+  const avail = await fetchLiveAvailability(dateStr, schedMode);
+  const events = await fetchEvents(dateStr);
+
+  const merged = mergeAvailabilityAndEvents(avail, events);
+
+  const results = document.getElementById("enhancedDayResults");
+  results.innerHTML = "";
+
+  Object.keys(merged).forEach(fieldId => {
+    renderEnhancedField(fieldId, merged[fieldId], results);
+  });
+}
+
+
+
+
 /****************************************************
  * STATIC JSON CACHE (updated hourly by GitHub)
  ****************************************************/
