@@ -24,18 +24,14 @@ jobs:
         run: |
           echo "Fetching season window..."
 
-          RAW=$(curl -sSL "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
+          RAW=$(curl -sSL "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=season_window")
 
           echo "RAW RESPONSE:"
           echo "$RAW"
 
-          # ⭐ Strip <pre> wrapper if present
+          # Strip <pre> wrapper if present
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
-
-          # If CLEAN is empty, assume RAW was already JSON
-          if [ -z "$CLEAN" ]; then
-            CLEAN="$RAW"
-          fi
+          if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
 
           echo "CLEAN JSON:"
           echo "$CLEAN"
@@ -61,6 +57,10 @@ jobs:
             exit 1
           fi
 
+          # Fetch field + complex map once
+          FIELDS_RAW=$(curl -sSL "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=fields")
+          FIELDS_JSON="$FIELDS_RAW"
+
           DAYS_JSON="{}"
           WEEKS_JSON="{}"
           MONTHS_JSON="{}"
@@ -71,16 +71,19 @@ jobs:
             echo "Fetching $CURRENT"
 
             RAW_DAY=$(curl -sSL \
-              "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=full_day&date=$CURRENT")
+              "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=day_calendar&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
+            # Insert into days
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
 
+            # Insert into weeks
             WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
             WEEKS_JSON=$(echo "$WEEKS_JSON" | jq --arg w "$WEEK_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
               .[$w] = (.[$w] // {}) | .[$w][$d] = $v
             ')
 
+            # Insert into months
             MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
             MONTHS_JSON=$(echo "$MONTHS_JSON" | jq --arg m "$MONTH_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
               .[$m] = (.[$m] // {}) | .[$m][$d] = $v
@@ -92,10 +95,19 @@ jobs:
           FINAL_JSON=$(jq -n \
             --arg start "$START" \
             --arg end "$END" \
+            --argjson fields "$FIELDS_JSON" \
             --argjson days "$DAYS_JSON" \
             --argjson weeks "$WEEKS_JSON" \
             --argjson months "$MONTHS_JSON" \
-            '{season_start: $start, season_end: $end, days: $days, weeks: $weeks, months: $months}'
+            '{
+              season_start: $start,
+              season_end: $end,
+              fields: $fields.fields,
+              complexes: $fields.complexes,
+              days: $days,
+              weeks: $weeks,
+              months: $months
+            }'
           )
 
           echo "$FINAL_JSON" > data/availability.json
