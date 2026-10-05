@@ -1,55 +1,168 @@
 /****************************************************
- * CONFIG
- ****************************************************/
-const API_BASE = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
-
-/****************************************************
  * GLOBAL STATE
  ****************************************************/
+let AVAIL = null;
+let DAYS = null;
+let WEEKS = null;
+let MONTHS = null;
+let FIELDS = null;
+let COMPLEXES = null;
+
 let currentDate = null;
 let currentWeekId = null;
 let currentMonthId = null;
-let complexes = {};     // from mode=fields
-let fields = [];        // from mode=fields
+
+let SELECTED_COMPLEXES = new Set();
 
 /****************************************************
- * BACKEND FETCHERS
+ * LOAD STATIC JSON
  ****************************************************/
-async function fetchDayCalendar(dateStr, schedMode) {
-  const url = `${API_BASE}?mode=day_calendar&date=${dateStr}&sched_mode=${schedMode}`;
-  const res = await fetch(url);
-  return res.json();
-}
+async function loadAvailabilityJSON() {
+  const res = await fetch("data/availability.json", { cache: "no-store" });
+  AVAIL = await res.json();
 
-async function fetchFields() {
-  const url = `${API_BASE}?mode=fields`;
-  const res = await fetch(url);
-  return res.json();
+  DAYS = AVAIL.days || {};
+  WEEKS = AVAIL.weeks || {};
+  MONTHS = AVAIL.months || {};
+  FIELDS = AVAIL.fields || [];
+  COMPLEXES = AVAIL.complexes || {};
 }
 
 /****************************************************
- * INITIAL LOAD
+ * COMPLEX FILTERING
  ****************************************************/
-(async function init() {
-  const f = await fetchFields();
-  complexes = f.complexes;
-  fields = f.fields;
+function toggleComplex(complexName) {
+  if (SELECTED_COMPLEXES.has(complexName)) {
+    SELECTED_COMPLEXES.delete(complexName);
+  } else {
+    SELECTED_COMPLEXES.add(complexName);
+  }
 
-  switchView("day");
-})();
+  if (currentView === "day") renderDayView();
+  if (currentView === "week") renderWeekView();
+  if (currentView === "month") renderMonthView();
+}
+
+function filterByComplex(merged) {
+  if (SELECTED_COMPLEXES.size === 0) return merged;
+
+  const allowedFields = new Set();
+  SELECTED_COMPLEXES.forEach(cx => {
+    (COMPLEXES[cx] || []).forEach(f => allowedFields.add(f));
+  });
+
+  return merged.filter(item => allowedFields.has(item.field));
+}
+
+function renderComplexFilters() {
+  const container = document.getElementById("complex-filters");
+  if (!container) return;
+
+  let html = "";
+  Object.keys(COMPLEXES).forEach(cx => {
+    const active = SELECTED_COMPLEXES.has(cx) ? "active" : "";
+    html += `
+      <button class="complex-btn ${active}" onclick="toggleComplex('${cx}')">
+        ${cx}
+      </button>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+/****************************************************
+ * MERGING LOGIC
+ ****************************************************/
+function mergeTimeline(availWindows, eventList, blockList, fieldId) {
+  const out = [];
+
+  availWindows.forEach(w => {
+    out.push({
+      field: fieldId,
+      start: w.start,
+      end: w.end,
+      type: "free",
+      title: "",
+      cls: "block-free",
+      badge: ""
+    });
+  });
+
+  eventList.forEach(ev => {
+    const style = getStyle(ev.type);
+    out.push({
+      field: fieldId,
+      start: ev.start,
+      end: ev.end,
+      type: ev.type,
+      title: ev.title,
+      cls: style.cls,
+      badge: style.badge
+    });
+  });
+
+  blockList.forEach(b => {
+    const style = getStyle("admin");
+    out.push({
+      field: fieldId,
+      start: b.start,
+      end: b.end,
+      type: "admin",
+      title: b.reason,
+      cls: style.cls,
+      badge: style.badge
+    });
+  });
+
+  return out.sort((a, b) => a.start.localeCompare(b.start));
+}
+
+function getStyle(type) {
+  switch (type) {
+    case "game": return { cls: "block-game", badge: "G" };
+    case "practice": return { cls: "block-practice", badge: "P" };
+    case "admin": return { cls: "block-admin", badge: "A" };
+    default: return { cls: "block-free", badge: "" };
+  }
+}
+
+/****************************************************
+ * VIEW STATE
+ ****************************************************/
+let currentView = "day";
 
 /****************************************************
  * NAVIGATION
  ****************************************************/
-document.querySelectorAll('.nav button').forEach(btn => {
-  btn.addEventListener('click', () => switchView(btn.dataset.view));
+document.addEventListener("DOMContentLoaded", () => {
+  initCalendar();
+
+  document.querySelectorAll(".nav button").forEach(btn => {
+    btn.addEventListener("click", () => switchView(btn.dataset.view));
+  });
 });
 
 function switchView(view) {
+  currentView = view;
   if (view === "day") renderDayView();
   if (view === "week") renderWeekView();
   if (view === "month") renderMonthView();
   if (view === "search") renderSearchView();
+}
+
+/****************************************************
+ * INIT
+ ****************************************************/
+async function initCalendar() {
+  await loadAvailabilityJSON();
+
+  currentDate = AVAIL.season_start || new Date().toISOString().split("T")[0];
+  currentWeekId = getWeekId(new Date(currentDate));
+  currentMonthId = currentDate.substring(0, 7);
+
+  renderComplexFilters();
+  switchView("day");
 }
 
 /****************************************************
@@ -62,8 +175,6 @@ async function renderDayView() {
     currentDate = new Date().toISOString().split("T")[0];
   }
 
-  const schedMode = document.getElementById("schedModeSelect").value;
-
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
@@ -74,27 +185,51 @@ async function renderDayView() {
     <div id="dayResults"></div>
   `;
 
-  document.getElementById("prevDay").onclick = () => navigateDay(-1);
-  document.getElementById("nextDay").onclick = () => navigateDay(1);
+  document.getElementById("prevDay").onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() - 1);
+    currentDate = d.toISOString().split("T")[0];
+    renderDayView();
+  };
 
-  const data = await fetchDayCalendar(currentDate, schedMode);
-  renderDayCalendar(data);
-}
+  document.getElementById("nextDay").onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() + 1);
+    currentDate = d.toISOString().split("T")[0];
+    renderDayView();
+  };
 
-function navigateDay(offset) {
-  const d = new Date(currentDate);
-  d.setDate(d.getDate() + offset);
-  currentDate = d.toISOString().split("T")[0];
-  renderDayView();
+  const dayData = DAYS[currentDate];
+  renderDayCalendar(dayData);
 }
 
 function renderDayCalendar(data) {
   const container = document.getElementById("dayResults");
   container.innerHTML = "";
 
+  if (!data) {
+    container.innerHTML = `<p>No data for ${currentDate} (outside season)</p>`;
+    return;
+  }
+
   const { availability, events, blocks } = data;
 
-  fields.forEach(fieldId => {
+  const dayFields = data.fields || FIELDS;
+
+  let mergedAll = [];
+  dayFields.forEach(fieldId => {
+    const merged = mergeTimeline(
+      availability[fieldId] || [],
+      (events && events[fieldId]) || [],
+      (blocks && blocks[fieldId]) || [],
+      fieldId
+    );
+    mergedAll = mergedAll.concat(merged);
+  });
+
+  mergedAll = filterByComplex(mergedAll);
+
+  dayFields.forEach(fieldId => {
     const card = document.createElement("div");
     card.className = "field-card";
 
@@ -103,19 +238,15 @@ function renderDayCalendar(data) {
     title.textContent = fieldId;
     card.appendChild(title);
 
-    const merged = mergeTimeline(
-      availability[fieldId] || [],
-      events[fieldId] || [],
-      blocks[fieldId] || []
-    );
+    const fieldSlots = mergedAll.filter(m => m.field === fieldId);
 
-    if (merged.length === 0) {
+    if (fieldSlots.length === 0) {
       const empty = document.createElement("div");
       empty.className = "window-empty";
       empty.textContent = "No availability";
       card.appendChild(empty);
     } else {
-      merged.forEach(slot => {
+      fieldSlots.forEach(slot => {
         const div = document.createElement("div");
         div.className = `block-slot ${slot.cls}`;
         div.textContent = `${slot.start} – ${slot.end}`;
@@ -140,69 +271,13 @@ function renderDayCalendar(data) {
 }
 
 /****************************************************
- * MERGING LOGIC
- ****************************************************/
-function mergeTimeline(availWindows, eventList, blockList) {
-  const out = [];
-
-  // Free windows
-  availWindows.forEach(w => {
-    out.push({
-      start: w.start,
-      end: w.end,
-      type: "free",
-      title: "",
-      cls: "block-free",
-      badge: ""
-    });
-  });
-
-  // Events
-  eventList.forEach(ev => {
-    const style = getStyle(ev.type);
-    out.push({
-      start: ev.start,
-      end: ev.end,
-      type: ev.type,
-      title: ev.title,
-      cls: style.cls,
-      badge: style.badge
-    });
-  });
-
-  // Blocks
-  blockList.forEach(b => {
-    const style = getStyle("admin");
-    out.push({
-      start: b.start,
-      end: b.end,
-      type: "admin",
-      title: b.reason,
-      cls: style.cls,
-      badge: style.badge
-    });
-  });
-
-  return out.sort((a, b) => a.start.localeCompare(b.start));
-}
-
-function getStyle(type) {
-  switch (type) {
-    case "game": return { cls: "block-game", badge: "G" };
-    case "practice": return { cls: "block-practice", badge: "P" };
-    case "admin": return { cls: "block-admin", badge: "A" };
-    default: return { cls: "block-free", badge: "" };
-  }
-}
-
-/****************************************************
  * WEEK VIEW
  ****************************************************/
 async function renderWeekView() {
   const container = document.getElementById("view-container");
 
   if (!currentWeekId) {
-    currentWeekId = getWeekId(new Date());
+    currentWeekId = getWeekId(new Date(currentDate || new Date()));
   }
 
   container.innerHTML = `
@@ -215,47 +290,58 @@ async function renderWeekView() {
     <div id="weekResults"></div>
   `;
 
-  document.getElementById("prevWeek").onclick = () => navigateWeek(-1);
-  document.getElementById("nextWeek").onclick = () => navigateWeek(1);
+  document.getElementById("prevWeek").onclick = () => {
+    const [year, weekStr] = currentWeekId.split("-W");
+    const week = Number(weekStr) - 1;
+    const d = new Date(year, 0, 1);
+    d.setDate(d.getDate() + (week - 1) * 7);
+    currentWeekId = getWeekId(d);
+    renderWeekView();
+  };
+
+  document.getElementById("nextWeek").onclick = () => {
+    const [year, weekStr] = currentWeekId.split("-W");
+    const week = Number(weekStr) + 1;
+    const d = new Date(year, 0, 1);
+    d.setDate(d.getDate() + (week - 1) * 7);
+    currentWeekId = getWeekId(d);
+    renderWeekView();
+  };
 
   renderWeekCalendar();
-}
-
-function navigateWeek(offset) {
-  const [year, weekStr] = currentWeekId.split("-W");
-  const week = Number(weekStr) + offset;
-
-  const d = new Date(year, 0, 1);
-  d.setDate(d.getDate() + (week - 1) * 7);
-
-  currentWeekId = getWeekId(d);
-  renderWeekView();
 }
 
 async function renderWeekCalendar() {
   const container = document.getElementById("weekResults");
   container.innerHTML = "";
 
-  const [year, weekStr] = currentWeekId.split("-W");
-  const week = Number(weekStr);
-
-  const start = new Date(year, 0, 1);
-  start.setDate(start.getDate() + (week - 1) * 7);
-
-  const days = [];
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(start);
-    d.setDate(start.getDate() + i);
-    days.push(d.toISOString().split("T")[0]);
+  const weekData = WEEKS[currentWeekId];
+  if (!weekData) {
+    container.innerHTML = `<p>No data for week ${currentWeekId}</p>`;
+    return;
   }
-
-  const schedMode = document.getElementById("schedModeSelect").value;
 
   const grid = document.createElement("div");
   grid.className = "week-grid";
 
-  for (const dateStr of days) {
-    const data = await fetchDayCalendar(dateStr, schedMode);
+  Object.keys(weekData).sort().forEach(dateStr => {
+    const data = weekData[dateStr];
+    const { availability, events, blocks } = data;
+
+    let mergedAll = [];
+    const dayFields = data.fields || FIELDS;
+
+    dayFields.forEach(fieldId => {
+      const merged = mergeTimeline(
+        availability[fieldId] || [],
+        (events && events[fieldId]) || [],
+        (blocks && blocks[fieldId]) || [],
+        fieldId
+      );
+      mergedAll = mergedAll.concat(merged);
+    });
+
+    mergedAll = filterByComplex(mergedAll);
 
     const dayCard = document.createElement("div");
     dayCard.className = "week-day-card";
@@ -265,7 +351,7 @@ async function renderWeekCalendar() {
     title.textContent = dateStr;
     dayCard.appendChild(title);
 
-    const anyAvail = Object.values(data.availability).some(w => w.length > 0);
+    const anyAvail = mergedAll.some(m => m.type === "free");
 
     const summary = document.createElement("div");
     summary.className = "week-day-summary";
@@ -278,7 +364,7 @@ async function renderWeekCalendar() {
     };
 
     grid.appendChild(dayCard);
-  }
+  });
 
   container.appendChild(grid);
 }
@@ -303,37 +389,62 @@ async function renderMonthView() {
     <div id="monthResults"></div>
   `;
 
-  document.getElementById("prevMonth").onclick = () => navigateMonth(-1);
-  document.getElementById("nextMonth").onclick = () => navigateMonth(1);
+  document.getElementById("prevMonth").onclick = () => {
+    const [year, month] = currentMonthId.split("-");
+    const d = new Date(Number(year), Number(month) - 2, 1);
+    currentMonthId = d.toISOString().substring(0, 7);
+    renderMonthView();
+  };
+
+  document.getElementById("nextMonth").onclick = () => {
+    const [year, month] = currentMonthId.split("-");
+    const d = new Date(Number(year), Number(month), 1);
+    currentMonthId = d.toISOString().substring(0, 7);
+    renderMonthView();
+  };
 
   renderMonthCalendar();
-}
-
-function navigateMonth(offset) {
-  const [year, month] = currentMonthId.split("-");
-  const d = new Date(Number(year), Number(month) - 1 + offset, 1);
-  currentMonthId = d.toISOString().substring(0, 7);
-  renderMonthView();
 }
 
 async function renderMonthCalendar() {
   const container = document.getElementById("monthResults");
   container.innerHTML = "";
 
-  const [year, month] = currentMonthId.split("-");
-  const d = new Date(Number(year), Number(month) - 1, 1);
-
-  const schedMode = document.getElementById("schedModeSelect").value;
+  const monthData = MONTHS[currentMonthId];
+  if (!monthData) {
+    container.innerHTML = `<p>No data for month ${currentMonthId}</p>`;
+    return;
+  }
 
   const grid = document.createElement("div");
   grid.className = "month-grid";
 
-  while (d.getMonth() === Number(month) - 1) {
-    const dateStr = d.toISOString().split("T")[0];
+  Object.keys(monthData).sort().forEach(dateStr => {
+    const data = monthData[dateStr];
+    const { availability, events, blocks } = data;
+
+    let mergedAll = [];
+    const dayFields = data.fields || FIELDS;
+
+    dayFields.forEach(fieldId => {
+      const merged = mergeTimeline(
+        availability[fieldId] || [],
+        (events && events[fieldId]) || [],
+        (blocks && blocks[fieldId]) || [],
+        fieldId
+      );
+      mergedAll = mergedAll.concat(merged);
+    });
+
+    mergedAll = filterByComplex(mergedAll);
 
     const dayCard = document.createElement("div");
     dayCard.className = "month-day-card";
-    dayCard.textContent = d.getDate();
+    dayCard.textContent = new Date(dateStr).getDate();
+
+    if (mergedAll.some(m => m.type === "free")) {
+      dayCard.classList.add("has-availability");
+    }
 
     dayCard.onclick = () => {
       currentDate = dateStr;
@@ -341,8 +452,7 @@ async function renderMonthCalendar() {
     };
 
     grid.appendChild(dayCard);
-    d.setDate(d.getDate() + 1);
-  }
+  });
 
   container.appendChild(grid);
 }
@@ -374,27 +484,28 @@ async function runSearch() {
     return;
   }
 
-  const schedMode = document.getElementById("schedModeSelect").value;
-
   const results = [];
+  const allowedFields = new Set();
 
-  // Search next 30 days
-  for (let i = 0; i < 30; i++) {
-    const d = new Date();
-    d.setDate(d.getDate() + i);
-    const dateStr = d.toISOString().split("T")[0];
+  if (SELECTED_COMPLEXES.size > 0) {
+    SELECTED_COMPLEXES.forEach(cx => {
+      (COMPLEXES[cx] || []).forEach(f => allowedFields.add(f));
+    });
+  }
 
-    const data = await fetchDayCalendar(dateStr, schedMode);
-
-    Object.keys(data.availability).forEach(fieldId => {
-      const windows = data.availability[fieldId];
+  Object.keys(DAYS).forEach(dateStr => {
+    const data = DAYS[dateStr];
+    const availability = data.availability || {};
+    Object.keys(availability).forEach(fieldId => {
+      if (allowedFields.size > 0 && !allowedFields.has(fieldId)) return;
+      const windows = availability[fieldId];
       windows.forEach(w => {
         if (w.start <= time && w.end >= time) {
           results.push({ date: dateStr, fieldId, window: w });
         }
       });
     });
-  }
+  });
 
   if (results.length === 0) {
     container.innerHTML = "<p>No availability found.</p>";
