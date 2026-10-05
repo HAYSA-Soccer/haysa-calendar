@@ -1,137 +1,7 @@
-const API_BASE = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
-
-async function fetchLiveAvailability(dateStr, schedMode) {
-  const url = `${API_BASE}?mode=day&date=${dateStr}&sched_mode=${schedMode}`;
-  const res = await fetch(url);
-  return res.json();
-}
-
-async function fetchEvents(dateStr) {
-  const url = `${API_BASE}?mode=events_for_date&date=${dateStr}`;
-  const res = await fetch(url);
-  return res.json();
-}
-
-
-
-function mergeAvailabilityAndEvents(avail, events) {
-  const merged = {};
-
-  Object.keys(avail).forEach(fieldId => {
-    const freeSlots = avail[fieldId].map(w => ({
-      start: w.start,
-      end: w.end,
-      type: "free",
-      title: ""
-    }));
-
-    const eventSlots = (events[fieldId] || []).map(ev => ({
-      start: ev.start,
-      end: ev.end,
-      type: ev.type,   // "game", "practice", "block"
-      title: ev.title
-    }));
-
-    merged[fieldId] = [...freeSlots, ...eventSlots].sort(
-      (a, b) => a.start.localeCompare(b.start)
-    );
-  });
-
-  return merged;
-}
-
-
-function getStyle(type) {
-  switch (type) {
-    case "game": return { cls: "block-game", badge: "G" };
-    case "practice": return { cls: "block-practice", badge: "P" };
-    case "block": return { cls: "block-block", badge: "B" };
-    default: return { cls: "block-free", badge: "" };
-  }
-}
-
-function renderEnhancedField(fieldId, slots, container) {
-  const card = document.createElement("div");
-  card.className = "field-card";
-
-  const title = document.createElement("div");
-  title.className = "field-title";
-  title.textContent = fieldId;
-  card.appendChild(title);
-
-  slots.forEach(slot => {
-    const { cls, badge } = getStyle(slot.type);
-
-    const div = document.createElement("div");
-    div.className = `block-slot ${cls}`;
-    div.textContent = `${slot.start} – ${slot.end}`;
-
-    if (badge) {
-      const badgeSpan = document.createElement("span");
-      badgeSpan.className = "block-badge";
-      badgeSpan.textContent = `[${badge}]`;
-      div.appendChild(badgeSpan);
-    }
-
-    if (slot.title) {
-      div.title = slot.title; // hover tooltip
-    }
-
-    card.appendChild(div);
-  });
-
-  container.appendChild(card);
-}
-
-
-
-async function renderEnhancedDayView() {
-  const container = document.getElementById("view-container");
-
-  const dateStr = currentDate || new Date().toISOString().split("T")[0];
-  const schedMode = document.getElementById("schedModeSelect").value;
-
-  container.innerHTML = `
-    <h2>Enhanced Day View</h2>
-    <div class="controls">
-      <button id="prevDay">← Previous</button>
-      <span>${dateStr}</span>
-      <button id="nextDay">Next →</button>
-    </div>
-    <div id="enhancedDayResults"></div>
-  `;
-
-  document.getElementById("prevDay").onclick = () => navigateDay(-1);
-  document.getElementById("nextDay").onclick = () => navigateDay(1);
-
-  const avail = await fetchLiveAvailability(dateStr, schedMode);
-  const events = await fetchEvents(dateStr);
-
-  const merged = mergeAvailabilityAndEvents(avail, events);
-
-  const results = document.getElementById("enhancedDayResults");
-  results.innerHTML = "";
-
-  Object.keys(merged).forEach(fieldId => {
-    renderEnhancedField(fieldId, merged[fieldId], results);
-  });
-}
-
-
-
-
 /****************************************************
- * STATIC JSON CACHE (updated hourly by GitHub)
+ * CONFIG
  ****************************************************/
-const STATIC_JSON_URL = "https://haysa-soccer.github.io/haysa-calendar/data/availability.json";
-let cachedFull = null;
-
-async function loadStaticAvailability() {
-  if (cachedFull) return cachedFull;
-  const response = await fetch(STATIC_JSON_URL);
-  cachedFull = await response.json();
-  return cachedFull;
-}
+const API_BASE = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 
 /****************************************************
  * GLOBAL STATE
@@ -139,6 +9,34 @@ async function loadStaticAvailability() {
 let currentDate = null;
 let currentWeekId = null;
 let currentMonthId = null;
+let complexes = {};     // from mode=fields
+let fields = [];        // from mode=fields
+
+/****************************************************
+ * BACKEND FETCHERS
+ ****************************************************/
+async function fetchDayCalendar(dateStr, schedMode) {
+  const url = `${API_BASE}?mode=day_calendar&date=${dateStr}&sched_mode=${schedMode}`;
+  const res = await fetch(url);
+  return res.json();
+}
+
+async function fetchFields() {
+  const url = `${API_BASE}?mode=fields`;
+  const res = await fetch(url);
+  return res.json();
+}
+
+/****************************************************
+ * INITIAL LOAD
+ ****************************************************/
+(async function init() {
+  const f = await fetchFields();
+  complexes = f.complexes;
+  fields = f.fields;
+
+  switchView("day");
+})();
 
 /****************************************************
  * NAVIGATION
@@ -146,9 +44,6 @@ let currentMonthId = null;
 document.querySelectorAll('.nav button').forEach(btn => {
   btn.addEventListener('click', () => switchView(btn.dataset.view));
 });
-
-// Initial view
-switchView("day");
 
 function switchView(view) {
   if (view === "day") renderDayView();
@@ -161,13 +56,13 @@ function switchView(view) {
  * DAY VIEW
  ****************************************************/
 async function renderDayView() {
-  const full = await loadStaticAvailability();
   const container = document.getElementById("view-container");
 
-  // Default to today if not set
   if (!currentDate) {
     currentDate = new Date().toISOString().split("T")[0];
   }
+
+  const schedMode = document.getElementById("schedModeSelect").value;
 
   container.innerHTML = `
     <h2>Day View</h2>
@@ -182,7 +77,8 @@ async function renderDayView() {
   document.getElementById("prevDay").onclick = () => navigateDay(-1);
   document.getElementById("nextDay").onclick = () => navigateDay(1);
 
-  renderDayAvailability(full);
+  const data = await fetchDayCalendar(currentDate, schedMode);
+  renderDayCalendar(data);
 }
 
 function navigateDay(offset) {
@@ -192,18 +88,13 @@ function navigateDay(offset) {
   renderDayView();
 }
 
-async function renderDayAvailability(full) {
+function renderDayCalendar(data) {
   const container = document.getElementById("dayResults");
-
-  if (!full.days[currentDate]) {
-    container.innerHTML = `<p>No data for ${currentDate} (outside season)</p>`;
-    return;
-  }
-
-  const data = full.days[currentDate];
   container.innerHTML = "";
 
-  Object.keys(data).forEach(fieldId => {
+  const { availability, events, blocks } = data;
+
+  fields.forEach(fieldId => {
     const card = document.createElement("div");
     card.className = "field-card";
 
@@ -212,18 +103,34 @@ async function renderDayAvailability(full) {
     title.textContent = fieldId;
     card.appendChild(title);
 
-    const windows = data[fieldId];
+    const merged = mergeTimeline(
+      availability[fieldId] || [],
+      events[fieldId] || [],
+      blocks[fieldId] || []
+    );
 
-    if (!windows || windows.length === 0) {
+    if (merged.length === 0) {
       const empty = document.createElement("div");
       empty.className = "window-empty";
       empty.textContent = "No availability";
       card.appendChild(empty);
     } else {
-      windows.forEach(w => {
+      merged.forEach(slot => {
         const div = document.createElement("div");
-        div.className = "window";
-        div.textContent = `${w.start} – ${w.end}`;
+        div.className = `block-slot ${slot.cls}`;
+        div.textContent = `${slot.start} – ${slot.end}`;
+
+        if (slot.badge) {
+          const badgeSpan = document.createElement("span");
+          badgeSpan.className = "block-badge";
+          badgeSpan.textContent = `[${slot.badge}]`;
+          div.appendChild(badgeSpan);
+        }
+
+        if (slot.title) {
+          div.title = slot.title;
+        }
+
         card.appendChild(div);
       });
     }
@@ -233,13 +140,67 @@ async function renderDayAvailability(full) {
 }
 
 /****************************************************
+ * MERGING LOGIC
+ ****************************************************/
+function mergeTimeline(availWindows, eventList, blockList) {
+  const out = [];
+
+  // Free windows
+  availWindows.forEach(w => {
+    out.push({
+      start: w.start,
+      end: w.end,
+      type: "free",
+      title: "",
+      cls: "block-free",
+      badge: ""
+    });
+  });
+
+  // Events
+  eventList.forEach(ev => {
+    const style = getStyle(ev.type);
+    out.push({
+      start: ev.start,
+      end: ev.end,
+      type: ev.type,
+      title: ev.title,
+      cls: style.cls,
+      badge: style.badge
+    });
+  });
+
+  // Blocks
+  blockList.forEach(b => {
+    const style = getStyle("admin");
+    out.push({
+      start: b.start,
+      end: b.end,
+      type: "admin",
+      title: b.reason,
+      cls: style.cls,
+      badge: style.badge
+    });
+  });
+
+  return out.sort((a, b) => a.start.localeCompare(b.start));
+}
+
+function getStyle(type) {
+  switch (type) {
+    case "game": return { cls: "block-game", badge: "G" };
+    case "practice": return { cls: "block-practice", badge: "P" };
+    case "admin": return { cls: "block-admin", badge: "A" };
+    default: return { cls: "block-free", badge: "" };
+  }
+}
+
+/****************************************************
  * WEEK VIEW
  ****************************************************/
 async function renderWeekView() {
-  const full = await loadStaticAvailability();
   const container = document.getElementById("view-container");
 
-  // Default to current week
   if (!currentWeekId) {
     currentWeekId = getWeekId(new Date());
   }
@@ -254,68 +215,78 @@ async function renderWeekView() {
     <div id="weekResults"></div>
   `;
 
-  document.getElementById("prevWeek").onclick = () => navigateWeek(-1, full);
-  document.getElementById("nextWeek").onclick = () => navigateWeek(1, full);
+  document.getElementById("prevWeek").onclick = () => navigateWeek(-1);
+  document.getElementById("nextWeek").onclick = () => navigateWeek(1);
 
-  renderWeekGrid(full);
+  renderWeekCalendar();
 }
 
-function navigateWeek(offset, full) {
-  const allWeeks = Object.keys(full.weeks).sort();
-  const idx = allWeeks.indexOf(currentWeekId);
-  const nextIdx = idx + offset;
+function navigateWeek(offset) {
+  const [year, weekStr] = currentWeekId.split("-W");
+  const week = Number(weekStr) + offset;
 
-  if (nextIdx < 0 || nextIdx >= allWeeks.length) return;
+  const d = new Date(year, 0, 1);
+  d.setDate(d.getDate() + (week - 1) * 7);
 
-  currentWeekId = allWeeks[nextIdx];
+  currentWeekId = getWeekId(d);
   renderWeekView();
 }
 
-async function renderWeekGrid(full) {
+async function renderWeekCalendar() {
   const container = document.getElementById("weekResults");
+  container.innerHTML = "";
 
-  if (!full.weeks[currentWeekId]) {
-    container.innerHTML = `<p>No data for ${currentWeekId} (outside season)</p>`;
-    return;
+  const [year, weekStr] = currentWeekId.split("-W");
+  const week = Number(weekStr);
+
+  const start = new Date(year, 0, 1);
+  start.setDate(start.getDate() + (week - 1) * 7);
+
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    days.push(d.toISOString().split("T")[0]);
   }
 
-  const data = full.weeks[currentWeekId];
-  container.innerHTML = `<div class="week-grid"></div>`;
-  const grid = container.querySelector(".week-grid");
+  const schedMode = document.getElementById("schedModeSelect").value;
 
-  Object.keys(data).forEach(date => {
+  const grid = document.createElement("div");
+  grid.className = "week-grid";
+
+  for (const dateStr of days) {
+    const data = await fetchDayCalendar(dateStr, schedMode);
+
     const dayCard = document.createElement("div");
     dayCard.className = "week-day-card";
 
     const title = document.createElement("div");
     title.className = "week-day-title";
-    title.textContent = date;
+    title.textContent = dateStr;
     dayCard.appendChild(title);
 
-    const fields = data[date];
-    const anyAvailable = Object.values(fields).some(w => w.length > 0);
+    const anyAvail = Object.values(data.availability).some(w => w.length > 0);
 
     const summary = document.createElement("div");
     summary.className = "week-day-summary";
-    summary.textContent = anyAvailable
-      ? `${Object.values(fields).filter(w => w.length > 0).length} fields available`
-      : "No availability";
+    summary.textContent = anyAvail ? "Available" : "No availability";
     dayCard.appendChild(summary);
 
     dayCard.onclick = () => {
-      currentDate = date;
+      currentDate = dateStr;
       switchView("day");
     };
 
     grid.appendChild(dayCard);
-  });
+  }
+
+  container.appendChild(grid);
 }
 
 /****************************************************
  * MONTH VIEW
  ****************************************************/
 async function renderMonthView() {
-  const full = await loadStaticAvailability();
   const container = document.getElementById("view-container");
 
   if (!currentMonthId) {
@@ -332,55 +303,54 @@ async function renderMonthView() {
     <div id="monthResults"></div>
   `;
 
-  document.getElementById("prevMonth").onclick = () => navigateMonth(-1, full);
-  document.getElementById("nextMonth").onclick = () => navigateMonth(1, full);
+  document.getElementById("prevMonth").onclick = () => navigateMonth(-1);
+  document.getElementById("nextMonth").onclick = () => navigateMonth(1);
 
-  renderMonthGrid(full);
+  renderMonthCalendar();
 }
 
-function navigateMonth(offset, full) {
-  const allMonths = Object.keys(full.months).sort();
-  const idx = allMonths.indexOf(currentMonthId);
-  const nextIdx = idx + offset;
-
-  if (nextIdx < 0 || nextIdx >= allMonths.length) return;
-
-  currentMonthId = allMonths[nextIdx];
+function navigateMonth(offset) {
+  const [year, month] = currentMonthId.split("-");
+  const d = new Date(Number(year), Number(month) - 1 + offset, 1);
+  currentMonthId = d.toISOString().substring(0, 7);
   renderMonthView();
 }
 
-async function renderMonthGrid(full) {
+async function renderMonthCalendar() {
   const container = document.getElementById("monthResults");
+  container.innerHTML = "";
 
-  if (!full.months[currentMonthId]) {
-    container.innerHTML = `<p>No data for ${currentMonthId} (outside season)</p>`;
-    return;
-  }
+  const [year, month] = currentMonthId.split("-");
+  const d = new Date(Number(year), Number(month) - 1, 1);
 
-  const data = full.months[currentMonthId];
-  container.innerHTML = `<div class="month-grid"></div>`;
-  const grid = container.querySelector(".month-grid");
+  const schedMode = document.getElementById("schedModeSelect").value;
 
-  Object.keys(data).forEach(date => {
+  const grid = document.createElement("div");
+  grid.className = "month-grid";
+
+  while (d.getMonth() === Number(month) - 1) {
+    const dateStr = d.toISOString().split("T")[0];
+
     const dayCard = document.createElement("div");
     dayCard.className = "month-day-card";
-
-    dayCard.textContent = date.substring(8);
+    dayCard.textContent = d.getDate();
 
     dayCard.onclick = () => {
-      currentDate = date;
+      currentDate = dateStr;
       switchView("day");
     };
 
     grid.appendChild(dayCard);
-  });
+    d.setDate(d.getDate() + 1);
+  }
+
+  container.appendChild(grid);
 }
 
 /****************************************************
  * SEARCH VIEW
  ****************************************************/
 async function renderSearchView() {
-  const full = await loadStaticAvailability();
   const container = document.getElementById("view-container");
 
   container.innerHTML = `
@@ -392,10 +362,10 @@ async function renderSearchView() {
     <div id="searchResults"></div>
   `;
 
-  document.getElementById("searchBtn").onclick = () => runSearch(full);
+  document.getElementById("searchBtn").onclick = () => runSearch();
 }
 
-function runSearch(full) {
+async function runSearch() {
   const time = document.getElementById("searchTime").value;
   const container = document.getElementById("searchResults");
 
@@ -404,19 +374,27 @@ function runSearch(full) {
     return;
   }
 
+  const schedMode = document.getElementById("schedModeSelect").value;
+
   const results = [];
 
-  Object.keys(full.days).forEach(date => {
-    const fields = full.days[date];
-    Object.keys(fields).forEach(fieldId => {
-      const windows = fields[fieldId];
+  // Search next 30 days
+  for (let i = 0; i < 30; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().split("T")[0];
+
+    const data = await fetchDayCalendar(dateStr, schedMode);
+
+    Object.keys(data.availability).forEach(fieldId => {
+      const windows = data.availability[fieldId];
       windows.forEach(w => {
         if (w.start <= time && w.end >= time) {
-          results.push({ date, fieldId, window: w });
+          results.push({ date: dateStr, fieldId, window: w });
         }
       });
     });
-  });
+  }
 
   if (results.length === 0) {
     container.innerHTML = "<p>No availability found.</p>";
