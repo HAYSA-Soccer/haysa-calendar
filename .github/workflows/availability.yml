@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      WEBAPP_URL: "https://script.google.com/macros/s/REPLACE_ME/exec"
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -24,7 +27,7 @@ jobs:
         run: |
           echo "Fetching season window..."
 
-          RAW=$(curl -sSL "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=season_window")
+          RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
 
           echo "RAW RESPONSE:"
           echo "$RAW"
@@ -58,7 +61,7 @@ jobs:
           fi
 
           # Fetch field + complex map once
-          FIELDS_RAW=$(curl -sSL "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=fields")
+          FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
           FIELDS_JSON="$FIELDS_RAW"
 
           DAYS_JSON="{}"
@@ -70,8 +73,7 @@ jobs:
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             echo "Fetching $CURRENT"
 
-            RAW_DAY=$(curl -sSL \
-              "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=day_calendar&date=$CURRENT")
+            RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
             # Insert into days
