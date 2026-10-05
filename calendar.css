@@ -96,3 +96,73 @@ body {
   padding: 6px;
   border-radius: 4px;
 }
+
+
+/****************************************************
+ * NEW: Availability Block Types (Game / Practice / Block)
+ ****************************************************/
+
+/* Available (free) */
+.block-free {
+  background: #d9ffd9; /* matches your existing "window" green */
+  padding: 6px;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+
+/* Game (hard conflict) */
+.block-game {
+  background: #ff4d4f; /* strong red */
+  color: white;
+  padding: 6px;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+
+/* Practice (soft conflict) */
+.block-practice {
+  background: #ffa940; /* orange */
+  color: white;
+  padding: 6px;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+
+/* Block / Other (maintenance, admin holds, misc) */
+.block-block {
+  background: #8c8c8c; /* gray */
+  color: white;
+  padding: 6px;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+
+/****************************************************
+ * NEW: Badge styling (G / P / B)
+ ****************************************************/
+.block-badge {
+  background: rgba(255,255,255,0.25);
+  padding: 2px 6px;
+  margin-left: 8px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/****************************************************
+ * NEW: Unified slot styling
+ ****************************************************/
+.block-slot {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  cursor: default;
+}
+
+/****************************************************
+ * OPTIONAL: Hover tooltip styling
+ ****************************************************/
+.block-slot:hover {
+  filter: brightness(1.05);
+}
+
