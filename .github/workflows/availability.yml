@@ -24,21 +24,24 @@ jobs:
         run: |
           echo "Fetching season window..."
 
-          SEASON_JSON=$(curl -sSL -w '\nHTTP_STATUS:%{http_code}\n' \
-            "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
+          RAW=$(curl -sSL "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec?mode=season_window")
 
           echo "RAW RESPONSE:"
-          echo "$SEASON_JSON"
+          echo "$RAW"
 
-          STATUS=$(echo "$SEASON_JSON" | sed -n 's/^HTTP_STATUS://p')
-          BODY=$(echo "$SEASON_JSON" | sed '/^HTTP_STATUS:/d')
+          # ⭐ Strip <pre> wrapper if present
+          CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
 
-          echo "HTTP STATUS: $STATUS"
-          echo "RAW JSON BODY:"
-          echo "$BODY"
+          # If CLEAN is empty, assume RAW was already JSON
+          if [ -z "$CLEAN" ]; then
+            CLEAN="$RAW"
+          fi
 
-          START=$(echo "$BODY" | jq -r '.season_start' 2>/dev/null || echo "")
-          END=$(echo "$BODY" | jq -r '.season_end' 2>/dev/null || echo "")
+          echo "CLEAN JSON:"
+          echo "$CLEAN"
+
+          START=$(echo "$CLEAN" | jq -r '.season_start')
+          END=$(echo "$CLEAN" | jq -r '.season_end')
 
           echo "Parsed START: $START"
           echo "Parsed END: $END"
