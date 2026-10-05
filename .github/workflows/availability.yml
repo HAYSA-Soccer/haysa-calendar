@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      WEBAPP_URL: "https://script.google.com/macros/s/REPLACE_ME/exec"
+      WEBAPP_URL: "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec"
 
     steps:
       - name: Checkout repo
