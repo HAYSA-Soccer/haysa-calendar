@@ -61,6 +61,7 @@ function filterByComplex(merged) {
 
 function renderComplexFilters() {
   const container = document.getElementById("complex-filters");
+  const status = document.getElementById("complex-status");
   if (!container) return;
 
   let html = "";
@@ -74,7 +75,14 @@ function renderComplexFilters() {
   });
 
   container.innerHTML = html;
+
+  if (SELECTED_COMPLEXES.size === 0) {
+    status.textContent = "Showing ALL complexes";
+  } else {
+    status.textContent = "Selected: " + Array.from(SELECTED_COMPLEXES).join(", ");
+  }
 }
+
 
 
 function getAllowedFields() {
