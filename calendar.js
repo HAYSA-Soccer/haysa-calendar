@@ -53,10 +53,15 @@ function toggleComplex(complexName) {
     SELECTED_COMPLEXES.add(complexName);
   }
 
+  // THIS WAS MISSING
+  renderComplexFilters();
+
   if (currentView === "day") renderDayView();
   if (currentView === "week") renderWeekView();
   if (currentView === "month") renderMonthView();
+  if (currentView === "search") renderSearchView();
 }
+
 
 function filterByComplex(merged) {
   if (SELECTED_COMPLEXES.size === 0) return merged;
