@@ -217,11 +217,6 @@ body {
   background: #0077dd;
 }
 
-.complex-btn.active {
-  background-color: #007bff;
-  color: white;
-}
-
 .complex-btn {
   padding: 6px 12px;
   margin: 4px;
@@ -236,7 +231,6 @@ body {
   color: white;
   border-color: #0056b3;
 }
-
 
 .week-grid-time {
   display: grid;
