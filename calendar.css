@@ -216,3 +216,9 @@ body {
 #enhancedDayBtn:hover {
   background: #0077dd;
 }
+
+.complex-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
