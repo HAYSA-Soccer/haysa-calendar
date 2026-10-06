@@ -222,3 +222,17 @@ body {
   color: white;
 }
 
+.complex-btn {
+  padding: 6px 12px;
+  margin: 4px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.complex-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
