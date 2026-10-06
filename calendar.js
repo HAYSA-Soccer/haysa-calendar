@@ -94,6 +94,23 @@ function renderComplexFilters() {
 }
 
 
+function getWeekRange(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // 0=Sun, 1=Mon, ...
+  const diffToMonday = (day === 0 ? -6 : 1 - day);
+  const monday = new Date(d);
+  monday.setDate(d.getDate() + diffToMonday);
+
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const dt = new Date(monday);
+    dt.setDate(monday.getDate() + i);
+    days.push(dt.toISOString().split("T")[0]);
+  }
+  return days;
+}
+
+
 
 function getAllowedFields() {
   if (SELECTED_COMPLEXES.size === 0) return FIELDS;
