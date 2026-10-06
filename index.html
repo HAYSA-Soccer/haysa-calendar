@@ -19,11 +19,13 @@
     <button data-view="search">Search</button>
   </nav>
 
+  <!-- Complex selection status -->
   <div id="complex-status" class="complex-status"></div>
 
-  <!-- Complex filters -->
+  <!-- Complex filter buttons -->
   <div id="complex-filters" class="complex-filter-bar"></div>
-  
+
+  <!-- Scheduling mode + enhanced view -->
   <section class="mode-bar">
     <div class="mode-controls">
       <label for="schedModeSelect">Scheduling Mode:</label>
@@ -32,18 +34,17 @@
         <option value="game">Game</option>
       </select>
     </div>
-  
+
+    <button id="enhancedDayBtn" class="enhanced-btn">
+      Enhanced Day View
+    </button>
   </section>
 
-
   <!-- Main content -->
-  <main id="view-container">
-    <!-- Views injected here -->
-  </main>
+  <main id="view-container"></main>
 
   <script src="calendar.js"></script>
   <script>
-    // Enhanced Day View button handler
     document.getElementById("enhancedDayBtn").addEventListener("click", () => {
       if (typeof renderEnhancedDayView === "function") {
         renderEnhancedDayView();
