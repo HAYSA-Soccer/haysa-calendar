@@ -339,68 +339,57 @@ async function renderWeekCalendar() {
   const container = document.getElementById("weekResults");
   container.innerHTML = "";
 
-  const weekData = WEEKS[currentWeekId];
-  if (!weekData) {
-    container.innerHTML = `<p>No data for week ${currentWeekId}</p>`;
-    return;
-  }
+  const days = getWeekRange(currentDate);
+  const allowedFields = getAllowedFields().map(f => f.id || f);
 
   const grid = document.createElement("div");
-  grid.className = "week-grid";
+  grid.className = "week-grid-time";
 
-  Object.keys(weekData).sort().forEach(dateStr => {
-    const dayData = weekData[dateStr];
-    const allowedFields = getAllowedFields().map(f => f.id || f);
-    const mergedAll = mergeTimelineForDay(dayData).filter(m => allowedFields.includes(m.field));
+  // Time column
+  const timeCol = document.createElement("div");
+  timeCol.className = "week-time-col";
+  TIME_SLOTS.forEach(t => {
+    const div = document.createElement("div");
+    div.className = "week-time-slot";
+    div.textContent = t;
+    timeCol.appendChild(div);
+  });
+  grid.appendChild(timeCol);
 
+  // Day columns
+  days.forEach(dateStr => {
+    const dayData = DAYS[dateStr];
+    const merged = dayData ? mergeTimelineForDay(dayData) : [];
 
-
-    const dayCard = document.createElement("div");
-    dayCard.className = "week-day-card";
+    const col = document.createElement("div");
+    col.className = "week-col";
 
     const title = document.createElement("div");
-    title.className = "week-day-title";
+    title.className = "week-col-title";
     title.textContent = dateStr;
-    dayCard.appendChild(title);
+    col.appendChild(title);
 
-    if (mergedAll.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "week-day-empty";
-      empty.textContent = "No availability";
-      dayCard.appendChild(empty);
-    } else {
-      mergedAll.forEach(slot => {
-        const div = document.createElement("div");
-        div.className = `block-slot ${slot.cls}`;
-        div.textContent = `${slot.start} – ${slot.end}`;
+    TIME_SLOTS.forEach(t => {
+      const slotDiv = document.createElement("div");
+      slotDiv.className = "week-slot";
 
-        if (slot.badge) {
-          const badgeSpan = document.createElement("span");
-          badgeSpan.className = "block-badge";
-          badgeSpan.textContent = `[${slot.badge}]`;
-          div.appendChild(badgeSpan);
-        }
+      const active = merged.find(m => m.start <= t && m.end > t);
 
-        if (slot.title) {
-          div.title = `${slot.fieldName}: ${slot.title}`;
-        } else {
-          div.title = slot.fieldName;
-        }
+      if (active && allowedFields.includes(active.field)) {
+        slotDiv.classList.add(active.cls);
+        slotDiv.textContent = active.badge ? `[${active.badge}]` : "";
+        slotDiv.title = `${active.fieldName} ${active.start}–${active.end}`;
+      }
 
-        dayCard.appendChild(div);
-      });
-    }
+      col.appendChild(slotDiv);
+    });
 
-    dayCard.onclick = () => {
-      currentDate = dateStr;
-      switchView("day");
-    };
-
-    grid.appendChild(dayCard);
+    grid.appendChild(col);
   });
 
   container.appendChild(grid);
 }
+
 
 /****************************************************
  * MONTH VIEW
