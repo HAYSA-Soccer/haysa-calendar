@@ -76,6 +76,19 @@ function renderComplexFilters() {
   container.innerHTML = html;
 }
 
+
+function getAllowedFields() {
+  if (SELECTED_COMPLEXES.size === 0) return FIELDS;
+
+  const allowed = new Set();
+  SELECTED_COMPLEXES.forEach(cx => {
+    (COMPLEXES[cx] || []).forEach(f => allowed.add(f));
+  });
+
+  return FIELDS.filter(f => allowed.has(f.id || f));
+}
+
+
 /****************************************************
  * MERGING LOGIC
  ****************************************************/
@@ -225,7 +238,9 @@ function renderDayCalendar(dayData) {
   }
 
   const mergedAll = mergeTimelineForDay(dayData);
-  const fields = dayData.fields || FIELDS;
+  let fields = dayData.fields || FIELDS;
+  fields = getAllowedFields();
+
 
   fields.forEach(field => {
     const fieldId = typeof field === "string" ? field : field.id;
@@ -327,7 +342,10 @@ async function renderWeekCalendar() {
 
   Object.keys(weekData).sort().forEach(dateStr => {
     const dayData = weekData[dateStr];
-    const mergedAll = mergeTimelineForDay(dayData);
+    const allowedFields = getAllowedFields().map(f => f.id || f);
+    const mergedAll = mergeTimelineForDay(dayData).filter(m => allowedFields.includes(m.field));
+
+
 
     const dayCard = document.createElement("div");
     dayCard.className = "week-day-card";
@@ -428,7 +446,9 @@ async function renderMonthCalendar() {
 
   Object.keys(monthData).sort().forEach(dateStr => {
     const dayData = monthData[dateStr];
-    const mergedAll = mergeTimelineForDay(dayData);
+    const allowedFields = getAllowedFields().map(f => f.id || f);
+    const mergedAll = mergeTimelineForDay(dayData).filter(m => allowedFields.includes(m.field));
+
 
     const dayCard = document.createElement("div");
     dayCard.className = "month-day-card";
@@ -490,10 +510,11 @@ async function runSearch() {
     if (!dayData) return;
 
     const availability = dayData.availability || {};
-    const fields = dayData.fields || FIELDS;
+    const fields = getAllowedFields();
 
     fields.forEach(field => {
-      const fieldId = typeof field === "string" ? field : field.id;
+      const fieldId = field.id || field;
+
       const fieldName = typeof field === "string" ? field : (field.name || field.id);
 
       if (allowedFields.size > 0 && !allowedFields.has(fieldId)) return;
