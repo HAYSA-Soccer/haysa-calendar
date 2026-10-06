@@ -33,6 +33,35 @@ body {
 }
 
 /****************************************************
+ * COMPLEX STATUS + FILTERS
+ ****************************************************/
+.complex-status {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.complex-filter-bar {
+  padding: 10px 20px;
+}
+
+.complex-btn {
+  padding: 6px 12px;
+  margin: 4px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.complex-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+/****************************************************
  * MAIN VIEW CONTAINER
  ****************************************************/
 #view-container {
@@ -56,15 +85,8 @@ body {
 }
 
 /****************************************************
- * BASIC AVAILABILITY WINDOWS (STATIC JSON)
+ * AVAILABILITY WINDOWS
  ****************************************************/
-.window {
-  background: #d9ffd9;
-  padding: 6px;
-  margin: 4px 0;
-  border-radius: 4px;
-}
-
 .window-empty {
   background: #ffe5e5;
   padding: 6px;
@@ -73,50 +95,8 @@ body {
 }
 
 /****************************************************
- * WEEK VIEW
+ * BLOCK TYPES
  ****************************************************/
-.week-grid {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.week-day-card {
-  background: white;
-  padding: 15px;
-  width: 180px;
-  border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
-  cursor: pointer;
-}
-
-.week-day-card:hover {
-  background: #eef6ff;
-}
-
-.week-day-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.week-day-empty {
-  background: #ffe5e5;
-  padding: 6px;
-  border-radius: 4px;
-  color: #990000;
-}
-
-.week-day-summary {
-  background: #d9ffd9;
-  padding: 6px;
-  border-radius: 4px;
-}
-
-/****************************************************
- * ENHANCED AVAILABILITY BLOCKS (GAME / PRACTICE / BLOCK)
- ****************************************************/
-
-/* Available (free) */
 .block-free {
   background: #d9ffd9;
   padding: 6px;
@@ -124,7 +104,6 @@ body {
   border-radius: 4px;
 }
 
-/* Game (hard conflict) */
 .block-game {
   background: #ff4d4f;
   color: white;
@@ -133,7 +112,6 @@ body {
   border-radius: 4px;
 }
 
-/* Practice (soft conflict) */
 .block-practice {
   background: #ffa940;
   color: white;
@@ -142,8 +120,7 @@ body {
   border-radius: 4px;
 }
 
-/* Block / Other */
-.block-block {
+.block-admin {
   background: #8c8c8c;
   color: white;
   padding: 6px;
@@ -151,9 +128,6 @@ body {
   border-radius: 4px;
 }
 
-/****************************************************
- * BADGES (G / P / B)
- ****************************************************/
 .block-badge {
   background: rgba(255,255,255,0.25);
   padding: 2px 6px;
@@ -163,22 +137,14 @@ body {
   font-weight: bold;
 }
 
-/****************************************************
- * UNIFIED SLOT STYLING
- ****************************************************/
 .block-slot {
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-  cursor: default;
-}
-
-.block-slot:hover {
-  filter: brightness(1.05);
 }
 
 /****************************************************
- * MODE BAR (Scheduling Mode + Enhanced View)
+ * MODE BAR
  ****************************************************/
 .mode-bar {
   background: #eef2f7;
@@ -201,8 +167,7 @@ body {
   font-size: 16px;
 }
 
-.enhanced-btn,
-#enhancedDayBtn {
+.enhanced-btn {
   background: #0055aa;
   color: white;
   border: none;
@@ -212,26 +177,13 @@ body {
   cursor: pointer;
 }
 
-.enhanced-btn:hover,
-#enhancedDayBtn:hover {
+.enhanced-btn:hover {
   background: #0077dd;
 }
 
-.complex-btn {
-  padding: 6px 12px;
-  margin: 4px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.complex-btn.active {
-  background: #007bff;
-  color: white;
-  border-color: #0056b3;
-}
-
+/****************************************************
+ * WEEK VIEW — TIME AXIS GRID
+ ****************************************************/
 .week-grid-time {
   display: grid;
   grid-template-columns: 120px repeat(7, 1fr);
@@ -258,16 +210,4 @@ body {
   font-weight: bold;
   text-align: center;
   margin-bottom: 4px;
-}
-
-.complex-status {
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-}
-
-
-.complex-filter-bar {
-  padding: 10px 20px;
 }
