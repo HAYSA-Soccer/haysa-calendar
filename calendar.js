@@ -378,7 +378,7 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  const mergedAll = mergeTimelineForDay(dayData);
+  const blocks = buildContinuousWindowsForDay(dayData);
   let fields = getAllowedFields();
 
   fields.forEach(field => {
