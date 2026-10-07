@@ -43,13 +43,19 @@
   <!-- Main content -->
   <main id="view-container"></main>
 
+  <!-- ⭐ Load JS *after* the DOM is fully built -->
   <script src="calendar.js"></script>
   <script>
-    document.getElementById("enhancedDayBtn").addEventListener("click", () => {
-      if (typeof renderEnhancedDayView === "function") {
-        renderEnhancedDayView();
-      } else {
-        alert("Enhanced Day View is not yet available.");
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("enhancedDayBtn");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          if (typeof renderEnhancedDayView === "function") {
+            renderEnhancedDayView();
+          } else {
+            alert("Enhanced Day View is not yet available.");
+          }
+        });
       }
     });
   </script>
