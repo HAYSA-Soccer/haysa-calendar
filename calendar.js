@@ -159,6 +159,151 @@ function getStyle(type) {
   }
 }
 
+
+/****************************************************
+ * CONTINUOUS WINDOW ENGINE (NEW)
+ ****************************************************/
+
+function timeToMinutes(t) {
+  const [hh, mm] = t.split(":").map(Number);
+  return hh * 60 + mm;
+}
+
+function minutesToTime(m) {
+  const hh = String(Math.floor(m / 60)).padStart(2, "0");
+  const mm = String(m % 60).padStart(2, "0");
+  return `${hh}:${mm}`;
+}
+
+function buildContinuousWindowsForDay(dayData) {
+  if (!dayData) return [];
+
+  const { fields, availability, events = {} } = dayData;
+
+  // Build field lookup
+  const fieldById = {};
+  const complexes = {};
+  fields.forEach(f => {
+    fieldById[f.id] = f;
+    if (!complexes[f.complex]) complexes[f.complex] = [];
+    complexes[f.complex].push(f.id);
+  });
+
+  // Determine time range
+  let minStart = Infinity;
+  let maxEnd = -Infinity;
+  Object.values(availability).forEach(windows => {
+    windows.forEach(w => {
+      const s = timeToMinutes(w.start);
+      const e = timeToMinutes(w.end);
+      if (s < minStart) minStart = s;
+      if (e > maxEnd) maxEnd = e;
+    });
+  });
+  if (!isFinite(minStart) || !isFinite(maxEnd)) return [];
+
+  // Build 30-min slots
+  const SLOT = 30;
+  const slots = [];
+  for (let t = minStart; t < maxEnd; t += SLOT) {
+    slots.push({ start: t, end: t + SLOT });
+  }
+
+  function fieldAvailable(fieldId, slot) {
+    const windows = availability[fieldId] || [];
+    return windows.some(w => {
+      const ws = timeToMinutes(w.start);
+      const we = timeToMinutes(w.end);
+      return ws <= slot.start && we >= slot.end;
+    });
+  }
+
+  function fieldBlocked(fieldId, slot) {
+    const evs = events[fieldId] || [];
+    return evs.some(ev => {
+      const es = timeToMinutes(ev.start);
+      const ee = timeToMinutes(ev.end);
+      return es < slot.end && ee > slot.start;
+    });
+  }
+
+  const blocks = [];
+
+  Object.entries(complexes).forEach(([complexName, fieldIds]) => {
+    const slotFieldSets = slots.map(slot => {
+      const available = fieldIds.filter(fid => {
+        return fieldAvailable(fid, slot) && !fieldBlocked(fid, slot);
+      });
+      available.sort();
+      return available;
+    });
+
+    let current = null;
+
+    for (let i = 0; i < slots.length; i++) {
+      const slot = slots[i];
+      const fieldsHere = slotFieldSets[i];
+      const key = fieldsHere.join("|");
+
+      if (!fieldsHere.length) {
+        if (current) {
+          blocks.push({
+            complex: complexName,
+            start: minutesToTime(current.start),
+            end: minutesToTime(current.end),
+            fieldIds: current.fieldIds,
+            fields: current.fieldIds.map(fid => fieldById[fid].name)
+          });
+          current = null;
+        }
+        continue;
+      }
+
+      if (!current) {
+        current = {
+          start: slot.start,
+          end: slot.end,
+          fieldIds: fieldsHere.slice(),
+          key
+        };
+      } else if (current.key === key) {
+        current.end = slot.end;
+      } else {
+        blocks.push({
+          complex: complexName,
+          start: minutesToTime(current.start),
+          end: minutesToTime(current.end),
+          fieldIds: current.fieldIds,
+          fields: current.fieldIds.map(fid => fieldById[fid].name)
+        });
+        current = {
+          start: slot.start,
+          end: slot.end,
+          fieldIds: fieldsHere.slice(),
+          key
+        };
+      }
+    }
+
+    if (current) {
+      blocks.push({
+        complex: complexName,
+        start: minutesToTime(current.start),
+        end: minutesToTime(current.end),
+        fieldIds: current.fieldIds,
+        fields: current.fieldIds.map(fid => fieldById[fid].name)
+      });
+    }
+  });
+
+  return blocks;
+}
+
+
+
+/****************************************************
+ * INIT
+ ****************************************************/
 /****************************************************
  * INIT
  ****************************************************/
@@ -171,7 +316,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   switchView("day");
+
+  // TEMP TEST — JSON is already loaded!
+  const day = DAYS["2026-10-09"];
+  const blocks = buildContinuousWindowsForDay(day);
+  console.log("CONTINUOUS BLOCKS:", blocks);
 });
+
 
 /****************************************************
  * VIEW SWITCHER
