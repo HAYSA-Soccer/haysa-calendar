@@ -378,48 +378,53 @@ function renderDayCalendar(dayData) {
     return;
   }
 
+  // NEW: use continuous window engine
   const blocks = buildContinuousWindowsForDay(dayData);
-  let fields = getAllowedFields();
 
-  fields.forEach(field => {
-    const fieldId = field.id || field;
-    const fieldName = field.name || fieldId;
+  if (blocks.length === 0) {
+    container.innerHTML = `<p>No availability for ${currentDate}</p>`;
+    return;
+  }
 
-    const card = document.createElement("div");
-    card.className = "field-card";
+  // Group blocks by complex
+  const byComplex = {};
+  blocks.forEach(b => {
+    if (!byComplex[b.complex]) byComplex[b.complex] = [];
+    byComplex[b.complex].push(b);
+  });
 
-    const title = document.createElement("div");
-    title.className = "field-title";
-    title.textContent = fieldName;
-    card.appendChild(title);
+  // Render each complex chronologically
+  Object.entries(byComplex).forEach(([complexName, windows]) => {
+    const section = document.createElement("div");
+    section.className = "complex-section";
 
-    const fieldSlots = mergedAll.filter(m => m.field === fieldId);
+    const title = document.createElement("h3");
+    title.textContent = complexName;
+    section.appendChild(title);
 
-    if (fieldSlots.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "window-empty";
-      empty.textContent = "No availability";
-      card.appendChild(empty);
-    } else {
-      fieldSlots.forEach(slot => {
-        const div = document.createElement("div");
-        div.className = `block-slot ${slot.cls}`;
-        div.textContent = `${slot.start} – ${slot.end}`;
+    windows.forEach(w => {
+      const card = document.createElement("div");
+      card.className = "window-card";
 
-        if (slot.badge) {
-          const badgeSpan = document.createElement("span");
-          badgeSpan.className = "block-badge";
-          badgeSpan.textContent = `[${slot.badge}]`;
-          div.appendChild(badgeSpan);
-        }
+      const header = document.createElement("div");
+      header.className = "window-header";
+      header.textContent = `${w.start} – ${w.end}  (${w.fields.length} fields)`;
+      card.appendChild(header);
 
-        if (slot.title) div.title = slot.title;
+      const list = document.createElement("ul");
+      list.className = "window-field-list";
 
-        card.appendChild(div);
+      w.fields.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        list.appendChild(li);
       });
-    }
 
-    container.appendChild(card);
+      card.appendChild(list);
+      section.appendChild(card);
+    });
+
+    container.appendChild(section);
   });
 }
 
