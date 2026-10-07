@@ -12,6 +12,8 @@ let currentDate = null;
 let currentView = "day";
 
 let SELECTED_COMPLEXES = new Set();
+let SELECTED_MODE = "practice"; // default matches HTML dropdown
+
 
 /****************************************************
  * LOAD STATIC JSON
@@ -116,18 +118,24 @@ function mergeTimelineForDay(dayData) {
     });
 
     eventList.forEach(ev => {
-      const style = getStyle(ev.type);
-      out.push({
-        field: fieldId,
-        fieldName,
-        start: ev.start,
-        end: ev.end,
-        type: ev.type,
-        title: ev.title,
-        cls: style.cls,
-        badge: style.badge
-      });
-    });
+  // Respect Scheduling Mode (Practice / Game)
+  if (SELECTED_MODE && ev.type && ev.type !== SELECTED_MODE) {
+    return; // skip events that don't match current mode
+  }
+
+  const style = getStyle(ev.type);
+  out.push({
+    field: fieldId,
+    fieldName,
+    start: ev.start,
+    end: ev.end,
+    type: ev.type,
+    title: ev.title,
+    cls: style.cls,
+    badge: style.badge
+  });
+});
+
 
     blockList.forEach(b => {
       const style = getStyle("admin");
@@ -219,13 +227,19 @@ function buildContinuousWindowsForDay(dayData) {
   }
 
   function fieldBlocked(fieldId, slot) {
-    const evs = events[fieldId] || [];
-    return evs.some(ev => {
-      const es = timeToMinutes(ev.start);
-      const ee = timeToMinutes(ev.end);
-      return es < slot.end && ee > slot.start;
-    });
-  }
+  const evs = events[fieldId] || [];
+  return evs.some(ev => {
+    // Respect Scheduling Mode (Practice / Game)
+    if (SELECTED_MODE && ev.type && ev.type !== SELECTED_MODE) {
+      return false; // ignore events of other modes
+    }
+
+    const es = timeToMinutes(ev.start);
+    const ee = timeToMinutes(ev.end);
+    return es < slot.end && ee > slot.start;
+  });
+}
+
 
   const blocks = [];
 
@@ -304,23 +318,33 @@ function buildContinuousWindowsForDay(dayData) {
 /****************************************************
  * INIT
  ****************************************************/
-/****************************************************
- * INIT
- ****************************************************/
 document.addEventListener("DOMContentLoaded", async () => {
   await loadAvailabilityJSON();
   renderComplexFilters();
 
+  // Wire top nav (Day / Week / Month / Search)
   document.querySelectorAll(".nav button").forEach(btn => {
     btn.addEventListener("click", () => switchView(btn.dataset.view));
   });
 
-  switchView("day");
+  // Wire Scheduling Mode dropdown (Practice / Game)
+  const modeSelect = document.getElementById("schedModeSelect");
+  if (modeSelect) {
+    // Initialize SELECTED_MODE from current dropdown value
+    SELECTED_MODE = modeSelect.value || "practice";
 
-  // TEMP TEST — JSON is already loaded!
-  const day = DAYS["2026-10-09"];
-  const blocks = buildContinuousWindowsForDay(day);
-  console.log("CONTINUOUS BLOCKS:", blocks);
+    modeSelect.addEventListener("change", (e) => {
+      SELECTED_MODE = e.target.value || "practice";
+      // Re-render current view so mode change is visible immediately
+      if (currentView === "day") renderDayView();
+      if (currentView === "week") renderWeekView();
+      if (currentView === "month") renderMonthView();
+      if (currentView === "search") renderSearchView();
+    });
+  }
+
+  // Initial view
+  switchView("day");
 });
 
 
