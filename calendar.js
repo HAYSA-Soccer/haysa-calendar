@@ -106,6 +106,27 @@ function mergeTimelineForDay(dayData) {
     const blockList = blocks[fieldId] || [];
 
     availWindows.forEach(w => {
+
+      // ⭐ If mode is "practice", remove windows blocked by game events
+      // ⭐ If mode is "game", remove windows blocked by practice events
+      const blocked = eventList.some(ev => {
+        const t = ev.title ? ev.title.toLowerCase() : "";
+        const evType = t.includes("game") || t.includes("vs") || t.includes("match")
+          ? "game"
+          : "practice";
+    
+        if (SELECTED_MODE !== evType) return false;
+    
+        const es = timeToMinutes(ev.start);
+        const ee = timeToMinutes(ev.end);
+        const ws = timeToMinutes(w.start);
+        const we = timeToMinutes(w.end);
+    
+        return es < we && ee > ws;
+      });
+    
+      if (blocked) return;
+    
       out.push({
         field: fieldId,
         fieldName,
@@ -117,9 +138,22 @@ function mergeTimelineForDay(dayData) {
       });
     });
 
+
     eventList.forEach(ev => {
-  // Respect Scheduling Mode (Practice / Game)
-  if (SELECTED_MODE && ev.type && ev.type !== SELECTED_MODE) {
+
+  // ⭐ Derive type from title if missing
+  if (!ev.type) {
+    const t = ev.title ? ev.title.toLowerCase() : "";
+    if (t.includes("game") || t.includes("vs") || t.includes("match")) {
+      ev.type = "game";
+    } else {
+      ev.type = "practice";
+    }
+  }
+
+
+  // ⭐ Respect Scheduling Mode (Practice / Game)
+  if (SELECTED_MODE && ev.type !== SELECTED_MODE) {
     return; // skip events that don't match current mode
   }
 
@@ -135,6 +169,7 @@ function mergeTimelineForDay(dayData) {
     badge: style.badge
   });
 });
+
 
 
     blockList.forEach(b => {
@@ -219,26 +254,60 @@ function buildContinuousWindowsForDay(dayData) {
 
   function fieldAvailable(fieldId, slot) {
     const windows = availability[fieldId] || [];
-    return windows.some(w => {
+  
+    // First: is this slot inside any availability window at all?
+    const inWindow = windows.some(w => {
       const ws = timeToMinutes(w.start);
       const we = timeToMinutes(w.end);
       return ws <= slot.start && we >= slot.end;
     });
+  
+    if (!inWindow) return false;
+  
+    // Second: if a mode is selected, ensure no events of that mode block this slot
+    const evs = events[fieldId] || [];
+    const blockedByMode = evs.some(ev => {
+      const t = ev.title ? ev.title.toLowerCase() : "";
+      const evType = t.includes("game") || t.includes("vs") || t.includes("match")
+        ? "game"
+        : "practice";
+  
+      if (!SELECTED_MODE || evType !== SELECTED_MODE) return false;
+  
+      const es = timeToMinutes(ev.start);
+      const ee = timeToMinutes(ev.end);
+      return es < slot.end && ee > slot.start;
+    });
+  
+    return !blockedByMode;
   }
 
-  function fieldBlocked(fieldId, slot) {
-  const evs = events[fieldId] || [];
-  return evs.some(ev => {
-    // Respect Scheduling Mode (Practice / Game)
-    if (SELECTED_MODE && ev.type && ev.type !== SELECTED_MODE) {
-      return false; // ignore events of other modes
-    }
 
-    const es = timeToMinutes(ev.start);
-    const ee = timeToMinutes(ev.end);
-    return es < slot.end && ee > slot.start;
-  });
-}
+  function fieldBlocked(fieldId, slot) {
+    const evs = events[fieldId] || [];
+    return evs.some(ev => {
+  
+      // ⭐ Derive type from title if missing
+      if (!ev.type) {
+        const t = ev.title ? ev.title.toLowerCase() : "";
+        if (t.includes("game") || t.includes("vs") || t.includes("match")) {
+          ev.type = "game";
+        } else {
+          ev.type = "practice";
+        }
+      }
+  
+      // ⭐ Respect Scheduling Mode
+      if (SELECTED_MODE && ev.type !== SELECTED_MODE) {
+        return false; // ignore events of other modes
+      }
+  
+      const es = timeToMinutes(ev.start);
+      const ee = timeToMinutes(ev.end);
+      return es < slot.end && ee > slot.start;
+    });
+  }
+
 
 
   const blocks = [];
