@@ -237,6 +237,9 @@ function buildContinuousWindowsForDay(dayData) {
     complexes[f.complex].push(f.id);
   });
 
+  // ⭐ Respect complex filters + allowed fields
+  const allowedFieldIds = getAllowedFields().map(f => f.id || f);
+
   // Determine time range
   let minStart = Infinity;
   let maxEnd = -Infinity;
@@ -256,6 +259,137 @@ function buildContinuousWindowsForDay(dayData) {
   for (let t = minStart; t < maxEnd; t += SLOT) {
     slots.push({ start: t, end: t + SLOT });
   }
+
+  function fieldAvailable(fieldId, slot) {
+    const windows = availability[fieldId] || [];
+
+    const inWindow = windows.some(w => {
+      const ws = timeToMinutes(w.start);
+      const we = timeToMinutes(w.end);
+      return ws <= slot.start && we >= slot.end;
+    });
+
+    if (!inWindow) return false;
+
+    const evs = events[fieldId] || [];
+    const blockedByMode = evs.some(ev => {
+      const t = ev.title ? ev.title.toLowerCase() : "";
+      const evType = t.includes("game") || t.includes("vs") || t.includes("match")
+        ? "game"
+        : "practice";
+
+      if (SELECTED_MODE !== evType) return false;
+
+      const es = timeToMinutes(ev.start);
+      const ee = timeToMinutes(ev.end);
+      return es < slot.end && ee > slot.start;
+    });
+
+    return !blockedByMode;
+  }
+
+  function fieldBlocked(fieldId, slot) {
+    const evs = events[fieldId] || [];
+    return evs.some(ev => {
+      if (!ev.type) {
+        const t = ev.title ? ev.title.toLowerCase() : "";
+        ev.type = (t.includes("game") || t.includes("vs") || t.includes("match"))
+          ? "game"
+          : "practice";
+      }
+
+      if (SELECTED_MODE && ev.type !== SELECTED_MODE) {
+        return false;
+      }
+
+      const es = timeToMinutes(ev.start);
+      const ee = timeToMinutes(ev.end);
+      return es < slot.end && ee > slot.start;
+    });
+  }
+
+  const blocks = [];
+
+  Object.entries(complexes).forEach(([complexName, fieldIds]) => {
+
+    // ⭐ Skip complexes not selected (if any selected)
+    if (SELECTED_COMPLEXES.size > 0 && !SELECTED_COMPLEXES.has(complexName)) {
+      return;
+    }
+
+    // ⭐ Restrict to allowed fields
+    const filteredFieldIds = fieldIds.filter(fid => allowedFieldIds.includes(fid));
+    if (filteredFieldIds.length === 0) return;
+
+    const slotFieldSets = slots.map(slot => {
+      const available = filteredFieldIds.filter(fid => {
+        return fieldAvailable(fid, slot) && !fieldBlocked(fid, slot);
+      });
+      available.sort();
+      return available;
+    });
+
+    let current = null;
+
+    for (let i = 0; i < slots.length; i++) {
+      const slot = slots[i];
+      const fieldsHere = slotFieldSets[i];
+      const key = fieldsHere.join("|");
+
+      if (!fieldsHere.length) {
+        if (current) {
+          blocks.push({
+            complex: complexName,
+            start: minutesToTime(current.start),
+            end: minutesToTime(current.end),
+            fieldIds: current.fieldIds,
+            fields: current.fieldIds.map(fid => fieldById[fid].name)
+          });
+          current = null;
+        }
+        continue;
+      }
+
+      if (!current) {
+        current = {
+          start: slot.start,
+          end: slot.end,
+          fieldIds: fieldsHere.slice(),
+          key
+        };
+      } else if (current.key === key) {
+        current.end = slot.end;
+      } else {
+        blocks.push({
+          complex: complexName,
+          start: minutesToTime(current.start),
+          end: minutesToTime(current.end),
+          fieldIds: current.fieldIds,
+          fields: current.fieldIds.map(fid => fieldById[fid].name)
+        });
+        current = {
+          start: slot.start,
+          end: slot.end,
+          fieldIds: fieldsHere.slice(),
+          key
+        };
+      }
+    }
+
+    if (current) {
+      blocks.push({
+        complex: complexName,
+        start: minutesToTime(current.start),
+        end: minutesToTime(current.end),
+        fieldIds: current.fieldIds,
+        fields: current.fieldIds.map(fid => fieldById[fid].name)
+      });
+    }
+  });
+
+  return blocks;
+}
+
 
   function fieldAvailable(fieldId, slot) {
     const windows = availability[fieldId] || [];
@@ -623,7 +757,15 @@ function renderWeekCalendar() {
       const slotDiv = document.createElement("div");
       slotDiv.className = "week-slot";
 
-      const active = merged.find(m => m.start <= t && m.end > t);
+      const active = merged.find(m => {
+        return (
+          m.start <= t &&
+          m.end > t &&
+          allowedFields.includes(m.field) &&
+          (!SELECTED_MODE || m.type === SELECTED_MODE)
+        );
+      });
+
 
       if (active && allowedFields.includes(active.field)) {
         slotDiv.classList.add(active.cls);
@@ -708,6 +850,7 @@ function renderMonthCalendar() {
     )) {
       dayCard.classList.add("has-availability");
     }
+
 
 
     dayCard.onclick = () => {
