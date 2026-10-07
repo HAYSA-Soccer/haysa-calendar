@@ -90,6 +90,11 @@ function renderComplexFilters() {
 function mergeTimelineForDay(dayData) {
   if (!dayData) return [];
 
+  // ⭐ Ignore precomputed merged data from JSON
+  if (dayData.merged) {
+    delete dayData.merged;
+  }
+
   const availability = dayData.availability || {};
   const events = dayData.events || {};
   const blocks = dayData.blocks || {};
@@ -600,7 +605,11 @@ function renderWeekCalendar() {
 
   days.forEach(dateStr => {
     const dayData = DAYS[dateStr];
-    const merged = dayData ? mergeTimelineForDay(dayData) : [];
+    if (dayData && dayData.merged) {
+      delete dayData.merged;
+    }
+    const merged = mergeTimelineForDay(dayData);
+
 
     const col = document.createElement("div");
     col.className = "week-col";
@@ -682,15 +691,24 @@ function renderMonthCalendar() {
 
   Object.keys(monthData).sort().forEach(dateStr => {
     const dayData = monthData[dateStr];
+    if (dayData.merged) {
+      delete dayData.merged;
+    }
     const merged = mergeTimelineForDay(dayData);
+
 
     const dayCard = document.createElement("div");
     dayCard.className = "month-day-card";
     dayCard.textContent = new Date(dateStr).getDate();
 
-    if (merged.some(m => allowedFields.includes(m.field))) {
+    if (merged.some(m =>
+      allowedFields.includes(m.field) &&
+      m.type === "free" &&
+      (!SELECTED_MODE || m.type === SELECTED_MODE)
+    )) {
       dayCard.classList.add("has-availability");
     }
+
 
     dayCard.onclick = () => {
       currentDate = dateStr;
@@ -737,19 +755,23 @@ function runSearch() {
     const dayData = DAYS[dateStr];
     if (!dayData) return;
 
-    const availability = dayData.availability || {};
-    const fields = getAllowedFields();
+    if (dayData.merged) delete dayData.merged;
 
-    fields.forEach(field => {
-      const fieldId = field.id || field;
-      const fieldName = field.name || fieldId;
+    const merged = mergeTimelineForDay(dayData);
 
-      const windows = availability[fieldId] || [];
-      windows.forEach(w => {
-        if (w.start <= time && w.end >= time) {
-          results.push({ date: dateStr, fieldName, window: w });
-        }
-      });
+    merged.forEach(m => {
+      if (
+        allowedFields.includes(m.field) &&
+        m.type === "free" &&
+        m.start <= time &&
+        m.end >= time
+      ) {
+        results.push({
+          date: dateStr,
+          fieldName: m.fieldName,
+          window: { start: m.start, end: m.end }
+        });
+      }
     });
   });
 
