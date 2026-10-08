@@ -758,11 +758,24 @@ function renderWeekTimeline() {
       block.style.left = `${b.lane * laneWidth}%`;
       block.style.width = `${laneWidth}%`;
 
-      const label = b.title
-        ? `${b.start}–${b.end} ${b.title}`
-        : `${b.start}–${b.end} (${b.fieldName})`;
+      const label = document.createElement("div");
+      label.className = "label";
+      
+      if (b.type === "practice" || b.type === "game") {
+        label.textContent = b.title || `${b.fields.length} fields`;
+      } else if (b.type === "admin") {
+        label.textContent = b.title || "Admin Block";
+      } else {
+        label.textContent = `${b.fields.length} fields`;
+      }
+      
+      const sub = document.createElement("div");
+      sub.className = "sub";
+      sub.textContent = `${b.start}–${b.end}`;
+      
+      block.appendChild(label);
+      block.appendChild(sub);
 
-      block.textContent = label;
 
       dayBody.appendChild(block);
     });
