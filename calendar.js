@@ -31,6 +31,7 @@ async function loadAvailabilityJSON() {
   currentDate = AVAIL.season_start || new Date().toISOString().split("T")[0];
 }
 
+
 /****************************************************
  * COMPLEX FILTERING
  ****************************************************/
@@ -63,7 +64,7 @@ function toggleComplex(complexName) {
 function renderComplexFilters() {
   const container = document.getElementById("complex-filters");
   const status = document.getElementById("complex-status");
-  if (!container) return;
+  if (!container || !status) return;
 
   let html = "";
   Object.keys(COMPLEXES).forEach(cx => {
@@ -84,13 +85,12 @@ function renderComplexFilters() {
   }
 }
 
+
 /****************************************************
  * MERGING LOGIC (week/month/search)
  ****************************************************/
 function mergeTimelineForDay(dayData) {
   if (!dayData) return [];
-
-  if (dayData.merged) delete dayData.merged;
 
   const availability = dayData.availability || {};
   const events = dayData.events || {};
@@ -115,7 +115,7 @@ function mergeTimelineForDay(dayData) {
           ? "game"
           : "practice";
 
-        if (SELECTED_MODE !== evType) return false;
+        if (SELECTED_MODE && SELECTED_MODE !== evType) return false;
 
         const es = timeToMinutes(ev.start);
         const ee = timeToMinutes(ev.end);
@@ -138,7 +138,7 @@ function mergeTimelineForDay(dayData) {
       });
     });
 
-    // events
+    // events (practices/games)
     eventList.forEach(ev => {
       if (!ev.type) {
         const t = ev.title ? ev.title.toLowerCase() : "";
@@ -194,6 +194,9 @@ function getStyle(type) {
 }
 
 
+/****************************************************
+ * DATE/TIME HELPERS
+ ****************************************************/
 function formatDateLabel(dateStr) {
   const d = new Date(dateStr + "T00:00:00");
   const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -202,15 +205,6 @@ function formatDateLabel(dateStr) {
   return `${dow} ${m}/${dd}`;
 }
 
-function minutesSinceStart(t) {
-  const [h, m] = t.split(":").map(Number);
-  return h * 60 + m;
-}
-
-
-/****************************************************
- * CONTINUOUS WINDOW ENGINE (day view)
- ****************************************************/
 function timeToMinutes(t) {
   const [hh, mm] = t.split(":").map(Number);
   return hh * 60 + mm;
@@ -222,12 +216,23 @@ function minutesToTime(m) {
   return `${hh}:${mm}`;
 }
 
+// vertical timeline base: 08:00–21:00
+const DAY_START_MIN = 8 * 60;
+const DAY_END_MIN = 21 * 60;
+
+function minutesSinceDayStart(t) {
+  return timeToMinutes(t) - DAY_START_MIN;
+}
+
+
+/****************************************************
+ * CONTINUOUS WINDOW ENGINE (day view availability)
+ ****************************************************/
 function buildContinuousWindowsForDay(dayData) {
   if (!dayData) return [];
 
   const { fields = FIELDS, availability = {}, events = {} } = dayData;
 
-  // Build field lookup and complexes
   const fieldById = {};
   const complexes = {};
   fields.forEach(f => {
@@ -240,7 +245,6 @@ function buildContinuousWindowsForDay(dayData) {
 
   const allowedFieldIds = getAllowedFields().map(f => f.id || f);
 
-  // Determine time range from availability
   let minStart = Infinity;
   let maxEnd = -Infinity;
   Object.values(availability).forEach(windows => {
@@ -253,7 +257,6 @@ function buildContinuousWindowsForDay(dayData) {
   });
   if (!isFinite(minStart) || !isFinite(maxEnd)) return [];
 
-  // Build 30‑min slots
   const SLOT = 30;
   const slots = [];
   for (let t = minStart; t < maxEnd; t += SLOT) {
@@ -263,7 +266,6 @@ function buildContinuousWindowsForDay(dayData) {
   function fieldAvailable(fieldId, slot) {
     const windows = availability[fieldId] || [];
 
-    // Is this slot inside any availability window?
     const inWindow = windows.some(w => {
       const ws = timeToMinutes(w.start);
       const we = timeToMinutes(w.end);
@@ -272,7 +274,6 @@ function buildContinuousWindowsForDay(dayData) {
 
     if (!inWindow) return false;
 
-    // If a mode is selected, ensure no events of that mode block this slot
     const evs = events[fieldId] || [];
     const blockedByMode = evs.some(ev => {
       const t = ev.title ? ev.title.toLowerCase() : "";
@@ -385,6 +386,7 @@ function buildContinuousWindowsForDay(dayData) {
   return blocks;
 }
 
+
 /****************************************************
  * INIT
  ****************************************************/
@@ -412,6 +414,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   switchView("day");
 });
 
+
 /****************************************************
  * VIEW SWITCHER
  ****************************************************/
@@ -422,6 +425,7 @@ function switchView(view) {
   if (view === "month") renderMonthView();
   if (view === "search") renderSearchView();
 }
+
 
 /****************************************************
  * DAY VIEW
@@ -466,7 +470,7 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  const blocks = mergeTimelineForDay(dayData);
+  const blocks = buildContinuousWindowsForDay(dayData);
 
   if (blocks.length === 0) {
     container.innerHTML = `<p>No availability for ${currentDate}</p>`;
@@ -513,6 +517,7 @@ function renderDayCalendar(dayData) {
   });
 }
 
+
 /****************************************************
  * WEEK VIEW
  ****************************************************/
@@ -524,20 +529,19 @@ const TIME_SLOTS = [
   "18:00","18:30","19:00","19:30","20:00","20:30","21:00"
 ];
 
-function getWeekRange(date) {
-  const d = new Date(date);
-  const day = d.getDay();
-  const diffToMonday = (day === 0 ? -6 : 1 - day);
-  const monday = new Date(d);
-  monday.setDate(d.getDate() + diffToMonday);
+function getWeekRange(dateStr) {
+  const d = new Date(dateStr + "T00:00:00");
+  const day = d.getDay(); // 0 = Sun, 1 = Mon, ...
+  const diff = (day === 0 ? -6 : 1 - day); // shift Sunday back to Monday
+  d.setDate(d.getDate() + diff);
 
-  const days = [];
+  const out = [];
   for (let i = 0; i < 7; i++) {
-    const dt = new Date(monday);
-    dt.setDate(monday.getDate() + i);
-    days.push(dt.toISOString().split("T")[0]);
+    const dt = new Date(d);
+    dt.setDate(d.getDate() + i);
+    out.push(dt.toISOString().split("T")[0]);
   }
-  return days;
+  return out;
 }
 
 function renderWeekView() {
@@ -570,8 +574,6 @@ function renderWeekView() {
   renderWeekTimeline();
 }
 
-
-
 function renderWeekTimeline() {
   const container = document.getElementById("weekTimeline");
   container.innerHTML = "";
@@ -585,10 +587,11 @@ function renderWeekTimeline() {
     const dayData = DAYS[dateStr] || {
       fields: FIELDS,
       availability: {},
-      events: {}
+      events: {},
+      blocks: {}
     };
 
-    const blocks = buildContinuousWindowsForDay(dayData);
+    const blocks = mergeTimelineForDay(dayData);
 
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
@@ -605,8 +608,8 @@ function renderWeekTimeline() {
     let lanes = [];
 
     blocks.forEach(b => {
-      const startMin = minutesSinceStart(b.start);
-      const endMin = minutesSinceStart(b.end);
+      const startMin = minutesSinceDayStart(b.start);
+      const endMin = minutesSinceDayStart(b.end);
 
       let laneIndex = 0;
 
@@ -617,8 +620,8 @@ function renderWeekTimeline() {
         }
 
         const conflict = lanes[laneIndex].some(existing => {
-          const es = minutesSinceStart(existing.start);
-          const ee = minutesSinceStart(existing.end);
+          const es = minutesSinceDayStart(existing.start);
+          const ee = minutesSinceDayStart(existing.end);
           return !(ee <= startMin || es >= endMin);
         });
 
@@ -634,8 +637,8 @@ function renderWeekTimeline() {
     const laneWidth = 100 / (lanes.length || 1);
 
     blocks.forEach(b => {
-      const startMin = minutesSinceStart(b.start);
-      const endMin = minutesSinceStart(b.end);
+      const startMin = minutesSinceDayStart(b.start);
+      const endMin = minutesSinceDayStart(b.end);
       const duration = endMin - startMin;
 
       const block = document.createElement("div");
@@ -646,7 +649,11 @@ function renderWeekTimeline() {
       block.style.left = `${b.lane * laneWidth}%`;
       block.style.width = `${laneWidth}%`;
 
-      block.textContent = `${b.start}–${b.end}`;
+      const label = b.title
+        ? `${b.start}–${b.end} ${b.title}`
+        : `${b.start}–${b.end} (${b.fieldName})`;
+
+      block.textContent = label;
 
       dayBody.appendChild(block);
     });
@@ -656,4 +663,24 @@ function renderWeekTimeline() {
   });
 
   container.appendChild(timeline);
+}
+
+
+/****************************************************
+ * MONTH & SEARCH (simple placeholders)
+ ****************************************************/
+function renderMonthView() {
+  const container = document.getElementById("view-container");
+  container.innerHTML = `
+    <h2>Month View</h2>
+    <p>Month view not yet implemented.</p>
+  `;
+}
+
+function renderSearchView() {
+  const container = document.getElementById("view-container");
+  container.innerHTML = `
+    <h2>Search View</h2>
+    <p>Search view not yet implemented.</p>
+  `;
 }
