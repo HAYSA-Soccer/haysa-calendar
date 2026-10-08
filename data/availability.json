@@ -2043,10 +2043,6 @@
           },
           {
             "start": "13:30",
-            "end": "14:00"
-          },
-          {
-            "start": "15:00",
             "end": "17:30"
           },
           {
@@ -2061,10 +2057,6 @@
           },
           {
             "start": "13:30",
-            "end": "14:00"
-          },
-          {
-            "start": "15:00",
             "end": "17:30"
           },
           {
@@ -2079,10 +2071,6 @@
           },
           {
             "start": "13:30",
-            "end": "14:00"
-          },
-          {
-            "start": "15:00",
             "end": "17:30"
           },
           {
@@ -2188,50 +2176,6 @@
         ]
       },
       "events": {
-        "H-HST": [
-          {
-            "event_id": "1a3f4582c6c9686b1ec09d4a5768867a",
-            "date": "2026-10-10",
-            "start": "14:00",
-            "end": "15:00",
-            "field": "H-HST",
-            "field_group": "TURF",
-            "type": "practice",
-            "title": "7/8 Boys Travel (Mills) vs. Randolph",
-            "team": "7/8 Boys Travel  vs. Randolph",
-            "coach": "Mills",
-            "grade": "7/8",
-            "source": "ICS"
-          },
-          {
-            "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
-            "date": "2026-10-10",
-            "start": "12:30",
-            "end": "13:30",
-            "field": "H-HST",
-            "field_group": "TURF",
-            "type": "practice",
-            "title": "7/8 Girls Travel (Caldwell) vs. Weymouth",
-            "team": "7/8 Girls Travel  vs. Weymouth",
-            "coach": "Caldwell",
-            "grade": "7/8",
-            "source": "ICS"
-          },
-          {
-            "event_id": "aa4711936f141af58eac1284de3edef6",
-            "date": "2026-10-10",
-            "start": "17:30",
-            "end": "18:30",
-            "field": "H-HST",
-            "field_group": "TURF",
-            "type": "practice",
-            "title": "5/6 Boys Travel (Walsh) vs. Weymouth",
-            "team": "5/6 Boys Travel  vs. Weymouth",
-            "coach": "Walsh",
-            "grade": "5/6",
-            "source": "ICS"
-          }
-        ],
         "H-SJ3": [
           {
             "event_id": "d527bbaa2d93a44d1c51ad04ae35c05d",
@@ -2259,6 +2203,36 @@
             "team": "3/4 Boys Travel  vs. Rockland",
             "coach": "Ball",
             "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-HST": [
+          {
+            "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
+            "date": "2026-10-10",
+            "start": "12:30",
+            "end": "13:30",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Girls Travel (Caldwell) vs. Weymouth",
+            "team": "7/8 Girls Travel  vs. Weymouth",
+            "coach": "Caldwell",
+            "grade": "7/8",
+            "source": "ICS"
+          },
+          {
+            "event_id": "59fe19b1386ff9a7fa5066908d27a245",
+            "date": "2026-10-10",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Walsh) vs. Weymouth",
+            "team": "5/6 Boys Travel  vs. Weymouth",
+            "coach": "Walsh",
+            "grade": "5/6",
             "source": "ICS"
           }
         ]
@@ -2364,13 +2338,6 @@
           "title": ""
         },
         {
-          "field": "H-HST",
-          "start": "12:30",
-          "end": "13:30",
-          "type": "practice",
-          "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
-        },
-        {
           "field": "H-SJ3",
           "start": "12:30",
           "end": "13:30",
@@ -2379,22 +2346,29 @@
         },
         {
           "field": "H-HST",
+          "start": "12:30",
+          "end": "13:30",
+          "type": "practice",
+          "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
+        },
+        {
+          "field": "H-HST",
           "start": "13:30",
-          "end": "14:00",
+          "end": "17:30",
           "type": "free",
           "title": ""
         },
         {
           "field": "H-HST1",
           "start": "13:30",
-          "end": "14:00",
+          "end": "17:30",
           "type": "free",
           "title": ""
         },
         {
           "field": "H-HST2",
           "start": "13:30",
-          "end": "14:00",
+          "end": "17:30",
           "type": "free",
           "title": ""
         },
@@ -2416,34 +2390,6 @@
           "field": "H-SJ3B",
           "start": "13:30",
           "end": "15:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-HST",
-          "start": "14:00",
-          "end": "15:00",
-          "type": "practice",
-          "title": "7/8 Boys Travel (Mills) vs. Randolph"
-        },
-        {
-          "field": "H-HST",
-          "start": "15:00",
-          "end": "17:30",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-HST1",
-          "start": "15:00",
-          "end": "17:30",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-HST2",
-          "start": "15:00",
-          "end": "17:30",
           "type": "free",
           "title": ""
         },
@@ -4579,10 +4525,6 @@
             },
             {
               "start": "13:30",
-              "end": "14:00"
-            },
-            {
-              "start": "15:00",
               "end": "17:30"
             },
             {
@@ -4597,10 +4539,6 @@
             },
             {
               "start": "13:30",
-              "end": "14:00"
-            },
-            {
-              "start": "15:00",
               "end": "17:30"
             },
             {
@@ -4615,10 +4553,6 @@
             },
             {
               "start": "13:30",
-              "end": "14:00"
-            },
-            {
-              "start": "15:00",
               "end": "17:30"
             },
             {
@@ -4724,50 +4658,6 @@
           ]
         },
         "events": {
-          "H-HST": [
-            {
-              "event_id": "1a3f4582c6c9686b1ec09d4a5768867a",
-              "date": "2026-10-10",
-              "start": "14:00",
-              "end": "15:00",
-              "field": "H-HST",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "7/8 Boys Travel (Mills) vs. Randolph",
-              "team": "7/8 Boys Travel  vs. Randolph",
-              "coach": "Mills",
-              "grade": "7/8",
-              "source": "ICS"
-            },
-            {
-              "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
-              "date": "2026-10-10",
-              "start": "12:30",
-              "end": "13:30",
-              "field": "H-HST",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "7/8 Girls Travel (Caldwell) vs. Weymouth",
-              "team": "7/8 Girls Travel  vs. Weymouth",
-              "coach": "Caldwell",
-              "grade": "7/8",
-              "source": "ICS"
-            },
-            {
-              "event_id": "aa4711936f141af58eac1284de3edef6",
-              "date": "2026-10-10",
-              "start": "17:30",
-              "end": "18:30",
-              "field": "H-HST",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "5/6 Boys Travel (Walsh) vs. Weymouth",
-              "team": "5/6 Boys Travel  vs. Weymouth",
-              "coach": "Walsh",
-              "grade": "5/6",
-              "source": "ICS"
-            }
-          ],
           "H-SJ3": [
             {
               "event_id": "d527bbaa2d93a44d1c51ad04ae35c05d",
@@ -4795,6 +4685,36 @@
               "team": "3/4 Boys Travel  vs. Rockland",
               "coach": "Ball",
               "grade": "3/4",
+              "source": "ICS"
+            }
+          ],
+          "H-HST": [
+            {
+              "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
+              "date": "2026-10-10",
+              "start": "12:30",
+              "end": "13:30",
+              "field": "H-HST",
+              "field_group": "TURF",
+              "type": "practice",
+              "title": "7/8 Girls Travel (Caldwell) vs. Weymouth",
+              "team": "7/8 Girls Travel  vs. Weymouth",
+              "coach": "Caldwell",
+              "grade": "7/8",
+              "source": "ICS"
+            },
+            {
+              "event_id": "59fe19b1386ff9a7fa5066908d27a245",
+              "date": "2026-10-10",
+              "start": "17:30",
+              "end": "18:30",
+              "field": "H-HST",
+              "field_group": "TURF",
+              "type": "practice",
+              "title": "5/6 Boys Travel (Walsh) vs. Weymouth",
+              "team": "5/6 Boys Travel  vs. Weymouth",
+              "coach": "Walsh",
+              "grade": "5/6",
               "source": "ICS"
             }
           ]
@@ -4900,13 +4820,6 @@
             "title": ""
           },
           {
-            "field": "H-HST",
-            "start": "12:30",
-            "end": "13:30",
-            "type": "practice",
-            "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
-          },
-          {
             "field": "H-SJ3",
             "start": "12:30",
             "end": "13:30",
@@ -4915,22 +4828,29 @@
           },
           {
             "field": "H-HST",
+            "start": "12:30",
+            "end": "13:30",
+            "type": "practice",
+            "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
+          },
+          {
+            "field": "H-HST",
             "start": "13:30",
-            "end": "14:00",
+            "end": "17:30",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-HST1",
             "start": "13:30",
-            "end": "14:00",
+            "end": "17:30",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-HST2",
             "start": "13:30",
-            "end": "14:00",
+            "end": "17:30",
             "type": "free",
             "title": ""
           },
@@ -4952,34 +4872,6 @@
             "field": "H-SJ3B",
             "start": "13:30",
             "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST",
-            "start": "14:00",
-            "end": "15:00",
-            "type": "practice",
-            "title": "7/8 Boys Travel (Mills) vs. Randolph"
-          },
-          {
-            "field": "H-HST",
-            "start": "15:00",
-            "end": "17:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST1",
-            "start": "15:00",
-            "end": "17:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST2",
-            "start": "15:00",
-            "end": "17:30",
             "type": "free",
             "title": ""
           },
@@ -7118,10 +7010,6 @@
             },
             {
               "start": "13:30",
-              "end": "14:00"
-            },
-            {
-              "start": "15:00",
               "end": "17:30"
             },
             {
@@ -7136,10 +7024,6 @@
             },
             {
               "start": "13:30",
-              "end": "14:00"
-            },
-            {
-              "start": "15:00",
               "end": "17:30"
             },
             {
@@ -7154,10 +7038,6 @@
             },
             {
               "start": "13:30",
-              "end": "14:00"
-            },
-            {
-              "start": "15:00",
               "end": "17:30"
             },
             {
@@ -7263,50 +7143,6 @@
           ]
         },
         "events": {
-          "H-HST": [
-            {
-              "event_id": "1a3f4582c6c9686b1ec09d4a5768867a",
-              "date": "2026-10-10",
-              "start": "14:00",
-              "end": "15:00",
-              "field": "H-HST",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "7/8 Boys Travel (Mills) vs. Randolph",
-              "team": "7/8 Boys Travel  vs. Randolph",
-              "coach": "Mills",
-              "grade": "7/8",
-              "source": "ICS"
-            },
-            {
-              "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
-              "date": "2026-10-10",
-              "start": "12:30",
-              "end": "13:30",
-              "field": "H-HST",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "7/8 Girls Travel (Caldwell) vs. Weymouth",
-              "team": "7/8 Girls Travel  vs. Weymouth",
-              "coach": "Caldwell",
-              "grade": "7/8",
-              "source": "ICS"
-            },
-            {
-              "event_id": "aa4711936f141af58eac1284de3edef6",
-              "date": "2026-10-10",
-              "start": "17:30",
-              "end": "18:30",
-              "field": "H-HST",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "5/6 Boys Travel (Walsh) vs. Weymouth",
-              "team": "5/6 Boys Travel  vs. Weymouth",
-              "coach": "Walsh",
-              "grade": "5/6",
-              "source": "ICS"
-            }
-          ],
           "H-SJ3": [
             {
               "event_id": "d527bbaa2d93a44d1c51ad04ae35c05d",
@@ -7334,6 +7170,36 @@
               "team": "3/4 Boys Travel  vs. Rockland",
               "coach": "Ball",
               "grade": "3/4",
+              "source": "ICS"
+            }
+          ],
+          "H-HST": [
+            {
+              "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
+              "date": "2026-10-10",
+              "start": "12:30",
+              "end": "13:30",
+              "field": "H-HST",
+              "field_group": "TURF",
+              "type": "practice",
+              "title": "7/8 Girls Travel (Caldwell) vs. Weymouth",
+              "team": "7/8 Girls Travel  vs. Weymouth",
+              "coach": "Caldwell",
+              "grade": "7/8",
+              "source": "ICS"
+            },
+            {
+              "event_id": "59fe19b1386ff9a7fa5066908d27a245",
+              "date": "2026-10-10",
+              "start": "17:30",
+              "end": "18:30",
+              "field": "H-HST",
+              "field_group": "TURF",
+              "type": "practice",
+              "title": "5/6 Boys Travel (Walsh) vs. Weymouth",
+              "team": "5/6 Boys Travel  vs. Weymouth",
+              "coach": "Walsh",
+              "grade": "5/6",
               "source": "ICS"
             }
           ]
@@ -7439,13 +7305,6 @@
             "title": ""
           },
           {
-            "field": "H-HST",
-            "start": "12:30",
-            "end": "13:30",
-            "type": "practice",
-            "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
-          },
-          {
             "field": "H-SJ3",
             "start": "12:30",
             "end": "13:30",
@@ -7454,22 +7313,29 @@
           },
           {
             "field": "H-HST",
+            "start": "12:30",
+            "end": "13:30",
+            "type": "practice",
+            "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
+          },
+          {
+            "field": "H-HST",
             "start": "13:30",
-            "end": "14:00",
+            "end": "17:30",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-HST1",
             "start": "13:30",
-            "end": "14:00",
+            "end": "17:30",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-HST2",
             "start": "13:30",
-            "end": "14:00",
+            "end": "17:30",
             "type": "free",
             "title": ""
           },
@@ -7491,34 +7357,6 @@
             "field": "H-SJ3B",
             "start": "13:30",
             "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST",
-            "start": "14:00",
-            "end": "15:00",
-            "type": "practice",
-            "title": "7/8 Boys Travel (Mills) vs. Randolph"
-          },
-          {
-            "field": "H-HST",
-            "start": "15:00",
-            "end": "17:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST1",
-            "start": "15:00",
-            "end": "17:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST2",
-            "start": "15:00",
-            "end": "17:30",
             "type": "free",
             "title": ""
           },
