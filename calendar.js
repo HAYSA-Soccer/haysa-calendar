@@ -625,40 +625,42 @@ function renderDayCalendar(dayData) {
     byComplex[b.complex].push(b);
   });
 
-  // Render each complex chronologically
-  Object.entries(byComplex).forEach(([complexName, windows]) => {
-    const section = document.createElement("div");
-    section.className = "complex-section";
+// Render each complex chronologically
+Object.entries(byComplex).forEach(([complexName, windows]) => {
+  const section = document.createElement("div");
+  section.className = "complex-section";
 
-    const title = document.createElement("h3");
-    title.textContent = complexName;
-    section.appendChild(title);
+  const title = document.createElement("h3");
+  title.textContent = complexName;
+  section.appendChild(title);
 
-    windows.forEach(w => {
-      const card = document.createElement("div");
-      card.className = "window-card";
+  windows.forEach(w => {
+    const card = document.createElement("div");
+    card.className = "window-card";
 
-      const header = document.createElement("div");
-      header.className = "window-header";
-      header.textContent = `${w.start} – ${w.end}  (${w.fields.length} fields)`;
-      card.appendChild(header);
+    const header = document.createElement("div");
+    header.className = "window-header";
+    header.textContent = `${w.start} – ${w.end} (${w.fields.length} fields)`;
+    card.appendChild(header);
 
-      const list = document.createElement("ul");
-      list.className = "window-field-list";
+    const list = document.createElement("ul");
+    list.className = "window-field-list";
 
-      w.fields.forEach(name => {
-        const li = document.createElement("li");
-        li.textContent = name;
-        list.appendChild(li);
-      });
-
-      card.appendChild(list);
-      section.appendChild(card);
+    w.fields.forEach(name => {
+      const li = document.createElement("li");
+      li.textContent = name;
+      list.appendChild(li);
     });
 
-    container.appendChild(section);
+    card.appendChild(list);
+    section.appendChild(card);
   });
+
+  container.appendChild(section);
+});
+
 }
+
 
 /****************************************************
  * WEEK VIEW — Monday → Sunday + Time Axis Grid
