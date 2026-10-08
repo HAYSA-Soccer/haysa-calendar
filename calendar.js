@@ -225,7 +225,7 @@ function minutesToTime(m) {
 function buildContinuousWindowsForDay(dayData) {
   if (!dayData) return [];
 
-  const { fields, availability, events = {} } = dayData;
+  const { fields, availability = {}, events = {} } = dayData;
 
   const fieldById = {};
   const complexes = {};
@@ -237,23 +237,105 @@ function buildContinuousWindowsForDay(dayData) {
 
   const allowedFieldIds = getAllowedFields().map(f => f.id || f);
 
-  let minStart = Infinity;
-  let maxEnd = -Infinity;
-  Object.values(availability).forEach(windows => {
+  // Collect ALL windows: availability + events
+  let rawWindows = [];
+
+  // Availability windows (free)
+  Object.entries(availability).forEach(([fieldId, windows]) => {
+    if (!allowedFieldIds.includes(fieldId)) return;
+
     windows.forEach(w => {
-      const s = timeToMinutes(w.start);
-      const e = timeToMinutes(w.end);
-      if (s < minStart) minStart = s;
-      if (e > maxEnd) maxEnd = e;
+      rawWindows.push({
+        field: fieldId,
+        complex: fieldById[fieldId].complex,
+        start: w.start,
+        end: w.end,
+        type: "free",
+        cls: "block-free"
+      });
     });
   });
-  if (!isFinite(minStart) || !isFinite(maxEnd)) return [];
 
-  const SLOT = 30;
-  const slots = [];
-  for (let t = minStart; t < maxEnd; t += SLOT) {
-    slots.push({ start: t, end: t + SLOT });
-  }
+  // Event windows (practice, game, admin, closure)
+  Object.entries(events).forEach(([fieldId, evList]) => {
+    if (!allowedFieldIds.includes(fieldId)) return;
+
+    evList.forEach(ev => {
+      const t = ev.title ? ev.title.toLowerCase() : "";
+
+      let type = "practice";
+      let cls = "block-practice";
+
+      if (t.includes("game") || t.includes("vs") || t.includes("match")) {
+        type = "game";
+        cls = "block-game";
+      } else if (t.includes("admin")) {
+        type = "admin";
+        cls = "block-admin";
+      } else if (t.includes("close") || t.includes("closure")) {
+        type = "closure";
+        cls = "block-closure";
+      }
+
+      rawWindows.push({
+        field: fieldId,
+        complex: fieldById[fieldId].complex,
+        start: ev.start,
+        end: ev.end,
+        type,
+        cls
+      });
+    });
+  });
+
+  if (rawWindows.length === 0) return [];
+
+  // Convert to minutes
+  rawWindows = rawWindows.map(w => ({
+    ...w,
+    startMin: timeToMinutes(w.start),
+    endMin: timeToMinutes(w.end)
+  }));
+
+  // Sort by start time
+  rawWindows.sort((a, b) => a.startMin - b.startMin);
+
+  // Merge into continuous windows by complex + type
+  const merged = [];
+
+  rawWindows.forEach(w => {
+    const last = merged[merged.length - 1];
+
+    if (
+      last &&
+      last.complex === w.complex &&
+      last.type === w.type &&
+      last.endMin >= w.startMin
+    ) {
+      // Extend window
+      last.endMin = Math.max(last.endMin, w.endMin);
+      last.fields.push(w.field);
+    } else {
+      // New window
+      merged.push({
+        complex: w.complex,
+        type: w.type,
+        cls: w.cls,
+        startMin: w.startMin,
+        endMin: w.endMin,
+        fields: [w.field]
+      });
+    }
+  });
+
+  // Convert back to time strings
+  merged.forEach(m => {
+    m.start = minutesToTime(m.startMin);
+    m.end = minutesToTime(m.endMin);
+  });
+
+  return merged;
+}
 
   function fieldAvailable(fieldId, slot) {
     const windows = availability[fieldId] || [];
