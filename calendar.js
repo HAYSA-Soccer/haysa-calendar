@@ -29,7 +29,10 @@ async function loadAvailabilityJSON() {
   COMPLEXES = AVAIL.complexes || {};
 
   currentDate = AVAIL.season_start || new Date().toISOString().split("T")[0];
+
+  window.DATA_TIMESTAMP = AVAIL.generated_at || null;
 }
+
 
 
 /****************************************************
