@@ -504,18 +504,37 @@ function buildContinuousWindowsForDay(dayData) {
  ****************************************************/
 document.addEventListener("DOMContentLoaded", async () => {
   await loadAvailabilityJSON();
+
+  // >>> TIMESTAMP INSERTION <<<
+  if (window.DATA_TIMESTAMP) {
+    const ts = new Date(window.DATA_TIMESTAMP);
+    const formatted = ts.toLocaleString("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short"
+    });
+
+    const tsEl = document.getElementById("dataTimestamp");
+    if (tsEl) {
+      tsEl.textContent = `Data current as of: ${formatted}`;
+    }
+  }
+  // >>> END TIMESTAMP INSERTION <<<
+
   renderComplexFilters();
 
+  // NAV BUTTONS
   document.querySelectorAll(".nav button").forEach(btn => {
     btn.addEventListener("click", () => switchView(btn.dataset.view));
   });
 
+  // MODE SELECT
   const modeSelect = document.getElementById("schedModeSelect");
   if (modeSelect) {
     SELECTED_MODE = modeSelect.value || "practice";
 
     modeSelect.addEventListener("change", (e) => {
       SELECTED_MODE = e.target.value || "practice";
+
       if (currentView === "day") renderDayView();
       if (currentView === "week") renderWeekView();
       if (currentView === "month") renderMonthView();
