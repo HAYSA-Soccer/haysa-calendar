@@ -466,7 +466,7 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  const blocks = buildContinuousWindowsForDay(dayData);
+  const blocks = mergeTimelineForDay(dayData);
 
   if (blocks.length === 0) {
     container.innerHTML = `<p>No availability for ${currentDate}</p>`;
@@ -569,87 +569,6 @@ function renderWeekView() {
 
   renderWeekTimeline();
 }
-
-
-
-
-function renderWeekCalendar() {
-  const container = document.getElementById("weekResults");
-  container.innerHTML = "";
-
-  const days = getWeekRange(currentDate);
-
-  const grid = document.createElement("div");
-  grid.className = "week-grid-time";
-
-  // Left column: time labels
-  const timeCol = document.createElement("div");
-  timeCol.className = "week-time-col";
-  TIME_SLOTS.forEach(t => {
-    const div = document.createElement("div");
-    div.className = "week-time-slot";
-    div.textContent = t;
-    timeCol.appendChild(div);
-  });
-  grid.appendChild(timeCol);
-
-  // Columns for each day (Monday → Sunday from getWeekRange)
-  days.forEach(dateStr => {
-    const dayData = DAYS[dateStr] || {
-      fields: FIELDS,
-      availability: {},
-      events: {}
-    };
-
-    const blocks = buildContinuousWindowsForDay(dayData);
-
-    const col = document.createElement("div");
-    col.className = "week-col";
-
-    // Day header: "Thu 10/08"
-    const title = document.createElement("div");
-    title.className = "week-col-title";
-    title.textContent = formatDateLabel(dateStr);
-    col.appendChild(title);
-
-    // One row per time slot
-    TIME_SLOTS.forEach(t => {
-      const slotStart = timeToMinutes(t);
-      const slotEnd = slotStart + 30;
-
-      const slotDiv = document.createElement("div");
-      slotDiv.className = "week-slot";
-
-      // All blocks that overlap this time slice
-      const actives = blocks.filter(b => {
-        const bs = timeToMinutes(b.start);
-        const be = timeToMinutes(b.end);
-        return bs < slotEnd && be > slotStart;
-      });
-
-      // Render each block inside the slot
-      actives.forEach(b => {
-        const blockDiv = document.createElement("div");
-        blockDiv.className = "week-block " + (b.cls || "block-free");
-
-        // Show ONLY count, not field names
-        blockDiv.textContent = `${b.fields.length} fields`;
-
-        // Simple hover: complex + window
-        blockDiv.title = `${b.complex} ${b.start}–${b.end}`;
-
-        slotDiv.appendChild(blockDiv);
-      });
-
-      col.appendChild(slotDiv);
-    });
-
-    grid.appendChild(col);
-  });
-
-  container.appendChild(grid);
-}
-
 
 
 
