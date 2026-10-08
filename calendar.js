@@ -571,13 +571,15 @@ function renderWeekCalendar() {
 
   // Columns for each day
   days.forEach(dateStr => {
+    // Ensure we always have a valid dayData structure
     const dayData = DAYS[dateStr] || {
       fields: FIELDS,
       availability: {},
       events: {}
     };
 
-    const blocks = buildContinuousWindowsForDay(dayData || {});
+    // Use the continuous window engine (same logic as Day View)
+    const blocks = buildContinuousWindowsForDay(dayData);
 
     const col = document.createElement("div");
     col.className = "week-col";
@@ -587,6 +589,7 @@ function renderWeekCalendar() {
     title.textContent = dateStr;
     col.appendChild(title);
 
+    // One row per time slot
     TIME_SLOTS.forEach(t => {
       const slotStart = timeToMinutes(t);
       const slotEnd = slotStart + 30;
@@ -594,7 +597,7 @@ function renderWeekCalendar() {
       const slotDiv = document.createElement("div");
       slotDiv.className = "week-slot";
 
-      // Find ALL blocks that overlap this slot
+      // All blocks that overlap this time slice
       const actives = blocks.filter(b => {
         const bs = timeToMinutes(b.start);
         const be = timeToMinutes(b.end);
@@ -604,16 +607,17 @@ function renderWeekCalendar() {
       // Render each block inside the slot
       actives.forEach(b => {
         const blockDiv = document.createElement("div");
-        blockDiv.className = "week-block " + b.cls;
+        blockDiv.className = "week-block " + (b.cls || "block-free");
 
-        // Example: "Field1, Field2" or "3 fields"
+        // Clean visual label: window + field count
         blockDiv.textContent = `${b.start}–${b.end} (${b.fields.length} fields)`;
 
-
+        // Detailed hover info
         blockDiv.title =
+          `${b.complex}\n` +
           `${b.start}–${b.end}\n` +
           `${b.fields.length} fields\n` +
-          `${b.complex}`;
+          b.fields.join(", ");
 
         slotDiv.appendChild(blockDiv);
       });
