@@ -274,3 +274,12 @@ body {
   font-size: 11px;
   opacity: 0.85;
 }
+
+
+#dataTimestamp {
+  font-size: 14px;
+  color: #555;
+  padding: 8px 20px;
+  font-style: italic;
+}
+
