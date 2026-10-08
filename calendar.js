@@ -193,6 +193,115 @@ function getStyle(type) {
   }
 }
 
+function buildMergedTimelineForWeek(dayData) {
+  if (!dayData) return [];
+
+  const availability = dayData.availability || {};
+  const events = dayData.events || {};
+  const blocks = dayData.blocks || {};
+  const fields = dayData.fields || FIELDS;
+
+  const allowed = getAllowedFields().map(f => f.id || f);
+
+  let raw = [];
+
+  fields.forEach(field => {
+    const fieldId = typeof field === "string" ? field : field.id;
+    const fieldName = typeof field === "string" ? field : (field.name || field.id);
+
+    if (!allowed.includes(fieldId)) return;
+
+    // Availability windows
+    (availability[fieldId] || []).forEach(w => {
+      raw.push({
+        start: w.start,
+        end: w.end,
+        type: "free",
+        cls: "block-free",
+        fieldName
+      });
+    });
+
+    // Events (practice/game)
+    (events[fieldId] || []).forEach(ev => {
+      const t = ev.title ? ev.title.toLowerCase() : "";
+      const evType = (t.includes("game") || t.includes("vs") || t.includes("match"))
+        ? "game"
+        : "practice";
+
+      if (SELECTED_MODE && evType !== SELECTED_MODE) return;
+
+      const style = getStyle(evType);
+
+      raw.push({
+        start: ev.start,
+        end: ev.end,
+        type: evType,
+        cls: style.cls,
+        title: ev.title,
+        fieldName
+      });
+    });
+
+    // Admin blocks
+    (blocks[fieldId] || []).forEach(b => {
+      const style = getStyle("admin");
+      raw.push({
+        start: b.start,
+        end: b.end,
+        type: "admin",
+        cls: style.cls,
+        title: b.reason,
+        fieldName
+      });
+    });
+  });
+
+  if (raw.length === 0) return [];
+
+  // Convert to minutes
+  raw = raw.map(w => ({
+    ...w,
+    startMin: timeToMinutes(w.start),
+    endMin: timeToMinutes(w.end)
+  }));
+
+  raw.sort((a, b) => a.startMin - b.startMin);
+
+  const merged = [];
+
+  raw.forEach(w => {
+    const last = merged[merged.length - 1];
+
+    if (
+      last &&
+      last.type === w.type &&
+      last.endMin >= w.startMin
+    ) {
+      last.endMin = Math.max(last.endMin, w.endMin);
+      last.fields.push(w.fieldName);
+    } else {
+      merged.push({
+        type: w.type,
+        cls: w.cls,
+        startMin: w.startMin,
+        endMin: w.endMin,
+        fields: [w.fieldName],
+        title: w.title || null
+      });
+    }
+  });
+
+  merged.forEach(m => {
+    m.start = minutesToTime(m.startMin);
+    m.end = minutesToTime(m.endMin);
+  });
+
+  return merged;
+}
+
+
+
 
 /****************************************************
  * DATE/TIME HELPERS
@@ -591,7 +700,7 @@ function renderWeekTimeline() {
       blocks: {}
     };
 
-    const blocks = mergeTimelineForDay(dayData);
+    const blocks = buildMergedTimelineForWeek(dayData);
 
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
