@@ -201,7 +201,7 @@ function buildMergedTimelineForWeek(dayData) {
 
   const availability = dayData.availability || {};
   const events = dayData.events || {};
-  const blocks = dayData.blocks || {};
+  const adminBlocks = dayData.blocks || {};
   const fields = dayData.fields || FIELDS;
 
   const allowed = getAllowedFields().map(f => f.id || f);
@@ -217,15 +217,13 @@ function buildMergedTimelineForWeek(dayData) {
     // Availability windows
     (availability[fieldId] || []).forEach(w => {
       raw.push({
-        start: ev.start,
-        end: ev.end,
-        type: evType,
-        cls: style.cls,
-        title: ev.title,
-        fieldName,
+        start: w.start,
+        end: w.end,
+        type: "free",
+        cls: "block-free",
+        title: null,
         fields: [fieldName]
       });
-
     });
 
     // Events (practice/game)
@@ -245,20 +243,20 @@ function buildMergedTimelineForWeek(dayData) {
         type: evType,
         cls: style.cls,
         title: ev.title,
-        fieldName
+        fields: [fieldName]
       });
     });
 
     // Admin blocks
-    (blocks[fieldId] || []).forEach(b => {
+    (adminBlocks[fieldId] || []).forEach(b => {
       const style = getStyle("admin");
+
       raw.push({
         start: b.start,
         end: b.end,
         type: "admin",
         cls: style.cls,
         title: b.reason,
-        fieldName,
         fields: [fieldName]
       });
     });
@@ -286,15 +284,15 @@ function buildMergedTimelineForWeek(dayData) {
       last.endMin >= w.startMin
     ) {
       last.endMin = Math.max(last.endMin, w.endMin);
-      last.fields.push(w.fieldName);
+      last.fields.push(...w.fields);
     } else {
       merged.push({
         type: w.type,
         cls: w.cls,
+        title: w.title,
         startMin: w.startMin,
         endMin: w.endMin,
-        fields: [w.fieldName],
-        title: w.title || null
+        fields: [...w.fields]
       });
     }
   });
@@ -306,6 +304,7 @@ function buildMergedTimelineForWeek(dayData) {
 
   return merged;
 }
+
 
 
 
@@ -605,7 +604,7 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  const blocks = buildContinuousWindowsForDay(dayData);
+  const blocks = buildMergedTimelineForWeek(dayData);
 
   if (blocks.length === 0) {
     container.innerHTML = `<p>No availability for ${currentDate}</p>`;
