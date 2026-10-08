@@ -222,7 +222,7 @@ function buildMergedTimelineForWeek(dayData) {
         type: evType,
         cls: style.cls,
         title: ev.title,
-        fieldName
+        fieldName,
         fields: [fieldName]
       });
 
