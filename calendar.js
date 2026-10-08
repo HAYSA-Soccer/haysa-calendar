@@ -682,6 +682,38 @@ function renderWeekTimeline() {
     const dayBody = document.createElement("div");
     dayBody.className = "week-day-body";
 
+    // Assign lanes for overlapping blocks
+    let lanes = [];
+
+    blocks.forEach(b => {
+      const startMin = minutesSinceStart(b.start);
+      const endMin = minutesSinceStart(b.end);
+
+      let laneIndex = 0;
+
+      while (true) {
+        if (!lanes[laneIndex]) {
+          lanes[laneIndex] = [];
+          break;
+        }
+
+        const conflict = lanes[laneIndex].some(existing => {
+          const es = minutesSinceStart(existing.start);
+          const ee = minutesSinceStart(existing.end);
+          return !(ee <= startMin || es >= endMin);
+        });
+
+        if (!conflict) break;
+
+        laneIndex++;
+      }
+
+      b.lane = laneIndex;
+      lanes[laneIndex].push(b);
+    });
+
+    const laneWidth = 100 / (lanes.length || 1);
+
     blocks.forEach(b => {
       const startMin = minutesSinceStart(b.start);
       const endMin = minutesSinceStart(b.end);
@@ -692,13 +724,10 @@ function renderWeekTimeline() {
 
       block.style.top = `${startMin}px`;
       block.style.height = `${duration}px`;
+      block.style.left = `${b.lane * laneWidth}%`;
+      block.style.width = `${laneWidth}%`;
 
       block.textContent = `${b.start}–${b.end}`;
-
-      block.title =
-        `${b.complex}\n` +
-        `${b.start}–${b.end}\n` +
-        `${b.fields.length} fields`;
 
       dayBody.appendChild(block);
     });
