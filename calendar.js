@@ -85,15 +85,12 @@ function renderComplexFilters() {
 }
 
 /****************************************************
- * MERGING LOGIC
+ * MERGING LOGIC (week/month/search)
  ****************************************************/
 function mergeTimelineForDay(dayData) {
   if (!dayData) return [];
 
-  // ⭐ Ignore precomputed merged data from JSON
-  if (dayData.merged) {
-    delete dayData.merged;
-  }
+  if (dayData.merged) delete dayData.merged;
 
   const availability = dayData.availability || {};
   const events = dayData.events || {};
@@ -110,28 +107,26 @@ function mergeTimelineForDay(dayData) {
     const eventList = events[fieldId] || [];
     const blockList = blocks[fieldId] || [];
 
+    // free windows
     availWindows.forEach(w => {
-
-      // ⭐ If mode is "practice", remove windows blocked by game events
-      // ⭐ If mode is "game", remove windows blocked by practice events
       const blocked = eventList.some(ev => {
         const t = ev.title ? ev.title.toLowerCase() : "";
         const evType = t.includes("game") || t.includes("vs") || t.includes("match")
           ? "game"
           : "practice";
-    
+
         if (SELECTED_MODE !== evType) return false;
-    
+
         const es = timeToMinutes(ev.start);
         const ee = timeToMinutes(ev.end);
         const ws = timeToMinutes(w.start);
         const we = timeToMinutes(w.end);
-    
+
         return es < we && ee > ws;
       });
-    
+
       if (blocked) return;
-    
+
       out.push({
         field: fieldId,
         fieldName,
@@ -143,40 +138,31 @@ function mergeTimelineForDay(dayData) {
       });
     });
 
-
+    // events
     eventList.forEach(ev => {
+      if (!ev.type) {
+        const t = ev.title ? ev.title.toLowerCase() : "";
+        ev.type = (t.includes("game") || t.includes("vs") || t.includes("match"))
+          ? "game"
+          : "practice";
+      }
 
-  // ⭐ Derive type from title if missing
-  if (!ev.type) {
-    const t = ev.title ? ev.title.toLowerCase() : "";
-    if (t.includes("game") || t.includes("vs") || t.includes("match")) {
-      ev.type = "game";
-    } else {
-      ev.type = "practice";
-    }
-  }
+      if (SELECTED_MODE && ev.type !== SELECTED_MODE) return;
 
+      const style = getStyle(ev.type);
+      out.push({
+        field: fieldId,
+        fieldName,
+        start: ev.start,
+        end: ev.end,
+        type: ev.type,
+        title: ev.title,
+        cls: style.cls,
+        badge: style.badge
+      });
+    });
 
-  // ⭐ Respect Scheduling Mode (Practice / Game)
-  if (SELECTED_MODE && ev.type !== SELECTED_MODE) {
-    return; // skip events that don't match current mode
-  }
-
-  const style = getStyle(ev.type);
-  out.push({
-    field: fieldId,
-    fieldName,
-    start: ev.start,
-    end: ev.end,
-    type: ev.type,
-    title: ev.title,
-    cls: style.cls,
-    badge: style.badge
-  });
-});
-
-
-
+    // admin blocks
     blockList.forEach(b => {
       const style = getStyle("admin");
       out.push({
@@ -207,11 +193,9 @@ function getStyle(type) {
   }
 }
 
-
 /****************************************************
- * CONTINUOUS WINDOW ENGINE (NEW)
+ * CONTINUOUS WINDOW ENGINE (day view)
  ****************************************************/
-
 function timeToMinutes(t) {
   const [hh, mm] = t.split(":").map(Number);
   return hh * 60 + mm;
@@ -228,7 +212,6 @@ function buildContinuousWindowsForDay(dayData) {
 
   const { fields, availability, events = {} } = dayData;
 
-  // Build field lookup
   const fieldById = {};
   const complexes = {};
   fields.forEach(f => {
@@ -237,10 +220,8 @@ function buildContinuousWindowsForDay(dayData) {
     complexes[f.complex].push(f.id);
   });
 
-  // ⭐ Respect complex filters + allowed fields
   const allowedFieldIds = getAllowedFields().map(f => f.id || f);
 
-  // Determine time range
   let minStart = Infinity;
   let maxEnd = -Infinity;
   Object.values(availability).forEach(windows => {
@@ -253,7 +234,6 @@ function buildContinuousWindowsForDay(dayData) {
   });
   if (!isFinite(minStart) || !isFinite(maxEnd)) return [];
 
-  // Build 30-min slots
   const SLOT = 30;
   const slots = [];
   for (let t = minStart; t < maxEnd; t += SLOT) {
@@ -298,9 +278,7 @@ function buildContinuousWindowsForDay(dayData) {
           : "practice";
       }
 
-      if (SELECTED_MODE && ev.type !== SELECTED_MODE) {
-        return false;
-      }
+      if (SELECTED_MODE && ev.type !== SELECTED_MODE) return false;
 
       const es = timeToMinutes(ev.start);
       const ee = timeToMinutes(ev.end);
@@ -311,13 +289,8 @@ function buildContinuousWindowsForDay(dayData) {
   const blocks = [];
 
   Object.entries(complexes).forEach(([complexName, fieldIds]) => {
+    if (SELECTED_COMPLEXES.size > 0 && !SELECTED_COMPLEXES.has(complexName)) return;
 
-    // ⭐ Skip complexes not selected (if any selected)
-    if (SELECTED_COMPLEXES.size > 0 && !SELECTED_COMPLEXES.has(complexName)) {
-      return;
-    }
-
-    // ⭐ Restrict to allowed fields
     const filteredFieldIds = fieldIds.filter(fid => allowedFieldIds.includes(fid));
     if (filteredFieldIds.length === 0) return;
 
@@ -390,139 +363,6 @@ function buildContinuousWindowsForDay(dayData) {
   return blocks;
 }
 
-
-  function fieldAvailable(fieldId, slot) {
-    const windows = availability[fieldId] || [];
-  
-    // First: is this slot inside any availability window at all?
-    const inWindow = windows.some(w => {
-      const ws = timeToMinutes(w.start);
-      const we = timeToMinutes(w.end);
-      return ws <= slot.start && we >= slot.end;
-    });
-  
-    if (!inWindow) return false;
-  
-    // Second: if a mode is selected, ensure no events of that mode block this slot
-    const evs = events[fieldId] || [];
-    const blockedByMode = evs.some(ev => {
-      const t = ev.title ? ev.title.toLowerCase() : "";
-      const evType = t.includes("game") || t.includes("vs") || t.includes("match")
-        ? "game"
-        : "practice";
-  
-      if (!SELECTED_MODE || evType !== SELECTED_MODE) return false;
-  
-      const es = timeToMinutes(ev.start);
-      const ee = timeToMinutes(ev.end);
-      return es < slot.end && ee > slot.start;
-    });
-  
-    return !blockedByMode;
-  }
-
-
-  function fieldBlocked(fieldId, slot) {
-    const evs = events[fieldId] || [];
-    return evs.some(ev => {
-  
-      // ⭐ Derive type from title if missing
-      if (!ev.type) {
-        const t = ev.title ? ev.title.toLowerCase() : "";
-        if (t.includes("game") || t.includes("vs") || t.includes("match")) {
-          ev.type = "game";
-        } else {
-          ev.type = "practice";
-        }
-      }
-  
-      // ⭐ Respect Scheduling Mode
-      if (SELECTED_MODE && ev.type !== SELECTED_MODE) {
-        return false; // ignore events of other modes
-      }
-  
-      const es = timeToMinutes(ev.start);
-      const ee = timeToMinutes(ev.end);
-      return es < slot.end && ee > slot.start;
-    });
-  }
-
-
-
-  const blocks = [];
-
-  Object.entries(complexes).forEach(([complexName, fieldIds]) => {
-    const slotFieldSets = slots.map(slot => {
-      const available = fieldIds.filter(fid => {
-        return fieldAvailable(fid, slot) && !fieldBlocked(fid, slot);
-      });
-      available.sort();
-      return available;
-    });
-
-    let current = null;
-
-    for (let i = 0; i < slots.length; i++) {
-      const slot = slots[i];
-      const fieldsHere = slotFieldSets[i];
-      const key = fieldsHere.join("|");
-
-      if (!fieldsHere.length) {
-        if (current) {
-          blocks.push({
-            complex: complexName,
-            start: minutesToTime(current.start),
-            end: minutesToTime(current.end),
-            fieldIds: current.fieldIds,
-            fields: current.fieldIds.map(fid => fieldById[fid].name)
-          });
-          current = null;
-        }
-        continue;
-      }
-
-      if (!current) {
-        current = {
-          start: slot.start,
-          end: slot.end,
-          fieldIds: fieldsHere.slice(),
-          key
-        };
-      } else if (current.key === key) {
-        current.end = slot.end;
-      } else {
-        blocks.push({
-          complex: complexName,
-          start: minutesToTime(current.start),
-          end: minutesToTime(current.end),
-          fieldIds: current.fieldIds,
-          fields: current.fieldIds.map(fid => fieldById[fid].name)
-        });
-        current = {
-          start: slot.start,
-          end: slot.end,
-          fieldIds: fieldsHere.slice(),
-          key
-        };
-      }
-    }
-
-    if (current) {
-      blocks.push({
-        complex: complexName,
-        start: minutesToTime(current.start),
-        end: minutesToTime(current.end),
-        fieldIds: current.fieldIds,
-        fields: current.fieldIds.map(fid => fieldById[fid].name)
-      });
-    }
-  });
-
-  return blocks;
-}
-
-
-
 /****************************************************
  * INIT
  ****************************************************/
@@ -530,20 +370,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadAvailabilityJSON();
   renderComplexFilters();
 
-  // Wire top nav (Day / Week / Month / Search)
   document.querySelectorAll(".nav button").forEach(btn => {
     btn.addEventListener("click", () => switchView(btn.dataset.view));
   });
 
-  // Wire Scheduling Mode dropdown (Practice / Game)
   const modeSelect = document.getElementById("schedModeSelect");
   if (modeSelect) {
-    // Initialize SELECTED_MODE from current dropdown value
     SELECTED_MODE = modeSelect.value || "practice";
 
     modeSelect.addEventListener("change", (e) => {
       SELECTED_MODE = e.target.value || "practice";
-      // Re-render current view so mode change is visible immediately
       if (currentView === "day") renderDayView();
       if (currentView === "week") renderWeekView();
       if (currentView === "month") renderMonthView();
@@ -551,10 +387,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Initial view
   switchView("day");
 });
-
 
 /****************************************************
  * VIEW SWITCHER
@@ -610,7 +444,6 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  // NEW: use continuous window engine
   const blocks = buildContinuousWindowsForDay(dayData);
 
   if (blocks.length === 0) {
@@ -618,52 +451,48 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  // Group blocks by complex
   const byComplex = {};
   blocks.forEach(b => {
     if (!byComplex[b.complex]) byComplex[b.complex] = [];
     byComplex[b.complex].push(b);
   });
 
-// Render each complex chronologically
-Object.entries(byComplex).forEach(([complexName, windows]) => {
-  const section = document.createElement("div");
-  section.className = "complex-section";
+  Object.entries(byComplex).forEach(([complexName, windows]) => {
+    const section = document.createElement("div");
+    section.className = "complex-section";
 
-  const title = document.createElement("h3");
-  title.textContent = complexName;
-  section.appendChild(title);
+    const title = document.createElement("h3");
+    title.textContent = complexName;
+    section.appendChild(title);
 
-  windows.forEach(w => {
-    const card = document.createElement("div");
-    card.className = "window-card";
+    windows.forEach(w => {
+      const card = document.createElement("div");
+      card.className = "window-card";
 
-    const header = document.createElement("div");
-    header.className = "window-header";
-    header.textContent = `${w.start} – ${w.end} (${w.fields.length} fields)`;
-    card.appendChild(header);
+      const header = document.createElement("div");
+      header.className = "window-header";
+      header.textContent = `${w.start} – ${w.end} (${w.fields.length} fields)`;
+      card.appendChild(header);
 
-    const list = document.createElement("ul");
-    list.className = "window-field-list";
+      const list = document.createElement("ul");
+      list.className = "window-field-list";
 
-    w.fields.forEach(name => {
-      const li = document.createElement("li");
-      li.textContent = name;
-      list.appendChild(li);
+      w.fields.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        list.appendChild(li);
+      });
+
+      card.appendChild(list);
+      section.appendChild(card);
     });
 
-    card.appendChild(list);
-    section.appendChild(card);
+    container.appendChild(section);
   });
-
-  container.appendChild(section);
-});
-
 }
 
-
 /****************************************************
- * WEEK VIEW — Monday → Sunday + Time Axis Grid
+ * WEEK VIEW
  ****************************************************/
 const TIME_SLOTS = [
   "06:00","06:30","07:00","07:30","08:00","08:30",
@@ -717,215 +546,3 @@ function renderWeekView() {
   };
 
   renderWeekCalendar();
-}
-
-function renderWeekCalendar() {
-  const container = document.getElementById("weekResults");
-  container.innerHTML = "";
-
-  const days = getWeekRange(currentDate);
-  const allowedFields = getAllowedFields().map(f => f.id || f);
-
-  const grid = document.createElement("div");
-  grid.className = "week-grid-time";
-
-  const timeCol = document.createElement("div");
-  timeCol.className = "week-time-col";
-  TIME_SLOTS.forEach(t => {
-    const div = document.createElement("div");
-    div.className = "week-time-slot";
-    div.textContent = t;
-    timeCol.appendChild(div);
-  });
-  grid.appendChild(timeCol);
-
-  days.forEach(dateStr => {
-    const dayData = DAYS[dateStr];
-    if (dayData && dayData.merged) {
-      delete dayData.merged;
-    }
-    const merged = mergeTimelineForDay(dayData);
-
-
-    const col = document.createElement("div");
-    col.className = "week-col";
-
-    const title = document.createElement("div");
-    title.className = "week-col-title";
-    title.textContent = dateStr;
-    col.appendChild(title);
-
-    TIME_SLOTS.forEach(t => {
-      const slotDiv = document.createElement("div");
-      slotDiv.className = "week-slot";
-
-      const active = merged.find(m => {
-        return (
-          m.start <= t &&
-          m.end > t &&
-          allowedFields.includes(m.field) &&
-          (!SELECTED_MODE || m.type === SELECTED_MODE)
-        );
-      });
-
-
-      if (active && allowedFields.includes(active.field)) {
-        slotDiv.classList.add(active.cls);
-        slotDiv.textContent = active.badge ? `[${active.badge}]` : "";
-        slotDiv.title = `${active.fieldName} ${active.start}–${active.end}`;
-      }
-
-      col.appendChild(slotDiv);
-    });
-
-    grid.appendChild(col);
-  });
-
-  container.appendChild(grid);
-}
-
-/****************************************************
- * MONTH VIEW
- ****************************************************/
-function renderMonthView() {
-  const container = document.getElementById("view-container");
-
-  container.innerHTML = `
-    <h2>Month View</h2>
-    <div class="controls">
-      <button id="prevMonth">← Previous</button>
-      <span>${currentDate.substring(0, 7)}</span>
-      <button id="nextMonth">Next →</button>
-    </div>
-    <div id="monthResults"></div>
-  `;
-
-  document.getElementById("prevMonth").onclick = () => {
-    const d = new Date(currentDate);
-    d.setMonth(d.getMonth() - 1);
-    currentDate = d.toISOString().split("T")[0];
-    renderMonthView();
-  };
-
-  document.getElementById("nextMonth").onclick = () => {
-    const d = new Date(currentDate);
-    d.setMonth(d.getMonth() + 1);
-    currentDate = d.toISOString().split("T")[0];
-    renderMonthView();
-  };
-
-  renderMonthCalendar();
-}
-
-function renderMonthCalendar() {
-  const container = document.getElementById("monthResults");
-  container.innerHTML = "";
-
-  const monthId = currentDate.substring(0, 7);
-  const monthData = MONTHS[monthId];
-  if (!monthData) {
-    container.innerHTML = `<p>No data for ${monthId}</p>`;
-    return;
-  }
-
-  const allowedFields = getAllowedFields().map(f => f.id || f);
-
-  const grid = document.createElement("div");
-  grid.className = "month-grid";
-
-  Object.keys(monthData).sort().forEach(dateStr => {
-    const dayData = monthData[dateStr];
-    if (dayData.merged) {
-      delete dayData.merged;
-    }
-    const merged = mergeTimelineForDay(dayData);
-
-
-    const dayCard = document.createElement("div");
-    dayCard.className = "month-day-card";
-    dayCard.textContent = new Date(dateStr).getDate();
-
-    if (merged.some(m =>
-      allowedFields.includes(m.field) &&
-      m.type === "free" &&
-      (!SELECTED_MODE || m.type === SELECTED_MODE)
-    )) {
-      dayCard.classList.add("has-availability");
-    }
-
-
-
-    dayCard.onclick = () => {
-      currentDate = dateStr;
-      switchView("day");
-    };
-
-    grid.appendChild(dayCard);
-  });
-
-  container.appendChild(grid);
-}
-
-/****************************************************
- * SEARCH VIEW
- ****************************************************/
-function renderSearchView() {
-  const container = document.getElementById("view-container");
-
-  container.innerHTML = `
-    <h2>Search</h2>
-    <div class="controls">
-      <input type="time" id="searchTime">
-      <button id="searchBtn">Search</button>
-    </div>
-    <div id="searchResults"></div>
-  `;
-
-  document.getElementById("searchBtn").onclick = () => runSearch();
-}
-
-function runSearch() {
-  const time = document.getElementById("searchTime").value;
-  const container = document.getElementById("searchResults");
-
-  if (!time) {
-    container.innerHTML = "<p>Please select a time.</p>";
-    return;
-  }
-
-  const allowedFields = getAllowedFields().map(f => f.id || f);
-  const results = [];
-
-  Object.keys(DAYS).forEach(dateStr => {
-    const dayData = DAYS[dateStr];
-    if (!dayData) return;
-
-    if (dayData.merged) delete dayData.merged;
-
-    const merged = mergeTimelineForDay(dayData);
-
-    merged.forEach(m => {
-      if (
-        allowedFields.includes(m.field) &&
-        m.type === "free" &&
-        m.start <= time &&
-        m.end >= time
-      ) {
-        results.push({
-          date: dateStr,
-          fieldName: m.fieldName,
-          window: { start: m.start, end: m.end }
-        });
-      }
-    });
-  });
-
-  if (results.length === 0) {
-    container.innerHTML = "<p>No availability found.</p>";
-    return;
-  }
-
-  container.innerHTML = results
-    .map(r => `<div>${r.date} — ${r.fieldName} (${r.window.start}–${r.window.end})</div>`)
-    .join("");
-}
