@@ -5,77 +5,92 @@
     {
       "id": "H-HST",
       "name": "Holbrook High School Turf (Full)",
-      "complex": "TURF"
+      "complex": "TURF",
+      "surface": ""
     },
     {
       "id": "H-HST1",
       "name": "Holbrook High School Turf 1",
-      "complex": "TURF"
+      "complex": "TURF",
+      "surface": ""
     },
     {
       "id": "H-HST2",
       "name": "Holbrook High School Turf 2",
-      "complex": "TURF"
+      "complex": "TURF",
+      "surface": ""
     },
     {
       "id": "H-Su1",
       "name": "Sumner Field 1 (Full)",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-Su1A",
       "name": "Sumner Field 1A",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-Su1B",
       "name": "Sumner Field 1B",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-Su2",
       "name": "Sumner Field 2 (Full)",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-Su2A",
       "name": "Sumner Field 2A",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-Su2B",
       "name": "Sumner Field 2B",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-SJ3",
       "name": "Sumner Field 3 (Full)",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-SJ3A",
       "name": "Sumner Field 3A",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-SJ3B",
       "name": "Sumner Field 3B",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-SJ4",
       "name": "Sumner Field 4 (Full)",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-SJ4A",
       "name": "Sumner Field 4A",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     },
     {
       "id": "H-SJ4B",
       "name": "Sumner Field 4B",
-      "complex": "SUMNER/SEAN JOYCE"
+      "complex": "SUMNER/SEAN JOYCE",
+      "surface": ""
     }
   ],
   "complexes": {
@@ -106,77 +121,92 @@
         {
           "id": "H-HST",
           "name": "Holbrook High School Turf (Full)",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST1",
           "name": "Holbrook High School Turf 1",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST2",
           "name": "Holbrook High School Turf 2",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-Su1",
           "name": "Sumner Field 1 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1A",
           "name": "Sumner Field 1A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1B",
           "name": "Sumner Field 1B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2",
           "name": "Sumner Field 2 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2A",
           "name": "Sumner Field 2A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2B",
           "name": "Sumner Field 2B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3",
           "name": "Sumner Field 3 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3A",
           "name": "Sumner Field 3A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3B",
           "name": "Sumner Field 3B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4",
           "name": "Sumner Field 4 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4A",
           "name": "Sumner Field 4A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4B",
           "name": "Sumner Field 4B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         }
       ],
       "complexes": {
@@ -201,9 +231,19 @@
         ]
       },
       "availability": {
-        "H-HST": [],
+        "H-HST": [
+          {
+            "start": "18:00",
+            "end": "21:00"
+          }
+        ],
         "H-HST1": [],
-        "H-HST2": [],
+        "H-HST2": [
+          {
+            "start": "18:00",
+            "end": "19:30"
+          }
+        ],
         "H-Su1": [
           {
             "start": "16:00",
@@ -326,13 +366,13 @@
         ]
       },
       "events": {
-        "H-HST": [
+        "H-HST1": [
           {
             "event_id": "08d9a62981984c87992aeab5dc1d6579",
             "date": "2026-10-07",
             "start": "18:00",
             "end": "19:30",
-            "field": "H-HST",
+            "field": "H-HST1",
             "field_group": "TURF",
             "type": "practice",
             "title": "5/6 Boys Travel (Walsh) Practice",
@@ -346,7 +386,7 @@
             "date": "2026-10-07",
             "start": "19:30",
             "end": "21:00",
-            "field": "H-HST",
+            "field": "H-HST1",
             "field_group": "TURF",
             "type": "practice",
             "title": "5/6 Girls Travel (Casavant) Practice",
@@ -354,13 +394,15 @@
             "coach": "Casavant",
             "grade": "5/6",
             "source": "ICS"
-          },
+          }
+        ],
+        "H-HST2": [
           {
             "event_id": "c5aac91763cbef88583ab6e6e2f755f4",
             "date": "2026-10-07",
             "start": "19:30",
             "end": "21:00",
-            "field": "H-HST",
+            "field": "H-HST2",
             "field_group": "TURF",
             "type": "practice",
             "title": "7/8 Girls Travel (Caldwell) Practice",
@@ -592,6 +634,20 @@
           "title": "Wm. Perry Auto Repair (Orange) Practice"
         },
         {
+          "field": "H-HST",
+          "start": "18:00",
+          "end": "21:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-HST2",
+          "start": "18:00",
+          "end": "19:30",
+          "type": "free",
+          "title": ""
+        },
+        {
           "field": "H-Su1",
           "start": "18:00",
           "end": "19:00",
@@ -634,7 +690,7 @@
           "title": ""
         },
         {
-          "field": "H-HST",
+          "field": "H-HST1",
           "start": "18:00",
           "end": "19:30",
           "type": "practice",
@@ -662,14 +718,14 @@
           "title": ""
         },
         {
-          "field": "H-HST",
+          "field": "H-HST1",
           "start": "19:30",
           "end": "21:00",
           "type": "practice",
           "title": "5/6 Girls Travel (Casavant) Practice"
         },
         {
-          "field": "H-HST",
+          "field": "H-HST2",
           "start": "19:30",
           "end": "21:00",
           "type": "practice",
@@ -683,77 +739,92 @@
         {
           "id": "H-HST",
           "name": "Holbrook High School Turf (Full)",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST1",
           "name": "Holbrook High School Turf 1",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST2",
           "name": "Holbrook High School Turf 2",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-Su1",
           "name": "Sumner Field 1 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1A",
           "name": "Sumner Field 1A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1B",
           "name": "Sumner Field 1B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2",
           "name": "Sumner Field 2 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2A",
           "name": "Sumner Field 2A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2B",
           "name": "Sumner Field 2B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3",
           "name": "Sumner Field 3 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3A",
           "name": "Sumner Field 3A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3B",
           "name": "Sumner Field 3B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4",
           "name": "Sumner Field 4 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4A",
           "name": "Sumner Field 4A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4B",
           "name": "Sumner Field 4B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         }
       ],
       "complexes": {
@@ -778,9 +849,19 @@
         ]
       },
       "availability": {
-        "H-HST": [],
+        "H-HST": [
+          {
+            "start": "18:00",
+            "end": "21:00"
+          }
+        ],
         "H-HST1": [],
-        "H-HST2": [],
+        "H-HST2": [
+          {
+            "start": "19:30",
+            "end": "21:00"
+          }
+        ],
         "H-Su1": [
           {
             "start": "16:00",
@@ -903,13 +984,13 @@
         ]
       },
       "events": {
-        "H-HST": [
+        "H-HST2": [
           {
             "event_id": "407325a7b876c44e2478edb3abddb735",
             "date": "2026-10-08",
             "start": "18:00",
             "end": "19:30",
-            "field": "H-HST",
+            "field": "H-HST2",
             "field_group": "TURF",
             "type": "practice",
             "title": "5/6 Boys Travel (Ayers) Practice",
@@ -917,13 +998,15 @@
             "coach": "Ayers",
             "grade": "5/6",
             "source": "ICS"
-          },
+          }
+        ],
+        "H-HST1": [
           {
             "event_id": "34161b57d00a9b11f2ef45d3afd5c742",
             "date": "2026-10-08",
             "start": "18:00",
             "end": "19:30",
-            "field": "H-HST",
+            "field": "H-HST1",
             "field_group": "TURF",
             "type": "practice",
             "title": "5/6 Girls Travel (Baird-Miller) Practice",
@@ -937,7 +1020,7 @@
             "date": "2026-10-08",
             "start": "19:30",
             "end": "21:00",
-            "field": "H-HST",
+            "field": "H-HST1",
             "field_group": "TURF",
             "type": "practice",
             "title": "7/8 Boys Travel (Mills) Practice",
@@ -1190,6 +1273,13 @@
           "title": "Avon Septic and Pumping (Blue) Practice"
         },
         {
+          "field": "H-HST",
+          "start": "18:00",
+          "end": "21:00",
+          "type": "free",
+          "title": ""
+        },
+        {
           "field": "H-Su2",
           "start": "18:00",
           "end": "19:00",
@@ -1232,14 +1322,14 @@
           "title": ""
         },
         {
-          "field": "H-HST",
+          "field": "H-HST2",
           "start": "18:00",
           "end": "19:30",
           "type": "practice",
           "title": "5/6 Boys Travel (Ayers) Practice"
         },
         {
-          "field": "H-HST",
+          "field": "H-HST1",
           "start": "18:00",
           "end": "19:30",
           "type": "practice",
@@ -1288,7 +1378,14 @@
           "title": ""
         },
         {
-          "field": "H-HST",
+          "field": "H-HST2",
+          "start": "19:30",
+          "end": "21:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-HST1",
           "start": "19:30",
           "end": "21:00",
           "type": "practice",
@@ -1302,77 +1399,92 @@
         {
           "id": "H-HST",
           "name": "Holbrook High School Turf (Full)",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST1",
           "name": "Holbrook High School Turf 1",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST2",
           "name": "Holbrook High School Turf 2",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-Su1",
           "name": "Sumner Field 1 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1A",
           "name": "Sumner Field 1A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1B",
           "name": "Sumner Field 1B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2",
           "name": "Sumner Field 2 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2A",
           "name": "Sumner Field 2A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2B",
           "name": "Sumner Field 2B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3",
           "name": "Sumner Field 3 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3A",
           "name": "Sumner Field 3A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3B",
           "name": "Sumner Field 3B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4",
           "name": "Sumner Field 4 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4A",
           "name": "Sumner Field 4A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4B",
           "name": "Sumner Field 4B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         }
       ],
       "complexes": {
@@ -1814,77 +1926,92 @@
         {
           "id": "H-HST",
           "name": "Holbrook High School Turf (Full)",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST1",
           "name": "Holbrook High School Turf 1",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST2",
           "name": "Holbrook High School Turf 2",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-Su1",
           "name": "Sumner Field 1 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1A",
           "name": "Sumner Field 1A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1B",
           "name": "Sumner Field 1B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2",
           "name": "Sumner Field 2 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2A",
           "name": "Sumner Field 2A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2B",
           "name": "Sumner Field 2B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3",
           "name": "Sumner Field 3 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3A",
           "name": "Sumner Field 3A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3B",
           "name": "Sumner Field 3B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4",
           "name": "Sumner Field 4 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4A",
           "name": "Sumner Field 4A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4B",
           "name": "Sumner Field 4B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         }
       ],
       "complexes": {
@@ -2391,77 +2518,92 @@
         {
           "id": "H-HST",
           "name": "Holbrook High School Turf (Full)",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST1",
           "name": "Holbrook High School Turf 1",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-HST2",
           "name": "Holbrook High School Turf 2",
-          "complex": "TURF"
+          "complex": "TURF",
+          "surface": ""
         },
         {
           "id": "H-Su1",
           "name": "Sumner Field 1 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1A",
           "name": "Sumner Field 1A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su1B",
           "name": "Sumner Field 1B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2",
           "name": "Sumner Field 2 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2A",
           "name": "Sumner Field 2A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-Su2B",
           "name": "Sumner Field 2B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3",
           "name": "Sumner Field 3 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3A",
           "name": "Sumner Field 3A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ3B",
           "name": "Sumner Field 3B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4",
           "name": "Sumner Field 4 (Full)",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4A",
           "name": "Sumner Field 4A",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         },
         {
           "id": "H-SJ4B",
           "name": "Sumner Field 4B",
-          "complex": "SUMNER/SEAN JOYCE"
+          "complex": "SUMNER/SEAN JOYCE",
+          "surface": ""
         }
       ],
       "complexes": {
@@ -2515,77 +2657,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -2610,9 +2767,19 @@
           ]
         },
         "availability": {
-          "H-HST": [],
+          "H-HST": [
+            {
+              "start": "18:00",
+              "end": "21:00"
+            }
+          ],
           "H-HST1": [],
-          "H-HST2": [],
+          "H-HST2": [
+            {
+              "start": "18:00",
+              "end": "19:30"
+            }
+          ],
           "H-Su1": [
             {
               "start": "16:00",
@@ -2735,13 +2902,13 @@
           ]
         },
         "events": {
-          "H-HST": [
+          "H-HST1": [
             {
               "event_id": "08d9a62981984c87992aeab5dc1d6579",
               "date": "2026-10-07",
               "start": "18:00",
               "end": "19:30",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Boys Travel (Walsh) Practice",
@@ -2755,7 +2922,7 @@
               "date": "2026-10-07",
               "start": "19:30",
               "end": "21:00",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Girls Travel (Casavant) Practice",
@@ -2763,13 +2930,15 @@
               "coach": "Casavant",
               "grade": "5/6",
               "source": "ICS"
-            },
+            }
+          ],
+          "H-HST2": [
             {
               "event_id": "c5aac91763cbef88583ab6e6e2f755f4",
               "date": "2026-10-07",
               "start": "19:30",
               "end": "21:00",
-              "field": "H-HST",
+              "field": "H-HST2",
               "field_group": "TURF",
               "type": "practice",
               "title": "7/8 Girls Travel (Caldwell) Practice",
@@ -3001,6 +3170,20 @@
             "title": "Wm. Perry Auto Repair (Orange) Practice"
           },
           {
+            "field": "H-HST",
+            "start": "18:00",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-HST2",
+            "start": "18:00",
+            "end": "19:30",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-Su1",
             "start": "18:00",
             "end": "19:00",
@@ -3043,7 +3226,7 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST1",
             "start": "18:00",
             "end": "19:30",
             "type": "practice",
@@ -3071,14 +3254,14 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST1",
             "start": "19:30",
             "end": "21:00",
             "type": "practice",
             "title": "5/6 Girls Travel (Casavant) Practice"
           },
           {
-            "field": "H-HST",
+            "field": "H-HST2",
             "start": "19:30",
             "end": "21:00",
             "type": "practice",
@@ -3092,77 +3275,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -3187,9 +3385,19 @@
           ]
         },
         "availability": {
-          "H-HST": [],
+          "H-HST": [
+            {
+              "start": "18:00",
+              "end": "21:00"
+            }
+          ],
           "H-HST1": [],
-          "H-HST2": [],
+          "H-HST2": [
+            {
+              "start": "19:30",
+              "end": "21:00"
+            }
+          ],
           "H-Su1": [
             {
               "start": "16:00",
@@ -3312,13 +3520,13 @@
           ]
         },
         "events": {
-          "H-HST": [
+          "H-HST2": [
             {
               "event_id": "407325a7b876c44e2478edb3abddb735",
               "date": "2026-10-08",
               "start": "18:00",
               "end": "19:30",
-              "field": "H-HST",
+              "field": "H-HST2",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Boys Travel (Ayers) Practice",
@@ -3326,13 +3534,15 @@
               "coach": "Ayers",
               "grade": "5/6",
               "source": "ICS"
-            },
+            }
+          ],
+          "H-HST1": [
             {
               "event_id": "34161b57d00a9b11f2ef45d3afd5c742",
               "date": "2026-10-08",
               "start": "18:00",
               "end": "19:30",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Girls Travel (Baird-Miller) Practice",
@@ -3346,7 +3556,7 @@
               "date": "2026-10-08",
               "start": "19:30",
               "end": "21:00",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "7/8 Boys Travel (Mills) Practice",
@@ -3599,6 +3809,13 @@
             "title": "Avon Septic and Pumping (Blue) Practice"
           },
           {
+            "field": "H-HST",
+            "start": "18:00",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-Su2",
             "start": "18:00",
             "end": "19:00",
@@ -3641,14 +3858,14 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST2",
             "start": "18:00",
             "end": "19:30",
             "type": "practice",
             "title": "5/6 Boys Travel (Ayers) Practice"
           },
           {
-            "field": "H-HST",
+            "field": "H-HST1",
             "start": "18:00",
             "end": "19:30",
             "type": "practice",
@@ -3697,7 +3914,14 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST2",
+            "start": "19:30",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-HST1",
             "start": "19:30",
             "end": "21:00",
             "type": "practice",
@@ -3711,77 +3935,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -4223,77 +4462,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -4802,77 +5056,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -4927,77 +5196,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -5022,9 +5306,19 @@
           ]
         },
         "availability": {
-          "H-HST": [],
+          "H-HST": [
+            {
+              "start": "18:00",
+              "end": "21:00"
+            }
+          ],
           "H-HST1": [],
-          "H-HST2": [],
+          "H-HST2": [
+            {
+              "start": "18:00",
+              "end": "19:30"
+            }
+          ],
           "H-Su1": [
             {
               "start": "16:00",
@@ -5147,13 +5441,13 @@
           ]
         },
         "events": {
-          "H-HST": [
+          "H-HST1": [
             {
               "event_id": "08d9a62981984c87992aeab5dc1d6579",
               "date": "2026-10-07",
               "start": "18:00",
               "end": "19:30",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Boys Travel (Walsh) Practice",
@@ -5167,7 +5461,7 @@
               "date": "2026-10-07",
               "start": "19:30",
               "end": "21:00",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Girls Travel (Casavant) Practice",
@@ -5175,13 +5469,15 @@
               "coach": "Casavant",
               "grade": "5/6",
               "source": "ICS"
-            },
+            }
+          ],
+          "H-HST2": [
             {
               "event_id": "c5aac91763cbef88583ab6e6e2f755f4",
               "date": "2026-10-07",
               "start": "19:30",
               "end": "21:00",
-              "field": "H-HST",
+              "field": "H-HST2",
               "field_group": "TURF",
               "type": "practice",
               "title": "7/8 Girls Travel (Caldwell) Practice",
@@ -5413,6 +5709,20 @@
             "title": "Wm. Perry Auto Repair (Orange) Practice"
           },
           {
+            "field": "H-HST",
+            "start": "18:00",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-HST2",
+            "start": "18:00",
+            "end": "19:30",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-Su1",
             "start": "18:00",
             "end": "19:00",
@@ -5455,7 +5765,7 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST1",
             "start": "18:00",
             "end": "19:30",
             "type": "practice",
@@ -5483,14 +5793,14 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST1",
             "start": "19:30",
             "end": "21:00",
             "type": "practice",
             "title": "5/6 Girls Travel (Casavant) Practice"
           },
           {
-            "field": "H-HST",
+            "field": "H-HST2",
             "start": "19:30",
             "end": "21:00",
             "type": "practice",
@@ -5504,77 +5814,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -5599,9 +5924,19 @@
           ]
         },
         "availability": {
-          "H-HST": [],
+          "H-HST": [
+            {
+              "start": "18:00",
+              "end": "21:00"
+            }
+          ],
           "H-HST1": [],
-          "H-HST2": [],
+          "H-HST2": [
+            {
+              "start": "19:30",
+              "end": "21:00"
+            }
+          ],
           "H-Su1": [
             {
               "start": "16:00",
@@ -5724,13 +6059,13 @@
           ]
         },
         "events": {
-          "H-HST": [
+          "H-HST2": [
             {
               "event_id": "407325a7b876c44e2478edb3abddb735",
               "date": "2026-10-08",
               "start": "18:00",
               "end": "19:30",
-              "field": "H-HST",
+              "field": "H-HST2",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Boys Travel (Ayers) Practice",
@@ -5738,13 +6073,15 @@
               "coach": "Ayers",
               "grade": "5/6",
               "source": "ICS"
-            },
+            }
+          ],
+          "H-HST1": [
             {
               "event_id": "34161b57d00a9b11f2ef45d3afd5c742",
               "date": "2026-10-08",
               "start": "18:00",
               "end": "19:30",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "5/6 Girls Travel (Baird-Miller) Practice",
@@ -5758,7 +6095,7 @@
               "date": "2026-10-08",
               "start": "19:30",
               "end": "21:00",
-              "field": "H-HST",
+              "field": "H-HST1",
               "field_group": "TURF",
               "type": "practice",
               "title": "7/8 Boys Travel (Mills) Practice",
@@ -6011,6 +6348,13 @@
             "title": "Avon Septic and Pumping (Blue) Practice"
           },
           {
+            "field": "H-HST",
+            "start": "18:00",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-Su2",
             "start": "18:00",
             "end": "19:00",
@@ -6053,14 +6397,14 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST2",
             "start": "18:00",
             "end": "19:30",
             "type": "practice",
             "title": "5/6 Boys Travel (Ayers) Practice"
           },
           {
-            "field": "H-HST",
+            "field": "H-HST1",
             "start": "18:00",
             "end": "19:30",
             "type": "practice",
@@ -6109,7 +6453,14 @@
             "title": ""
           },
           {
-            "field": "H-HST",
+            "field": "H-HST2",
+            "start": "19:30",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-HST1",
             "start": "19:30",
             "end": "21:00",
             "type": "practice",
@@ -6123,77 +6474,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -6635,77 +7001,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
@@ -7212,77 +7593,92 @@
           {
             "id": "H-HST",
             "name": "Holbrook High School Turf (Full)",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST1",
             "name": "Holbrook High School Turf 1",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-HST2",
             "name": "Holbrook High School Turf 2",
-            "complex": "TURF"
+            "complex": "TURF",
+            "surface": ""
           },
           {
             "id": "H-Su1",
             "name": "Sumner Field 1 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1A",
             "name": "Sumner Field 1A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su1B",
             "name": "Sumner Field 1B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2",
             "name": "Sumner Field 2 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2A",
             "name": "Sumner Field 2A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-Su2B",
             "name": "Sumner Field 2B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3",
             "name": "Sumner Field 3 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3A",
             "name": "Sumner Field 3A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ3B",
             "name": "Sumner Field 3B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4",
             "name": "Sumner Field 4 (Full)",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4A",
             "name": "Sumner Field 4A",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           },
           {
             "id": "H-SJ4B",
             "name": "Sumner Field 4B",
-            "complex": "SUMNER/SEAN JOYCE"
+            "complex": "SUMNER/SEAN JOYCE",
+            "surface": ""
           }
         ],
         "complexes": {
