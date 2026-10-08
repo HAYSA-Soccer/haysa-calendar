@@ -198,10 +198,15 @@ function formatDateLabel(dateStr) {
   const d = new Date(dateStr + "T00:00:00");
   const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   const dow = days[d.getDay()];
-
   const [y, m, dd] = dateStr.split("-");
   return `${dow} ${m}/${dd}`;
 }
+
+function minutesSinceStart(t) {
+  const [h, m] = t.split(":").map(Number);
+  return h * 60 + m;
+}
+
 
 /****************************************************
  * CONTINUOUS WINDOW ENGINE (day view)
