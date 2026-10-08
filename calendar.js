@@ -548,3 +548,69 @@ function renderWeekView() {
   renderWeekCalendar();
 }
 
+
+function renderWeekCalendar() {
+  const container = document.getElementById("weekResults");
+  container.innerHTML = "";
+
+  const days = getWeekRange(currentDate);
+  const allowedFields = getAllowedFields().map(f => f.id || f);
+
+  const grid = document.createElement("div");
+  grid.className = "week-grid-time";
+
+  // Left column: time labels
+  const timeCol = document.createElement("div");
+  timeCol.className = "week-time-col";
+  TIME_SLOTS.forEach(t => {
+    const div = document.createElement("div");
+    div.className = "week-time-slot";
+    div.textContent = t;
+    timeCol.appendChild(div);
+  });
+  grid.appendChild(timeCol);
+
+  // Columns for each day
+  days.forEach(dateStr => {
+    const dayData = DAYS[dateStr];
+    if (dayData && dayData.merged) delete dayData.merged;
+
+    const merged = mergeTimelineForDay(dayData);
+
+    const col = document.createElement("div");
+    col.className = "week-col";
+
+    const title = document.createElement("div");
+    title.className = "week-col-title";
+    title.textContent = dateStr;
+    col.appendChild(title);
+
+    TIME_SLOTS.forEach(t => {
+      const slotDiv = document.createElement("div");
+      slotDiv.className = "week-slot";
+
+      const active = merged.find(m => {
+        return (
+          m.start <= t &&
+          m.end > t &&
+          allowedFields.includes(m.field) &&
+          (!SELECTED_MODE || m.type === SELECTED_MODE)
+        );
+      });
+
+      if (active) {
+        slotDiv.classList.add(active.cls);
+        slotDiv.textContent = active.badge ? `[${active.badge}]` : "";
+        slotDiv.title = `${active.fieldName} ${active.start}–${active.end}`;
+      }
+
+      col.appendChild(slotDiv);
+    });
+
+    grid.appendChild(col);
+  });
+
+  container.appendChild(grid);
+}
+
+
