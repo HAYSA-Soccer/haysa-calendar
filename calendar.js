@@ -571,7 +571,12 @@ function renderWeekCalendar() {
 
   // Columns for each day
   days.forEach(dateStr => {
-    const dayData = DAYS[dateStr];
+    const dayData = DAYS[dateStr] || {
+      fields: FIELDS,
+      availability: {},
+      events: {}
+    };
+
     const blocks = buildContinuousWindowsForDay(dayData || {});
 
     const col = document.createElement("div");
