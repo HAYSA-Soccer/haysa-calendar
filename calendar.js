@@ -49,6 +49,28 @@ function getAllowedFields() {
   return FIELDS.filter(f => allowed.has(f.id || f));
 }
 
+
+function resolveTurfSurface(ev) {
+  // Only applies to TURF
+  if (ev.field !== "H-HST") return ev.field;
+
+  const disp = ev.field_display || "";
+
+  // Full-field event
+  if (disp.includes("H-HST,")) return "H-HST";
+  if (disp.includes("H-HST)")) return "H-HST";
+  if (disp.trim() === "H-HST") return "H-HST";
+
+  // Half-field events
+  if (disp.includes("H-HST1")) return "H-HST1";
+  if (disp.includes("H-HST2")) return "H-HST2";
+
+  // Fallback: treat as full-field
+  return "H-HST";
+}
+
+
+
 function toggleComplex(complexName) {
   if (SELECTED_COMPLEXES.has(complexName)) {
     SELECTED_COMPLEXES.delete(complexName);
@@ -552,12 +574,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 /****************************************************
  * VIEW SWITCHER
  ****************************************************/
-function switchView(view) {
-  currentView = view;
-  if (view === "day") renderDayView();
-  if (view === "week") renderWeekView();
-  if (view === "month") renderMonthView();
-  if (view === "search") renderSearchView();
+function switchView(viewName) {
+  currentView = viewName;
+
+  if (viewName === "day") renderDayView();
+  if (viewName === "week") renderWeekView();
+  if (viewName === "month") renderMonthView();
+  if (viewName === "search") renderSearchView();
 }
 
 
@@ -604,7 +627,8 @@ function renderDayCalendar(dayData) {
     return;
   }
 
-  const blocks = buildMergedTimelineForWeek(dayData);
+  // Use complex-level continuous windows for day view
+  const blocks = buildContinuousWindowsForDay(dayData);
 
   if (blocks.length === 0) {
     container.innerHTML = `<p>No availability for ${currentDate}</p>`;
@@ -800,7 +824,6 @@ function renderWeekTimeline() {
       
       block.appendChild(label);
       block.appendChild(sub);
-
 
       dayBody.appendChild(block);
     });
