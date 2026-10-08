@@ -181,13 +181,17 @@ body {
   background: #0077dd;
 }
 
+
+
+
 /****************************************************
- * WEEK VIEW — TIMELINE LAYOUT
+ * WEEK TIMELINE — CLEAN, READABLE, PROFESSIONAL
  ****************************************************/
+
 .week-timeline {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 12px;
+  gap: 14px;
   padding: 10px;
 }
 
@@ -202,10 +206,10 @@ body {
 
 .week-day-header {
   background: #f3f6fa;
-  padding: 8px;
+  padding: 10px;
   text-align: center;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   border-bottom: 1px solid #d0d0d0;
 }
 
@@ -217,7 +221,7 @@ body {
     to bottom,
     #fafafa,
     #fafafa 29px,
-    #f0f0f0 30px
+    #e8e8e8 30px
   );
   border-radius: 0 0 6px 6px;
 }
@@ -227,16 +231,16 @@ body {
  ****************************************************/
 .week-block {
   position: absolute;
-  border-radius: 4px;
-  padding: 4px 6px;
-  font-size: 12px;
-  line-height: 1.2;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+  line-height: 1.25;
   color: #fff;
   overflow: hidden;
   box-sizing: border-box;
   border: 1px solid rgba(0,0,0,0.15);
-  min-height: 18px;
-  margin-left: 2px; /* lane gutter */
+  min-height: 22px;
+  margin-left: 4px; /* lane gutter */
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -256,4 +260,17 @@ body {
 
 .week-block.block-admin {
   background: #8c8c8c;
+}
+
+/****************************************************
+ * BLOCK LABELS
+ ****************************************************/
+.week-block .label {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.week-block .sub {
+  font-size: 11px;
+  opacity: 0.85;
 }
