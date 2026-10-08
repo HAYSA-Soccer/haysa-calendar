@@ -550,7 +550,7 @@ function renderWeekView() {
       <span>${currentDate}</span>
       <button id="nextWeek">Next →</button>
     </div>
-    <div id="weekResults"></div>
+    <div id="weekTimeline"></div>
   `;
 
   document.getElementById("prevWeek").onclick = () => {
@@ -567,8 +567,9 @@ function renderWeekView() {
     renderWeekView();
   };
 
-  renderWeekCalendar();
+  renderWeekTimeline();
 }
+
 
 
 
