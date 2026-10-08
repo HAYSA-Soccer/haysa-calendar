@@ -640,3 +640,63 @@ function renderWeekCalendar() {
 
   container.appendChild(grid);
 }
+
+
+
+
+function renderWeekTimeline() {
+  const container = document.getElementById("weekTimeline");
+  container.innerHTML = "";
+
+  const days = getWeekRange(currentDate); // Monday → Sunday
+
+  const timeline = document.createElement("div");
+  timeline.className = "week-timeline";
+
+  days.forEach(dateStr => {
+    const dayData = DAYS[dateStr] || {
+      fields: FIELDS,
+      availability: {},
+      events: {}
+    };
+
+    const blocks = buildContinuousWindowsForDay(dayData);
+
+    const dayCol = document.createElement("div");
+    dayCol.className = "week-day-col";
+
+    const header = document.createElement("div");
+    header.className = "week-day-header";
+    header.textContent = formatDateLabel(dateStr);
+    dayCol.appendChild(header);
+
+    const dayBody = document.createElement("div");
+    dayBody.className = "week-day-body";
+
+    blocks.forEach(b => {
+      const startMin = minutesSinceStart(b.start);
+      const endMin = minutesSinceStart(b.end);
+      const duration = endMin - startMin;
+
+      const block = document.createElement("div");
+      block.className = "week-block " + (b.cls || "block-free");
+
+      block.style.top = `${startMin}px`;
+      block.style.height = `${duration}px`;
+
+      block.textContent = `${b.start}–${b.end}`;
+
+      block.title =
+        `${b.complex}\n` +
+        `${b.start}–${b.end}\n` +
+        `${b.fields.length} fields`;
+
+      dayBody.appendChild(block);
+    });
+
+    dayCol.appendChild(dayBody);
+    timeline.appendChild(dayCol);
+  });
+
+  container.appendChild(timeline);
+}
