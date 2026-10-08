@@ -193,6 +193,16 @@ function getStyle(type) {
   }
 }
 
+
+function formatDateLabel(dateStr) {
+  const d = new Date(dateStr + "T00:00:00");
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const dow = days[d.getDay()];
+
+  const [y, m, dd] = dateStr.split("-");
+  return `${dow} ${m}/${dd}`;
+}
+
 /****************************************************
  * CONTINUOUS WINDOW ENGINE (day view)
  ****************************************************/
@@ -569,24 +579,23 @@ function renderWeekCalendar() {
   });
   grid.appendChild(timeCol);
 
-  // Columns for each day
+  // Columns for each day (Monday → Sunday from getWeekRange)
   days.forEach(dateStr => {
-    // Ensure we always have a valid dayData structure
     const dayData = DAYS[dateStr] || {
       fields: FIELDS,
       availability: {},
       events: {}
     };
 
-    // Use the continuous window engine (same logic as Day View)
     const blocks = buildContinuousWindowsForDay(dayData);
 
     const col = document.createElement("div");
     col.className = "week-col";
 
+    // Day header: "Thu 10/08"
     const title = document.createElement("div");
     title.className = "week-col-title";
-    title.textContent = dateStr;
+    title.textContent = formatDateLabel(dateStr);
     col.appendChild(title);
 
     // One row per time slot
@@ -609,15 +618,11 @@ function renderWeekCalendar() {
         const blockDiv = document.createElement("div");
         blockDiv.className = "week-block " + (b.cls || "block-free");
 
-        // Clean visual label: window + field count
-        blockDiv.textContent = `${b.start}–${b.end} (${b.fields.length} fields)`;
+        // Show ONLY count, not field names
+        blockDiv.textContent = `${b.fields.length} fields`;
 
-        // Detailed hover info
-        blockDiv.title =
-          `${b.complex}\n` +
-          `${b.start}–${b.end}\n` +
-          `${b.fields.length} fields\n` +
-          b.fields.join(", ");
+        // Simple hover: complex + window
+        blockDiv.title = `${b.complex} ${b.start}–${b.end}`;
 
         slotDiv.appendChild(blockDiv);
       });
