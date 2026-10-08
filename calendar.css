@@ -329,3 +329,46 @@ body {
 .week-block.block-game { background: #007bff; }
 .week-block.block-admin { background: #8c8c8c; }
 
+.week-timeline {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.week-day-col {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.week-day-header {
+  background: #eef2f7;
+  padding: 6px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+
+.week-day-body {
+  position: relative;
+  height: 900px; /* 6am–9pm = 15 hours = 900 minutes */
+  background: #fafafa;
+}
+
+.week-block {
+  position: absolute;
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Reuse your existing block colors */
+.week-block.block-free { background: #4caf50; }
+.week-block.block-practice { background: #ffa940; }
+.week-block.block-game { background: #007bff; }
+.week-block.block-admin { background: #8c8c8c; }
+
