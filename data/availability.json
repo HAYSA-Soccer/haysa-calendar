@@ -1965,41 +1965,49 @@
         ],
         "H-Su1": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-Su1A": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-Su1B": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-Su2": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-Su2A": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-Su2B": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-SJ3": [
+          {
+            "start": "08:00",
+            "end": "12:30"
+          },
+          {
+            "start": "13:30",
+            "end": "15:00"
+          },
           {
             "start": "16:00",
             "end": "19:00"
@@ -2007,11 +2015,27 @@
         ],
         "H-SJ3A": [
           {
+            "start": "08:00",
+            "end": "12:30"
+          },
+          {
+            "start": "13:30",
+            "end": "15:00"
+          },
+          {
             "start": "16:00",
             "end": "19:00"
           }
         ],
         "H-SJ3B": [
+          {
+            "start": "08:00",
+            "end": "12:30"
+          },
+          {
+            "start": "13:30",
+            "end": "15:00"
+          },
           {
             "start": "16:00",
             "end": "19:00"
@@ -2025,13 +2049,13 @@
         ],
         "H-SJ4A": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ],
         "H-SJ4B": [
           {
-            "start": "16:00",
+            "start": "08:00",
             "end": "19:00"
           }
         ]
@@ -2115,6 +2139,83 @@
       "blocks": {},
       "merged": [
         {
+          "field": "H-Su1",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-Su1A",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-Su1B",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-Su2",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-Su2A",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-Su2B",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ3",
+          "start": "08:00",
+          "end": "12:30",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ3A",
+          "start": "08:00",
+          "end": "12:30",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ3B",
+          "start": "08:00",
+          "end": "12:30",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ4A",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ4B",
+          "start": "08:00",
+          "end": "19:00",
+          "type": "free",
+          "title": ""
+        },
+        {
           "field": "H-HST",
           "start": "09:00",
           "end": "12:30",
@@ -2171,6 +2272,27 @@
           "title": ""
         },
         {
+          "field": "H-SJ3",
+          "start": "13:30",
+          "end": "15:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ3A",
+          "start": "13:30",
+          "end": "15:00",
+          "type": "free",
+          "title": ""
+        },
+        {
+          "field": "H-SJ3B",
+          "start": "13:30",
+          "end": "15:00",
+          "type": "free",
+          "title": ""
+        },
+        {
           "field": "H-HST",
           "start": "14:00",
           "end": "15:00",
@@ -2206,48 +2328,6 @@
           "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy"
         },
         {
-          "field": "H-Su1",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su1A",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su1B",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su2",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su2A",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su2B",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
           "field": "H-SJ3",
           "start": "16:00",
           "end": "19:00",
@@ -2270,20 +2350,6 @@
         },
         {
           "field": "H-SJ4",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ4A",
-          "start": "16:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ4B",
           "start": "16:00",
           "end": "19:00",
           "type": "free",
@@ -4308,41 +4374,49 @@
           ],
           "H-Su1": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su1A": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su1B": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su2": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su2A": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su2B": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-SJ3": [
+            {
+              "start": "08:00",
+              "end": "12:30"
+            },
+            {
+              "start": "13:30",
+              "end": "15:00"
+            },
             {
               "start": "16:00",
               "end": "19:00"
@@ -4350,11 +4424,27 @@
           ],
           "H-SJ3A": [
             {
+              "start": "08:00",
+              "end": "12:30"
+            },
+            {
+              "start": "13:30",
+              "end": "15:00"
+            },
+            {
               "start": "16:00",
               "end": "19:00"
             }
           ],
           "H-SJ3B": [
+            {
+              "start": "08:00",
+              "end": "12:30"
+            },
+            {
+              "start": "13:30",
+              "end": "15:00"
+            },
             {
               "start": "16:00",
               "end": "19:00"
@@ -4368,13 +4458,13 @@
           ],
           "H-SJ4A": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-SJ4B": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ]
@@ -4458,6 +4548,83 @@
         "blocks": {},
         "merged": [
           {
+            "field": "H-Su1",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su1A",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su1B",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su2",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su2A",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su2B",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3",
+            "start": "08:00",
+            "end": "12:30",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3A",
+            "start": "08:00",
+            "end": "12:30",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3B",
+            "start": "08:00",
+            "end": "12:30",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ4A",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ4B",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-HST",
             "start": "09:00",
             "end": "12:30",
@@ -4514,6 +4681,27 @@
             "title": ""
           },
           {
+            "field": "H-SJ3",
+            "start": "13:30",
+            "end": "15:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3A",
+            "start": "13:30",
+            "end": "15:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3B",
+            "start": "13:30",
+            "end": "15:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-HST",
             "start": "14:00",
             "end": "15:00",
@@ -4549,48 +4737,6 @@
             "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy"
           },
           {
-            "field": "H-Su1",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1A",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1B",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su2",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su2A",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su2B",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
             "field": "H-SJ3",
             "start": "16:00",
             "end": "19:00",
@@ -4613,20 +4759,6 @@
           },
           {
             "field": "H-SJ4",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ4A",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ4B",
             "start": "16:00",
             "end": "19:00",
             "type": "free",
@@ -6654,41 +6786,49 @@
           ],
           "H-Su1": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su1A": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su1B": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su2": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su2A": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-Su2B": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-SJ3": [
+            {
+              "start": "08:00",
+              "end": "12:30"
+            },
+            {
+              "start": "13:30",
+              "end": "15:00"
+            },
             {
               "start": "16:00",
               "end": "19:00"
@@ -6696,11 +6836,27 @@
           ],
           "H-SJ3A": [
             {
+              "start": "08:00",
+              "end": "12:30"
+            },
+            {
+              "start": "13:30",
+              "end": "15:00"
+            },
+            {
               "start": "16:00",
               "end": "19:00"
             }
           ],
           "H-SJ3B": [
+            {
+              "start": "08:00",
+              "end": "12:30"
+            },
+            {
+              "start": "13:30",
+              "end": "15:00"
+            },
             {
               "start": "16:00",
               "end": "19:00"
@@ -6714,13 +6870,13 @@
           ],
           "H-SJ4A": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ],
           "H-SJ4B": [
             {
-              "start": "16:00",
+              "start": "08:00",
               "end": "19:00"
             }
           ]
@@ -6804,6 +6960,83 @@
         "blocks": {},
         "merged": [
           {
+            "field": "H-Su1",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su1A",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su1B",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su2",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su2A",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-Su2B",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3",
+            "start": "08:00",
+            "end": "12:30",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3A",
+            "start": "08:00",
+            "end": "12:30",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3B",
+            "start": "08:00",
+            "end": "12:30",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ4A",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ4B",
+            "start": "08:00",
+            "end": "19:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-HST",
             "start": "09:00",
             "end": "12:30",
@@ -6860,6 +7093,27 @@
             "title": ""
           },
           {
+            "field": "H-SJ3",
+            "start": "13:30",
+            "end": "15:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3A",
+            "start": "13:30",
+            "end": "15:00",
+            "type": "free",
+            "title": ""
+          },
+          {
+            "field": "H-SJ3B",
+            "start": "13:30",
+            "end": "15:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-HST",
             "start": "14:00",
             "end": "15:00",
@@ -6895,48 +7149,6 @@
             "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy"
           },
           {
-            "field": "H-Su1",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1A",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1B",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su2",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su2A",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su2B",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
             "field": "H-SJ3",
             "start": "16:00",
             "end": "19:00",
@@ -6959,20 +7171,6 @@
           },
           {
             "field": "H-SJ4",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ4A",
-            "start": "16:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ4B",
             "start": "16:00",
             "end": "19:00",
             "type": "free",
