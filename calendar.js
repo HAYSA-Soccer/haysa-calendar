@@ -607,7 +607,8 @@ function renderWeekCalendar() {
         blockDiv.className = "week-block " + b.cls;
 
         // Example: "Field1, Field2" or "3 fields"
-        blockDiv.textContent = b.fields.join(", ");
+        blockDiv.textContent = `${b.start}–${b.end} (${b.fields.length} fields)`;
+
 
         blockDiv.title =
           `${b.start}–${b.end}\n` +
