@@ -217,12 +217,15 @@ function buildMergedTimelineForWeek(dayData) {
     // Availability windows
     (availability[fieldId] || []).forEach(w => {
       raw.push({
-        start: w.start,
-        end: w.end,
-        type: "free",
-        cls: "block-free",
+        start: ev.start,
+        end: ev.end,
+        type: evType,
+        cls: style.cls,
+        title: ev.title,
         fieldName
+        fields: [fieldName]
       });
+
     });
 
     // Events (practice/game)
@@ -255,7 +258,8 @@ function buildMergedTimelineForWeek(dayData) {
         type: "admin",
         cls: style.cls,
         title: b.reason,
-        fieldName
+        fieldName,
+        fields: [fieldName]
       });
     });
   });
