@@ -69,7 +69,7 @@ body {
 }
 
 /****************************************************
- * FIELD CARDS
+ * FIELD CARDS (DAY VIEW)
  ****************************************************/
 .field-card {
   background: white;
@@ -85,7 +85,7 @@ body {
 }
 
 /****************************************************
- * AVAILABILITY WINDOWS
+ * AVAILABILITY WINDOWS (DAY VIEW)
  ****************************************************/
 .window-empty {
   background: #ffe5e5;
@@ -95,7 +95,7 @@ body {
 }
 
 /****************************************************
- * BLOCK TYPES
+ * BLOCK TYPES (SHARED)
  ****************************************************/
 .block-free {
   background: #d9ffd9;
@@ -182,172 +182,78 @@ body {
 }
 
 /****************************************************
- * WEEK VIEW — TIME AXIS GRID
+ * WEEK VIEW — TIMELINE LAYOUT
  ****************************************************/
-
-.week-col-title {
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 4px;
+.week-timeline {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  padding: 10px;
 }
 
+.week-day-col {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.week-day-header {
+  background: #f3f6fa;
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+/* Timeline body: 08:00–21:00 */
+.week-day-body {
+  position: relative;
+  height: 780px; /* 13 hours * 60px */
+  background: repeating-linear-gradient(
+    to bottom,
+    #fafafa,
+    #fafafa 29px,
+    #f0f0f0 30px
+  );
+  border-radius: 0 0 6px 6px;
+}
 
 /****************************************************
- * WEEK VIEW — TIME AXIS GRID
+ * WEEK BLOCKS
  ****************************************************/
-.week-grid-time {
-  display: grid;
-  grid-template-columns: 120px repeat(7, 1fr);
-  gap: 4px;
-}
-
-/* Left time column */
-.week-time-col {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Each day column boxed */
-.week-col {
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-/* Day header: e.g., Thu 10/08 */
-.week-col-title {
-  font-weight: bold;
-  text-align: center;
-  padding: 4px 0;
-  border-bottom: 1px solid #ccc;
-  background: #f0f4fa;
-}
-
-/* Time rows */
-.week-time-slot,
-.week-slot {
-  height: 24px;
-  border-bottom: 1px solid #eee;
-  font-size: 12px;
-  padding: 2px 4px;
-}
-
-/* Blocks inside each time slot */
 .week-block {
-  display: inline-block;
-  background: #d9ffd9; /* base free color */
-  color: #333;
-  font-size: 11px;
-  border-radius: 3px;
-  padding: 1px 4px;
-  margin: 1px 0;
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.15);
+  min-height: 18px;
+  margin-left: 2px; /* lane gutter */
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-/* Re‑use your existing type colors */
+/* Colors mapped to types */
+.week-block.block-free {
+  background: #4caf50;
+}
+
 .week-block.block-practice {
   background: #ffa940;
-  color: #fff;
 }
 
 .week-block.block-game {
-  background: #ff4d4f;
-  color: #fff;
+  background: #007bff;
 }
 
 .week-block.block-admin {
   background: #8c8c8c;
-  color: #fff;
 }
-
-
-.week-timeline {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-}
-
-.week-day-col {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  overflow: hidden;
-  position: relative;
-}
-
-.week-day-header {
-  background: #eef2f7;
-  padding: 6px;
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 1px solid #ccc;
-}
-
-.week-day-body {
-  position: relative;
-  height: 900px; /* 6am–9pm = 15 hours = 900 minutes */
-  background: #fafafa;
-}
-
-.week-block {
-  position: absolute;
-  left: 4px;
-  right: 4px;
-  border-radius: 4px;
-  padding: 2px 4px;
-  font-size: 12px;
-  color: #fff;
-  overflow: hidden;
-}
-
-/* Reuse your existing block colors */
-.week-block.block-free { background: #4caf50; }
-.week-block.block-practice { background: #ffa940; }
-.week-block.block-game { background: #007bff; }
-.week-block.block-admin { background: #8c8c8c; }
-
-.week-timeline {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-}
-
-.week-day-col {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  overflow: hidden;
-  position: relative;
-}
-
-.week-day-header {
-  background: #eef2f7;
-  padding: 6px;
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 1px solid #ccc;
-}
-
-.week-day-body {
-  position: relative;
-  height: 900px; /* 6am–9pm = 15 hours = 900 minutes */
-  background: #fafafa;
-}
-
-.week-block {
-  position: absolute;
-  border-radius: 4px;
-  padding: 2px 4px;
-  font-size: 12px;
-  color: #fff;
-  overflow: hidden;
-}
-
-/* Reuse your existing block colors */
-.week-block.block-free { background: #4caf50; }
-.week-block.block-practice { background: #ffa940; }
-.week-block.block-game { background: #007bff; }
-.week-block.block-admin { background: #8c8c8c; }
-
