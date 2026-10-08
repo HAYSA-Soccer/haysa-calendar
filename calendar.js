@@ -554,7 +554,6 @@ function renderWeekCalendar() {
   container.innerHTML = "";
 
   const days = getWeekRange(currentDate);
-  const allowedFields = getAllowedFields().map(f => f.id || f);
 
   const grid = document.createElement("div");
   grid.className = "week-grid-time";
@@ -573,9 +572,7 @@ function renderWeekCalendar() {
   // Columns for each day
   days.forEach(dateStr => {
     const dayData = DAYS[dateStr];
-    if (dayData && dayData.merged) delete dayData.merged;
-
-    const merged = mergeTimelineForDay(dayData);
+    const blocks = buildContinuousWindowsForDay(dayData || {});
 
     const col = document.createElement("div");
     col.className = "week-col";
@@ -586,23 +583,34 @@ function renderWeekCalendar() {
     col.appendChild(title);
 
     TIME_SLOTS.forEach(t => {
+      const slotStart = timeToMinutes(t);
+      const slotEnd = slotStart + 30;
+
       const slotDiv = document.createElement("div");
       slotDiv.className = "week-slot";
 
-      const active = merged.find(m => {
-        return (
-          m.start <= t &&
-          m.end > t &&
-          allowedFields.includes(m.field) &&
-          (!SELECTED_MODE || m.type === SELECTED_MODE)
-        );
+      // Find ALL blocks that overlap this slot
+      const actives = blocks.filter(b => {
+        const bs = timeToMinutes(b.start);
+        const be = timeToMinutes(b.end);
+        return bs < slotEnd && be > slotStart;
       });
 
-      if (active) {
-        slotDiv.classList.add(active.cls);
-        slotDiv.textContent = active.badge ? `[${active.badge}]` : "";
-        slotDiv.title = `${active.fieldName} ${active.start}–${active.end}`;
-      }
+      // Render each block inside the slot
+      actives.forEach(b => {
+        const blockDiv = document.createElement("div");
+        blockDiv.className = "week-block " + b.cls;
+
+        // Example: "Field1, Field2" or "3 fields"
+        blockDiv.textContent = b.fields.join(", ");
+
+        blockDiv.title =
+          `${b.start}–${b.end}\n` +
+          `${b.fields.length} fields\n` +
+          `${b.complex}`;
+
+        slotDiv.appendChild(blockDiv);
+      });
 
       col.appendChild(slotDiv);
     });
@@ -612,5 +620,3 @@ function renderWeekCalendar() {
 
   container.appendChild(grid);
 }
-
-
