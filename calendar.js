@@ -13,14 +13,6 @@ let SELECTED_COMPLEXES = new Set();
 
 const HOURS = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
 
-HOURS.forEach((h, idx) => {
-  const lbl = document.createElement("div");
-  lbl.className = "week-time-label";
-  lbl.style.top = `${idx * 60}px`;
-  lbl.textContent = h;
-  body.appendChild(lbl);
-});
-
 function timeToY(timeStr) {
   const [h, m] = timeStr.split(":").map(Number);
   const minutes = (h - 8) * 60 + m; // 08:00 = top
@@ -260,6 +252,16 @@ function renderWeekTimeline() {
 
     const body = document.createElement("div");
     body.className = "week-day-body";
+
+    // STEP 3: Add time labels (08:00 → 21:00)
+    HOURS.forEach((h, idx) => {
+      const lbl = document.createElement("div");
+      lbl.className = "week-time-label";
+      lbl.style.top = `${idx * 60}px`;   // 60px per hour
+      lbl.textContent = h;
+      body.appendChild(lbl);
+    });
+
 
     // Use complex_timeline instead of merged
     const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
