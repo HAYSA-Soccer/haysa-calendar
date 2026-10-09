@@ -9,6 +9,25 @@ let currentView = "day";
 let SELECTED_MODE = "practice"; // practice/game
 let SELECTED_COMPLEXES = new Set();
 
+
+
+const HOURS = ["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
+
+HOURS.forEach((h, idx) => {
+  const lbl = document.createElement("div");
+  lbl.className = "week-time-label";
+  lbl.style.top = `${idx * 60}px`;
+  lbl.textContent = h;
+  body.appendChild(lbl);
+});
+
+function timeToY(timeStr) {
+  const [h, m] = timeStr.split(":").map(Number);
+  const minutes = (h - 8) * 60 + m; // 08:00 = top
+  return minutes;
+}
+
+
 /****************************************************
  * LOAD STATIC JSON FILES
  ****************************************************/
@@ -254,14 +273,26 @@ function renderWeekTimeline() {
       windows.forEach(w => {
         const block = document.createElement("div");
         block.className = "week-block";
-
+      
+        // Position block by time
+        const top = timeToY(w.start);
+        const height = timeToY(w.end) - timeToY(w.start);
+      
+        block.style.position = "absolute";
+        block.style.top = `${top}px`;
+        block.style.height = `${height}px`;
+        block.style.left = "4px";
+        block.style.right = "4px";
+      
         block.innerHTML = `
           <div class="label">${cx}</div>
           <div class="sub">${w.start}–${w.end} (${w.fields.length} fields)</div>
+          <div class="fields">${w.fields.join(", ")}</div>
         `;
-
+      
         body.appendChild(block);
       });
+
     });
 
     dayCol.appendChild(body);
