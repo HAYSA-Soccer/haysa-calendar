@@ -158,29 +158,56 @@ function renderDayCalendar(dayData) {
 
     windows.forEach(w => {
       const card = document.createElement("div");
-      card.className = "window-card";
+      card.className = "day-window-card";
 
-      const header = document.createElement("div");
-      header.className = "window-header";
-      header.textContent = `${w.start} – ${w.end} (${w.fields.length} fields)`;
-      card.appendChild(header);
+      // Type-based color coding
+      if (w.type === "free") card.classList.add("block-free");
+      else if (w.type === "practice") card.classList.add("block-practice");
+      else if (w.type === "game") card.classList.add("block-game");
+      else card.classList.add("block-admin");
 
-      const list = document.createElement("ul");
-      list.className = "window-field-list";
+      const durationMin = timeToMin(w.end) - timeToMin(w.start);
 
-      w.fields.forEach(f => {
-        const li = document.createElement("li");
-        li.textContent = f;
-        list.appendChild(li);
+      card.innerHTML = `
+        <div class="day-window-header">
+          ${w.type === "free" ? "Availability" : cx}
+          <span class="day-badge">${durationMin} min</span>
+          <span class="day-badge">${w.fields.length} fields</span>
+        </div>
+
+        <div class="day-window-sub">${w.start}–${w.end}</div>
+
+        <div class="day-window-fields">${w.fields.join(", ")}</div>
+      `;
+
+      // Hover tooltip
+      card.addEventListener("mouseenter", () => {
+        const tip = document.createElement("div");
+        tip.className = "week-block-tooltip";
+        tip.textContent = `${w.type.toUpperCase()} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+        document.body.appendChild(tip);
+
+        const rect = card.getBoundingClientRect();
+        tip.style.left = `${rect.right + 8}px`;
+        tip.style.top = `${rect.top}px`;
+
+        card._tooltip = tip;
       });
 
-      card.appendChild(list);
+      card.addEventListener("mouseleave", () => {
+        if (card._tooltip) {
+          card._tooltip.remove();
+          card._tooltip = null;
+        }
+      });
+
       section.appendChild(card);
     });
 
     container.appendChild(section);
   });
 }
+
 
 /****************************************************
  * WEEK VIEW (STATIC JSON)
