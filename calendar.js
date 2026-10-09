@@ -86,6 +86,25 @@ function toggleComplex(cx) {
   switchView(currentView);
 }
 
+
+function getEventTitlesForWindow(dayData, window) {
+  const titles = [];
+
+  window.fields.forEach(fieldId => {
+    const events = dayData.events[fieldId] || [];
+
+    events.forEach(ev => {
+      if (ev.start === window.start && ev.end === window.end) {
+        titles.push(ev.title);
+      }
+    });
+  });
+
+  return titles;
+}
+
+
+
 /****************************************************
  * VIEW SWITCHER
  ****************************************************/
@@ -417,24 +436,37 @@ function renderWeekTimeline() {
 
           const durationMin = timeToMin(w.end) - timeToMin(w.start);
 
+          // STEP 9: Event titles
+          const titles = getEventTitlesForWindow(dayData, w);
+
+          const labelHTML =
+            w.type === "free"
+              ? "Availability"
+              : titles.length
+                ? titles.join("<br>")
+                : "Admin Block";
+
           block.innerHTML = `
             <div class="label">
-              ${w.type === "free" ? "Availability" : cx}
+              ${labelHTML}
               <span class="week-badge">${durationMin} min</span>
               <span class="week-badge">${w.fields.length} fields</span>
             </div>
-          
+
             <div class="sub">${w.start}–${w.end}</div>
-          
+
             <div class="fields">${w.fields.join(", ")}</div>
           `;
 
-
-          // STEP 7A: Hover tooltip
+          // STEP 7A: Hover tooltip (now includes event titles)
           block.addEventListener("mouseenter", e => {
             const tip = document.createElement("div");
             tip.className = "week-block-tooltip";
-            tip.textContent = `${w.type.toUpperCase()} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+
+            tip.textContent = titles.length
+              ? titles.join(" | ")
+              : `${w.type.toUpperCase()} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+
             document.body.appendChild(tip);
 
             const rect = block.getBoundingClientRect();
@@ -468,7 +500,6 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
-
 
 
 
