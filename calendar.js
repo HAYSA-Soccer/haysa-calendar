@@ -141,6 +141,22 @@ function renderDayCalendar(dayData) {
   const container = document.getElementById("dayResults");
   container.innerHTML = "";
 
+  /* STEP 9: Jump-to-time navigation */
+  const timeNav = document.createElement("div");
+  timeNav.className = "day-time-nav";
+
+  ["16:00", "17:00", "18:00", "19:00", "20:00"].forEach(t => {
+    const btn = document.createElement("button");
+    btn.textContent = t;
+    btn.addEventListener("click", () => {
+      const target = document.querySelector(`[data-start="${t}"]`);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    timeNav.appendChild(btn);
+  });
+
+  container.appendChild(timeNav);
+
   const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
     if (SELECTED_COMPLEXES.size === 0) return true;
     return SELECTED_COMPLEXES.has(cx);
@@ -150,15 +166,23 @@ function renderDayCalendar(dayData) {
     const windows = dayData.complex_timeline[cx];
 
     const section = document.createElement("div");
-    section.className = "complex-section";
+    section.className = `complex-section complex-accent-${cx.replace(/\s/g, "\\ ")}`;
 
     const title = document.createElement("h3");
     title.textContent = cx;
+
+    /* STEP 9: Collapsible complex sections */
+    title.style.cursor = "pointer";
+    title.addEventListener("click", () => {
+      section.classList.toggle("collapsed");
+    });
+
     section.appendChild(title);
 
     windows.forEach(w => {
       const card = document.createElement("div");
       card.className = "day-window-card";
+      card.dataset.start = w.start; // for jump-to-time
 
       // Type-based color coding
       if (w.type === "free") card.classList.add("block-free");
@@ -168,19 +192,36 @@ function renderDayCalendar(dayData) {
 
       const durationMin = timeToMin(w.end) - timeToMin(w.start);
 
-      card.innerHTML = `
-        <div class="day-window-header">
-          ${w.type === "free" ? "Availability" : cx}
-          <span class="day-badge">${durationMin} min</span>
-          <span class="day-badge">${w.fields.length} fields</span>
-        </div>
-
-        <div class="day-window-sub">${w.start}–${w.end}</div>
-
-        <div class="day-window-fields">${w.fields.join(", ")}</div>
+      /* HEADER */
+      const header = document.createElement("div");
+      header.className = "day-window-header";
+      header.innerHTML = `
+        ${w.type === "free" ? "Availability" : cx}
+        <span class="day-badge">${durationMin} min</span>
+        <span class="day-badge">${w.fields.length} fields</span>
       `;
+      card.appendChild(header);
 
-      // Hover tooltip
+      /* TIME RANGE */
+      const sub = document.createElement("div");
+      sub.className = "day-window-sub";
+      sub.textContent = `${w.start}–${w.end}`;
+      card.appendChild(sub);
+
+      /* FIELD CHIPS */
+      const fieldWrap = document.createElement("div");
+      fieldWrap.className = "day-window-fields";
+
+      w.fields.forEach(f => {
+        const chip = document.createElement("span");
+        chip.className = "field-chip";
+        chip.textContent = f;
+        fieldWrap.appendChild(chip);
+      });
+
+      card.appendChild(fieldWrap);
+
+      /* Hover tooltip */
       card.addEventListener("mouseenter", () => {
         const tip = document.createElement("div");
         tip.className = "week-block-tooltip";
