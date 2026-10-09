@@ -731,7 +731,60 @@
           "type": "practice",
           "title": "7/8 Girls Travel (Caldwell) Practice"
         }
-      ]
+      ],
+      "complex_timeline": {
+        "TURF": [
+          {
+            "type": "free",
+            "start": "18:00",
+            "end": "19:30",
+            "fields": [
+              "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "fields": [
+              "H-HST",
+              "H-HST1",
+              "H-HST2"
+            ]
+          }
+        ],
+        "SUMNER/SEAN JOYCE": [
+          {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "fields": [
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "18:30",
+            "end": "19:00",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B",
+              "H-Su2",
+              "H-Su2A",
+              "H-Su2B",
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B",
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          }
+        ]
+      }
     },
     "2026-10-08": {
       "date": "2026-10-08",
@@ -1368,7 +1421,72 @@
           "type": "practice",
           "title": "7/8 Boys Travel (Mills) Practice"
         }
-      ]
+      ],
+      "complex_timeline": {
+        "TURF": [
+          {
+            "type": "free",
+            "start": "18:00",
+            "end": "21:00",
+            "fields": [
+              "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "18:00",
+            "end": "21:00",
+            "fields": [
+              "H-HST",
+              "H-HST1"
+            ]
+          }
+        ],
+        "SUMNER/SEAN JOYCE": [
+          {
+            "type": "free",
+            "start": "17:00",
+            "end": "17:30",
+            "fields": [
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B",
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "18:30",
+            "end": "19:00",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B",
+              "H-Su2",
+              "H-Su2A",
+              "H-Su2B",
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B",
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          }
+        ]
+      }
     },
     "2026-10-09": {
       "date": "2026-10-09",
@@ -1895,7 +2013,54 @@
           "type": "free",
           "title": ""
         }
-      ]
+      ],
+      "complex_timeline": {
+        "TURF": [],
+        "SUMNER/SEAN JOYCE": [
+          {
+            "type": "free",
+            "start": "17:00",
+            "end": "17:30",
+            "fields": [
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "fields": [
+              "H-Su2",
+              "H-Su2A",
+              "H-Su2B",
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "18:30",
+            "end": "19:00",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B",
+              "H-Su2",
+              "H-Su2A",
+              "H-Su2B",
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B",
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          }
+        ]
+      }
     },
     "2026-10-10": {
       "date": "2026-10-10",
@@ -2153,36 +2318,6 @@
         ]
       },
       "events": {
-        "H-SJ3": [
-          {
-            "event_id": "d527bbaa2d93a44d1c51ad04ae35c05d",
-            "date": "2026-10-10",
-            "start": "15:00",
-            "end": "16:00",
-            "field": "H-SJ3",
-            "field_group": "SUMNER/SEAN JOYCE",
-            "type": "practice",
-            "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
-            "team": "3/4 Girls Travel  vs. Quincy",
-            "coach": "Lamb-Williams",
-            "grade": "3/4",
-            "source": "ICS"
-          },
-          {
-            "event_id": "0b6f3da329e634c263b65ed03eace423",
-            "date": "2026-10-10",
-            "start": "12:30",
-            "end": "13:30",
-            "field": "H-SJ3",
-            "field_group": "SUMNER/SEAN JOYCE",
-            "type": "practice",
-            "title": "3/4 Boys Travel (Ball) vs. Rockland",
-            "team": "3/4 Boys Travel  vs. Rockland",
-            "coach": "Ball",
-            "grade": "3/4",
-            "source": "ICS"
-          }
-        ],
         "H-HST": [
           {
             "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
@@ -2210,6 +2345,36 @@
             "team": "5/6 Boys Travel  vs. Weymouth",
             "coach": "Walsh",
             "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "0b6f3da329e634c263b65ed03eace423",
+            "date": "2026-10-10",
+            "start": "12:30",
+            "end": "13:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Ball) vs. Rockland",
+            "team": "3/4 Boys Travel  vs. Rockland",
+            "coach": "Ball",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "fb3998dc81c753c097da7cefbd493634",
+            "date": "2026-10-10",
+            "start": "15:00",
+            "end": "16:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
+            "team": "3/4 Girls Travel  vs. Quincy",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
             "source": "ICS"
           }
         ]
@@ -2315,18 +2480,18 @@
           "title": ""
         },
         {
-          "field": "H-SJ3",
-          "start": "12:30",
-          "end": "13:30",
-          "type": "practice",
-          "title": "3/4 Boys Travel (Ball) vs. Rockland"
-        },
-        {
           "field": "H-HST",
           "start": "12:30",
           "end": "13:30",
           "type": "practice",
           "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "12:30",
+          "end": "13:30",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Ball) vs. Rockland"
         },
         {
           "field": "H-HST",
@@ -2433,7 +2598,102 @@
           "type": "free",
           "title": ""
         }
-      ]
+      ],
+      "complex_timeline": {
+        "TURF": [
+          {
+            "type": "free",
+            "start": "09:00",
+            "end": "12:30",
+            "fields": [
+              "H-HST",
+              "H-HST1",
+              "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "12:30",
+            "end": "13:30",
+            "fields": [
+              "H-HST",
+              "H-HST1",
+              "H-HST2"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "13:30",
+            "end": "17:30",
+            "fields": [
+              "H-HST",
+              "H-HST1",
+              "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "17:30",
+            "end": "18:30",
+            "fields": [
+              "H-HST",
+              "H-HST1",
+              "H-HST2"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "18:30",
+            "end": "21:00",
+            "fields": [
+              "H-HST",
+              "H-HST1",
+              "H-HST2"
+            ]
+          }
+        ],
+        "SUMNER/SEAN JOYCE": [
+          {
+            "type": "practice",
+            "start": "12:30",
+            "end": "13:30",
+            "fields": [
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "15:00",
+            "end": "16:00",
+            "fields": [
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "16:00",
+            "end": "19:00",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B",
+              "H-Su2",
+              "H-Su2A",
+              "H-Su2B",
+              "H-SJ3",
+              "H-SJ3A",
+              "H-SJ3B",
+              "H-SJ4",
+              "H-SJ4A",
+              "H-SJ4B"
+            ]
+          }
+        ]
+      }
     },
     "2026-10-11": {
       "date": "2026-10-11",
@@ -2569,7 +2829,11 @@
       },
       "events": {},
       "blocks": {},
-      "merged": []
+      "merged": [],
+      "complex_timeline": {
+        "TURF": [],
+        "SUMNER/SEAN JOYCE": []
+      }
     }
   },
   "weeks": {
@@ -3190,7 +3454,60 @@
             "type": "practice",
             "title": "7/8 Girls Travel (Caldwell) Practice"
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [
+            {
+              "type": "free",
+              "start": "18:00",
+              "end": "19:30",
+              "fields": [
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "19:30",
+              "end": "21:00",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            }
+          ],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "18:30",
+              "fields": [
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-08": {
         "date": "2026-10-08",
@@ -3827,7 +4144,72 @@
             "type": "practice",
             "title": "7/8 Boys Travel (Mills) Practice"
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [
+            {
+              "type": "free",
+              "start": "18:00",
+              "end": "21:00",
+              "fields": [
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "21:00",
+              "fields": [
+                "H-HST",
+                "H-HST1"
+              ]
+            }
+          ],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "free",
+              "start": "17:00",
+              "end": "17:30",
+              "fields": [
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "18:30",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-09": {
         "date": "2026-10-09",
@@ -4354,7 +4736,54 @@
             "type": "free",
             "title": ""
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "free",
+              "start": "17:00",
+              "end": "17:30",
+              "fields": [
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "18:30",
+              "fields": [
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-10": {
         "date": "2026-10-10",
@@ -4612,36 +5041,6 @@
           ]
         },
         "events": {
-          "H-SJ3": [
-            {
-              "event_id": "d527bbaa2d93a44d1c51ad04ae35c05d",
-              "date": "2026-10-10",
-              "start": "15:00",
-              "end": "16:00",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
-              "team": "3/4 Girls Travel  vs. Quincy",
-              "coach": "Lamb-Williams",
-              "grade": "3/4",
-              "source": "ICS"
-            },
-            {
-              "event_id": "0b6f3da329e634c263b65ed03eace423",
-              "date": "2026-10-10",
-              "start": "12:30",
-              "end": "13:30",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Boys Travel (Ball) vs. Rockland",
-              "team": "3/4 Boys Travel  vs. Rockland",
-              "coach": "Ball",
-              "grade": "3/4",
-              "source": "ICS"
-            }
-          ],
           "H-HST": [
             {
               "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
@@ -4669,6 +5068,36 @@
               "team": "5/6 Boys Travel  vs. Weymouth",
               "coach": "Walsh",
               "grade": "5/6",
+              "source": "ICS"
+            }
+          ],
+          "H-SJ3": [
+            {
+              "event_id": "0b6f3da329e634c263b65ed03eace423",
+              "date": "2026-10-10",
+              "start": "12:30",
+              "end": "13:30",
+              "field": "H-SJ3",
+              "field_group": "SUMNER/SEAN JOYCE",
+              "type": "practice",
+              "title": "3/4 Boys Travel (Ball) vs. Rockland",
+              "team": "3/4 Boys Travel  vs. Rockland",
+              "coach": "Ball",
+              "grade": "3/4",
+              "source": "ICS"
+            },
+            {
+              "event_id": "fb3998dc81c753c097da7cefbd493634",
+              "date": "2026-10-10",
+              "start": "15:00",
+              "end": "16:00",
+              "field": "H-SJ3",
+              "field_group": "SUMNER/SEAN JOYCE",
+              "type": "practice",
+              "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
+              "team": "3/4 Girls Travel  vs. Quincy",
+              "coach": "Lamb-Williams",
+              "grade": "3/4",
               "source": "ICS"
             }
           ]
@@ -4774,18 +5203,18 @@
             "title": ""
           },
           {
-            "field": "H-SJ3",
-            "start": "12:30",
-            "end": "13:30",
-            "type": "practice",
-            "title": "3/4 Boys Travel (Ball) vs. Rockland"
-          },
-          {
             "field": "H-HST",
             "start": "12:30",
             "end": "13:30",
             "type": "practice",
             "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
+          },
+          {
+            "field": "H-SJ3",
+            "start": "12:30",
+            "end": "13:30",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Ball) vs. Rockland"
           },
           {
             "field": "H-HST",
@@ -4892,7 +5321,102 @@
             "type": "free",
             "title": ""
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [
+            {
+              "type": "free",
+              "start": "09:00",
+              "end": "12:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "12:30",
+              "end": "13:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "13:30",
+              "end": "17:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "17:30",
+              "end": "18:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "21:00",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            }
+          ],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "practice",
+              "start": "12:30",
+              "end": "13:30",
+              "fields": [
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "15:00",
+              "end": "16:00",
+              "fields": [
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "16:00",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       }
     },
     "2026-W41": {
@@ -5030,7 +5554,11 @@
         },
         "events": {},
         "blocks": {},
-        "merged": []
+        "merged": [],
+        "complex_timeline": {
+          "TURF": [],
+          "SUMNER/SEAN JOYCE": []
+        }
       }
     }
   },
@@ -5652,7 +6180,60 @@
             "type": "practice",
             "title": "7/8 Girls Travel (Caldwell) Practice"
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [
+            {
+              "type": "free",
+              "start": "18:00",
+              "end": "19:30",
+              "fields": [
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "19:30",
+              "end": "21:00",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            }
+          ],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "18:30",
+              "fields": [
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-08": {
         "date": "2026-10-08",
@@ -6289,7 +6870,72 @@
             "type": "practice",
             "title": "7/8 Boys Travel (Mills) Practice"
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [
+            {
+              "type": "free",
+              "start": "18:00",
+              "end": "21:00",
+              "fields": [
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "21:00",
+              "fields": [
+                "H-HST",
+                "H-HST1"
+              ]
+            }
+          ],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "free",
+              "start": "17:00",
+              "end": "17:30",
+              "fields": [
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "18:30",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-09": {
         "date": "2026-10-09",
@@ -6816,7 +7462,54 @@
             "type": "free",
             "title": ""
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "free",
+              "start": "17:00",
+              "end": "17:30",
+              "fields": [
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "18:00",
+              "end": "18:30",
+              "fields": [
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-10": {
         "date": "2026-10-10",
@@ -7074,36 +7767,6 @@
           ]
         },
         "events": {
-          "H-SJ3": [
-            {
-              "event_id": "d527bbaa2d93a44d1c51ad04ae35c05d",
-              "date": "2026-10-10",
-              "start": "15:00",
-              "end": "16:00",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
-              "team": "3/4 Girls Travel  vs. Quincy",
-              "coach": "Lamb-Williams",
-              "grade": "3/4",
-              "source": "ICS"
-            },
-            {
-              "event_id": "0b6f3da329e634c263b65ed03eace423",
-              "date": "2026-10-10",
-              "start": "12:30",
-              "end": "13:30",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Boys Travel (Ball) vs. Rockland",
-              "team": "3/4 Boys Travel  vs. Rockland",
-              "coach": "Ball",
-              "grade": "3/4",
-              "source": "ICS"
-            }
-          ],
           "H-HST": [
             {
               "event_id": "fe85efe042acfb4bdd26fbf9a8ccb044",
@@ -7131,6 +7794,36 @@
               "team": "5/6 Boys Travel  vs. Weymouth",
               "coach": "Walsh",
               "grade": "5/6",
+              "source": "ICS"
+            }
+          ],
+          "H-SJ3": [
+            {
+              "event_id": "0b6f3da329e634c263b65ed03eace423",
+              "date": "2026-10-10",
+              "start": "12:30",
+              "end": "13:30",
+              "field": "H-SJ3",
+              "field_group": "SUMNER/SEAN JOYCE",
+              "type": "practice",
+              "title": "3/4 Boys Travel (Ball) vs. Rockland",
+              "team": "3/4 Boys Travel  vs. Rockland",
+              "coach": "Ball",
+              "grade": "3/4",
+              "source": "ICS"
+            },
+            {
+              "event_id": "fb3998dc81c753c097da7cefbd493634",
+              "date": "2026-10-10",
+              "start": "15:00",
+              "end": "16:00",
+              "field": "H-SJ3",
+              "field_group": "SUMNER/SEAN JOYCE",
+              "type": "practice",
+              "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
+              "team": "3/4 Girls Travel  vs. Quincy",
+              "coach": "Lamb-Williams",
+              "grade": "3/4",
               "source": "ICS"
             }
           ]
@@ -7236,18 +7929,18 @@
             "title": ""
           },
           {
-            "field": "H-SJ3",
-            "start": "12:30",
-            "end": "13:30",
-            "type": "practice",
-            "title": "3/4 Boys Travel (Ball) vs. Rockland"
-          },
-          {
             "field": "H-HST",
             "start": "12:30",
             "end": "13:30",
             "type": "practice",
             "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
+          },
+          {
+            "field": "H-SJ3",
+            "start": "12:30",
+            "end": "13:30",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Ball) vs. Rockland"
           },
           {
             "field": "H-HST",
@@ -7354,7 +8047,102 @@
             "type": "free",
             "title": ""
           }
-        ]
+        ],
+        "complex_timeline": {
+          "TURF": [
+            {
+              "type": "free",
+              "start": "09:00",
+              "end": "12:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "12:30",
+              "end": "13:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "13:30",
+              "end": "17:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "17:30",
+              "end": "18:30",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "18:30",
+              "end": "21:00",
+              "fields": [
+                "H-HST",
+                "H-HST1",
+                "H-HST2"
+              ]
+            }
+          ],
+          "SUMNER/SEAN JOYCE": [
+            {
+              "type": "practice",
+              "start": "12:30",
+              "end": "13:30",
+              "fields": [
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "practice",
+              "start": "15:00",
+              "end": "16:00",
+              "fields": [
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B"
+              ]
+            },
+            {
+              "type": "free",
+              "start": "16:00",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B",
+                "H-Su2",
+                "H-Su2A",
+                "H-Su2B",
+                "H-SJ3",
+                "H-SJ3A",
+                "H-SJ3B",
+                "H-SJ4",
+                "H-SJ4A",
+                "H-SJ4B"
+              ]
+            }
+          ]
+        }
       },
       "2026-10-11": {
         "date": "2026-10-11",
@@ -7490,7 +8278,11 @@
         },
         "events": {},
         "blocks": {},
-        "merged": []
+        "merged": [],
+        "complex_timeline": {
+          "TURF": [],
+          "SUMNER/SEAN JOYCE": []
+        }
       }
     }
   }
