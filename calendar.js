@@ -166,7 +166,7 @@ function renderDayCalendar(dayData) {
   const container = document.getElementById("dayResults");
   container.innerHTML = "";
 
-  /* STEP 9: Jump-to-time navigation */
+  /* Jump-to-time navigation */
   const timeNav = document.createElement("div");
   timeNav.className = "day-time-nav";
 
@@ -196,7 +196,7 @@ function renderDayCalendar(dayData) {
     const title = document.createElement("h3");
     title.textContent = cx;
 
-    /* STEP 9: Collapsible complex sections */
+    /* Collapsible complex sections */
     title.style.cursor = "pointer";
     title.addEventListener("click", () => {
       section.classList.toggle("collapsed");
@@ -207,21 +207,71 @@ function renderDayCalendar(dayData) {
     windows.forEach(w => {
       const card = document.createElement("div");
       card.className = "day-window-card";
-      card.dataset.start = w.start; // for jump-to-time
+      card.dataset.start = w.start;
 
-      // Type-based color coding
-      if (w.type === "free") card.classList.add("block-free");
-      else if (w.type === "practice") card.classList.add("block-practice");
-      else if (w.type === "game") card.classList.add("block-game");
-      else card.classList.add("block-admin");
+      /* Normalize title for keyword checks */
+      const txt = (w.title || "").toLowerCase();
+
+      /* --- COLOR RULES (your exact rules) --- */
+
+      // Availability → green
+      if (w.type === "free") {
+        card.classList.add("block-free");
+      }
+
+      // Practice → gray
+      else if (w.type === "practice" || txt.includes("practice")) {
+        card.classList.add("block-practice");
+      }
+
+      // Game / Team → blue
+      else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
+        card.classList.add("block-game");
+      }
+
+      // Blocks_ → red unless containing game/practice
+      else if (w.source === "blocks") {
+        if (txt.includes("game") || txt.includes("practice")) {
+          card.classList.add("block-game");   // treat as game/practice
+        } else {
+          card.classList.add("block-admin");  // red
+        }
+      }
+
+      // Fallback → red
+      else {
+        card.classList.add("block-admin");
+      }
 
       const durationMin = timeToMin(w.end) - timeToMin(w.start);
+
+      /* --- LABEL RULES (your exact rules) --- */
+
+      let labelHTML;
+
+      if (w.type === "free") {
+        labelHTML = "Availability";
+      }
+      else if (w.type === "practice" || txt.includes("practice")) {
+        labelHTML = w.title || "Practice";
+      }
+      else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
+        labelHTML = w.title || "Game";
+      }
+      else if (w.source === "blocks") {
+        if (txt.includes("game")) labelHTML = "Game";
+        else if (txt.includes("practice")) labelHTML = "Practice";
+        else labelHTML = "Blocked";
+      }
+      else {
+        labelHTML = "Blocked";
+      }
 
       /* HEADER */
       const header = document.createElement("div");
       header.className = "day-window-header";
       header.innerHTML = `
-        ${w.type === "free" ? "Availability" : cx}
+        ${labelHTML}
         <span class="day-badge">${durationMin} min</span>
         <span class="day-badge">${w.fields.length} fields</span>
       `;
@@ -250,7 +300,11 @@ function renderDayCalendar(dayData) {
       card.addEventListener("mouseenter", () => {
         const tip = document.createElement("div");
         tip.className = "week-block-tooltip";
-        tip.textContent = `${w.type.toUpperCase()} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+
+        tip.textContent = w.title
+          ? w.title
+          : `${labelHTML} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+
         document.body.appendChild(tip);
 
         const rect = card.getBoundingClientRect();
@@ -273,6 +327,7 @@ function renderDayCalendar(dayData) {
     container.appendChild(section);
   });
 }
+
 
 /***********************************************
 * DISPLAY TITLES OF EVENTS
