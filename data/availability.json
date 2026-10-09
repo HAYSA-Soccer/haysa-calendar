@@ -858,7 +858,7 @@
         "H-HST1": [],
         "H-HST2": [
           {
-            "start": "19:30",
+            "start": "18:00",
             "end": "21:00"
           }
         ],
@@ -984,22 +984,6 @@
         ]
       },
       "events": {
-        "H-HST2": [
-          {
-            "event_id": "407325a7b876c44e2478edb3abddb735",
-            "date": "2026-10-08",
-            "start": "18:00",
-            "end": "19:30",
-            "field": "H-HST2",
-            "field_group": "TURF",
-            "type": "practice",
-            "title": "5/6 Boys Travel (Ayers) Practice",
-            "team": "5/6 Boys Travel",
-            "coach": "Ayers",
-            "grade": "5/6",
-            "source": "ICS"
-          }
-        ],
         "H-HST1": [
           {
             "event_id": "34161b57d00a9b11f2ef45d3afd5c742",
@@ -1280,6 +1264,13 @@
           "title": ""
         },
         {
+          "field": "H-HST2",
+          "start": "18:00",
+          "end": "21:00",
+          "type": "free",
+          "title": ""
+        },
+        {
           "field": "H-Su2",
           "start": "18:00",
           "end": "19:00",
@@ -1320,13 +1311,6 @@
           "end": "19:00",
           "type": "free",
           "title": ""
-        },
-        {
-          "field": "H-HST2",
-          "start": "18:00",
-          "end": "19:30",
-          "type": "practice",
-          "title": "5/6 Boys Travel (Ayers) Practice"
         },
         {
           "field": "H-HST1",
@@ -1374,13 +1358,6 @@
           "field": "H-SJ4B",
           "start": "18:30",
           "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-HST2",
-          "start": "19:30",
-          "end": "21:00",
           "type": "free",
           "title": ""
         },
@@ -3340,7 +3317,7 @@
           "H-HST1": [],
           "H-HST2": [
             {
-              "start": "19:30",
+              "start": "18:00",
               "end": "21:00"
             }
           ],
@@ -3466,22 +3443,6 @@
           ]
         },
         "events": {
-          "H-HST2": [
-            {
-              "event_id": "407325a7b876c44e2478edb3abddb735",
-              "date": "2026-10-08",
-              "start": "18:00",
-              "end": "19:30",
-              "field": "H-HST2",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "5/6 Boys Travel (Ayers) Practice",
-              "team": "5/6 Boys Travel",
-              "coach": "Ayers",
-              "grade": "5/6",
-              "source": "ICS"
-            }
-          ],
           "H-HST1": [
             {
               "event_id": "34161b57d00a9b11f2ef45d3afd5c742",
@@ -3762,6 +3723,13 @@
             "title": ""
           },
           {
+            "field": "H-HST2",
+            "start": "18:00",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-Su2",
             "start": "18:00",
             "end": "19:00",
@@ -3802,13 +3770,6 @@
             "end": "19:00",
             "type": "free",
             "title": ""
-          },
-          {
-            "field": "H-HST2",
-            "start": "18:00",
-            "end": "19:30",
-            "type": "practice",
-            "title": "5/6 Boys Travel (Ayers) Practice"
           },
           {
             "field": "H-HST1",
@@ -3856,13 +3817,6 @@
             "field": "H-SJ4B",
             "start": "18:30",
             "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST2",
-            "start": "19:30",
-            "end": "21:00",
             "type": "free",
             "title": ""
           },
@@ -5825,7 +5779,7 @@
           "H-HST1": [],
           "H-HST2": [
             {
-              "start": "19:30",
+              "start": "18:00",
               "end": "21:00"
             }
           ],
@@ -5951,22 +5905,6 @@
           ]
         },
         "events": {
-          "H-HST2": [
-            {
-              "event_id": "407325a7b876c44e2478edb3abddb735",
-              "date": "2026-10-08",
-              "start": "18:00",
-              "end": "19:30",
-              "field": "H-HST2",
-              "field_group": "TURF",
-              "type": "practice",
-              "title": "5/6 Boys Travel (Ayers) Practice",
-              "team": "5/6 Boys Travel",
-              "coach": "Ayers",
-              "grade": "5/6",
-              "source": "ICS"
-            }
-          ],
           "H-HST1": [
             {
               "event_id": "34161b57d00a9b11f2ef45d3afd5c742",
@@ -6247,6 +6185,13 @@
             "title": ""
           },
           {
+            "field": "H-HST2",
+            "start": "18:00",
+            "end": "21:00",
+            "type": "free",
+            "title": ""
+          },
+          {
             "field": "H-Su2",
             "start": "18:00",
             "end": "19:00",
@@ -6287,13 +6232,6 @@
             "end": "19:00",
             "type": "free",
             "title": ""
-          },
-          {
-            "field": "H-HST2",
-            "start": "18:00",
-            "end": "19:30",
-            "type": "practice",
-            "title": "5/6 Boys Travel (Ayers) Practice"
           },
           {
             "field": "H-HST1",
@@ -6341,13 +6279,6 @@
             "field": "H-SJ4B",
             "start": "18:30",
             "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-HST2",
-            "start": "19:30",
-            "end": "21:00",
             "type": "free",
             "title": ""
           },
