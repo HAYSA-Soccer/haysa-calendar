@@ -1,123 +1,52 @@
 /****************************************************
  * GLOBAL STATE
  ****************************************************/
+let AVAIL = null;          // availability.json
+let SEARCH = null;         // search_index.json
+
 let currentDate = null;
 let currentView = "day";
-
-let FIELDS = [];
-let COMPLEXES = {};
+let SELECTED_MODE = "practice"; // practice/game
 let SELECTED_COMPLEXES = new Set();
-let SELECTED_MODE = "practice"; // matches HTML dropdown
-
-let DATA_TIMESTAMP = null;
-
-// SET THIS TO YOUR DEPLOYED WEB APP URL (NO TRAILING ?)
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec";
-
 
 /****************************************************
- * BACKEND HELPERS
+ * LOAD STATIC JSON FILES
  ****************************************************/
-async function fetchJSON(url) {
+async function loadJSON(url) {
   const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  if (!res.ok) throw new Error(`Failed to load ${url}`);
   return await res.json();
 }
 
-function buildDayCalendarURL(dateStr, mode) {
-  const params = new URLSearchParams({
-    mode: "day_calendar",
-    date: dateStr,
-    sched_mode: mode || "practice"
-  });
-  return `${BACKEND_URL}?${params.toString()}`;
+async function loadAllData() {
+  AVAIL = await loadJSON("data/availability.json");
+  SEARCH = await loadJSON("data/search_index.json");
+
+  insertTimestamp();
 }
-
-function buildSearchBlockURL({ date, complex, start, duration, mode }) {
-  const params = new URLSearchParams({
-    mode: "search_block",
-    date,
-    complex,
-    start,
-    duration: String(duration || 90),
-    sched_mode: mode || "practice"
-  });
-  return `${BACKEND_URL}?${params.toString()}`;
-}
-
-async function fetchDayCalendar(dateStr, mode) {
-  const url = buildDayCalendarURL(dateStr, mode);
-  const data = await fetchJSON(url);
-
-  // Cache global fields/complexes/timestamp from first load
-  if (!FIELDS.length && Array.isArray(data.fields)) {
-    FIELDS = data.fields;
-  }
-  if (!Object.keys(COMPLEXES).length && data.complexes) {
-    COMPLEXES = data.complexes;
-  }
-  if (!DATA_TIMESTAMP && data.generated_at) {
-    DATA_TIMESTAMP = data.generated_at;
-    insertTimestamp(DATA_TIMESTAMP);
-  }
-
-  return data;
-}
-
 
 /****************************************************
  * TIMESTAMP DISPLAY
  ****************************************************/
-function insertTimestamp(tsStr) {
+function insertTimestamp() {
   const tsEl = document.getElementById("dataTimestamp");
   if (!tsEl) return;
 
-  const ts = new Date(tsStr);
-  const formatted = ts.toLocaleString("en-US", {
-    dateStyle: "medium",
-    timeStyle: "short"
-  });
-
-  tsEl.textContent = `Data current as of: ${formatted}`;
+  const now = new Date();
+  tsEl.textContent = `Data last updated: ${now.toLocaleString()}`;
 }
-
 
 /****************************************************
- * COMPLEX FILTERING
+ * COMPLEX FILTERS
  ****************************************************/
-function getAllowedFields() {
-  if (SELECTED_COMPLEXES.size === 0) return FIELDS;
-
-  const allowed = new Set();
-  SELECTED_COMPLEXES.forEach(cx => {
-    (COMPLEXES[cx] || []).forEach(fid => allowed.add(fid));
-  });
-
-  return FIELDS.filter(f => allowed.has(f.id || f));
-}
-
-function toggleComplex(complexName) {
-  if (SELECTED_COMPLEXES.has(complexName)) {
-    SELECTED_COMPLEXES.delete(complexName);
-  } else {
-    SELECTED_COMPLEXES.add(complexName);
-  }
-
-  renderComplexFilters();
-
-  if (currentView === "day") renderDayView();
-  if (currentView === "week") renderWeekView();
-  if (currentView === "month") renderMonthView();
-  if (currentView === "search") renderSearchView();
-}
-
 function renderComplexFilters() {
   const container = document.getElementById("complex-filters");
   const status = document.getElementById("complex-status");
-  if (!container || !status) return;
+
+  const complexes = Object.keys(AVAIL.complexes);
 
   let html = "";
-  Object.keys(COMPLEXES).forEach(cx => {
+  complexes.forEach(cx => {
     const active = SELECTED_COMPLEXES.has(cx) ? "active" : "";
     html += `
       <button class="complex-btn ${active}" onclick="toggleComplex('${cx}')">
@@ -135,95 +64,16 @@ function renderComplexFilters() {
   }
 }
 
-
-/****************************************************
- * STYLE HELPERS
- ****************************************************/
-function getStyle(type) {
-  switch (type) {
-    case "game": return { cls: "block-game", badge: "G" };
-    case "practice": return { cls: "block-practice", badge: "P" };
-    case "admin": return { cls: "block-admin", badge: "A" };
-    default: return { cls: "block-free", badge: "" };
-  }
-}
-
-
-/****************************************************
- * DATE/TIME HELPERS
- ****************************************************/
-function formatDateLabel(dateStr) {
-  const d = new Date(dateStr + "T00:00:00");
-  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const dow = days[d.getDay()];
-  const [y, m, dd] = dateStr.split("-");
-  return `${dow} ${m}/${dd}`;
-}
-
-function timeToMinutes(t) {
-  const [hh, mm] = t.split(":").map(Number);
-  return hh * 60 + mm;
-}
-
-function minutesToTime(m) {
-  const hh = String(Math.floor(m / 60)).padStart(2, "0");
-  const mm = String(m % 60).padStart(2, "0");
-  return `${hh}:${mm}`;
-}
-
-// vertical timeline base: 08:00–21:00
-const DAY_START_MIN = 8 * 60;
-const DAY_END_MIN = 21 * 60;
-
-function minutesSinceDayStart(t) {
-  return timeToMinutes(t) - DAY_START_MIN;
-}
-
-
-/****************************************************
- * INIT
- ****************************************************/
-document.addEventListener("DOMContentLoaded", async () => {
-  // Start at today by default
-  currentDate = new Date().toISOString().split("T")[0];
-
-  // MODE SELECT
-  const modeSelect = document.getElementById("schedModeSelect");
-  if (modeSelect) {
-    SELECTED_MODE = modeSelect.value || "practice";
-
-    modeSelect.addEventListener("change", (e) => {
-      SELECTED_MODE = e.target.value || "practice";
-
-      if (currentView === "day") renderDayView();
-      if (currentView === "week") renderWeekView();
-      if (currentView === "month") renderMonthView();
-      if (currentView === "search") renderSearchView();
-    });
-  }
-
-  // NAV BUTTONS
-  document.querySelectorAll(".nav button").forEach(btn => {
-    btn.addEventListener("click", () => switchView(btn.dataset.view));
-  });
-
-  // Initial load: fetch one day to populate fields/complexes/timestamp
-  try {
-    const firstDay = await fetchDayCalendar(currentDate, SELECTED_MODE);
-    if (firstDay && firstDay.fields) {
-      FIELDS = firstDay.fields;
-    }
-    if (firstDay && firstDay.complexes) {
-      COMPLEXES = firstDay.complexes;
-    }
-  } catch (err) {
-    console.error("Initial day load failed:", err);
+function toggleComplex(cx) {
+  if (SELECTED_COMPLEXES.has(cx)) {
+    SELECTED_COMPLEXES.delete(cx);
+  } else {
+    SELECTED_COMPLEXES.add(cx);
   }
 
   renderComplexFilters();
-  switchView("day");
-});
-
+  switchView(currentView);
+}
 
 /****************************************************
  * VIEW SWITCHER
@@ -237,11 +87,10 @@ function switchView(viewName) {
   if (viewName === "search") renderSearchView();
 }
 
-
 /****************************************************
- * DAY VIEW (backend-driven)
+ * DAY VIEW (STATIC JSON)
  ****************************************************/
-async function renderDayView() {
+function renderDayView() {
   const container = document.getElementById("view-container");
 
   container.innerHTML = `
@@ -268,13 +117,9 @@ async function renderDayView() {
     renderDayView();
   };
 
-  let dayData;
-  try {
-    dayData = await fetchDayCalendar(currentDate, SELECTED_MODE);
-  } catch (err) {
-    console.error("Day calendar fetch failed:", err);
-    const res = document.getElementById("dayResults");
-    if (res) res.innerHTML = `<p>Error loading data for ${currentDate}</p>`;
+  const dayData = AVAIL.days[currentDate];
+  if (!dayData) {
+    document.getElementById("dayResults").innerHTML = `<p>No data for ${currentDate}</p>`;
     return;
   }
 
@@ -285,31 +130,19 @@ function renderDayCalendar(dayData) {
   const container = document.getElementById("dayResults");
   container.innerHTML = "";
 
-  if (!dayData || !dayData.complex_timeline) {
-    container.innerHTML = `<p>No data for ${currentDate}</p>`;
-    return;
-  }
-
-  // Apply complex filter: if some complexes are selected, only show those
   const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
     if (SELECTED_COMPLEXES.size === 0) return true;
     return SELECTED_COMPLEXES.has(cx);
   });
 
-  if (!visibleComplexes.length) {
-    container.innerHTML = `<p>No complexes selected for ${currentDate}</p>`;
-    return;
-  }
-
-  visibleComplexes.forEach(complexName => {
-    const windows = dayData.complex_timeline[complexName] || [];
-    if (!windows.length) return;
+  visibleComplexes.forEach(cx => {
+    const windows = dayData.complex_timeline[cx];
 
     const section = document.createElement("div");
     section.className = "complex-section";
 
     const title = document.createElement("h3");
-    title.textContent = complexName;
+    title.textContent = cx;
     section.appendChild(title);
 
     windows.forEach(w => {
@@ -324,9 +157,9 @@ function renderDayCalendar(dayData) {
       const list = document.createElement("ul");
       list.className = "window-field-list";
 
-      (w.fields || []).forEach(name => {
+      w.fields.forEach(f => {
         const li = document.createElement("li");
-        li.textContent = name;
+        li.textContent = f;
         list.appendChild(li);
       });
 
@@ -338,14 +171,13 @@ function renderDayCalendar(dayData) {
   });
 }
 
-
 /****************************************************
- * WEEK VIEW (backend-driven, using merged field timeline)
+ * WEEK VIEW (STATIC JSON)
  ****************************************************/
 function getWeekRange(dateStr) {
   const d = new Date(dateStr + "T00:00:00");
-  const day = d.getDay(); // 0 = Sun, 1 = Mon, ...
-  const diff = (day === 0 ? -6 : 1 - day); // shift Sunday back to Monday
+  const day = d.getDay();
+  const diff = (day === 0 ? -6 : 1 - day);
   d.setDate(d.getDate() + diff);
 
   const out = [];
@@ -357,7 +189,7 @@ function getWeekRange(dateStr) {
   return out;
 }
 
-async function renderWeekView() {
+function renderWeekView() {
   const container = document.getElementById("view-container");
 
   container.innerHTML = `
@@ -384,201 +216,199 @@ async function renderWeekView() {
     renderWeekView();
   };
 
-  await renderWeekTimeline();
+  renderWeekTimeline();
 }
 
-async function renderWeekTimeline() {
+function renderWeekTimeline() {
   const container = document.getElementById("weekTimeline");
   container.innerHTML = "";
 
-  const days = getWeekRange(currentDate); // Monday → Sunday
-
+  const days = getWeekRange(currentDate);
   const timeline = document.createElement("div");
   timeline.className = "week-timeline";
 
-  for (const dateStr of days) {
-    let dayData;
-    try {
-      dayData = await fetchDayCalendar(dateStr, SELECTED_MODE);
-    } catch (err) {
-      console.error("Week day fetch failed for", dateStr, err);
-      continue;
-    }
+  days.forEach(dateStr => {
+    const dayData = AVAIL.days[dateStr];
+    if (!dayData) return;
 
-    const merged = Array.isArray(dayData.merged) ? dayData.merged : [];
-
-    // Apply complex filter: only include blocks whose field belongs to a visible complex
-    const allowedFieldIds = getAllowedFields().map(f => f.id || f);
-    const blocks = merged.filter(b => {
-      const fid = b.field;
-      return !allowedFieldIds.length || allowedFieldIds.includes(fid);
-    });
+    const merged = dayData.merged || [];
 
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
 
     const header = document.createElement("div");
     header.className = "week-day-header";
-    header.textContent = formatDateLabel(dateStr);
+    header.textContent = dateStr;
     dayCol.appendChild(header);
 
-    const dayBody = document.createElement("div");
-    dayBody.className = "week-day-body";
+    const body = document.createElement("div");
+    body.className = "week-day-body";
 
-    // Assign lanes for overlapping blocks
-    let lanes = [];
-
-    blocks.forEach(b => {
-      const startMin = minutesSinceDayStart(b.start);
-      const endMin = minutesSinceDayStart(b.end);
-
-      let laneIndex = 0;
-
-      while (true) {
-        if (!lanes[laneIndex]) {
-          lanes[laneIndex] = [];
-          break;
-        }
-
-        const conflict = lanes[laneIndex].some(existing => {
-          const es = minutesSinceDayStart(existing.start);
-          const ee = minutesSinceDayStart(existing.end);
-          return !(ee <= startMin || es >= endMin);
-        });
-
-        if (!conflict) break;
-
-        laneIndex++;
-      }
-
-      b.lane = laneIndex;
-      lanes[laneIndex].push(b);
-    });
-
-    const laneWidth = 100 / (lanes.length || 1);
-
-    blocks.forEach(b => {
-      const startMin = minutesSinceDayStart(b.start);
-      const endMin = minutesSinceDayStart(b.end);
-      const duration = endMin - startMin;
-
-      const style = getStyle(b.type);
+    merged.forEach(b => {
       const block = document.createElement("div");
-      block.className = "week-block " + (style.cls || "block-free");
+      block.className = "week-block";
 
-      block.style.top = `${startMin}px`;
-      block.style.height = `${duration}px`;
-      block.style.left = `${b.lane * laneWidth}%`;
-      block.style.width = `${laneWidth}%`;
+      block.innerHTML = `
+        <div class="label">${b.title || b.field}</div>
+        <div class="sub">${b.start}–${b.end}</div>
+      `;
 
-      const label = document.createElement("div");
-      label.className = "label";
-
-      if (b.type === "practice" || b.type === "game") {
-        label.textContent = b.title || (b.field || "");
-      } else if (b.type === "admin") {
-        label.textContent = b.title || "Admin Block";
-      } else {
-        label.textContent = b.field || "";
-      }
-
-      const sub = document.createElement("div");
-      sub.className = "sub";
-      sub.textContent = `${b.start}–${b.end}`;
-
-      block.appendChild(label);
-      block.appendChild(sub);
-
-      dayBody.appendChild(block);
+      body.appendChild(block);
     });
 
-    dayCol.appendChild(dayBody);
+    dayCol.appendChild(body);
     timeline.appendChild(dayCol);
-  }
+  });
 
   container.appendChild(timeline);
 }
 
-
 /****************************************************
- * MONTH VIEW (simple backend-driven placeholder)
+ * MONTH VIEW (STATIC JSON)
  ****************************************************/
-async function renderMonthView() {
+function renderMonthView() {
   const container = document.getElementById("view-container");
 
   container.innerHTML = `
     <h2>Month View</h2>
-    <p>Month view is not fully implemented yet, but will use backend day_calendar data
-       to mark days as free/busy/mixed.</p>
+    <p>Month view will use AVAIL.months[...] data.</p>
   `;
 }
 
-
 /****************************************************
- * SEARCH VIEW (backend-driven using search_block)
+ * SEARCH VIEW (STATIC JSON + FULL/PARTIAL/NEARBY)
  ****************************************************/
-async function renderSearchView() {
+function renderSearchView() {
   const container = document.getElementById("view-container");
 
   container.innerHTML = `
-    <h2>Search View</h2>
+    <h2>Search</h2>
     <div class="controls">
       <label>Date: <input type="date" id="searchDate" value="${currentDate}"></label>
       <label>Complex:
         <select id="searchComplex">
-          ${Object.keys(COMPLEXES).map(cx => `<option value="${cx}">${cx}</option>`).join("")}
+          ${Object.keys(AVAIL.complexes).map(cx => `<option value="${cx}">${cx}</option>`).join("")}
         </select>
       </label>
-      <label>Start: <input type="time" id="searchStart" value="18:00"></label>
+      <label>Start: <input type="time" id="searchStart" value="17:00"></label>
       <label>Duration (min): <input type="number" id="searchDuration" value="90"></label>
       <button id="searchRun">Search</button>
     </div>
     <div id="searchResults"></div>
   `;
 
-  const dateInput = document.getElementById("searchDate");
-  const complexSelect = document.getElementById("searchComplex");
-  const startInput = document.getElementById("searchStart");
-  const durationInput = document.getElementById("searchDuration");
-  const runBtn = document.getElementById("searchRun");
-  const results = document.getElementById("searchResults");
-
-  if (!runBtn || !results) return;
-
-  runBtn.onclick = async () => {
-    const date = dateInput.value || currentDate;
-    const complex = complexSelect.value;
-    const start = startInput.value || "18:00";
-    const duration = parseInt(durationInput.value || "90", 10);
-
-    results.innerHTML = `<p>Searching...</p>`;
-
-    try {
-      const url = buildSearchBlockURL({ date, complex, start, duration, mode: SELECTED_MODE });
-      const data = await fetchJSON(url);
-
-      const matches = Array.isArray(data.matches) ? data.matches : [];
-
-      if (!matches.length) {
-        results.innerHTML = `<p>No matching free blocks found.</p>`;
-        return;
-      }
-
-      const list = document.createElement("ul");
-      list.className = "search-result-list";
-
-      matches.forEach(m => {
-        const li = document.createElement("li");
-        const fields = (m.fields || []).join(", ");
-        li.textContent = `${m.start}–${m.end} @ ${fields}`;
-        list.appendChild(li);
-      });
-
-      results.innerHTML = "";
-      results.appendChild(list);
-    } catch (err) {
-      console.error("Search failed:", err);
-      results.innerHTML = `<p>Error running search.</p>`;
-    }
-  };
+  document.getElementById("searchRun").onclick = runSearch;
 }
+
+function runSearch() {
+  const date = document.getElementById("searchDate").value;
+  const complex = document.getElementById("searchComplex").value;
+  const start = document.getElementById("searchStart").value;
+  const duration = parseInt(document.getElementById("searchDuration").value, 10);
+
+  const results = document.getElementById("searchResults");
+  results.innerHTML = "";
+
+  const daySearch = SEARCH[date];
+  if (!daySearch || !daySearch[complex]) {
+    results.innerHTML = `<p>No free windows found.</p>`;
+    return;
+  }
+
+  const windows = daySearch[complex];
+
+  const reqStartMin = timeToMin(start);
+  const reqEndMin = reqStartMin + duration;
+
+  const full = [];
+  const partial = [];
+  const nearby = [];
+
+  windows.forEach(w => {
+    const wStart = timeToMin(w.start);
+    const wEnd = timeToMin(w.end);
+
+    if (wStart <= reqStartMin && wEnd >= reqEndMin) {
+      full.push(w);
+    } else if (wStart <= reqStartMin && wEnd > reqStartMin && wEnd < reqEndMin) {
+      partial.push(w);
+    } else if (wStart >= reqStartMin) {
+      nearby.push(w);
+    }
+  });
+
+  renderSearchResults(full, partial, nearby);
+}
+
+function renderSearchResults(full, partial, nearby) {
+  const container = document.getElementById("searchResults");
+
+  let html = "";
+
+  if (full.length) {
+    html += `<h3 class="full-header">FULL MATCHES</h3>`;
+    full.forEach(w => {
+      html += renderSearchCard(w, true);
+    });
+  }
+
+  if (partial.length) {
+    html += `<h3>PARTIAL MATCHES</h3>`;
+    partial.forEach(w => {
+      html += renderSearchCard(w, false);
+    });
+  }
+
+  if (nearby.length) {
+    html += `<h3>NEARBY MATCHES</h3>`;
+    nearby.forEach(w => {
+      html += renderSearchCard(w, false);
+    });
+  }
+
+  container.innerHTML = html || `<p>No matches found.</p>`;
+}
+
+function renderSearchCard(w, isFull) {
+  return `
+    <div class="search-card ${isFull ? "full-match" : ""}">
+      <div class="search-header">
+        ${w.start} – ${w.end} (${w.fields.length} fields)
+        ${isFull ? `<span class="full-tag">FULL MATCH</span>` : ""}
+      </div>
+      <ul class="search-field-list">
+        ${w.fields.map(f => `<li>${f}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+}
+
+/****************************************************
+ * TIME HELPERS
+ ****************************************************/
+function timeToMin(t) {
+  const [h, m] = t.split(":").map(Number);
+  return h * 60 + m;
+}
+
+/****************************************************
+ * INIT
+ ****************************************************/
+document.addEventListener("DOMContentLoaded", async () => {
+  currentDate = new Date().toISOString().split("T")[0];
+
+  await loadAllData();
+
+  const modeSelect = document.getElementById("schedModeSelect");
+  modeSelect.addEventListener("change", e => {
+    SELECTED_MODE = e.target.value;
+    switchView(currentView);
+  });
+
+  document.querySelectorAll(".nav button").forEach(btn => {
+    btn.addEventListener("click", () => switchView(btn.dataset.view));
+  });
+
+  renderComplexFilters();
+  switchView("day");
+});
