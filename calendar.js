@@ -231,8 +231,6 @@ function renderWeekTimeline() {
     const dayData = AVAIL.days[dateStr];
     if (!dayData) return;
 
-    const merged = dayData.merged || [];
-
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
 
@@ -244,16 +242,26 @@ function renderWeekTimeline() {
     const body = document.createElement("div");
     body.className = "week-day-body";
 
-    merged.forEach(b => {
-      const block = document.createElement("div");
-      block.className = "week-block";
+    // Use complex_timeline instead of merged
+    const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
+      if (SELECTED_COMPLEXES.size === 0) return true;
+      return SELECTED_COMPLEXES.has(cx);
+    });
 
-      block.innerHTML = `
-        <div class="label">${b.title || b.field}</div>
-        <div class="sub">${b.start}–${b.end}</div>
-      `;
+    visibleComplexes.forEach(cx => {
+      const windows = dayData.complex_timeline[cx];
 
-      body.appendChild(block);
+      windows.forEach(w => {
+        const block = document.createElement("div");
+        block.className = "week-block";
+
+        block.innerHTML = `
+          <div class="label">${cx}</div>
+          <div class="sub">${w.start}–${w.end} (${w.fields.length} fields)</div>
+        `;
+
+        body.appendChild(block);
+      });
     });
 
     dayCol.appendChild(body);
@@ -262,6 +270,7 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
+
 
 /****************************************************
  * MONTH VIEW (STATIC JSON)
