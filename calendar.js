@@ -292,50 +292,21 @@ function getEventTitlesForWindow(dayData, window) {
 /****************************************************
  * WEEK VIEW (STATIC JSON)
  ****************************************************/
-function getWeekRange(dateStr) {
-  const d = new Date(dateStr + "T00:00:00");
-  const day = d.getDay();
-  const diff = (day === 0 ? -6 : 1 - day);
-  d.setDate(d.getDate() + diff);
+function getWeekRange(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // 0 = Sunday
+  const sunday = new Date(d);
+  sunday.setDate(d.getDate() - day);
 
-  const out = [];
+  const days = [];
   for (let i = 0; i < 7; i++) {
-    const dt = new Date(d);
-    dt.setDate(d.getDate() + i);
-    out.push(dt.toISOString().split("T")[0]);
+    const dt = new Date(sunday);
+    dt.setDate(sunday.getDate() + i);
+    days.push(dt.toISOString().slice(0, 10)); // YYYY-MM-DD
   }
-  return out;
+  return days;
 }
 
-function renderWeekView() {
-  const container = document.getElementById("view-container");
-
-  container.innerHTML = `
-    <h2>Week View</h2>
-    <div class="controls">
-      <button id="prevWeek">← Previous</button>
-      <span>${currentDate}</span>
-      <button id="nextWeek">Next →</button>
-    </div>
-    <div id="weekTimeline"></div>
-  `;
-
-  document.getElementById("prevWeek").onclick = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() - 7);
-    currentDate = d.toISOString().split("T")[0];
-    renderWeekView();
-  };
-
-  document.getElementById("nextWeek").onclick = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() + 7);
-    currentDate = d.toISOString().split("T")[0];
-    renderWeekView();
-  };
-
-  renderWeekTimeline();
-}
 
 function renderWeekTimeline() {
   const container = document.getElementById("weekTimeline");
@@ -346,21 +317,34 @@ function renderWeekTimeline() {
   timeline.className = "week-timeline";
 
   days.forEach(dateStr => {
-    const dayData = AVAIL.days[dateStr];
-    if (!dayData) return;
+    const dayData = AVAIL.days[dateStr] || null;
 
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
 
+    // --- HEADER: Day of week + formatted date ---
+    const dt = new Date(dateStr);
+    const dow = dt.toLocaleDateString("en-US", { weekday: "short" });
+    const fmt = dt.toLocaleDateString("en-US");
+
     const header = document.createElement("div");
     header.className = "week-day-header";
-    header.textContent = dateStr;
+    header.innerHTML = `
+      <div class="week-dow">${dow}</div>
+      <div class="week-date">${fmt}</div>
+    `;
     dayCol.appendChild(header);
+
+    // Highlight today
+    const todayStr = new Date().toISOString().slice(0, 10);
+    if (dateStr === todayStr) {
+      dayCol.classList.add("today");
+    }
 
     const body = document.createElement("div");
     body.className = "week-day-body";
 
-    // STEP 3: Add time labels (08:00 → 21:00)
+    // --- Time labels (08:00 → 21:00) ---
     HOURS.forEach((h, idx) => {
       const lbl = document.createElement("div");
       lbl.className = "week-time-label";
@@ -369,7 +353,19 @@ function renderWeekTimeline() {
       body.appendChild(lbl);
     });
 
-    // Use complex_timeline instead of merged
+    // --- If no data, show empty column ---
+    if (!dayData) {
+      const emptyMsg = document.createElement("div");
+      emptyMsg.className = "week-empty";
+      emptyMsg.textContent = "No data";
+      body.appendChild(emptyMsg);
+
+      dayCol.appendChild(body);
+      timeline.appendChild(dayCol);
+      return;
+    }
+
+    // --- Complex filtering ---
     const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
       if (SELECTED_COMPLEXES.size === 0) return true;
       return SELECTED_COMPLEXES.has(cx);
@@ -378,10 +374,10 @@ function renderWeekTimeline() {
     visibleComplexes.forEach(cx => {
       const windows = dayData.complex_timeline[cx];
 
-      // STEP 5: Compute max fields ONCE per complex
+      // Max fields for width scaling
       const maxFields = Math.max(...windows.map(win => win.fields.length));
 
-      // STEP 4: Build lanes for overlapping blocks
+      // --- Lane assignment for overlapping windows ---
       const laneAssignments = [];
 
       windows.forEach(w => {
@@ -402,7 +398,7 @@ function renderWeekTimeline() {
         laneAssignments[laneIndex].push({ startY, endY, w });
       });
 
-      // Render blocks with lane positioning + multi-field scaling + type colors + hover + click
+      // --- Render blocks ---
       laneAssignments.forEach((lane, laneIndex) => {
         const baseWidth = 100 / laneAssignments.length;
 
@@ -410,24 +406,18 @@ function renderWeekTimeline() {
           const block = document.createElement("div");
           block.className = "week-block";
 
-          // STEP 6: Type-based color coding
-          if (w.type === "free") {
-            block.classList.add("block-free");
-          } else if (w.type === "practice") {
-            block.classList.add("block-practice");
-          } else if (w.type === "game") {
-            block.classList.add("block-game");
-          } else {
-            block.classList.add("block-admin");
-          }
+          // Type-based color coding
+          if (w.type === "free") block.classList.add("block-free");
+          else if (w.type === "practice") block.classList.add("block-practice");
+          else if (w.type === "game") block.classList.add("block-game");
+          else block.classList.add("block-admin");
 
           const height = endY - startY;
-
           block.style.position = "absolute";
           block.style.top = `${startY}px`;
           block.style.height = `${height}px`;
 
-          // STEP 5: Multi-field width scaling
+          // Multi-field width scaling
           const fieldScale = w.fields.length / maxFields;
           const scaledWidth = Math.max(baseWidth * fieldScale, baseWidth * 0.4);
 
@@ -436,7 +426,7 @@ function renderWeekTimeline() {
 
           const durationMin = timeToMin(w.end) - timeToMin(w.start);
 
-          // STEP 9: Event titles
+          // --- Event titles ---
           const titles = getEventTitlesForWindow(dayData, w);
 
           const labelHTML =
@@ -458,8 +448,8 @@ function renderWeekTimeline() {
             <div class="fields">${w.fields.join(", ")}</div>
           `;
 
-          // STEP 7A: Hover tooltip (now includes event titles)
-          block.addEventListener("mouseenter", e => {
+          // --- Hover tooltip ---
+          block.addEventListener("mouseenter", () => {
             const tip = document.createElement("div");
             tip.className = "week-block-tooltip";
 
@@ -483,7 +473,7 @@ function renderWeekTimeline() {
             }
           });
 
-          // STEP 7B: Click-to-open Day View
+          // --- Click-to-open Day View ---
           block.addEventListener("click", () => {
             currentDate = dateStr;
             switchView("day");
