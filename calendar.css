@@ -471,3 +471,59 @@ body {
   font-size: 10px;
   margin-left: 6px;
 }
+
+
+/* --- FIELD CHIPS --- */
+.field-chip {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  margin: 2px 4px 2px 0;
+}
+
+/* --- COMPLEX ACCENT BAR --- */
+.day-window-card {
+  border-left: 6px solid rgba(255,255,255,0.35);
+}
+
+/* Accent colors per complex */
+.complex-accent-TURF .day-window-card {
+  border-left-color: #4caf50;
+}
+
+.complex-accent-SUMNER\/SEAN\ JOYCE .day-window-card {
+  border-left-color: #007bff;
+}
+
+/* --- COLLAPSIBLE COMPLEX SECTIONS --- */
+.complex-section.collapsed .day-window-card {
+  display: none;
+}
+
+.complex-section.collapsed h3::after {
+  content: " (collapsed)";
+  font-weight: normal;
+  opacity: 0.7;
+}
+
+/* --- JUMP TO TIME NAV --- */
+.day-time-nav {
+  margin-bottom: 12px;
+  padding: 6px 0;
+}
+
+.day-time-nav button {
+  margin-right: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+.day-time-nav button:hover {
+  background: #eaeaea;
+}
