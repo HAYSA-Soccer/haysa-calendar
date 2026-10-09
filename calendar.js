@@ -53,14 +53,13 @@ function insertTimestamp() {
 function renderComplexFilters() {
   const container = document.getElementById("complex-filters");
   const status = document.getElementById("complex-status");
-
-  const complexes = Object.keys(AVAIL.complexes);
+  if (!container) return;
 
   let html = "";
-  complexes.forEach(cx => {
+  Object.keys(COMPLEXES).forEach(cx => {
     const active = SELECTED_COMPLEXES.has(cx) ? "active" : "";
     html += `
-      <button class="complex-btn ${active}" onclick="toggleComplex('${cx}')">
+      <button class="complex-btn ${active}" data-cx="${cx}">
         ${cx}
       </button>
     `;
@@ -68,12 +67,34 @@ function renderComplexFilters() {
 
   container.innerHTML = html;
 
+  // Attach click handlers AFTER rendering
+  container.querySelectorAll(".complex-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const cx = btn.dataset.cx;
+
+      // Toggle selection
+      if (SELECTED_COMPLEXES.has(cx)) {
+        SELECTED_COMPLEXES.delete(cx);
+      } else {
+        SELECTED_COMPLEXES.add(cx);
+      }
+
+      // Re-render filters
+      renderComplexFilters();
+
+      // ⭐ Re-render the CURRENT view — DO NOT switch to day
+      renderCurrentView();
+    });
+  });
+
+  // Status text
   if (SELECTED_COMPLEXES.size === 0) {
     status.textContent = "Showing ALL complexes";
   } else {
     status.textContent = "Selected: " + Array.from(SELECTED_COMPLEXES).join(", ");
   }
 }
+
 
 function toggleComplex(cx) {
   if (SELECTED_COMPLEXES.has(cx)) {
