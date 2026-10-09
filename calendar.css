@@ -414,3 +414,60 @@ body {
 }
 
 
+.day-window-card {
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  border: 1px solid rgba(0,0,0,0.15);
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.day-window-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transform: translateY(-2px);
+}
+
+.day-window-card.block-free {
+  background: linear-gradient(135deg, #4caf50, #43a047);
+}
+
+.day-window-card.block-practice {
+  background: linear-gradient(135deg, #9e9e9e, #757575);
+}
+
+.day-window-card.block-game {
+  background: linear-gradient(135deg, #007bff, #005fcc);
+}
+
+.day-window-card.block-admin {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+}
+
+.day-window-header {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.day-window-sub {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+
+.day-window-fields {
+  font-size: 11px;
+  opacity: 0.85;
+  line-height: 1.2;
+}
+
+.day-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  margin-left: 6px;
+}
