@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      WEBAPP_URL: "https://script.google.com/macros/s/AKfycbxsqMLIxgq5CbzkQCovmwDzI8wjlf3KvQOyB0g10JPTVxzmXAaT7m6B13nPmHmLElrO/exec"
+      WEBAPP_URL: "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRYr4AsbhB_k2od42QNnGqprfv7zszTnsVtYSEEciYsJfZiLJ0X8tNeu8iAOEhctrWpJ4etMlMZZpKr3lj4qH7cpb-7aMMa_GLIXF0sv1pb4U61JDGSKLMwbhhyhp_TgcUUenzi8RCxZeM9WT6UpusP50HCM8NqmumNMjHFE5d8GTj60fXFcWJVvYcMxOQ1r-cadA6zjAJdK86TKu4xi8Wx1KSKqbsmIlpW_rbmJUkmJWkbky3h7OIB9IZPZLxJU1M2Wito9rtOvCekGUgP5PtwjbFhxQ5a56DKWd5yadi8ZKh2GBJdTvzY7MROW7RwLgWvaNZ_aKGs6fi-hw6rK9Lw0mNA-Q&lib=MIhjDaA3O95CPuwnhR1KTFMZ3ibJN0JiI"
 
     steps:
       - name: Checkout repo
