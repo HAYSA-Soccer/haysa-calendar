@@ -432,8 +432,6 @@ function renderWeekTimeline() {
 
     visibleComplexes.forEach(cx => {
       const windows = dayData.complex_timeline[cx];
-
-      // Max fields for width scaling
       const maxFields = Math.max(...windows.map(win => win.fields.length));
 
       // Lane assignment
@@ -465,7 +463,7 @@ function renderWeekTimeline() {
 
           const txt = (w.title || "").toLowerCase();
 
-          /* --- COLOR RULES (your exact rules) --- */
+          /* --- COLOR RULES (no labels) --- */
 
           if (w.type === "free") {
             block.classList.add("block-free");        // GREEN
@@ -499,28 +497,11 @@ function renderWeekTimeline() {
           block.style.width = `${scaledWidth}%`;
 
           const durationMin = timeToMin(w.end) - timeToMin(w.start);
+          const titles = getEventTitlesForWindow(dayData, w);
 
-          /* --- LABEL RULES (your exact rules) --- */
+          /* --- LABEL CONTENT (NO TYPE LABELS) --- */
 
-          let labelHTML;
-
-          if (w.type === "free") {
-            labelHTML = "Availability";
-          }
-          else if (w.type === "practice" || txt.includes("practice")) {
-            labelHTML = w.title || "Practice";
-          }
-          else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
-            labelHTML = w.title || "Game";
-          }
-          else if (w.source === "blocks") {
-            if (txt.includes("game")) labelHTML = "Game";
-            else if (txt.includes("practice")) labelHTML = "Practice";
-            else labelHTML = "Blocked";
-          }
-          else {
-            labelHTML = "Blocked";
-          }
+          const labelHTML = titles.length ? titles.join("<br>") : "";
 
           block.innerHTML = `
             <div class="label">
@@ -528,7 +509,9 @@ function renderWeekTimeline() {
               <span class="week-badge">${durationMin} min</span>
               <span class="week-badge">${w.fields.length} fields</span>
             </div>
+
             <div class="sub">${w.start}–${w.end}</div>
+
             <div class="fields">${w.fields.join(", ")}</div>
           `;
 
@@ -537,9 +520,9 @@ function renderWeekTimeline() {
             const tip = document.createElement("div");
             tip.className = "week-block-tooltip";
 
-            tip.textContent = w.title
-              ? w.title
-              : `${labelHTML} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+            tip.textContent = titles.length
+              ? titles.join(" | ")
+              : `${w.start}–${w.end} • ${w.fields.length} fields`;
 
             document.body.appendChild(tip);
 
