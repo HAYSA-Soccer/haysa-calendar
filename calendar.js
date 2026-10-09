@@ -108,14 +108,20 @@ function getEventTitlesForWindow(dayData, window) {
 /****************************************************
  * VIEW SWITCHER
  ****************************************************/
-function switchView(viewName) {
-  currentView = viewName;
+function switchView(mode) {
+  CURRENT_VIEW = mode;
 
-  if (viewName === "day") renderDayView();
-  if (viewName === "week") renderWeekView();
-  if (viewName === "month") renderMonthView();
-  if (viewName === "search") renderSearchView();
+  if (mode === "day") {
+    renderDayView();
+  } else if (mode === "week") {
+    renderWeekTimeline();   // <-- FIXED
+  } else if (mode === "month") {
+    renderMonthView();
+  } else if (mode === "search") {
+    renderSearchView();
+  }
 }
+
 
 /****************************************************
  * DAY VIEW (STATIC JSON)
