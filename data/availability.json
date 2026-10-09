@@ -1607,36 +1607,9 @@
         "H-HST": [],
         "H-HST1": [],
         "H-HST2": [],
-        "H-Su1": [
-          {
-            "start": "16:00",
-            "end": "16:30"
-          },
-          {
-            "start": "18:00",
-            "end": "19:00"
-          }
-        ],
-        "H-Su1A": [
-          {
-            "start": "16:00",
-            "end": "16:30"
-          },
-          {
-            "start": "18:00",
-            "end": "19:00"
-          }
-        ],
-        "H-Su1B": [
-          {
-            "start": "16:00",
-            "end": "16:30"
-          },
-          {
-            "start": "18:00",
-            "end": "19:00"
-          }
-        ],
+        "H-Su1": [],
+        "H-Su1A": [],
+        "H-Su1B": [],
         "H-Su2": [
           {
             "start": "16:00",
@@ -1808,28 +1781,25 @@
           }
         ]
       },
-      "blocks": {},
+      "blocks": {
+        "H-Su1": [
+          {
+            "date": "2026-10-09",
+            "start": "12:00",
+            "end": "19:00",
+            "field": "H-Su1",
+            "reason": "Graduation",
+            "type": "admin"
+          }
+        ]
+      },
       "merged": [
         {
           "field": "H-Su1",
-          "start": "16:00",
-          "end": "16:30",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su1A",
-          "start": "16:00",
-          "end": "16:30",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su1B",
-          "start": "16:00",
-          "end": "16:30",
-          "type": "free",
-          "title": ""
+          "start": "12:00",
+          "end": "19:00",
+          "type": "admin",
+          "title": "Graduation"
         },
         {
           "field": "H-Su2",
@@ -1930,27 +1900,6 @@
           "title": "Brockton Rox (Blue) Practice"
         },
         {
-          "field": "H-Su1",
-          "start": "18:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su1A",
-          "start": "18:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-Su1B",
-          "start": "18:00",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
           "field": "H-SJ4",
           "start": "18:00",
           "end": "19:00",
@@ -2018,6 +1967,16 @@
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "admin",
+            "start": "16:00",
+            "end": "16:30",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B"
+            ]
+          },
+          {
             "type": "free",
             "start": "17:00",
             "end": "17:30",
@@ -2045,9 +2004,6 @@
             "start": "18:30",
             "end": "19:00",
             "fields": [
-              "H-Su1",
-              "H-Su1A",
-              "H-Su1B",
               "H-Su2",
               "H-Su2A",
               "H-Su2B",
@@ -2057,6 +2013,16 @@
               "H-SJ4",
               "H-SJ4A",
               "H-SJ4B"
+            ]
+          },
+          {
+            "type": "admin",
+            "start": "18:00",
+            "end": "19:00",
+            "fields": [
+              "H-Su1",
+              "H-Su1A",
+              "H-Su1B"
             ]
           }
         ]
@@ -2263,10 +2229,6 @@
           },
           {
             "start": "13:30",
-            "end": "15:00"
-          },
-          {
-            "start": "16:00",
             "end": "19:00"
           }
         ],
@@ -2277,10 +2239,6 @@
           },
           {
             "start": "13:30",
-            "end": "15:00"
-          },
-          {
-            "start": "16:00",
             "end": "19:00"
           }
         ],
@@ -2291,10 +2249,6 @@
           },
           {
             "start": "13:30",
-            "end": "15:00"
-          },
-          {
-            "start": "16:00",
             "end": "19:00"
           }
         ],
@@ -2360,20 +2314,6 @@
             "title": "3/4 Boys Travel (Ball) vs. Rockland",
             "team": "3/4 Boys Travel  vs. Rockland",
             "coach": "Ball",
-            "grade": "3/4",
-            "source": "ICS"
-          },
-          {
-            "event_id": "fb3998dc81c753c097da7cefbd493634",
-            "date": "2026-10-10",
-            "start": "15:00",
-            "end": "16:00",
-            "field": "H-SJ3",
-            "field_group": "SUMNER/SEAN JOYCE",
-            "type": "practice",
-            "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
-            "team": "3/4 Girls Travel  vs. Quincy",
-            "coach": "Lamb-Williams",
             "grade": "3/4",
             "source": "ICS"
           }
@@ -2517,48 +2457,20 @@
         {
           "field": "H-SJ3",
           "start": "13:30",
-          "end": "15:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3A",
-          "start": "13:30",
-          "end": "15:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3B",
-          "start": "13:30",
-          "end": "15:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3",
-          "start": "15:00",
-          "end": "16:00",
-          "type": "practice",
-          "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy"
-        },
-        {
-          "field": "H-SJ3",
-          "start": "16:00",
           "end": "19:00",
           "type": "free",
           "title": ""
         },
         {
           "field": "H-SJ3A",
-          "start": "16:00",
+          "start": "13:30",
           "end": "19:00",
           "type": "free",
           "title": ""
         },
         {
           "field": "H-SJ3B",
-          "start": "16:00",
+          "start": "13:30",
           "end": "19:00",
           "type": "free",
           "title": ""
@@ -2657,16 +2569,6 @@
             "type": "practice",
             "start": "12:30",
             "end": "13:30",
-            "fields": [
-              "H-SJ3",
-              "H-SJ3A",
-              "H-SJ3B"
-            ]
-          },
-          {
-            "type": "practice",
-            "start": "15:00",
-            "end": "16:00",
             "fields": [
               "H-SJ3",
               "H-SJ3A",
@@ -4330,36 +4232,9 @@
           "H-HST": [],
           "H-HST1": [],
           "H-HST2": [],
-          "H-Su1": [
-            {
-              "start": "16:00",
-              "end": "16:30"
-            },
-            {
-              "start": "18:00",
-              "end": "19:00"
-            }
-          ],
-          "H-Su1A": [
-            {
-              "start": "16:00",
-              "end": "16:30"
-            },
-            {
-              "start": "18:00",
-              "end": "19:00"
-            }
-          ],
-          "H-Su1B": [
-            {
-              "start": "16:00",
-              "end": "16:30"
-            },
-            {
-              "start": "18:00",
-              "end": "19:00"
-            }
-          ],
+          "H-Su1": [],
+          "H-Su1A": [],
+          "H-Su1B": [],
           "H-Su2": [
             {
               "start": "16:00",
@@ -4531,28 +4406,25 @@
             }
           ]
         },
-        "blocks": {},
+        "blocks": {
+          "H-Su1": [
+            {
+              "date": "2026-10-09",
+              "start": "12:00",
+              "end": "19:00",
+              "field": "H-Su1",
+              "reason": "Graduation",
+              "type": "admin"
+            }
+          ]
+        },
         "merged": [
           {
             "field": "H-Su1",
-            "start": "16:00",
-            "end": "16:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1A",
-            "start": "16:00",
-            "end": "16:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1B",
-            "start": "16:00",
-            "end": "16:30",
-            "type": "free",
-            "title": ""
+            "start": "12:00",
+            "end": "19:00",
+            "type": "admin",
+            "title": "Graduation"
           },
           {
             "field": "H-Su2",
@@ -4653,27 +4525,6 @@
             "title": "Brockton Rox (Blue) Practice"
           },
           {
-            "field": "H-Su1",
-            "start": "18:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1A",
-            "start": "18:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1B",
-            "start": "18:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
             "field": "H-SJ4",
             "start": "18:00",
             "end": "19:00",
@@ -4741,6 +4592,16 @@
           "TURF": [],
           "SUMNER/SEAN JOYCE": [
             {
+              "type": "admin",
+              "start": "16:00",
+              "end": "16:30",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B"
+              ]
+            },
+            {
               "type": "free",
               "start": "17:00",
               "end": "17:30",
@@ -4768,9 +4629,6 @@
               "start": "18:30",
               "end": "19:00",
               "fields": [
-                "H-Su1",
-                "H-Su1A",
-                "H-Su1B",
                 "H-Su2",
                 "H-Su2A",
                 "H-Su2B",
@@ -4780,6 +4638,16 @@
                 "H-SJ4",
                 "H-SJ4A",
                 "H-SJ4B"
+              ]
+            },
+            {
+              "type": "admin",
+              "start": "18:00",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B"
               ]
             }
           ]
@@ -4986,10 +4854,6 @@
             },
             {
               "start": "13:30",
-              "end": "15:00"
-            },
-            {
-              "start": "16:00",
               "end": "19:00"
             }
           ],
@@ -5000,10 +4864,6 @@
             },
             {
               "start": "13:30",
-              "end": "15:00"
-            },
-            {
-              "start": "16:00",
               "end": "19:00"
             }
           ],
@@ -5014,10 +4874,6 @@
             },
             {
               "start": "13:30",
-              "end": "15:00"
-            },
-            {
-              "start": "16:00",
               "end": "19:00"
             }
           ],
@@ -5083,20 +4939,6 @@
               "title": "3/4 Boys Travel (Ball) vs. Rockland",
               "team": "3/4 Boys Travel  vs. Rockland",
               "coach": "Ball",
-              "grade": "3/4",
-              "source": "ICS"
-            },
-            {
-              "event_id": "fb3998dc81c753c097da7cefbd493634",
-              "date": "2026-10-10",
-              "start": "15:00",
-              "end": "16:00",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
-              "team": "3/4 Girls Travel  vs. Quincy",
-              "coach": "Lamb-Williams",
               "grade": "3/4",
               "source": "ICS"
             }
@@ -5240,48 +5082,20 @@
           {
             "field": "H-SJ3",
             "start": "13:30",
-            "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3A",
-            "start": "13:30",
-            "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3B",
-            "start": "13:30",
-            "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3",
-            "start": "15:00",
-            "end": "16:00",
-            "type": "practice",
-            "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy"
-          },
-          {
-            "field": "H-SJ3",
-            "start": "16:00",
             "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3A",
-            "start": "16:00",
+            "start": "13:30",
             "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3B",
-            "start": "16:00",
+            "start": "13:30",
             "end": "19:00",
             "type": "free",
             "title": ""
@@ -5380,16 +5194,6 @@
               "type": "practice",
               "start": "12:30",
               "end": "13:30",
-              "fields": [
-                "H-SJ3",
-                "H-SJ3A",
-                "H-SJ3B"
-              ]
-            },
-            {
-              "type": "practice",
-              "start": "15:00",
-              "end": "16:00",
               "fields": [
                 "H-SJ3",
                 "H-SJ3A",
@@ -7056,36 +6860,9 @@
           "H-HST": [],
           "H-HST1": [],
           "H-HST2": [],
-          "H-Su1": [
-            {
-              "start": "16:00",
-              "end": "16:30"
-            },
-            {
-              "start": "18:00",
-              "end": "19:00"
-            }
-          ],
-          "H-Su1A": [
-            {
-              "start": "16:00",
-              "end": "16:30"
-            },
-            {
-              "start": "18:00",
-              "end": "19:00"
-            }
-          ],
-          "H-Su1B": [
-            {
-              "start": "16:00",
-              "end": "16:30"
-            },
-            {
-              "start": "18:00",
-              "end": "19:00"
-            }
-          ],
+          "H-Su1": [],
+          "H-Su1A": [],
+          "H-Su1B": [],
           "H-Su2": [
             {
               "start": "16:00",
@@ -7257,28 +7034,25 @@
             }
           ]
         },
-        "blocks": {},
+        "blocks": {
+          "H-Su1": [
+            {
+              "date": "2026-10-09",
+              "start": "12:00",
+              "end": "19:00",
+              "field": "H-Su1",
+              "reason": "Graduation",
+              "type": "admin"
+            }
+          ]
+        },
         "merged": [
           {
             "field": "H-Su1",
-            "start": "16:00",
-            "end": "16:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1A",
-            "start": "16:00",
-            "end": "16:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1B",
-            "start": "16:00",
-            "end": "16:30",
-            "type": "free",
-            "title": ""
+            "start": "12:00",
+            "end": "19:00",
+            "type": "admin",
+            "title": "Graduation"
           },
           {
             "field": "H-Su2",
@@ -7379,27 +7153,6 @@
             "title": "Brockton Rox (Blue) Practice"
           },
           {
-            "field": "H-Su1",
-            "start": "18:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1A",
-            "start": "18:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-Su1B",
-            "start": "18:00",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
             "field": "H-SJ4",
             "start": "18:00",
             "end": "19:00",
@@ -7467,6 +7220,16 @@
           "TURF": [],
           "SUMNER/SEAN JOYCE": [
             {
+              "type": "admin",
+              "start": "16:00",
+              "end": "16:30",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B"
+              ]
+            },
+            {
               "type": "free",
               "start": "17:00",
               "end": "17:30",
@@ -7494,9 +7257,6 @@
               "start": "18:30",
               "end": "19:00",
               "fields": [
-                "H-Su1",
-                "H-Su1A",
-                "H-Su1B",
                 "H-Su2",
                 "H-Su2A",
                 "H-Su2B",
@@ -7506,6 +7266,16 @@
                 "H-SJ4",
                 "H-SJ4A",
                 "H-SJ4B"
+              ]
+            },
+            {
+              "type": "admin",
+              "start": "18:00",
+              "end": "19:00",
+              "fields": [
+                "H-Su1",
+                "H-Su1A",
+                "H-Su1B"
               ]
             }
           ]
@@ -7712,10 +7482,6 @@
             },
             {
               "start": "13:30",
-              "end": "15:00"
-            },
-            {
-              "start": "16:00",
               "end": "19:00"
             }
           ],
@@ -7726,10 +7492,6 @@
             },
             {
               "start": "13:30",
-              "end": "15:00"
-            },
-            {
-              "start": "16:00",
               "end": "19:00"
             }
           ],
@@ -7740,10 +7502,6 @@
             },
             {
               "start": "13:30",
-              "end": "15:00"
-            },
-            {
-              "start": "16:00",
               "end": "19:00"
             }
           ],
@@ -7809,20 +7567,6 @@
               "title": "3/4 Boys Travel (Ball) vs. Rockland",
               "team": "3/4 Boys Travel  vs. Rockland",
               "coach": "Ball",
-              "grade": "3/4",
-              "source": "ICS"
-            },
-            {
-              "event_id": "fb3998dc81c753c097da7cefbd493634",
-              "date": "2026-10-10",
-              "start": "15:00",
-              "end": "16:00",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy",
-              "team": "3/4 Girls Travel  vs. Quincy",
-              "coach": "Lamb-Williams",
               "grade": "3/4",
               "source": "ICS"
             }
@@ -7966,48 +7710,20 @@
           {
             "field": "H-SJ3",
             "start": "13:30",
-            "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3A",
-            "start": "13:30",
-            "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3B",
-            "start": "13:30",
-            "end": "15:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3",
-            "start": "15:00",
-            "end": "16:00",
-            "type": "practice",
-            "title": "3/4 Girls Travel (Lamb-Williams) vs. Quincy"
-          },
-          {
-            "field": "H-SJ3",
-            "start": "16:00",
             "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3A",
-            "start": "16:00",
+            "start": "13:30",
             "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3B",
-            "start": "16:00",
+            "start": "13:30",
             "end": "19:00",
             "type": "free",
             "title": ""
@@ -8106,16 +7822,6 @@
               "type": "practice",
               "start": "12:30",
               "end": "13:30",
-              "fields": [
-                "H-SJ3",
-                "H-SJ3A",
-                "H-SJ3B"
-              ]
-            },
-            {
-              "type": "practice",
-              "start": "15:00",
-              "end": "16:00",
               "fields": [
                 "H-SJ3",
                 "H-SJ3A",
