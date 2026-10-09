@@ -295,7 +295,7 @@ function renderWeekTimeline() {
         laneAssignments[laneIndex].push({ startY, endY, w });
       });
 
-      // Render blocks with lane positioning + multi-field scaling + type colors
+      // Render blocks with lane positioning + multi-field scaling + type colors + hover + click
       laneAssignments.forEach((lane, laneIndex) => {
         const baseWidth = 100 / laneAssignments.length;
 
@@ -333,6 +333,33 @@ function renderWeekTimeline() {
             <div class="fields">${w.fields.join(", ")}</div>
           `;
 
+          // STEP 7A: Hover tooltip
+          block.addEventListener("mouseenter", e => {
+            const tip = document.createElement("div");
+            tip.className = "week-block-tooltip";
+            tip.textContent = `${w.type.toUpperCase()} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+            document.body.appendChild(tip);
+
+            const rect = block.getBoundingClientRect();
+            tip.style.left = `${rect.right + 8}px`;
+            tip.style.top = `${rect.top}px`;
+
+            block._tooltip = tip;
+          });
+
+          block.addEventListener("mouseleave", () => {
+            if (block._tooltip) {
+              block._tooltip.remove();
+              block._tooltip = null;
+            }
+          });
+
+          // STEP 7B: Click-to-open Day View
+          block.addEventListener("click", () => {
+            currentDate = dateStr;
+            switchView("day");
+          });
+
           body.appendChild(block);
         });
       });
@@ -344,6 +371,7 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
+
 
 
 
