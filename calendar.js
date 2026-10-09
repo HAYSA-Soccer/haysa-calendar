@@ -315,7 +315,7 @@ function getWeekRange(date) {
 
 
 function renderWeekTimeline() {
-  const container = document.getElementById("weekTimeline");
+  const container = document.getElementById("view-container");
   container.innerHTML = "";
 
   const days = getWeekRange(currentDate);
