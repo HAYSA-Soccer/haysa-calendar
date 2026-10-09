@@ -332,3 +332,85 @@ body {
   white-space: nowrap;
 }
 
+
+/* --- WEEK BLOCK BASE STYLE --- */
+.week-block {
+  position: absolute;
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+  color: #fff;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.15);
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+/* Hover polish */
+.week-block:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transform: translateY(-2px);
+}
+
+/* --- TYPE COLORS --- */
+.week-block.block-free {
+  background: linear-gradient(135deg, #4caf50, #43a047);
+}
+
+.week-block.block-practice {
+  background: linear-gradient(135deg, #9e9e9e, #757575);
+}
+
+.week-block.block-game {
+  background: linear-gradient(135deg, #007bff, #005fcc);
+}
+
+.week-block.block-admin {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+}
+
+/* --- LABELS --- */
+.week-block .label {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.week-block .sub {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.week-block .fields {
+  font-size: 11px;
+  opacity: 0.85;
+  line-height: 1.2;
+}
+
+/* --- BADGES --- */
+.week-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  margin-left: 6px;
+}
+
+/* --- TOOLTIP --- */
+.week-block-tooltip {
+  position: absolute;
+  background: #222;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+
