@@ -249,6 +249,26 @@ function renderDayCalendar(dayData) {
   });
 }
 
+/***********************************************
+* DISPLAY TITLES OF EVENTS
+***********************************************/
+
+function getEventTitlesForWindow(dayData, window) {
+  const titles = [];
+
+  window.fields.forEach(fieldId => {
+    const events = dayData.events[fieldId] || [];
+
+    events.forEach(ev => {
+      if (ev.start === window.start && ev.end === window.end) {
+        titles.push(ev.title);
+      }
+    });
+  });
+
+  return titles;
+}
+
 
 /****************************************************
  * WEEK VIEW (STATIC JSON)
