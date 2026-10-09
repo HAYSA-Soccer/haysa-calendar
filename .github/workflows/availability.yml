@@ -25,71 +25,58 @@ jobs:
       - name: Fetch season window
         id: season
         run: |
-          echo "Fetching season window..."
-
           RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
-
-          echo "RAW RESPONSE:"
-          echo "$RAW"
-
-          # Strip <pre> wrapper if present
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
-
-          echo "CLEAN JSON:"
-          echo "$CLEAN"
 
           START=$(echo "$CLEAN" | jq -r '.season_start')
           END=$(echo "$CLEAN" | jq -r '.season_end')
 
-          echo "Parsed START: $START"
-          echo "Parsed END: $END"
-
           echo "season_start=$START" >> $GITHUB_OUTPUT
           echo "season_end=$END" >> $GITHUB_OUTPUT
 
-      - name: Build availability JSON
+      - name: Build availability + search index
         run: |
           START="${{ steps.season.outputs.season_start }}"
           END="${{ steps.season.outputs.season_end }}"
 
-          echo "Building availability from $START to $END"
-
-          if [ -z "$START" ] || [ -z "$END" ]; then
-            echo "ERROR: START or END is empty — stopping."
-            exit 1
-          fi
-
-          # Fetch field + complex map once
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
           FIELDS_JSON="$FIELDS_RAW"
 
           DAYS_JSON="{}"
           WEEKS_JSON="{}"
           MONTHS_JSON="{}"
+          SEARCH_JSON="{}"
 
           CURRENT="$START"
 
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
-            echo "Fetching $CURRENT"
-
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
-            # Insert into days
             DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
 
-            # Insert into weeks
             WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
             WEEKS_JSON=$(echo "$WEEKS_JSON" | jq --arg w "$WEEK_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
               .[$w] = (.[$w] // {}) | .[$w][$d] = $v
             ')
 
-            # Insert into months
             MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
             MONTHS_JSON=$(echo "$MONTHS_JSON" | jq --arg m "$MONTH_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
               .[$m] = (.[$m] // {}) | .[$m][$d] = $v
             ')
+
+            # Build search index for this day
+            COMPLEXES=$(echo "$DAY_DATA" | jq -r '.complex_timeline | keys[]')
+
+            DAY_SEARCH="{}"
+
+            for CX in $COMPLEXES; do
+              WINDOWS=$(echo "$DAY_DATA" | jq --arg cx "$CX" '.complex_timeline[$cx]')
+              DAY_SEARCH=$(echo "$DAY_SEARCH" | jq --arg cx "$CX" --argjson w "$WINDOWS" '.[$cx] = $w')
+            done
+
+            SEARCH_JSON=$(echo "$SEARCH_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_SEARCH" '.[$d] = $v')
 
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
@@ -113,11 +100,12 @@ jobs:
           )
 
           echo "$FINAL_JSON" > data/availability.json
+          echo "$SEARCH_JSON" > data/search_index.json
 
       - name: Commit updated JSON
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add data/availability.json
-          git commit -m "Updated availability.json" || echo "No changes to commit"
+          git add data/availability.json data/search_index.json
+          git commit -m "Updated availability + search index" || echo "No changes to commit"
           git push
