@@ -577,7 +577,11 @@ function renderWeekTimeline() {
   });
 
   container.appendChild(timeline);
+
+  // ⭐ Restore complex filter buttons after rendering week view
+  renderComplexFilters();
 }
+
 
 
 
