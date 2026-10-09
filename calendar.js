@@ -383,7 +383,7 @@ function renderWeekTimeline() {
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
 
-    // --- HEADER: Day of week + formatted date ---
+    // HEADER
     const dt = new Date(dateStr);
     const dow = dt.toLocaleDateString("en-US", { weekday: "short" });
     const fmt = dt.toLocaleDateString("en-US");
@@ -398,14 +398,12 @@ function renderWeekTimeline() {
 
     // Highlight today
     const todayStr = new Date().toISOString().slice(0, 10);
-    if (dateStr === todayStr) {
-      dayCol.classList.add("today");
-    }
+    if (dateStr === todayStr) dayCol.classList.add("today");
 
     const body = document.createElement("div");
     body.className = "week-day-body";
 
-    // --- Time labels (08:00 → 21:00) ---
+    // Time labels
     HOURS.forEach((h, idx) => {
       const lbl = document.createElement("div");
       lbl.className = "week-time-label";
@@ -414,7 +412,7 @@ function renderWeekTimeline() {
       body.appendChild(lbl);
     });
 
-    // --- If no data, show empty column ---
+    // No data
     if (!dayData) {
       const emptyMsg = document.createElement("div");
       emptyMsg.className = "week-empty";
@@ -426,7 +424,7 @@ function renderWeekTimeline() {
       return;
     }
 
-    // --- Complex filtering ---
+    // Complex filtering
     const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
       if (SELECTED_COMPLEXES.size === 0) return true;
       return SELECTED_COMPLEXES.has(cx);
@@ -438,7 +436,7 @@ function renderWeekTimeline() {
       // Max fields for width scaling
       const maxFields = Math.max(...windows.map(win => win.fields.length));
 
-      // --- Lane assignment for overlapping windows ---
+      // Lane assignment
       const laneAssignments = [];
 
       windows.forEach(w => {
@@ -448,9 +446,7 @@ function renderWeekTimeline() {
         let laneIndex = 0;
         while (
           laneAssignments[laneIndex] &&
-          laneAssignments[laneIndex].some(b => {
-            return !(endY <= b.startY || startY >= b.endY);
-          })
+          laneAssignments[laneIndex].some(b => !(endY <= b.startY || startY >= b.endY))
         ) {
           laneIndex++;
         }
@@ -459,7 +455,7 @@ function renderWeekTimeline() {
         laneAssignments[laneIndex].push({ startY, endY, w });
       });
 
-      // --- Render blocks ---
+      // Render blocks
       laneAssignments.forEach((lane, laneIndex) => {
         const baseWidth = 100 / laneAssignments.length;
 
@@ -467,18 +463,35 @@ function renderWeekTimeline() {
           const block = document.createElement("div");
           block.className = "week-block";
 
-          // Type-based color coding
-          if (w.type === "free") block.classList.add("block-free");
-          else if (w.type === "practice") block.classList.add("block-practice");
-          else if (w.type === "game") block.classList.add("block-game");
-          else block.classList.add("block-admin");
+          const txt = (w.title || "").toLowerCase();
+
+          /* --- COLOR RULES (your exact rules) --- */
+
+          if (w.type === "free") {
+            block.classList.add("block-free");        // GREEN
+          }
+          else if (w.type === "practice" || txt.includes("practice")) {
+            block.classList.add("block-practice");    // GRAY
+          }
+          else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
+            block.classList.add("block-game");        // BLUE
+          }
+          else if (w.source === "blocks") {
+            if (txt.includes("game") || txt.includes("practice")) {
+              block.classList.add("block-game");      // BLUE
+            } else {
+              block.classList.add("block-admin");     // RED
+            }
+          }
+          else {
+            block.classList.add("block-admin");       // RED
+          }
 
           const height = endY - startY;
           block.style.position = "absolute";
           block.style.top = `${startY}px`;
           block.style.height = `${height}px`;
 
-          // Multi-field width scaling
           const fieldScale = w.fields.length / maxFields;
           const scaledWidth = Math.max(baseWidth * fieldScale, baseWidth * 0.4);
 
@@ -487,15 +500,27 @@ function renderWeekTimeline() {
 
           const durationMin = timeToMin(w.end) - timeToMin(w.start);
 
-          // --- Event titles ---
-          const titles = getEventTitlesForWindow(dayData, w);
+          /* --- LABEL RULES (your exact rules) --- */
 
-          const labelHTML =
-            w.type === "free"
-              ? "Availability"
-              : titles.length
-                ? titles.join("<br>")
-                : "Admin Block";
+          let labelHTML;
+
+          if (w.type === "free") {
+            labelHTML = "Availability";
+          }
+          else if (w.type === "practice" || txt.includes("practice")) {
+            labelHTML = w.title || "Practice";
+          }
+          else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
+            labelHTML = w.title || "Game";
+          }
+          else if (w.source === "blocks") {
+            if (txt.includes("game")) labelHTML = "Game";
+            else if (txt.includes("practice")) labelHTML = "Practice";
+            else labelHTML = "Blocked";
+          }
+          else {
+            labelHTML = "Blocked";
+          }
 
           block.innerHTML = `
             <div class="label">
@@ -503,20 +528,18 @@ function renderWeekTimeline() {
               <span class="week-badge">${durationMin} min</span>
               <span class="week-badge">${w.fields.length} fields</span>
             </div>
-
             <div class="sub">${w.start}–${w.end}</div>
-
             <div class="fields">${w.fields.join(", ")}</div>
           `;
 
-          // --- Hover tooltip ---
+          // Tooltip
           block.addEventListener("mouseenter", () => {
             const tip = document.createElement("div");
             tip.className = "week-block-tooltip";
 
-            tip.textContent = titles.length
-              ? titles.join(" | ")
-              : `${w.type.toUpperCase()} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+            tip.textContent = w.title
+              ? w.title
+              : `${labelHTML} • ${w.start}–${w.end} • ${w.fields.length} fields`;
 
             document.body.appendChild(tip);
 
@@ -534,7 +557,7 @@ function renderWeekTimeline() {
             }
           });
 
-          // --- Click-to-open Day View ---
+          // Click-to-day
           block.addEventListener("click", () => {
             currentDate = dateStr;
             switchView("day");
