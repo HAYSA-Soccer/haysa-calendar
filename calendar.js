@@ -309,8 +309,19 @@ function renderWeekTimeline() {
           block.style.height = `${height}px`;
 
           // Lane positioning
-          block.style.left = `${laneIndex * laneWidthPercent}%`;
-          block.style.width = `${laneWidthPercent}%`;
+          // STEP 5: Multi-field width scaling
+          const maxFields = Math.max(...windows.map(win => win.fields.length));
+          const fieldScale = w.fields.length / maxFields;
+          
+          // Base lane width
+          const baseWidth = 100 / laneAssignments.length;
+          
+          // Scaled width (never smaller than 40% of base)
+          const scaledWidth = Math.max(baseWidth * fieldScale, baseWidth * 0.4);
+          
+          block.style.left = `${laneIndex * baseWidth}%`;
+          block.style.width = `${scaledWidth}%`;
+
 
           block.innerHTML = `
             <div class="label">${cx}</div>
