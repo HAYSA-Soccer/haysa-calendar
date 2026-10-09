@@ -327,11 +327,20 @@ function renderWeekTimeline() {
           block.style.left = `${laneIndex * baseWidth}%`;
           block.style.width = `${scaledWidth}%`;
 
+          const durationMin = timeToMin(w.end) - timeToMin(w.start);
+
           block.innerHTML = `
-            <div class="label">${w.type === "free" ? "Availability" : cx}</div>
-            <div class="sub">${w.start}–${w.end} (${w.fields.length} fields)</div>
+            <div class="label">
+              ${w.type === "free" ? "Availability" : cx}
+              <span class="week-badge">${durationMin} min</span>
+              <span class="week-badge">${w.fields.length} fields</span>
+            </div>
+          
+            <div class="sub">${w.start}–${w.end}</div>
+          
             <div class="fields">${w.fields.join(", ")}</div>
           `;
+
 
           // STEP 7A: Hover tooltip
           block.addEventListener("mouseenter", e => {
