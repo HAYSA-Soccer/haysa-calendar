@@ -295,13 +295,24 @@ function renderWeekTimeline() {
         laneAssignments[laneIndex].push({ startY, endY, w });
       });
 
-      // Render blocks with lane positioning + multi-field scaling
+      // Render blocks with lane positioning + multi-field scaling + type colors
       laneAssignments.forEach((lane, laneIndex) => {
         const baseWidth = 100 / laneAssignments.length;
 
         lane.forEach(({ startY, endY, w }) => {
           const block = document.createElement("div");
           block.className = "week-block";
+
+          // STEP 6: Type-based color coding
+          if (w.type === "free") {
+            block.classList.add("block-free");
+          } else if (w.type === "practice") {
+            block.classList.add("block-practice");
+          } else if (w.type === "game") {
+            block.classList.add("block-game");
+          } else {
+            block.classList.add("block-admin");
+          }
 
           const height = endY - startY;
 
@@ -317,7 +328,7 @@ function renderWeekTimeline() {
           block.style.width = `${scaledWidth}%`;
 
           block.innerHTML = `
-            <div class="label">${cx}</div>
+            <div class="label">${w.type === "free" ? "Availability" : cx}</div>
             <div class="sub">${w.start}–${w.end} (${w.fields.length} fields)</div>
             <div class="fields">${w.fields.join(", ")}</div>
           `;
@@ -333,6 +344,7 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
+
 
 
 /****************************************************
