@@ -135,13 +135,17 @@ function switchView(mode) {
   if (mode === "day") {
     renderDayView();
   } else if (mode === "week") {
-    renderWeekTimeline();   // <-- FIXED
+    renderWeekTimeline();
   } else if (mode === "month") {
     renderMonthView();
   } else if (mode === "search") {
     renderSearchView();
   }
+
+  // ⭐ Always restore complex filter buttons after switching views
+  renderComplexFilters();
 }
+
 
 
 /****************************************************
