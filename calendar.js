@@ -262,7 +262,6 @@ function renderWeekTimeline() {
       body.appendChild(lbl);
     });
 
-
     // Use complex_timeline instead of merged
     const visibleComplexes = Object.keys(dayData.complex_timeline).filter(cx => {
       if (SELECTED_COMPLEXES.size === 0) return true;
@@ -272,29 +271,56 @@ function renderWeekTimeline() {
     visibleComplexes.forEach(cx => {
       const windows = dayData.complex_timeline[cx];
 
+      // STEP 4: Build lanes for overlapping blocks
+      const laneAssignments = []; // array of arrays: lanes[laneIndex] = [blocks]
+
       windows.forEach(w => {
-        const block = document.createElement("div");
-        block.className = "week-block";
-      
-        // Position block by time
-        const top = timeToY(w.start);
-        const height = timeToY(w.end) - timeToY(w.start);
-      
-        block.style.position = "absolute";
-        block.style.top = `${top}px`;
-        block.style.height = `${height}px`;
-        block.style.left = "4px";
-        block.style.right = "4px";
-      
-        block.innerHTML = `
-          <div class="label">${cx}</div>
-          <div class="sub">${w.start}–${w.end} (${w.fields.length} fields)</div>
-          <div class="fields">${w.fields.join(", ")}</div>
-        `;
-      
-        body.appendChild(block);
+        const startY = timeToY(w.start);
+        const endY = timeToY(w.end);
+
+        // Find a lane that does NOT overlap
+        let laneIndex = 0;
+        while (
+          laneAssignments[laneIndex] &&
+          laneAssignments[laneIndex].some(b => {
+            return !(endY <= b.startY || startY >= b.endY); // overlap check
+          })
+        ) {
+          laneIndex++;
+        }
+
+        // Assign block to lane
+        if (!laneAssignments[laneIndex]) laneAssignments[laneIndex] = [];
+        laneAssignments[laneIndex].push({ startY, endY, w });
       });
 
+      // Render blocks with lane positioning
+      laneAssignments.forEach((lane, laneIndex) => {
+        const laneWidthPercent = 100 / laneAssignments.length;
+
+        lane.forEach(({ startY, endY, w }) => {
+          const block = document.createElement("div");
+          block.className = "week-block";
+
+          const height = endY - startY;
+
+          block.style.position = "absolute";
+          block.style.top = `${startY}px`;
+          block.style.height = `${height}px`;
+
+          // Lane positioning
+          block.style.left = `${laneIndex * laneWidthPercent}%`;
+          block.style.width = `${laneWidthPercent}%`;
+
+          block.innerHTML = `
+            <div class="label">${cx}</div>
+            <div class="sub">${w.start}–${w.end} (${w.fields.length} fields)</div>
+            <div class="fields">${w.fields.join(", ")}</div>
+          `;
+
+          body.appendChild(block);
+        });
+      });
     });
 
     dayCol.appendChild(body);
@@ -303,7 +329,6 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
-
 
 /****************************************************
  * MONTH VIEW (STATIC JSON)
