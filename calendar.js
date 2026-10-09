@@ -257,7 +257,7 @@ function renderWeekTimeline() {
     HOURS.forEach((h, idx) => {
       const lbl = document.createElement("div");
       lbl.className = "week-time-label";
-      lbl.style.top = `${idx * 60}px`;   // 60px per hour
+      lbl.style.top = `${idx * 60}px`;
       lbl.textContent = h;
       body.appendChild(lbl);
     });
@@ -271,32 +271,33 @@ function renderWeekTimeline() {
     visibleComplexes.forEach(cx => {
       const windows = dayData.complex_timeline[cx];
 
+      // STEP 5: Compute max fields ONCE per complex
+      const maxFields = Math.max(...windows.map(win => win.fields.length));
+
       // STEP 4: Build lanes for overlapping blocks
-      const laneAssignments = []; // array of arrays: lanes[laneIndex] = [blocks]
+      const laneAssignments = [];
 
       windows.forEach(w => {
         const startY = timeToY(w.start);
         const endY = timeToY(w.end);
 
-        // Find a lane that does NOT overlap
         let laneIndex = 0;
         while (
           laneAssignments[laneIndex] &&
           laneAssignments[laneIndex].some(b => {
-            return !(endY <= b.startY || startY >= b.endY); // overlap check
+            return !(endY <= b.startY || startY >= b.endY);
           })
         ) {
           laneIndex++;
         }
 
-        // Assign block to lane
         if (!laneAssignments[laneIndex]) laneAssignments[laneIndex] = [];
         laneAssignments[laneIndex].push({ startY, endY, w });
       });
 
-      // Render blocks with lane positioning
+      // Render blocks with lane positioning + multi-field scaling
       laneAssignments.forEach((lane, laneIndex) => {
-        const laneWidthPercent = 100 / laneAssignments.length;
+        const baseWidth = 100 / laneAssignments.length;
 
         lane.forEach(({ startY, endY, w }) => {
           const block = document.createElement("div");
@@ -308,20 +309,12 @@ function renderWeekTimeline() {
           block.style.top = `${startY}px`;
           block.style.height = `${height}px`;
 
-          // Lane positioning
           // STEP 5: Multi-field width scaling
-          const maxFields = Math.max(...windows.map(win => win.fields.length));
           const fieldScale = w.fields.length / maxFields;
-          
-          // Base lane width
-          const baseWidth = 100 / laneAssignments.length;
-          
-          // Scaled width (never smaller than 40% of base)
           const scaledWidth = Math.max(baseWidth * fieldScale, baseWidth * 0.4);
-          
+
           block.style.left = `${laneIndex * baseWidth}%`;
           block.style.width = `${scaledWidth}%`;
-
 
           block.innerHTML = `
             <div class="label">${cx}</div>
@@ -340,6 +333,7 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
+
 
 /****************************************************
  * MONTH VIEW (STATIC JSON)
