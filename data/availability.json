@@ -2254,30 +2254,18 @@
         "H-SJ3": [
           {
             "start": "08:00",
-            "end": "12:30"
-          },
-          {
-            "start": "13:30",
             "end": "19:00"
           }
         ],
         "H-SJ3A": [
           {
             "start": "08:00",
-            "end": "12:30"
-          },
-          {
-            "start": "13:30",
             "end": "19:00"
           }
         ],
         "H-SJ3B": [
           {
             "start": "08:00",
-            "end": "12:30"
-          },
-          {
-            "start": "13:30",
             "end": "19:00"
           }
         ],
@@ -2330,22 +2318,6 @@
             "grade": "5/6",
             "source": "ICS"
           }
-        ],
-        "H-SJ3": [
-          {
-            "event_id": "0b6f3da329e634c263b65ed03eace423",
-            "date": "2026-10-10",
-            "start": "12:30",
-            "end": "13:30",
-            "field": "H-SJ3",
-            "field_group": "SUMNER/SEAN JOYCE",
-            "type": "practice",
-            "title": "3/4 Boys Travel (Ball) vs. Rockland",
-            "team": "3/4 Boys Travel  vs. Rockland",
-            "coach": "Ball",
-            "grade": "3/4",
-            "source": "ICS"
-          }
         ]
       },
       "blocks": {},
@@ -2395,21 +2367,21 @@
         {
           "field": "H-SJ3",
           "start": "08:00",
-          "end": "12:30",
+          "end": "19:00",
           "type": "free",
           "title": ""
         },
         {
           "field": "H-SJ3A",
           "start": "08:00",
-          "end": "12:30",
+          "end": "19:00",
           "type": "free",
           "title": ""
         },
         {
           "field": "H-SJ3B",
           "start": "08:00",
-          "end": "12:30",
+          "end": "19:00",
           "type": "free",
           "title": ""
         },
@@ -2456,13 +2428,6 @@
           "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
         },
         {
-          "field": "H-SJ3",
-          "start": "12:30",
-          "end": "13:30",
-          "type": "practice",
-          "title": "3/4 Boys Travel (Ball) vs. Rockland"
-        },
-        {
           "field": "H-HST",
           "start": "13:30",
           "end": "17:30",
@@ -2480,27 +2445,6 @@
           "field": "H-HST2",
           "start": "13:30",
           "end": "17:30",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3",
-          "start": "13:30",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3A",
-          "start": "13:30",
-          "end": "19:00",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3B",
-          "start": "13:30",
-          "end": "19:00",
           "type": "free",
           "title": ""
         },
@@ -2594,16 +2538,6 @@
           }
         ],
         "SUMNER/SEAN JOYCE": [
-          {
-            "type": "practice",
-            "start": "12:30",
-            "end": "13:30",
-            "fields": [
-              "H-SJ3",
-              "H-SJ3A",
-              "H-SJ3B"
-            ]
-          },
           {
             "type": "free",
             "start": "16:00",
@@ -4908,30 +4842,18 @@
           "H-SJ3": [
             {
               "start": "08:00",
-              "end": "12:30"
-            },
-            {
-              "start": "13:30",
               "end": "19:00"
             }
           ],
           "H-SJ3A": [
             {
               "start": "08:00",
-              "end": "12:30"
-            },
-            {
-              "start": "13:30",
               "end": "19:00"
             }
           ],
           "H-SJ3B": [
             {
               "start": "08:00",
-              "end": "12:30"
-            },
-            {
-              "start": "13:30",
               "end": "19:00"
             }
           ],
@@ -4984,22 +4906,6 @@
               "grade": "5/6",
               "source": "ICS"
             }
-          ],
-          "H-SJ3": [
-            {
-              "event_id": "0b6f3da329e634c263b65ed03eace423",
-              "date": "2026-10-10",
-              "start": "12:30",
-              "end": "13:30",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Boys Travel (Ball) vs. Rockland",
-              "team": "3/4 Boys Travel  vs. Rockland",
-              "coach": "Ball",
-              "grade": "3/4",
-              "source": "ICS"
-            }
           ]
         },
         "blocks": {},
@@ -5049,21 +4955,21 @@
           {
             "field": "H-SJ3",
             "start": "08:00",
-            "end": "12:30",
+            "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3A",
             "start": "08:00",
-            "end": "12:30",
+            "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3B",
             "start": "08:00",
-            "end": "12:30",
+            "end": "19:00",
             "type": "free",
             "title": ""
           },
@@ -5110,13 +5016,6 @@
             "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
           },
           {
-            "field": "H-SJ3",
-            "start": "12:30",
-            "end": "13:30",
-            "type": "practice",
-            "title": "3/4 Boys Travel (Ball) vs. Rockland"
-          },
-          {
             "field": "H-HST",
             "start": "13:30",
             "end": "17:30",
@@ -5134,27 +5033,6 @@
             "field": "H-HST2",
             "start": "13:30",
             "end": "17:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3",
-            "start": "13:30",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3A",
-            "start": "13:30",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3B",
-            "start": "13:30",
-            "end": "19:00",
             "type": "free",
             "title": ""
           },
@@ -5248,16 +5126,6 @@
             }
           ],
           "SUMNER/SEAN JOYCE": [
-            {
-              "type": "practice",
-              "start": "12:30",
-              "end": "13:30",
-              "fields": [
-                "H-SJ3",
-                "H-SJ3A",
-                "H-SJ3B"
-              ]
-            },
             {
               "type": "free",
               "start": "16:00",
@@ -7565,30 +7433,18 @@
           "H-SJ3": [
             {
               "start": "08:00",
-              "end": "12:30"
-            },
-            {
-              "start": "13:30",
               "end": "19:00"
             }
           ],
           "H-SJ3A": [
             {
               "start": "08:00",
-              "end": "12:30"
-            },
-            {
-              "start": "13:30",
               "end": "19:00"
             }
           ],
           "H-SJ3B": [
             {
               "start": "08:00",
-              "end": "12:30"
-            },
-            {
-              "start": "13:30",
               "end": "19:00"
             }
           ],
@@ -7641,22 +7497,6 @@
               "grade": "5/6",
               "source": "ICS"
             }
-          ],
-          "H-SJ3": [
-            {
-              "event_id": "0b6f3da329e634c263b65ed03eace423",
-              "date": "2026-10-10",
-              "start": "12:30",
-              "end": "13:30",
-              "field": "H-SJ3",
-              "field_group": "SUMNER/SEAN JOYCE",
-              "type": "practice",
-              "title": "3/4 Boys Travel (Ball) vs. Rockland",
-              "team": "3/4 Boys Travel  vs. Rockland",
-              "coach": "Ball",
-              "grade": "3/4",
-              "source": "ICS"
-            }
           ]
         },
         "blocks": {},
@@ -7706,21 +7546,21 @@
           {
             "field": "H-SJ3",
             "start": "08:00",
-            "end": "12:30",
+            "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3A",
             "start": "08:00",
-            "end": "12:30",
+            "end": "19:00",
             "type": "free",
             "title": ""
           },
           {
             "field": "H-SJ3B",
             "start": "08:00",
-            "end": "12:30",
+            "end": "19:00",
             "type": "free",
             "title": ""
           },
@@ -7767,13 +7607,6 @@
             "title": "7/8 Girls Travel (Caldwell) vs. Weymouth"
           },
           {
-            "field": "H-SJ3",
-            "start": "12:30",
-            "end": "13:30",
-            "type": "practice",
-            "title": "3/4 Boys Travel (Ball) vs. Rockland"
-          },
-          {
             "field": "H-HST",
             "start": "13:30",
             "end": "17:30",
@@ -7791,27 +7624,6 @@
             "field": "H-HST2",
             "start": "13:30",
             "end": "17:30",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3",
-            "start": "13:30",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3A",
-            "start": "13:30",
-            "end": "19:00",
-            "type": "free",
-            "title": ""
-          },
-          {
-            "field": "H-SJ3B",
-            "start": "13:30",
-            "end": "19:00",
             "type": "free",
             "title": ""
           },
@@ -7905,16 +7717,6 @@
             }
           ],
           "SUMNER/SEAN JOYCE": [
-            {
-              "type": "practice",
-              "start": "12:30",
-              "end": "13:30",
-              "fields": [
-                "H-SJ3",
-                "H-SJ3A",
-                "H-SJ3B"
-              ]
-            },
             {
               "type": "free",
               "start": "16:00",
