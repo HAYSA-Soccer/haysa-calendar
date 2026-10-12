@@ -22,85 +22,52 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Fetch season window (diagnostic)
+      - name: Fetch season window
         id: season
         run: |
           RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
 
-          echo "=== DEBUG season_window RAW ==="
-          echo "$RAW"
-          echo "=== DEBUG season_window CLEAN ==="
-          echo "$CLEAN"
-
           if ! echo "$CLEAN" | jq empty >/dev/null 2>&1; then
-            echo "FATAL: SEASON_WINDOW JSON INVALID"
-            mkdir -p data
-            echo "$RAW"   > data/error_season_raw.txt
-            echo "$CLEAN" > data/error_season_clean.txt
+            echo "Season window JSON invalid"
             exit 1
           fi
 
           START=$(echo "$CLEAN" | jq -r '.season_start')
           END=$(echo "$CLEAN" | jq -r '.season_end')
 
-          echo "Season start: $START"
-          echo "Season end:   $END"
-
           echo "season_start=$START" >> $GITHUB_OUTPUT
           echo "season_end=$END" >> $GITHUB_OUTPUT
 
-      - name: Build availability + search index (file-based, diagnostic)
+      - name: Build availability + search index
         run: |
           START="${{ steps.season.outputs.season_start }}"
           END="${{ steps.season.outputs.season_end }}"
 
-          echo "=== BUILD WINDOW ==="
-          echo "START=$START"
-          echo "END=$END"
-
           mkdir -p data/tmp_days data/tmp_search
 
-          echo "=== FETCH FIELDS ==="
+          # Fetch fields
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
-          echo "=== DEBUG FIELDS_RAW (first 2000 chars) ==="
-          echo "$FIELDS_RAW" | head -c 2000
-          echo
-
           if ! echo "$FIELDS_RAW" | jq empty >/dev/null 2>&1; then
-            echo "FATAL: FIELDS JSON INVALID"
-            mkdir -p data
-            echo "$FIELDS_RAW" > data/error_fields_raw.txt
+            echo "Fields JSON invalid"
             exit 1
           fi
-
           FIELDS_JSON="$FIELDS_RAW"
 
           CURRENT="$START"
 
-          echo "=== START DAY LOOP ==="
-
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
-            echo "---- DAY $CURRENT ----"
-
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
 
-            echo "=== DEBUG RAW_DAY (first 2000 chars) for $CURRENT ==="
-            echo "$RAW_DAY" | head -c 2000
-            echo
-
             if ! echo "$RAW_DAY" | jq empty >/dev/null 2>&1; then
-              echo "FATAL: BAD JSON FOR DATE $CURRENT"
-              mkdir -p data
-              echo "$RAW_DAY" > "data/error_day_${CURRENT}.json"
+              echo "Bad JSON for $CURRENT"
               exit 1
             fi
 
-            # Store per-day JSON to file
             echo "$RAW_DAY" > "data/tmp_days/${CURRENT}.json"
 
-            # Build per-day search index file
+            # Build search index for this day
             COMPLEXES=$(echo "$RAW_DAY" | jq -r '.complex_timeline | keys[]')
             DAY_SEARCH="{}"
 
@@ -114,22 +81,22 @@ jobs:
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
 
-          echo "=== LOOP COMPLETE ==="
-
-          echo "=== BUILD DAYS_JSON FROM FILES ==="
+          # Build days.json
           DAYS_JSON=$(jq -s '
             reduce .[] as $d ({}; .[$d.date] = $d)
           ' data/tmp_days/*.json)
 
-          echo "=== BUILD WEEKS_JSON FROM FILES ==="
+          # Build weeks.json
           WEEKS_JSON=$(jq -s '
             reduce .[] as $d ({}; 
-              .[(($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y")) + "-W" + ($d.date | strptime("%Y-%m-%d") | mktime | strftime("%U")))] 
+              .[(($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y")) 
+                + "-W" + 
+                ($d.date | strptime("%Y-%m-%d") | mktime | strftime("%U")))] 
               |= (. // {}) | .[$d.date] = $d
             )
           ' data/tmp_days/*.json)
 
-          echo "=== BUILD MONTHS_JSON FROM FILES ==="
+          # Build months.json
           MONTHS_JSON=$(jq -s '
             reduce .[] as $d ({}; 
               .[($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y-%m"))] 
@@ -137,7 +104,7 @@ jobs:
             )
           ' data/tmp_days/*.json)
 
-          echo "=== BUILD SEARCH_JSON FROM FILES (simple loop) ==="
+          # Build search_index.json
           SEARCH_JSON="{}"
           for f in data/tmp_search/*.json; do
             d=$(basename "$f" .json)
@@ -145,24 +112,7 @@ jobs:
             SEARCH_JSON=$(echo "$SEARCH_JSON" | jq --arg d "$d" --argjson v "$s" '.[$d] = $v')
           done
 
-          echo "=== VALIDATE ACCUMULATED BLOBS ==="
-
-          echo "$FIELDS_JSON" | jq empty >/dev/null 2>&1 || { echo "FIELDS_JSON invalid AFTER BUILD"; exit 1; }
-          echo "$DAYS_JSON"   | jq empty >/dev/null 2>&1 || { echo "DAYS_JSON invalid AFTER BUILD";   exit 1; }
-          echo "$WEEKS_JSON"  | jq empty >/dev/null 2>&1 || { echo "WEEKS_JSON invalid AFTER BUILD";  exit 1; }
-          echo "$MONTHS_JSON" | jq empty >/dev/null 2>&1 || { echo "MONTHS_JSON invalid AFTER BUILD"; exit 1; }
-          echo "$SEARCH_JSON" | jq empty >/dev/null 2>&1 || { echo "SEARCH_JSON invalid AFTER BUILD"; exit 1; }
-
-          echo "=== WRITE DEBUG FILES ==="
-          mkdir -p data
-          echo "$FIELDS_JSON"  > data/debug_fields.json
-          echo "$DAYS_JSON"    > data/debug_days.json
-          echo "$WEEKS_JSON"   > data/debug_weeks.json
-          echo "$MONTHS_JSON"  > data/debug_months.json
-          echo "$SEARCH_JSON"  > data/debug_search.json
-
-          echo "=== FINAL MERGE WITH jq -n ==="
-
+          # Final merge
           FINAL_JSON=$(jq -n \
             --arg start "$START" \
             --arg end "$END" \
@@ -181,18 +131,16 @@ jobs:
             }'
           )
 
-          echo "=== WRITE FINAL FILES ==="
           echo "$FINAL_JSON"  > data/availability.json
           echo "$SEARCH_JSON" > data/search_index.json
 
-      - name: Commit updated JSON + diagnostics
+      - name: Commit updated JSON
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add data/availability.json data/search_index.json \
-                  data/debug_fields.json data/debug_days.json \
-                  data/debug_weeks.json data/debug_months.json \
-                  data/debug_search.json \
-                  data/error_* || true
-          git commit -m "File-based build: availability + search index" || echo "No changes to commit"
-          git push || echo "No push"
+
+          # Stage only the real output files
+          git add data/availability.json data/search_index.json
+
+          git commit -m "Updated availability + search index" || echo "No changes to commit"
+          git push
