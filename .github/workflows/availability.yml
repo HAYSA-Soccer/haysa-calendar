@@ -54,29 +54,40 @@ jobs:
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
             DAY_DATA="$RAW_DAY"
 
-            DAYS_JSON=$(echo "$DAYS_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_DATA" '.[$d] = $v')
+            # DAYS_JSON (stdin merge)
+            DAYS_JSON=$(jq --arg d "$CURRENT" '
+              .[$d] = input
+            ' <<<"$DAYS_JSON" <<<"$DAY_DATA")
 
             WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
-            WEEKS_JSON=$(echo "$WEEKS_JSON" | jq --arg w "$WEEK_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
-              .[$w] = (.[$w] // {}) | .[$w][$d] = $v
-            ')
+
+            # WEEKS_JSON (stdin merge)
+            WEEKS_JSON=$(jq --arg w "$WEEK_ID" --arg d "$CURRENT" '
+              .[$w] = (.[$w] // {}) | .[$w][$d] = input
+            ' <<<"$WEEKS_JSON" <<<"$DAY_DATA")
 
             MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
-            MONTHS_JSON=$(echo "$MONTHS_JSON" | jq --arg m "$MONTH_ID" --arg d "$CURRENT" --argjson v "$DAY_DATA" '
-              .[$m] = (.[$m] // {}) | .[$m][$d] = $v
-            ')
 
-            # Build search index for this day
-            COMPLEXES=$(echo "$DAY_DATA" | jq -r '.complex_timeline | keys[]')
+            # MONTHS_JSON (stdin merge)
+            MONTHS_JSON=$(jq --arg m "$MONTH_ID" --arg d "$CURRENT" '
+              .[$m] = (.[$m] // {}) | .[$m][$d] = input
+            ' <<<"$MONTHS_JSON" <<<"$DAY_DATA")
 
+            # Build search index
+            COMPLEXES=$(jq -r '.complex_timeline | keys[]' <<<"$DAY_DATA")
             DAY_SEARCH="{}"
 
             for CX in $COMPLEXES; do
-              WINDOWS=$(echo "$DAY_DATA" | jq --arg cx "$CX" '.complex_timeline[$cx]')
-              DAY_SEARCH=$(echo "$DAY_SEARCH" | jq --arg cx "$CX" --argjson w "$WINDOWS" '.[$cx] = $w')
+              WINDOWS=$(jq --arg cx "$CX" '.complex_timeline[$cx]' <<<"$DAY_DATA")
+
+              DAY_SEARCH=$(jq --arg cx "$CX" '
+                .[$cx] = input
+              ' <<<"$DAY_SEARCH" <<<"$WINDOWS")
             done
 
-            SEARCH_JSON=$(echo "$SEARCH_JSON" | jq --arg d "$CURRENT" --argjson v "$DAY_SEARCH" '.[$d] = $v')
+            SEARCH_JSON=$(jq --arg d "$CURRENT" '
+              .[$d] = input
+            ' <<<"$SEARCH_JSON" <<<"$DAY_SEARCH")
 
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
