@@ -41,6 +41,14 @@ jobs:
           END="${{ steps.season.outputs.season_end }}"
 
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
+
+          # Validate fields JSON
+          if ! echo "$FIELDS_RAW" | jq empty 2>/dev/null; then
+            echo "BAD FIELDS JSON — aborting"
+            echo "$FIELDS_RAW"
+            exit 1
+          fi
+
           FIELDS_JSON="$FIELDS_RAW"
 
           DAYS_JSON="{}"
@@ -99,6 +107,12 @@ jobs:
 
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
+
+          # Validate the big blobs before final jq
+          echo "$FIELDS_JSON" | jq empty 2>/dev/null || { echo "FIELDS_JSON invalid"; exit 1; }
+          echo "$DAYS_JSON"   | jq empty 2>/dev/null || { echo "DAYS_JSON invalid";   exit 1; }
+          echo "$WEEKS_JSON"  | jq empty 2>/dev/null || { echo "WEEKS_JSON invalid";  exit 1; }
+          echo "$MONTHS_JSON" | jq empty 2>/dev/null || { echo "MONTHS_JSON invalid"; exit 1; }
 
           FINAL_JSON=$(jq -n \
             --arg start "$START" \
