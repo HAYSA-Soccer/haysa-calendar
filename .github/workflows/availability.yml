@@ -52,6 +52,14 @@ jobs:
 
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
+
+            # Validate JSON — skip bad days
+            if ! echo "$RAW_DAY" | jq empty 2>/dev/null; then
+              echo "BAD JSON for $CURRENT — skipping"
+              CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
+              continue
+            fi
+
             DAY_DATA="$RAW_DAY"
 
             # DAYS_JSON (stdin merge)
