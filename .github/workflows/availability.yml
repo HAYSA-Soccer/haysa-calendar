@@ -108,27 +108,33 @@ jobs:
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
 
+          # Write blobs to temp files
+          echo "$FIELDS_JSON" > /tmp/fields.json
+          echo "$DAYS_JSON"   > /tmp/days.json
+          echo "$WEEKS_JSON"  > /tmp/weeks.json
+          echo "$MONTHS_JSON" > /tmp/months.json
+
           # Validate big blobs BEFORE final merge
-          echo "$FIELDS_JSON" | jq empty 2>/dev/null || { echo "FIELDS_JSON invalid"; exit 1; }
-          echo "$DAYS_JSON"   | jq empty 2>/dev/null || { echo "DAYS_JSON invalid";   exit 1; }
-          echo "$WEEKS_JSON"  | jq empty 2>/dev/null || { echo "WEEKS_JSON invalid";  exit 1; }
-          echo "$MONTHS_JSON" | jq empty 2>/dev/null || { echo "MONTHS_JSON invalid"; exit 1; }
+          jq empty /tmp/fields.json  2>/dev/null || { echo "FIELDS_JSON invalid";  cat /tmp/fields.json;  exit 1; }
+          jq empty /tmp/days.json    2>/dev/null || { echo "DAYS_JSON invalid";    cat /tmp/days.json;    exit 1; }
+          jq empty /tmp/weeks.json   2>/dev/null || { echo "WEEKS_JSON invalid";   cat /tmp/weeks.json;   exit 1; }
+          jq empty /tmp/months.json  2>/dev/null || { echo "MONTHS_JSON invalid";  cat /tmp/months.json;  exit 1; }
 
           FINAL_JSON=$(jq -n \
             --arg start "$START" \
             --arg end "$END" \
-            --argjson fields "$FIELDS_JSON" \
-            --argjson days "$DAYS_JSON" \
-            --argjson weeks "$WEEKS_JSON" \
-            --argjson months "$MONTHS_JSON" \
+            --slurpfile fields /tmp/fields.json \
+            --slurpfile days   /tmp/days.json \
+            --slurpfile weeks  /tmp/weeks.json \
+            --slurpfile months /tmp/months.json \
             '{
               season_start: $start,
               season_end: $end,
-              fields: $fields.fields,
-              complexes: $fields.complexes,
-              days: $days,
-              weeks: $weeks,
-              months: $months
+              fields: ($fields[0].fields),
+              complexes: ($fields[0].complexes),
+              days: $days[0],
+              weeks: $weeks[0],
+              months: $months[0]
             }'
           )
 
