@@ -108,7 +108,7 @@ jobs:
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
 
-          # Validate the big blobs before final jq
+          # Validate big blobs BEFORE final merge
           echo "$FIELDS_JSON" | jq empty 2>/dev/null || { echo "FIELDS_JSON invalid"; exit 1; }
           echo "$DAYS_JSON"   | jq empty 2>/dev/null || { echo "DAYS_JSON invalid";   exit 1; }
           echo "$WEEKS_JSON"  | jq empty 2>/dev/null || { echo "WEEKS_JSON invalid";  exit 1; }
