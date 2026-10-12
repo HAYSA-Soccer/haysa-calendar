@@ -137,12 +137,13 @@ jobs:
             )
           ' data/tmp_days/*.json)
 
-          echo "=== BUILD SEARCH_JSON FROM FILES ==="
-          SEARCH_JSON=$(jq -s '
-            reduce .[] as $s ({}; .[$s.date] = $s.index)
-          ' <(jq -s '
-              map({date: (input_filename | split("/")[-1] | split(".")[0]), index: .})
-            ' data/tmp_search/*.json))
+          echo "=== BUILD SEARCH_JSON FROM FILES (simple loop) ==="
+          SEARCH_JSON="{}"
+          for f in data/tmp_search/*.json; do
+            d=$(basename "$f" .json)
+            s=$(cat "$f")
+            SEARCH_JSON=$(echo "$SEARCH_JSON" | jq --arg d "$d" --argjson v "$s" '.[$d] = $v')
+          done
 
           echo "=== VALIDATE ACCUMULATED BLOBS ==="
 
