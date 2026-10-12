@@ -22,11 +22,9 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Fetch season window
+      - name: Fetch season window (diagnostic)
         id: season
         run: |
-          set -e
-
           RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
@@ -36,11 +34,13 @@ jobs:
           echo "=== DEBUG season_window CLEAN ==="
           echo "$CLEAN"
 
-          # Validate season JSON
-          echo "$CLEAN" | jq empty 2>/dev/null || {
-            echo "SEASON_WINDOW JSON INVALID"
+          if ! echo "$CLEAN" | jq empty >/dev/null 2>&1; then
+            echo "FATAL: SEASON_WINDOW JSON INVALID"
+            mkdir -p data
+            echo "$RAW"   > data/error_season_raw.txt
+            echo "$CLEAN" > data/error_season_clean.txt
             exit 1
-          }
+          fi
 
           START=$(echo "$CLEAN" | jq -r '.season_start')
           END=$(echo "$CLEAN" | jq -r '.season_end')
@@ -53,8 +53,6 @@ jobs:
 
       - name: Build availability + search index (diagnostic)
         run: |
-          set -e
-
           START="${{ steps.season.outputs.season_start }}"
           END="${{ steps.season.outputs.season_end }}"
 
@@ -68,11 +66,10 @@ jobs:
           echo "$FIELDS_RAW" | head -c 2000
           echo
 
-          # Validate fields JSON HARD (fail, don't skip)
-          if ! echo "$FIELDS_RAW" | jq empty 2>/dev/null; then
+          if ! echo "$FIELDS_RAW" | jq empty >/dev/null 2>&1; then
             echo "FATAL: FIELDS JSON INVALID"
-            echo "=== FULL FIELDS_RAW ==="
-            echo "$FIELDS_RAW"
+            mkdir -p data
+            echo "$FIELDS_RAW" > data/error_fields_raw.txt
             exit 1
           fi
 
@@ -96,36 +93,31 @@ jobs:
             echo "$RAW_DAY" | head -c 2000
             echo
 
-            # HARD VALIDATION: if this fails, we STOP and see the body
-            if ! echo "$RAW_DAY" | jq empty 2>/dev/null; then
+            if ! echo "$RAW_DAY" | jq empty >/dev/null 2>&1; then
               echo "FATAL: BAD JSON FOR DATE $CURRENT"
-              echo "=== FULL RAW_DAY FOR $CURRENT ==="
-              echo "$RAW_DAY"
+              mkdir -p data
+              echo "$RAW_DAY" > "data/error_day_${CURRENT}.json"
               exit 1
             fi
 
             DAY_DATA="$RAW_DAY"
 
-            # DAYS_JSON (stdin merge)
             DAYS_JSON=$(jq --arg d "$CURRENT" '
               .[$d] = input
             ' <<<"$DAYS_JSON" <<<"$DAY_DATA")
 
             WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
 
-            # WEEKS_JSON (stdin merge)
             WEEKS_JSON=$(jq --arg w "$WEEK_ID" --arg d "$CURRENT" '
               .[$w] = (.[$w] // {}) | .[$w][$d] = input
             ' <<<"$WEEKS_JSON" <<<"$DAY_DATA")
 
             MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
 
-            # MONTHS_JSON (stdin merge)
             MONTHS_JSON=$(jq --arg m "$MONTH_ID" --arg d "$CURRENT" '
               .[$m] = (.[$m] // {}) | .[$m][$d] = input
             ' <<<"$MONTHS_JSON" <<<"$DAY_DATA")
 
-            # Build search index
             COMPLEXES=$(jq -r '.complex_timeline | keys[]' <<<"$DAY_DATA")
             DAY_SEARCH="{}"
 
@@ -148,10 +140,33 @@ jobs:
 
           echo "=== VALIDATE ACCUMULATED BLOBS ==="
 
-          echo "$FIELDS_JSON" | jq empty 2>/dev/null || { echo "FIELDS_JSON invalid AFTER LOOP"; exit 1; }
-          echo "$DAYS_JSON"   | jq empty 2>/dev/null || { echo "DAYS_JSON invalid AFTER LOOP";   exit 1; }
-          echo "$WEEKS_JSON"  | jq empty 2>/dev/null || { echo "WEEKS_JSON invalid AFTER LOOP";  exit 1; }
-          echo "$MONTHS_JSON" | jq empty 2>/dev/null || { echo "MONTHS_JSON invalid AFTER LOOP"; exit 1; }
+          if ! echo "$FIELDS_JSON" | jq empty >/dev/null 2>&1; then
+            echo "FIELDS_JSON invalid AFTER LOOP"
+            mkdir -p data
+            echo "$FIELDS_JSON" > data/error_fields_after_loop.json
+            exit 1
+          fi
+
+          if ! echo "$DAYS_JSON" | jq empty >/dev/null 2>&1; then
+            echo "DAYS_JSON invalid AFTER LOOP"
+            mkdir -p data
+            echo "$DAYS_JSON" > data/error_days_after_loop.json
+            exit 1
+          fi
+
+          if ! echo "$WEEKS_JSON" | jq empty >/dev/null 2>&1; then
+            echo "WEEKS_JSON invalid AFTER LOOP"
+            mkdir -p data
+            echo "$WEEKS_JSON" > data/error_weeks_after_loop.json
+            exit 1
+          fi
+
+          if ! echo "$MONTHS_JSON" | jq empty >/dev/null 2>&1; then
+            echo "MONTHS_JSON invalid AFTER LOOP"
+            mkdir -p data
+            echo "$MONTHS_JSON" > data/error_months_after_loop.json
+            exit 1
+          fi
 
           echo "=== WRITE DEBUG FILES ==="
           mkdir -p data
@@ -163,7 +178,6 @@ jobs:
 
           echo "=== FINAL MERGE WITH jq -n ==="
 
-          # If this fails, we already know all inputs are valid JSON; we’ll see jq’s error.
           FINAL_JSON=$(jq -n \
             --arg start "$START" \
             --arg end "$END" \
@@ -186,13 +200,14 @@ jobs:
           echo "$FINAL_JSON"  > data/availability.json
           echo "$SEARCH_JSON" > data/search_index.json
 
-      - name: Commit updated JSON
+      - name: Commit updated JSON + diagnostics
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add data/availability.json data/search_index.json \
                   data/debug_fields.json data/debug_days.json \
                   data/debug_weeks.json data/debug_months.json \
-                  data/debug_search.json
+                  data/debug_search.json \
+                  data/error_* || true
           git commit -m "Diagnostic build: availability + search index" || echo "No changes to commit"
-          git push
+          git push || echo "No push"
