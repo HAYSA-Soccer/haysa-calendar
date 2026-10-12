@@ -51,7 +51,7 @@ jobs:
           echo "season_start=$START" >> $GITHUB_OUTPUT
           echo "season_end=$END" >> $GITHUB_OUTPUT
 
-      - name: Build availability + search index (diagnostic)
+      - name: Build availability + search index (file-based, diagnostic)
         run: |
           START="${{ steps.season.outputs.season_start }}"
           END="${{ steps.season.outputs.season_end }}"
@@ -59,6 +59,8 @@ jobs:
           echo "=== BUILD WINDOW ==="
           echo "START=$START"
           echo "END=$END"
+
+          mkdir -p data/tmp_days data/tmp_search
 
           echo "=== FETCH FIELDS ==="
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
@@ -74,11 +76,6 @@ jobs:
           fi
 
           FIELDS_JSON="$FIELDS_RAW"
-
-          DAYS_JSON="{}"
-          WEEKS_JSON="{}"
-          MONTHS_JSON="{}"
-          SEARCH_JSON="{}"
 
           CURRENT="$START"
 
@@ -100,73 +97,60 @@ jobs:
               exit 1
             fi
 
-            DAY_DATA="$RAW_DAY"
+            # Store per-day JSON to file
+            echo "$RAW_DAY" > "data/tmp_days/${CURRENT}.json"
 
-            DAYS_JSON=$(jq --arg d "$CURRENT" '
-              .[$d] = input
-            ' <<<"$DAYS_JSON" <<<"$DAY_DATA")
-
-            WEEK_ID=$(date -d "$CURRENT" +%Y)-W$(date -d "$CURRENT" +%U)
-
-            WEEKS_JSON=$(jq --arg w "$WEEK_ID" --arg d "$CURRENT" '
-              .[$w] = (.[$w] // {}) | .[$w][$d] = input
-            ' <<<"$WEEKS_JSON" <<<"$DAY_DATA")
-
-            MONTH_ID=$(date -d "$CURRENT" +%Y-%m)
-
-            MONTHS_JSON=$(jq --arg m "$MONTH_ID" --arg d "$CURRENT" '
-              .[$m] = (.[$m] // {}) | .[$m][$d] = input
-            ' <<<"$MONTHS_JSON" <<<"$DAY_DATA")
-
-            COMPLEXES=$(jq -r '.complex_timeline | keys[]' <<<"$DAY_DATA")
+            # Build per-day search index file
+            COMPLEXES=$(echo "$RAW_DAY" | jq -r '.complex_timeline | keys[]')
             DAY_SEARCH="{}"
 
             for CX in $COMPLEXES; do
-              WINDOWS=$(jq --arg cx "$CX" '.complex_timeline[$cx]' <<<"$DAY_DATA")
-
-              DAY_SEARCH=$(jq --arg cx "$CX" '
-                .[$cx] = input
-              ' <<<"$DAY_SEARCH" <<<"$WINDOWS")
+              WINDOWS=$(echo "$RAW_DAY" | jq --arg cx "$CX" '.complex_timeline[$cx]')
+              DAY_SEARCH=$(echo "$DAY_SEARCH" | jq --arg cx "$CX" --argjson w "$WINDOWS" '.[$cx] = $w')
             done
 
-            SEARCH_JSON=$(jq --arg d "$CURRENT" '
-              .[$d] = input
-            ' <<<"$SEARCH_JSON" <<<"$DAY_SEARCH")
+            echo "$DAY_SEARCH" > "data/tmp_search/${CURRENT}.json"
 
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
 
           echo "=== LOOP COMPLETE ==="
 
+          echo "=== BUILD DAYS_JSON FROM FILES ==="
+          DAYS_JSON=$(jq -s '
+            reduce .[] as $d ({}; .[$d.date] = $d)
+          ' data/tmp_days/*.json)
+
+          echo "=== BUILD WEEKS_JSON FROM FILES ==="
+          WEEKS_JSON=$(jq -s '
+            reduce .[] as $d ({}; 
+              .[(($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y")) + "-W" + ($d.date | strptime("%Y-%m-%d") | mktime | strftime("%U")))] 
+              |= (. // {}) | .[$d.date] = $d
+            )
+          ' data/tmp_days/*.json)
+
+          echo "=== BUILD MONTHS_JSON FROM FILES ==="
+          MONTHS_JSON=$(jq -s '
+            reduce .[] as $d ({}; 
+              .[($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y-%m"))] 
+              |= (. // {}) | .[$d.date] = $d
+            )
+          ' data/tmp_days/*.json)
+
+          echo "=== BUILD SEARCH_JSON FROM FILES ==="
+          SEARCH_JSON=$(jq -s '
+            reduce .[] as $s ({}; .[$s.date] = $s.index)
+          ' <(jq -s '
+              map({date: (input_filename | split("/")[-1] | split(".")[0]), index: .})
+            ' data/tmp_search/*.json))
+
           echo "=== VALIDATE ACCUMULATED BLOBS ==="
 
-          if ! echo "$FIELDS_JSON" | jq empty >/dev/null 2>&1; then
-            echo "FIELDS_JSON invalid AFTER LOOP"
-            mkdir -p data
-            echo "$FIELDS_JSON" > data/error_fields_after_loop.json
-            exit 1
-          fi
-
-          if ! echo "$DAYS_JSON" | jq empty >/dev/null 2>&1; then
-            echo "DAYS_JSON invalid AFTER LOOP"
-            mkdir -p data
-            echo "$DAYS_JSON" > data/error_days_after_loop.json
-            exit 1
-          fi
-
-          if ! echo "$WEEKS_JSON" | jq empty >/dev/null 2>&1; then
-            echo "WEEKS_JSON invalid AFTER LOOP"
-            mkdir -p data
-            echo "$WEEKS_JSON" > data/error_weeks_after_loop.json
-            exit 1
-          fi
-
-          if ! echo "$MONTHS_JSON" | jq empty >/dev/null 2>&1; then
-            echo "MONTHS_JSON invalid AFTER LOOP"
-            mkdir -p data
-            echo "$MONTHS_JSON" > data/error_months_after_loop.json
-            exit 1
-          fi
+          echo "$FIELDS_JSON" | jq empty >/dev/null 2>&1 || { echo "FIELDS_JSON invalid AFTER BUILD"; exit 1; }
+          echo "$DAYS_JSON"   | jq empty >/dev/null 2>&1 || { echo "DAYS_JSON invalid AFTER BUILD";   exit 1; }
+          echo "$WEEKS_JSON"  | jq empty >/dev/null 2>&1 || { echo "WEEKS_JSON invalid AFTER BUILD";  exit 1; }
+          echo "$MONTHS_JSON" | jq empty >/dev/null 2>&1 || { echo "MONTHS_JSON invalid AFTER BUILD"; exit 1; }
+          echo "$SEARCH_JSON" | jq empty >/dev/null 2>&1 || { echo "SEARCH_JSON invalid AFTER BUILD"; exit 1; }
 
           echo "=== WRITE DEBUG FILES ==="
           mkdir -p data
@@ -209,5 +193,5 @@ jobs:
                   data/debug_weeks.json data/debug_months.json \
                   data/debug_search.json \
                   data/error_* || true
-          git commit -m "Diagnostic build: availability + search index" || echo "No changes to commit"
+          git commit -m "File-based build: availability + search index" || echo "No changes to commit"
           git push || echo "No push"
