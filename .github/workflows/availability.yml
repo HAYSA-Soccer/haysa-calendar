@@ -25,17 +25,22 @@ jobs:
       - name: Fetch season window
         id: season
         run: |
+          echo "Fetching season window..."
+
           RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
 
           if ! echo "$CLEAN" | jq empty >/dev/null 2>&1; then
-            echo "Season window JSON invalid"
+            echo "❌ Season window JSON invalid"
             exit 1
           fi
 
           START=$(echo "$CLEAN" | jq -r '.season_start')
           END=$(echo "$CLEAN" | jq -r '.season_end')
+
+          echo "Season start: $START"
+          echo "Season end:   $END"
 
           echo "season_start=$START" >> $GITHUB_OUTPUT
           echo "season_end=$END" >> $GITHUB_OUTPUT
@@ -45,26 +50,40 @@ jobs:
           START="${{ steps.season.outputs.season_start }}"
           END="${{ steps.season.outputs.season_end }}"
 
+          echo "------------------------------------------------------------"
+          echo "Building availability from $START through $END"
+          echo "------------------------------------------------------------"
+
           mkdir -p data/tmp_days data/tmp_search
 
           # Fetch fields
+          echo "Fetching field map..."
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
           if ! echo "$FIELDS_RAW" | jq empty >/dev/null 2>&1; then
-            echo "Fields JSON invalid"
+            echo "❌ Fields JSON invalid"
             exit 1
           fi
           FIELDS_JSON="$FIELDS_RAW"
+          echo "✔ Field map OK"
 
           CURRENT="$START"
 
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
+            echo ""
+            echo "------------------------------------------------------------"
+            echo "Processing date: $CURRENT"
+            echo "------------------------------------------------------------"
+
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
 
             if ! echo "$RAW_DAY" | jq empty >/dev/null 2>&1; then
-              echo "Bad JSON for $CURRENT"
+              echo "❌ Bad JSON for $CURRENT"
               exit 1
             fi
 
+            echo "✔ JSON OK for $CURRENT"
+
+            # Save day JSON
             echo "$RAW_DAY" > "data/tmp_days/${CURRENT}.json"
 
             # Build search index for this day
@@ -78,8 +97,15 @@ jobs:
 
             echo "$DAY_SEARCH" > "data/tmp_search/${CURRENT}.json"
 
+            echo "✔ Completed: $CURRENT"
+
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
+
+          echo ""
+          echo "------------------------------------------------------------"
+          echo "All dates processed. Building final JSON files..."
+          echo "------------------------------------------------------------"
 
           # Build days.json
           DAYS_JSON=$(jq -s '
@@ -134,13 +160,13 @@ jobs:
           echo "$FINAL_JSON"  > data/availability.json
           echo "$SEARCH_JSON" > data/search_index.json
 
+          echo "✔ Final JSON files written."
+
       - name: Commit updated JSON
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          # Stage only the real output files
           git add data/availability.json data/search_index.json
-
           git commit -m "Updated availability + search index" || echo "No changes to commit"
           git push
