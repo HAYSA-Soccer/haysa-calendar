@@ -59,11 +59,14 @@ jobs:
           # Fetch fields
           echo "Fetching field map..."
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
-          if ! echo "$FIELDS_RAW" | jq empty >/dev/null 2>&1; then
+          FIELDS_CLEAN=$(echo "$FIELDS_RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
+          if [ -z "$FIELDS_CLEAN" ]; then FIELDS_CLEAN="$FIELDS_RAW"; fi
+
+          if ! echo "$FIELDS_CLEAN" | jq empty >/dev/null 2>&1; then
             echo "❌ Fields JSON invalid"
             exit 1
           fi
-          FIELDS_JSON="$FIELDS_RAW"
+          FIELDS_JSON="$FIELDS_CLEAN"
           echo "✔ Field map OK"
 
           CURRENT="$START"
@@ -75,8 +78,10 @@ jobs:
             echo "------------------------------------------------------------"
 
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
+            CLEAN_DAY=$(echo "$RAW_DAY" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
+            if [ -z "$CLEAN_DAY" ]; then CLEAN_DAY="$RAW_DAY"; fi
 
-            if ! echo "$RAW_DAY" | jq empty >/dev/null 2>&1; then
+            if ! echo "$CLEAN_DAY" | jq empty >/dev/null 2>&1; then
               echo "❌ Bad JSON for $CURRENT"
               exit 1
             fi
@@ -84,14 +89,14 @@ jobs:
             echo "✔ JSON OK for $CURRENT"
 
             # Save day JSON
-            echo "$RAW_DAY" > "data/tmp_days/${CURRENT}.json"
+            echo "$CLEAN_DAY" > "data/tmp_days/${CURRENT}.json"
 
             # Build search index for this day
-            COMPLEXES=$(echo "$RAW_DAY" | jq -r '.complex_timeline | keys[]')
+            COMPLEXES=$(echo "$CLEAN_DAY" | jq -r '.complex_timeline | keys[]')
             DAY_SEARCH="{}"
 
             for CX in $COMPLEXES; do
-              WINDOWS=$(echo "$RAW_DAY" | jq --arg cx "$CX" '.complex_timeline[$cx]')
+              WINDOWS=$(echo "$CLEAN_DAY" | jq --arg cx "$CX" '.complex_timeline[$cx]')
               DAY_SEARCH=$(echo "$DAY_SEARCH" | jq --arg cx "$CX" --argjson w "$WINDOWS" '.[$cx] = $w')
             done
 
