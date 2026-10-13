@@ -5,8 +5,7 @@ let AVAIL = null;          // availability.json
 let SEARCH = null;         // search_index.json
 
 let currentDate = null;
-let currentView = "day";
-let SELECTED_MODE = "practice"; // practice/game (reserved if you expand modes later)
+let currentView = "week";  // default to week view
 let SELECTED_COMPLEXES = new Set();
 
 const HOURS = [
@@ -53,16 +52,25 @@ function insertTimestamp() {
 }
 
 /****************************************************
- * COMPLEX FILTERS
+ * COMPLEX FILTERS (per currentDate)
  ****************************************************/
 function renderComplexFilters() {
   const container = document.getElementById("complex-filters");
   const status = document.getElementById("complex-status");
-  if (!container || !AVAIL || !AVAIL.complexes) return;
+  if (!container || !AVAIL || !AVAIL.days || !currentDate) return;
+
+  const dayData = AVAIL.days[currentDate];
+  if (!dayData || !dayData.complex_timeline) {
+    container.innerHTML = "";
+    if (status) status.textContent = "No complexes for this date";
+    return;
+  }
+
+  const complexes = Object.keys(dayData.complex_timeline);
 
   let html = "";
-  Object.keys(AVAIL.complexes).forEach(cx => {
-    const active = SELECTED_COMPLEXES.has(cx) ? "active" : "";
+  complexes.forEach(cx => {
+    const active = SELECTED_COMPLEXES.size === 0 || SELECTED_COMPLEXES.has(cx) ? "active" : "";
     html += `
       <button class="complex-btn ${active}" data-cx="${cx}">
         ${cx}
@@ -120,7 +128,7 @@ function switchView(mode) {
 }
 
 /****************************************************
- * DAY VIEW (STATIC JSON)
+ * DAY VIEW (complex_timeline)
  ****************************************************/
 function renderDayView() {
   const container = document.getElementById("view-container");
@@ -141,6 +149,7 @@ function renderDayView() {
     d.setDate(d.getDate() - 1);
     currentDate = d.toISOString().split("T")[0];
     renderDayView();
+    renderComplexFilters();
   };
 
   document.getElementById("nextDay").onclick = () => {
@@ -148,6 +157,7 @@ function renderDayView() {
     d.setDate(d.getDate() + 1);
     currentDate = d.toISOString().split("T")[0];
     renderDayView();
+    renderComplexFilters();
   };
 
   const dayData = AVAIL.days[currentDate];
@@ -159,9 +169,6 @@ function renderDayView() {
   renderDayCalendar(dayData);
 }
 
-/****************************************************
- * DAY CALENDAR (complex_timeline)
- ****************************************************/
 function renderDayCalendar(dayData) {
   const container = document.getElementById("dayResults");
   if (!container) return;
@@ -190,8 +197,9 @@ function renderDayCalendar(dayData) {
   visibleComplexes.forEach(cx => {
     const blocks = dayData.complex_timeline[cx];
 
+    const safeCx = cx.replace(/\W+/g, "_");
     const section = document.createElement("div");
-    section.className = `complex-section complex-accent-${cx.replace(/\s/g, "\\ ")}`;
+    section.className = `complex-section complex-accent-${safeCx}`;
 
     const title = document.createElement("h3");
     title.textContent = cx;
@@ -245,7 +253,6 @@ function renderDayCalendar(dayData) {
       card.addEventListener("mouseenter", () => {
         const tip = document.createElement("div");
         tip.className = "week-block-tooltip";
-
         tip.textContent = `${b.type.toUpperCase()} • ${b.start_12}–${b.end_12} • ${b.fields.length} fields`;
 
         document.body.appendChild(tip);
@@ -272,13 +279,12 @@ function renderDayCalendar(dayData) {
 }
 
 /****************************************************
- * WEEK VIEW (STATIC JSON + complex_timeline)
+ * WEEK VIEW (complex_timeline)
  ****************************************************/
 function getWeekRange(date) {
   const d = new Date(date);
   const dow = d.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
 
-  // Shift so Monday becomes the first day of the week
   const diffToMonday = (dow === 0 ? -6 : 1 - dow);
 
   const monday = new Date(d);
@@ -293,7 +299,6 @@ function getWeekRange(date) {
 
   return days;
 }
-
 
 function renderWeekTimeline() {
   const container = document.getElementById("view-container");
@@ -313,7 +318,6 @@ function renderWeekTimeline() {
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
 
-    // ⭐ Highlight today
     if (dateStr === todayStr) {
       dayCol.classList.add("today");
     }
@@ -359,8 +363,9 @@ function renderWeekTimeline() {
 
     visibleComplexes.forEach(cx => {
       const blocks = dayData.complex_timeline[cx];
-      const maxFields = Math.max(...blocks.map(b => b.fields.length));
+      if (!blocks || !blocks.length) return;
 
+      const maxFields = Math.max(...blocks.map(b => b.fields.length));
       const laneAssignments = [];
 
       blocks.forEach(b => {
@@ -419,7 +424,6 @@ function renderWeekTimeline() {
           block.addEventListener("mouseenter", () => {
             const tip = document.createElement("div");
             tip.className = "week-block-tooltip";
-
             tip.textContent = `${b.type.toUpperCase()} • ${b.start_12}–${b.end_12} • ${b.fields.length} fields`;
 
             document.body.appendChild(tip);
@@ -440,7 +444,7 @@ function renderWeekTimeline() {
 
           block.addEventListener("click", () => {
             currentDate = dateStr;
-            switchView("week");
+            switchView("day");
           });
 
           body.appendChild(block);
@@ -455,9 +459,8 @@ function renderWeekTimeline() {
   container.appendChild(timeline);
 }
 
-
 /****************************************************
- * MONTH VIEW (STATIC JSON)
+ * MONTH VIEW (stub)
  ****************************************************/
 function renderMonthView() {
   const container = document.getElementById("view-container");
@@ -465,16 +468,21 @@ function renderMonthView() {
 
   container.innerHTML = `
     <h2>Month View</h2>
-    <p>Month view will use AVAIL.months[...] data.</p>
+    <p>Month view will use AVAIL.months[...] data (to be implemented).</p>
   `;
 }
 
 /****************************************************
- * SEARCH VIEW (STATIC JSON + FULL/PARTIAL/NEARBY)
+ * SEARCH VIEW (uses SEARCH + complex_timeline names)
  ****************************************************/
 function renderSearchView() {
   const container = document.getElementById("view-container");
   if (!container) return;
+
+  const dayData = AVAIL.days[currentDate];
+  const complexes = dayData && dayData.complex_timeline
+    ? Object.keys(dayData.complex_timeline)
+    : [];
 
   container.innerHTML = `
     <h2>Search</h2>
@@ -482,7 +490,7 @@ function renderSearchView() {
       <label>Date: <input type="date" id="searchDate" value="${currentDate}"></label>
       <label>Complex:
         <select id="searchComplex">
-          ${Object.keys(AVAIL.complexes).map(cx => `<option value="${cx}">${cx}</option>`).join("")}
+          ${complexes.map(cx => `<option value="${cx}">${cx}</option>`).join("")}
         </select>
       </label>
       <label>Start: <input type="time" id="searchStart" value="17:00"></label>
@@ -586,14 +594,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   currentDate = new Date().toISOString().split("T")[0];
 
   await loadAllData();
-
-  const modeSelect = document.getElementById("schedModeSelect");
-  if (modeSelect) {
-    modeSelect.addEventListener("change", e => {
-      SELECTED_MODE = e.target.value;
-      renderCurrentView();
-    });
-  }
 
   document.querySelectorAll(".nav button").forEach(btn => {
     btn.addEventListener("click", () => {
