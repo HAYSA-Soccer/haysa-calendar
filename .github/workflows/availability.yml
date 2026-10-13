@@ -26,6 +26,7 @@ jobs:
         id: season
         run: |
           RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
+
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
 
@@ -61,6 +62,7 @@ jobs:
 
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
+
             CLEAN_DAY=$(echo "$RAW_DAY" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
             if [ -z "$CLEAN_DAY" ]; then CLEAN_DAY="$RAW_DAY"; fi
 
