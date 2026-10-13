@@ -1,16 +1,29 @@
 {
   "2026-10-12": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": [
+    "full": [
+      {
+        "type": "free",
+        "start": "19:00",
+        "end": "21:00",
+        "start_12": "7:00 PM",
+        "end_12": "9:00 PM",
+        "fields": [
+          "H-HST"
+        ]
+      }
+    ],
+    "half": []
+  },
+  "2026-10-13": {
+    "full": [
       {
         "type": "practice",
         "start": "18:00",
-        "end": "19:00",
+        "end": "18:30",
         "start_12": "6:00 PM",
-        "end_12": "7:00 PM",
+        "end_12": "6:30 PM",
         "fields": [
-          "H-HST1"
+          "H-Su2"
         ]
       },
       {
@@ -20,107 +33,133 @@
         "start_12": "7:00 PM",
         "end_12": "9:00 PM",
         "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2"
+          "H-HST"
         ]
       }
-    ]
+    ],
+    "half": []
   },
-  "2026-10-13": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": [
+  "2026-10-14": {
+    "full": [
       {
-        "type": "free",
-        "start": "19:30",
-        "end": "21:00",
-        "start_12": "7:30 PM",
-        "end_12": "9:00 PM",
+        "type": "practice",
+        "start": "18:00",
+        "end": "18:30",
+        "start_12": "6:00 PM",
+        "end_12": "6:30 PM",
         "fields": [
-          "H-HST",
-          "H-HST2"
+          "H-SJ4"
         ]
       },
       {
-        "type": "practice",
-        "start": "19:30",
-        "end": "21:00",
-        "start_12": "7:30 PM",
-        "end_12": "9:00 PM",
-        "fields": [
-          "H-HST1"
-        ]
-      }
-    ]
-  },
-  "2026-10-14": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": [
-      {
         "type": "free",
-        "start": "19:30",
+        "start": "19:00",
         "end": "21:00",
-        "start_12": "7:30 PM",
+        "start_12": "7:00 PM",
         "end_12": "9:00 PM",
         "fields": [
           "H-HST"
         ]
-      },
-      {
-        "type": "practice",
-        "start": "19:30",
-        "end": "21:00",
-        "start_12": "7:30 PM",
-        "end_12": "9:00 PM",
-        "fields": [
-          "H-HST1",
-          "H-HST2"
-        ]
       }
-    ]
+    ],
+    "half": []
   },
   "2026-10-15": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": [
+    "full": [
       {
         "type": "free",
-        "start": "19:30",
-        "end": "21:00",
-        "start_12": "7:30 PM",
-        "end_12": "9:00 PM",
+        "start": "17:00",
+        "end": "17:30",
+        "start_12": "5:00 PM",
+        "end_12": "5:30 PM",
         "fields": [
-          "H-HST",
-          "H-HST2"
+          "H-SJ4"
         ]
       },
       {
         "type": "practice",
-        "start": "19:30",
+        "start": "18:00",
+        "end": "18:30",
+        "start_12": "6:00 PM",
+        "end_12": "6:30 PM",
+        "fields": [
+          "H-Su1",
+          "H-SJ4"
+        ]
+      },
+      {
+        "type": "free",
+        "start": "19:00",
         "end": "21:00",
-        "start_12": "7:30 PM",
+        "start_12": "7:00 PM",
         "end_12": "9:00 PM",
         "fields": [
-          "H-HST1"
+          "H-HST"
         ]
       }
-    ]
+    ],
+    "half": []
   },
   "2026-10-16": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": []
+    "full": [
+      {
+        "type": "practice",
+        "start": "18:00",
+        "end": "18:30",
+        "start_12": "6:00 PM",
+        "end_12": "6:30 PM",
+        "fields": [
+          "H-SJ3"
+        ]
+      },
+      {
+        "type": "free",
+        "start": "18:30",
+        "end": "19:00",
+        "start_12": "6:30 PM",
+        "end_12": "7:00 PM",
+        "fields": [
+          "H-Su1",
+          "H-Su2",
+          "H-SJ3",
+          "H-SJ4"
+        ]
+      }
+    ],
+    "half": []
   },
   "2026-10-17": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": []
+    "full": [
+      {
+        "type": "game",
+        "start": "11:00",
+        "end": "12:00",
+        "start_12": "11:00 AM",
+        "end_12": "12:00 PM",
+        "fields": [
+          "H-Su1",
+          "H-Su2",
+          "H-SJ4"
+        ]
+      },
+      {
+        "type": "free",
+        "start": "16:00",
+        "end": "19:00",
+        "start_12": "4:00 PM",
+        "end_12": "7:00 PM",
+        "fields": [
+          "H-Su1",
+          "H-Su2",
+          "H-SJ3",
+          "H-SJ4"
+        ]
+      }
+    ],
+    "half": []
   },
   "2026-10-18": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": []
+    "full": [],
+    "half": []
   }
 }
