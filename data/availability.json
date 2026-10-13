@@ -1021,7 +1021,7 @@
           }
         ],
         "TURF": [],
-        "full": [
+        "OTHER": [
           {
             "type": "free",
             "start": "08:00",
@@ -1032,8 +1032,7 @@
               "H-SJ3"
             ]
           }
-        ],
-        "half": []
+        ]
       }
     },
     "2026-10-18": {
@@ -1172,8 +1171,9 @@
       "blocks": {},
       "merged": [],
       "complex_timeline": {
-        "full": [],
-        "half": []
+        "OTHER": [],
+        "TURF": [],
+        "SUMNER/SEAN JOYCE": []
       }
     }
   },
@@ -2085,7 +2085,7 @@
           }
         ],
         "TURF": [],
-        "full": [
+        "OTHER": [
           {
             "type": "free",
             "start": "08:00",
@@ -2096,8 +2096,7 @@
               "H-SJ3"
             ]
           }
-        ],
-        "half": []
+        ]
       }
     },
     "2026-W42": {},
@@ -2237,8 +2236,9 @@
       "blocks": {},
       "merged": [],
       "complex_timeline": {
-        "full": [],
-        "half": []
+        "OTHER": [],
+        "TURF": [],
+        "SUMNER/SEAN JOYCE": []
       }
     }
   },
@@ -3150,7 +3150,7 @@
           }
         ],
         "TURF": [],
-        "full": [
+        "OTHER": [
           {
             "type": "free",
             "start": "08:00",
@@ -3161,8 +3161,7 @@
               "H-SJ3"
             ]
           }
-        ],
-        "half": []
+        ]
       }
     },
     "2026-10-18": {
@@ -3301,8 +3300,9 @@
       "blocks": {},
       "merged": [],
       "complex_timeline": {
-        "full": [],
-        "half": []
+        "OTHER": [],
+        "TURF": [],
+        "SUMNER/SEAN JOYCE": []
       }
     }
   }

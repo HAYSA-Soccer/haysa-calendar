@@ -1,9 +1,6 @@
 {
   "2026-10-17": {
-    "SUMNER/SEAN": null,
-    "JOYCE": null,
-    "TURF": [],
-    "full": [
+    "OTHER": [
       {
         "type": "free",
         "start": "08:00",
@@ -15,10 +12,14 @@
         ]
       }
     ],
-    "half": []
+    "SUMNER/SEAN": null,
+    "JOYCE": null,
+    "TURF": []
   },
   "2026-10-18": {
-    "full": [],
-    "half": []
+    "OTHER": [],
+    "SUMNER/SEAN": null,
+    "JOYCE": null,
+    "TURF": []
   }
 }
