@@ -920,6 +920,20 @@
         }
       ],
       "complex_timeline": {
+        "full": [
+          {
+            "type": "free",
+            "start": "08:00",
+            "end": "19:00",
+            "start_12": "8:00 AM",
+            "end_12": "7:00 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          }
+        ],
+        "TURF": [],
+        "half": [],
         "SUMNER/SEAN JOYCE": [
           {
             "type": "game",
@@ -928,9 +942,9 @@
             "start_12": "8:30 AM",
             "end_12": "9:30 AM",
             "fields": [
-              "H-SJ4A",
+              "H-Su1A",
               "H-SJ3A",
-              "H-Su1A"
+              "H-SJ4A"
             ]
           },
           {
@@ -940,8 +954,8 @@
             "start_12": "9:45 AM",
             "end_12": "10:45 AM",
             "fields": [
-              "H-Su2A",
-              "H-Su1A"
+              "H-Su1A",
+              "H-Su2A"
             ]
           },
           {
@@ -963,8 +977,8 @@
             "end_12": "12:00 PM",
             "fields": [
               "H-Su1",
-              "H-SJ4",
-              "H-Su2"
+              "H-Su2",
+              "H-SJ4"
             ]
           },
           {
@@ -1015,21 +1029,8 @@
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
-              "H-SJ4",
-              "H-Su2"
-            ]
-          }
-        ],
-        "TURF": [],
-        "OTHER": [
-          {
-            "type": "free",
-            "start": "08:00",
-            "end": "19:00",
-            "start_12": "8:00 AM",
-            "end_12": "7:00 PM",
-            "fields": [
-              "H-SJ3"
+              "H-Su2",
+              "H-SJ4"
             ]
           }
         ]
@@ -1171,9 +1172,8 @@
       "blocks": {},
       "merged": [],
       "complex_timeline": {
-        "OTHER": [],
-        "TURF": [],
-        "SUMNER/SEAN JOYCE": []
+        "full": [],
+        "half": []
       }
     }
   },
@@ -1984,6 +1984,20 @@
         }
       ],
       "complex_timeline": {
+        "full": [
+          {
+            "type": "free",
+            "start": "08:00",
+            "end": "19:00",
+            "start_12": "8:00 AM",
+            "end_12": "7:00 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          }
+        ],
+        "TURF": [],
+        "half": [],
         "SUMNER/SEAN JOYCE": [
           {
             "type": "game",
@@ -1992,9 +2006,9 @@
             "start_12": "8:30 AM",
             "end_12": "9:30 AM",
             "fields": [
-              "H-SJ4A",
+              "H-Su1A",
               "H-SJ3A",
-              "H-Su1A"
+              "H-SJ4A"
             ]
           },
           {
@@ -2004,8 +2018,8 @@
             "start_12": "9:45 AM",
             "end_12": "10:45 AM",
             "fields": [
-              "H-Su2A",
-              "H-Su1A"
+              "H-Su1A",
+              "H-Su2A"
             ]
           },
           {
@@ -2027,8 +2041,8 @@
             "end_12": "12:00 PM",
             "fields": [
               "H-Su1",
-              "H-SJ4",
-              "H-Su2"
+              "H-Su2",
+              "H-SJ4"
             ]
           },
           {
@@ -2079,21 +2093,8 @@
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
-              "H-SJ4",
-              "H-Su2"
-            ]
-          }
-        ],
-        "TURF": [],
-        "OTHER": [
-          {
-            "type": "free",
-            "start": "08:00",
-            "end": "19:00",
-            "start_12": "8:00 AM",
-            "end_12": "7:00 PM",
-            "fields": [
-              "H-SJ3"
+              "H-Su2",
+              "H-SJ4"
             ]
           }
         ]
@@ -2236,9 +2237,8 @@
       "blocks": {},
       "merged": [],
       "complex_timeline": {
-        "OTHER": [],
-        "TURF": [],
-        "SUMNER/SEAN JOYCE": []
+        "full": [],
+        "half": []
       }
     }
   },
@@ -3049,6 +3049,20 @@
         }
       ],
       "complex_timeline": {
+        "full": [
+          {
+            "type": "free",
+            "start": "08:00",
+            "end": "19:00",
+            "start_12": "8:00 AM",
+            "end_12": "7:00 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          }
+        ],
+        "TURF": [],
+        "half": [],
         "SUMNER/SEAN JOYCE": [
           {
             "type": "game",
@@ -3057,9 +3071,9 @@
             "start_12": "8:30 AM",
             "end_12": "9:30 AM",
             "fields": [
-              "H-SJ4A",
+              "H-Su1A",
               "H-SJ3A",
-              "H-Su1A"
+              "H-SJ4A"
             ]
           },
           {
@@ -3069,8 +3083,8 @@
             "start_12": "9:45 AM",
             "end_12": "10:45 AM",
             "fields": [
-              "H-Su2A",
-              "H-Su1A"
+              "H-Su1A",
+              "H-Su2A"
             ]
           },
           {
@@ -3092,8 +3106,8 @@
             "end_12": "12:00 PM",
             "fields": [
               "H-Su1",
-              "H-SJ4",
-              "H-Su2"
+              "H-Su2",
+              "H-SJ4"
             ]
           },
           {
@@ -3144,21 +3158,8 @@
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
-              "H-SJ4",
-              "H-Su2"
-            ]
-          }
-        ],
-        "TURF": [],
-        "OTHER": [
-          {
-            "type": "free",
-            "start": "08:00",
-            "end": "19:00",
-            "start_12": "8:00 AM",
-            "end_12": "7:00 PM",
-            "fields": [
-              "H-SJ3"
+              "H-Su2",
+              "H-SJ4"
             ]
           }
         ]
@@ -3300,9 +3301,8 @@
       "blocks": {},
       "merged": [],
       "complex_timeline": {
-        "OTHER": [],
-        "TURF": [],
-        "SUMNER/SEAN JOYCE": []
+        "full": [],
+        "half": []
       }
     }
   }
