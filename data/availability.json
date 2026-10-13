@@ -322,7 +322,24 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "6d7914c32fb3dcad6df72e92a9a68912",
+            "date": "2026-10-12",
+            "start": "17:30",
+            "end": "19:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Ball) Practice",
+            "team": "3/4 Boys Travel",
+            "coach": "Ball",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -434,6 +451,19 @@
           "title": ""
         },
         {
+          "field": "H-HST1",
+          "start": "17:30",
+          "end": "19:00",
+          "start_12": "5:30 PM",
+          "end_12": "7:00 PM",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Ball) Practice",
+          "team": "3/4 Boys Travel",
+          "coach": "Ball",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -464,10 +494,20 @@
       "complex_timeline": {
         "TURF": [
           {
-            "type": "free",
+            "type": "practice",
             "start": "18:00",
-            "end": "21:00",
+            "end": "19:00",
             "start_12": "6:00 PM",
+            "end_12": "7:00 PM",
+            "fields": [
+              "H-HST1"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "19:00",
+            "end": "21:00",
+            "start_12": "7:00 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
@@ -708,7 +748,86 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "5168e51c6b7cc7541f01ef67062db4d2",
+            "date": "2026-10-13",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Boys Travel (Collins) Practice",
+            "team": "7/8 Boys Travel",
+            "coach": "Collins",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "b21c3e6823c235955118285522acbcb2",
+            "date": "2026-10-13",
+            "start": "17:00",
+            "end": "18:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Lamb-Williams) Practice",
+            "team": "3/4 Girls Travel",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "80c6b649c67d285d539e9dee9c6f370f",
+            "date": "2026-10-13",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Wm. Perry Trucking (Orange) Practice",
+            "team": "Wm. Perry Trucking",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "23804043be68967801e1e4ff47153076",
+            "date": "2026-10-13",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "The Sean Joyce Foundation (Red) Practice",
+            "team": "The Sean Joyce Foundation",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "231dc1360e1e0d8ad0f787bc03a13245",
+            "date": "2026-10-13",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. Practice",
+            "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc.",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -820,6 +939,58 @@
           "title": ""
         },
         {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:30",
+          "start_12": "5:00 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "3/4 Girls Travel (Lamb-Williams) Practice",
+          "team": "3/4 Girls Travel",
+          "coach": "Lamb-Williams",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "The Sean Joyce Foundation (Red) Practice",
+          "team": "The Sean Joyce Foundation",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Wm. Perry Trucking (Orange) Practice",
+          "team": "Wm. Perry Trucking",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. Practice",
+          "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc.",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -845,29 +1016,63 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Boys Travel (Collins) Practice",
+          "team": "7/8 Boys Travel",
+          "coach": "Collins",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
-              "H-HST1",
               "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
+              "H-HST1"
             ]
           }
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "17:30",
+            "end": "18:30",
+            "start_12": "5:30 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su1",
+              "H-Su2",
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -1094,7 +1299,132 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "1917cb8c5b20502d41aae9b53acd9317",
+            "date": "2026-10-14",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Girls Travel (Casavant) Practice",
+            "team": "5/6 Girls Travel",
+            "coach": "Casavant",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "e505b39c25747c57f57d4071e24c564a",
+            "date": "2026-10-14",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Walsh) Practice",
+            "team": "5/6 Boys Travel",
+            "coach": "Walsh",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-HST2": [
+          {
+            "event_id": "f1bd4e35ded94dc2c453cfa5b41e0a48",
+            "date": "2026-10-14",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST2",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Girls Travel (Caldwell) Practice",
+            "team": "7/8 Girls Travel",
+            "coach": "Caldwell",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "5d9eac87b9de5744aea710e55660ad18",
+            "date": "2026-10-14",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Summit's Place (Green) Practice",
+            "team": "Summit's Place",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "2142f02b2d7710345c2a5d3099f2ad42",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "www.slamyourday.com (Green) Practice",
+            "team": "www.slamyourday.com",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "802c7bb3b41dcc15908b6845bdec0be3",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Troupe Waste & Recycling (Green) Practice",
+            "team": "Troupe Waste & Recycling",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "da0b5651d0bfe7c7e9500853a14da5fd",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Edwards Built Pavements (Blue) Practice",
+            "team": "Edwards Built Pavements",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "7e99bb7c9825b52ce74c2d703de9d73d",
+            "date": "2026-10-14",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Wm. Perry Auto Repair (Orange) Practice",
+            "team": "Wm. Perry Auto Repair",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -1206,6 +1536,71 @@
           "title": ""
         },
         {
+          "field": "H-SJ3",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Summit's Place (Green) Practice",
+          "team": "Summit's Place",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "www.slamyourday.com (Green) Practice",
+          "team": "www.slamyourday.com",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Troupe Waste & Recycling (Green) Practice",
+          "team": "Troupe Waste & Recycling",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Edwards Built Pavements (Blue) Practice",
+          "team": "Edwards Built Pavements",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Wm. Perry Auto Repair (Orange) Practice",
+          "team": "Wm. Perry Auto Repair",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -1231,18 +1626,66 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Boys Travel (Walsh) Practice",
+          "team": "5/6 Boys Travel",
+          "coach": "Walsh",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "5/6 Girls Travel (Casavant) Practice",
+          "team": "5/6 Girls Travel",
+          "coach": "Casavant",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST2",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Girls Travel (Caldwell) Practice",
+          "team": "7/8 Girls Travel",
+          "coach": "Caldwell",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
-              "H-HST",
+              "H-HST"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
               "H-HST1",
               "H-HST2"
             ]
@@ -1250,10 +1693,20 @@
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -1480,7 +1933,160 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "71ea6358ca420d7ef6725859c412fd85",
+            "date": "2026-10-15",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Girls Travel (Baird-Miller) Practice",
+            "team": "5/6 Girls Travel",
+            "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "67d14f2ea1f3a975d7523a10b12e6a27",
+            "date": "2026-10-15",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Boys Travel (Mills) Practice",
+            "team": "7/8 Boys Travel",
+            "coach": "Mills",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-HST2": [
+          {
+            "event_id": "6689105b54f151f60639578750463703",
+            "date": "2026-10-15",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST2",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Ayers) Practice",
+            "team": "5/6 Boys Travel",
+            "coach": "Ayers",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "27c0875879755815919d1e87a9cddac3",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Team 1 - Edwards Built Pavements Practice",
+            "team": "3/4 Girls Team 1 - Edwards Built Pavements",
+            "coach": "",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1b5221dbf88efbc718543024bc73b10a",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "5/6/7 Girls Team 1 - Best Collision Practice",
+            "team": "5/6/7 Girls Team 1 - Best Collision",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "b7a3f25abe9be3aa9e8d0248b503a9b2",
+            "date": "2026-10-15",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Hornets Nest Solutions LLC (Red) Practice",
+            "team": "Hornets Nest Solutions LLC",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "19de43033adbbae103bab621f3131007",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "The Red House Academy (Red) Practice",
+            "team": "The Red House Academy",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "0bf6bf18d647bd99b0e8f279813e232c",
+            "date": "2026-10-15",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Avon Septic and Pumping (Blue) Practice",
+            "team": "Avon Septic and Pumping",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "d1c3a51bbbd077667a76a3eebfa6088c",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Hope and Future Home Care Services (Blue) Practice",
+            "team": "Hope and Future Home Care Services",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "7fa76857a9c4e40b2c271a4a0c97c697",
+            "date": "2026-10-15",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Abington Bank (Red) Practice",
+            "team": "Abington Bank",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -1592,6 +2198,97 @@
           "title": ""
         },
         {
+          "field": "H-Su2",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Abington Bank (Red) Practice",
+          "team": "Abington Bank",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "3/4 Girls Team 1 - Edwards Built Pavements Practice",
+          "team": "3/4 Girls Team 1 - Edwards Built Pavements",
+          "coach": "",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "5/6/7 Girls Team 1 - Best Collision Practice",
+          "team": "5/6/7 Girls Team 1 - Best Collision",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "The Red House Academy (Red) Practice",
+          "team": "The Red House Academy",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Hope and Future Home Care Services (Blue) Practice",
+          "team": "Hope and Future Home Care Services",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Hornets Nest Solutions LLC (Red) Practice",
+          "team": "Hornets Nest Solutions LLC",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Avon Septic and Pumping (Blue) Practice",
+          "team": "Avon Septic and Pumping",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -1617,29 +2314,88 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Girls Travel (Baird-Miller) Practice",
+          "team": "5/6 Girls Travel",
+          "coach": "Baird-Miller",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST2",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Boys Travel (Ayers) Practice",
+          "team": "5/6 Boys Travel",
+          "coach": "Ayers",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Boys Travel (Mills) Practice",
+          "team": "7/8 Boys Travel",
+          "coach": "Mills",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
-              "H-HST1",
               "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
+              "H-HST1"
             ]
           }
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su1",
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -1851,7 +2607,86 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-Su2": [
+          {
+            "event_id": "b47812431e76f53b8e1f4158fead2912",
+            "date": "2026-10-16",
+            "start": "17:00",
+            "end": "18:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Osward) Practice",
+            "team": "3/4 Boys Travel",
+            "coach": "Osward",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "3ada53d67d7b213b01fc84af78b203c7",
+            "date": "2026-10-16",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Holbrook Community Center (Green) Practice",
+            "team": "Holbrook Community Center",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "3d49cc683f56d3ce43b740a147e061e7",
+            "date": "2026-10-16",
+            "start": "16:30",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Casavant) Practice",
+            "team": "3/4 Girls Travel",
+            "coach": "Casavant",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "3a527c0d1afce16615cf47690b920ea9",
+            "date": "2026-10-16",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Nielsen Eye Center (Orange) Practice",
+            "team": "Nielsen Eye Center",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "e6cb84a1df5eea58888b30b64be162f8",
+            "date": "2026-10-16",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Brockton Rox (Blue) Practice",
+            "team": "Brockton Rox",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -1961,16 +2796,92 @@
           "end_12": "7:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-Su2",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Holbrook Community Center (Green) Practice",
+          "team": "Holbrook Community Center",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "16:30",
+          "end": "18:00",
+          "start_12": "4:30 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "3/4 Girls Travel (Casavant) Practice",
+          "team": "3/4 Girls Travel",
+          "coach": "Casavant",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:30",
+          "start_12": "5:00 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Osward) Practice",
+          "team": "3/4 Boys Travel",
+          "coach": "Osward",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Nielsen Eye Center (Orange) Practice",
+          "team": "Nielsen Eye Center",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Brockton Rox (Blue) Practice",
+          "team": "Brockton Rox",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su2",
+              "H-SJ3"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -2182,7 +3093,314 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-SuSS": [
+          {
+            "event_id": "5dec9352d1945b4149a099b1b2853b69",
+            "date": "2026-10-17",
+            "start": "10:30",
+            "end": "11:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 10:30 AM Session Practice",
+            "team": "Mini Kickers 10:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "268c0d0b15be06e4ee98858613699949",
+            "date": "2026-10-17",
+            "start": "09:30",
+            "end": "10:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 9:30 AM Session Practice",
+            "team": "Mini Kickers 9:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "8d2c161e961f357cfcd3017ff1e5b59f",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 8:30 AM Session Practice",
+            "team": "Mini Kickers 8:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "513f9c7e87bd089bbf7419086f134fc5",
+            "date": "2026-10-17",
+            "start": "11:30",
+            "end": "12:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 11:30 AM Session Practice",
+            "team": "Mini Kickers 11:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "046d4648ca801a9a6b1d9949fac1986b",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Hornets Nest Solutions LLC (Red) vs. Wm. Perry Auto Repair (Orange)",
+            "team": "Hornets Nest Solutions LLC  vs. Wm. Perry Auto Repair (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1d68c0250621caabab05561d2d80429b",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "www.slamyourday.com (Green) vs. Brockton Rox (Blue)",
+            "team": "www.slamyourday.com  vs. Brockton Rox (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "e75097242af98281914e2aba4b6e9ddc",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "The Sean Joyce Foundation (Red) vs. Nielsen Eye Center (Orange)",
+            "team": "The Sean Joyce Foundation  vs. Nielsen Eye Center (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "76b77e5a78431cb83f0a4aa003c4e4d3",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Summit's Place (Green) vs. Hope and Future Home Care Services (Blue)",
+            "team": "Summit's Place  vs. Hope and Future Home Care Services (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "45469daf88c9bd5e17df126446eff788",
+            "date": "2026-10-17",
+            "start": "15:00",
+            "end": "16:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Travel (Lamb-Williams) vs. Stoughton",
+            "team": "3/4 Girls Travel  vs. Stoughton",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "5b5e4dfa4686702425bcc41ceb1af320",
+            "date": "2026-10-17",
+            "start": "13:45",
+            "end": "14:45",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Travel (Casavant) vs. Rockland",
+            "team": "3/4 Girls Travel  vs. Rockland",
+            "coach": "Casavant",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "0ece5f508d77621ce58e5446bbc21537",
+            "date": "2026-10-17",
+            "start": "12:30",
+            "end": "13:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Boys Travel (Osward) vs. Sharon",
+            "team": "3/4 Boys Travel  vs. Sharon",
+            "coach": "Osward",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "260abb350c60db4daf9bc5bec4b605eb",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Abington Bank (Red) vs. Wm. Perry Trucking (Orange)",
+            "team": "Abington Bank  vs. Wm. Perry Trucking (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "39728518759111be3b792263648a9891",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Troupe Waste & Recycling (Green) vs. Edwards Built Pavements (Blue)",
+            "team": "Troupe Waste & Recycling  vs. Edwards Built Pavements (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1841faa0ac7450c51a844110a8ada559",
+            "date": "2026-10-17",
+            "start": "09:45",
+            "end": "10:45",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+            "team": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "92b9ac0d81b59dda05500a71cde6628a",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+            "team": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+            "coach": "",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "f3af5687163538c40286f307f06dbda1",
+            "date": "2026-10-17",
+            "start": "09:45",
+            "end": "10:45",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+            "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "5ba2a8f2672dc2e9ead11d50d7547fec",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "The Red House Academy (Red) vs. Undercover Undercoaters Bridgewater (Orange)",
+            "team": "The Red House Academy  vs. Undercover Undercoaters Bridgewater (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "de2e0e326d1c8b9328e5e9b26e943376",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Holbrook Community Center (Green) vs. Avon Septic and Pumping (Blue)",
+            "team": "Holbrook Community Center  vs. Avon Septic and Pumping (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-HST": [
+          {
+            "event_id": "f14224cf94d43a01919b7bb14d618d27",
+            "date": "2026-10-17",
+            "start": "16:00",
+            "end": "17:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+            "team": "5/6 Boys Travel  vs. Sharon",
+            "coach": "Walsh",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "fcd28a9082b52fc70e37a1be16e8ba8b",
+            "date": "2026-10-17",
+            "start": "18:00",
+            "end": "19:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Girls Travel (Casavant) vs. Raynham",
+            "team": "5/6 Girls Travel  vs. Raynham",
+            "coach": "Casavant",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "614c51628c7e16df3b525410d97b2d5f",
+            "date": "2026-10-17",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
+            "team": "5/6 Girls Travel  vs. Sharon",
+            "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -2267,6 +3485,240 @@
           "title": ""
         },
         {
+          "field": "H-SuSS",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 8:30 AM Session Practice",
+          "team": "Mini Kickers 8:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "Hornets Nest Solutions LLC (Red) vs. Wm. Perry Auto Repair (Orange)",
+          "team": "Hornets Nest Solutions LLC  vs. Wm. Perry Auto Repair (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "Summit's Place (Green) vs. Hope and Future Home Care Services (Blue)",
+          "team": "Summit's Place  vs. Hope and Future Home Care Services (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+          "team": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+          "coach": "",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "09:30",
+          "end": "10:30",
+          "start_12": "9:30 AM",
+          "end_12": "10:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 9:30 AM Session Practice",
+          "team": "Mini Kickers 9:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "09:45",
+          "end": "10:45",
+          "start_12": "9:45 AM",
+          "end_12": "10:45 AM",
+          "type": "game",
+          "title": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+          "team": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "09:45",
+          "end": "10:45",
+          "start_12": "9:45 AM",
+          "end_12": "10:45 AM",
+          "type": "game",
+          "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+          "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "10:30",
+          "end": "11:30",
+          "start_12": "10:30 AM",
+          "end_12": "11:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 10:30 AM Session Practice",
+          "team": "Mini Kickers 10:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "www.slamyourday.com (Green) vs. Brockton Rox (Blue)",
+          "team": "www.slamyourday.com  vs. Brockton Rox (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "The Sean Joyce Foundation (Red) vs. Nielsen Eye Center (Orange)",
+          "team": "The Sean Joyce Foundation  vs. Nielsen Eye Center (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Abington Bank (Red) vs. Wm. Perry Trucking (Orange)",
+          "team": "Abington Bank  vs. Wm. Perry Trucking (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Troupe Waste & Recycling (Green) vs. Edwards Built Pavements (Blue)",
+          "team": "Troupe Waste & Recycling  vs. Edwards Built Pavements (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "The Red House Academy (Red) vs. Undercover Undercoaters Bridgewater (Orange)",
+          "team": "The Red House Academy  vs. Undercover Undercoaters Bridgewater (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Holbrook Community Center (Green) vs. Avon Septic and Pumping (Blue)",
+          "team": "Holbrook Community Center  vs. Avon Septic and Pumping (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "11:30",
+          "end": "12:30",
+          "start_12": "11:30 AM",
+          "end_12": "12:30 PM",
+          "type": "practice",
+          "title": "Mini Kickers 11:30 AM Session Practice",
+          "team": "Mini Kickers 11:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "12:30",
+          "end": "13:30",
+          "start_12": "12:30 PM",
+          "end_12": "1:30 PM",
+          "type": "game",
+          "title": "3/4 Boys Travel (Osward) vs. Sharon",
+          "team": "3/4 Boys Travel  vs. Sharon",
+          "coach": "Osward",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "13:45",
+          "end": "14:45",
+          "start_12": "1:45 PM",
+          "end_12": "2:45 PM",
+          "type": "game",
+          "title": "3/4 Girls Travel (Casavant) vs. Rockland",
+          "team": "3/4 Girls Travel  vs. Rockland",
+          "coach": "Casavant",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "15:00",
+          "end": "16:00",
+          "start_12": "3:00 PM",
+          "end_12": "4:00 PM",
+          "type": "game",
+          "title": "3/4 Girls Travel (Lamb-Williams) vs. Stoughton",
+          "team": "3/4 Girls Travel  vs. Stoughton",
+          "coach": "Lamb-Williams",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
           "field": "H-SJ4",
           "start": "16:00",
           "end": "19:00",
@@ -2292,11 +3744,115 @@
           "end_12": "7:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST",
+          "start": "16:00",
+          "end": "17:00",
+          "start_12": "4:00 PM",
+          "end_12": "5:00 PM",
+          "type": "game",
+          "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+          "team": "5/6 Boys Travel  vs. Sharon",
+          "coach": "Walsh",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "game",
+          "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
+          "team": "5/6 Girls Travel  vs. Sharon",
+          "coach": "Baird-Miller",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST",
+          "start": "18:00",
+          "end": "19:00",
+          "start_12": "6:00 PM",
+          "end_12": "7:00 PM",
+          "type": "game",
+          "title": "5/6 Girls Travel (Casavant) vs. Raynham",
+          "team": "5/6 Girls Travel  vs. Raynham",
+          "coach": "Casavant",
+          "grade": "5/6",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
+          {
+            "type": "game",
+            "start": "08:30",
+            "end": "09:30",
+            "start_12": "8:30 AM",
+            "end_12": "9:30 AM",
+            "fields": [
+              "H-Su1",
+              "H-SJ3",
+              "H-SJ4"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "09:45",
+            "end": "10:45",
+            "start_12": "9:45 AM",
+            "end_12": "10:45 AM",
+            "fields": [
+              "H-Su1",
+              "H-Su2"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "11:00",
+            "end": "12:00",
+            "start_12": "11:00 AM",
+            "end_12": "12:00 PM",
+            "fields": [
+              "H-Su1",
+              "H-Su2",
+              "H-SJ4"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "12:30",
+            "end": "13:30",
+            "start_12": "12:30 PM",
+            "end_12": "1:30 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "13:45",
+            "end": "14:45",
+            "start_12": "1:45 PM",
+            "end_12": "2:45 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "15:00",
+            "end": "16:00",
+            "start_12": "3:00 PM",
+            "end_12": "4:00 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
           {
             "type": "free",
             "start": "16:00",
@@ -2671,7 +4227,24 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "6d7914c32fb3dcad6df72e92a9a68912",
+            "date": "2026-10-12",
+            "start": "17:30",
+            "end": "19:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Ball) Practice",
+            "team": "3/4 Boys Travel",
+            "coach": "Ball",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -2783,6 +4356,19 @@
           "title": ""
         },
         {
+          "field": "H-HST1",
+          "start": "17:30",
+          "end": "19:00",
+          "start_12": "5:30 PM",
+          "end_12": "7:00 PM",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Ball) Practice",
+          "team": "3/4 Boys Travel",
+          "coach": "Ball",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -2813,10 +4399,20 @@
       "complex_timeline": {
         "TURF": [
           {
-            "type": "free",
+            "type": "practice",
             "start": "18:00",
-            "end": "21:00",
+            "end": "19:00",
             "start_12": "6:00 PM",
+            "end_12": "7:00 PM",
+            "fields": [
+              "H-HST1"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "19:00",
+            "end": "21:00",
+            "start_12": "7:00 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
@@ -3057,7 +4653,86 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "5168e51c6b7cc7541f01ef67062db4d2",
+            "date": "2026-10-13",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Boys Travel (Collins) Practice",
+            "team": "7/8 Boys Travel",
+            "coach": "Collins",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "b21c3e6823c235955118285522acbcb2",
+            "date": "2026-10-13",
+            "start": "17:00",
+            "end": "18:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Lamb-Williams) Practice",
+            "team": "3/4 Girls Travel",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "80c6b649c67d285d539e9dee9c6f370f",
+            "date": "2026-10-13",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Wm. Perry Trucking (Orange) Practice",
+            "team": "Wm. Perry Trucking",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "23804043be68967801e1e4ff47153076",
+            "date": "2026-10-13",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "The Sean Joyce Foundation (Red) Practice",
+            "team": "The Sean Joyce Foundation",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "231dc1360e1e0d8ad0f787bc03a13245",
+            "date": "2026-10-13",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. Practice",
+            "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc.",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -3169,6 +4844,58 @@
           "title": ""
         },
         {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:30",
+          "start_12": "5:00 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "3/4 Girls Travel (Lamb-Williams) Practice",
+          "team": "3/4 Girls Travel",
+          "coach": "Lamb-Williams",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "The Sean Joyce Foundation (Red) Practice",
+          "team": "The Sean Joyce Foundation",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Wm. Perry Trucking (Orange) Practice",
+          "team": "Wm. Perry Trucking",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. Practice",
+          "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc.",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -3194,29 +4921,63 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Boys Travel (Collins) Practice",
+          "team": "7/8 Boys Travel",
+          "coach": "Collins",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
-              "H-HST1",
               "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
+              "H-HST1"
             ]
           }
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "17:30",
+            "end": "18:30",
+            "start_12": "5:30 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su1",
+              "H-Su2",
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -3443,7 +5204,132 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "1917cb8c5b20502d41aae9b53acd9317",
+            "date": "2026-10-14",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Girls Travel (Casavant) Practice",
+            "team": "5/6 Girls Travel",
+            "coach": "Casavant",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "e505b39c25747c57f57d4071e24c564a",
+            "date": "2026-10-14",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Walsh) Practice",
+            "team": "5/6 Boys Travel",
+            "coach": "Walsh",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-HST2": [
+          {
+            "event_id": "f1bd4e35ded94dc2c453cfa5b41e0a48",
+            "date": "2026-10-14",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST2",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Girls Travel (Caldwell) Practice",
+            "team": "7/8 Girls Travel",
+            "coach": "Caldwell",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "5d9eac87b9de5744aea710e55660ad18",
+            "date": "2026-10-14",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Summit's Place (Green) Practice",
+            "team": "Summit's Place",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "2142f02b2d7710345c2a5d3099f2ad42",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "www.slamyourday.com (Green) Practice",
+            "team": "www.slamyourday.com",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "802c7bb3b41dcc15908b6845bdec0be3",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Troupe Waste & Recycling (Green) Practice",
+            "team": "Troupe Waste & Recycling",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "da0b5651d0bfe7c7e9500853a14da5fd",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Edwards Built Pavements (Blue) Practice",
+            "team": "Edwards Built Pavements",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "7e99bb7c9825b52ce74c2d703de9d73d",
+            "date": "2026-10-14",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Wm. Perry Auto Repair (Orange) Practice",
+            "team": "Wm. Perry Auto Repair",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -3555,6 +5441,71 @@
           "title": ""
         },
         {
+          "field": "H-SJ3",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Summit's Place (Green) Practice",
+          "team": "Summit's Place",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "www.slamyourday.com (Green) Practice",
+          "team": "www.slamyourday.com",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Troupe Waste & Recycling (Green) Practice",
+          "team": "Troupe Waste & Recycling",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Edwards Built Pavements (Blue) Practice",
+          "team": "Edwards Built Pavements",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Wm. Perry Auto Repair (Orange) Practice",
+          "team": "Wm. Perry Auto Repair",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -3580,18 +5531,66 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Boys Travel (Walsh) Practice",
+          "team": "5/6 Boys Travel",
+          "coach": "Walsh",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "5/6 Girls Travel (Casavant) Practice",
+          "team": "5/6 Girls Travel",
+          "coach": "Casavant",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST2",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Girls Travel (Caldwell) Practice",
+          "team": "7/8 Girls Travel",
+          "coach": "Caldwell",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
-              "H-HST",
+              "H-HST"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
               "H-HST1",
               "H-HST2"
             ]
@@ -3599,10 +5598,20 @@
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -3829,7 +5838,160 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "71ea6358ca420d7ef6725859c412fd85",
+            "date": "2026-10-15",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Girls Travel (Baird-Miller) Practice",
+            "team": "5/6 Girls Travel",
+            "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "67d14f2ea1f3a975d7523a10b12e6a27",
+            "date": "2026-10-15",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Boys Travel (Mills) Practice",
+            "team": "7/8 Boys Travel",
+            "coach": "Mills",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-HST2": [
+          {
+            "event_id": "6689105b54f151f60639578750463703",
+            "date": "2026-10-15",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST2",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Ayers) Practice",
+            "team": "5/6 Boys Travel",
+            "coach": "Ayers",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "27c0875879755815919d1e87a9cddac3",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Team 1 - Edwards Built Pavements Practice",
+            "team": "3/4 Girls Team 1 - Edwards Built Pavements",
+            "coach": "",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1b5221dbf88efbc718543024bc73b10a",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "5/6/7 Girls Team 1 - Best Collision Practice",
+            "team": "5/6/7 Girls Team 1 - Best Collision",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "b7a3f25abe9be3aa9e8d0248b503a9b2",
+            "date": "2026-10-15",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Hornets Nest Solutions LLC (Red) Practice",
+            "team": "Hornets Nest Solutions LLC",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "19de43033adbbae103bab621f3131007",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "The Red House Academy (Red) Practice",
+            "team": "The Red House Academy",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "0bf6bf18d647bd99b0e8f279813e232c",
+            "date": "2026-10-15",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Avon Septic and Pumping (Blue) Practice",
+            "team": "Avon Septic and Pumping",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "d1c3a51bbbd077667a76a3eebfa6088c",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Hope and Future Home Care Services (Blue) Practice",
+            "team": "Hope and Future Home Care Services",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "7fa76857a9c4e40b2c271a4a0c97c697",
+            "date": "2026-10-15",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Abington Bank (Red) Practice",
+            "team": "Abington Bank",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -3941,6 +6103,97 @@
           "title": ""
         },
         {
+          "field": "H-Su2",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Abington Bank (Red) Practice",
+          "team": "Abington Bank",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "3/4 Girls Team 1 - Edwards Built Pavements Practice",
+          "team": "3/4 Girls Team 1 - Edwards Built Pavements",
+          "coach": "",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "5/6/7 Girls Team 1 - Best Collision Practice",
+          "team": "5/6/7 Girls Team 1 - Best Collision",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "The Red House Academy (Red) Practice",
+          "team": "The Red House Academy",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Hope and Future Home Care Services (Blue) Practice",
+          "team": "Hope and Future Home Care Services",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Hornets Nest Solutions LLC (Red) Practice",
+          "team": "Hornets Nest Solutions LLC",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Avon Septic and Pumping (Blue) Practice",
+          "team": "Avon Septic and Pumping",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -3966,29 +6219,88 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Girls Travel (Baird-Miller) Practice",
+          "team": "5/6 Girls Travel",
+          "coach": "Baird-Miller",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST2",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Boys Travel (Ayers) Practice",
+          "team": "5/6 Boys Travel",
+          "coach": "Ayers",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Boys Travel (Mills) Practice",
+          "team": "7/8 Boys Travel",
+          "coach": "Mills",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
-              "H-HST1",
               "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
+              "H-HST1"
             ]
           }
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su1",
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -4200,7 +6512,86 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-Su2": [
+          {
+            "event_id": "b47812431e76f53b8e1f4158fead2912",
+            "date": "2026-10-16",
+            "start": "17:00",
+            "end": "18:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Osward) Practice",
+            "team": "3/4 Boys Travel",
+            "coach": "Osward",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "3ada53d67d7b213b01fc84af78b203c7",
+            "date": "2026-10-16",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Holbrook Community Center (Green) Practice",
+            "team": "Holbrook Community Center",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "3d49cc683f56d3ce43b740a147e061e7",
+            "date": "2026-10-16",
+            "start": "16:30",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Casavant) Practice",
+            "team": "3/4 Girls Travel",
+            "coach": "Casavant",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "3a527c0d1afce16615cf47690b920ea9",
+            "date": "2026-10-16",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Nielsen Eye Center (Orange) Practice",
+            "team": "Nielsen Eye Center",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "e6cb84a1df5eea58888b30b64be162f8",
+            "date": "2026-10-16",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Brockton Rox (Blue) Practice",
+            "team": "Brockton Rox",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -4310,16 +6701,92 @@
           "end_12": "7:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-Su2",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Holbrook Community Center (Green) Practice",
+          "team": "Holbrook Community Center",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "16:30",
+          "end": "18:00",
+          "start_12": "4:30 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "3/4 Girls Travel (Casavant) Practice",
+          "team": "3/4 Girls Travel",
+          "coach": "Casavant",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:30",
+          "start_12": "5:00 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Osward) Practice",
+          "team": "3/4 Boys Travel",
+          "coach": "Osward",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Nielsen Eye Center (Orange) Practice",
+          "team": "Nielsen Eye Center",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Brockton Rox (Blue) Practice",
+          "team": "Brockton Rox",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su2",
+              "H-SJ3"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -4531,7 +6998,314 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-SuSS": [
+          {
+            "event_id": "5dec9352d1945b4149a099b1b2853b69",
+            "date": "2026-10-17",
+            "start": "10:30",
+            "end": "11:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 10:30 AM Session Practice",
+            "team": "Mini Kickers 10:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "268c0d0b15be06e4ee98858613699949",
+            "date": "2026-10-17",
+            "start": "09:30",
+            "end": "10:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 9:30 AM Session Practice",
+            "team": "Mini Kickers 9:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "8d2c161e961f357cfcd3017ff1e5b59f",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 8:30 AM Session Practice",
+            "team": "Mini Kickers 8:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "513f9c7e87bd089bbf7419086f134fc5",
+            "date": "2026-10-17",
+            "start": "11:30",
+            "end": "12:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 11:30 AM Session Practice",
+            "team": "Mini Kickers 11:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "046d4648ca801a9a6b1d9949fac1986b",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Hornets Nest Solutions LLC (Red) vs. Wm. Perry Auto Repair (Orange)",
+            "team": "Hornets Nest Solutions LLC  vs. Wm. Perry Auto Repair (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1d68c0250621caabab05561d2d80429b",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "www.slamyourday.com (Green) vs. Brockton Rox (Blue)",
+            "team": "www.slamyourday.com  vs. Brockton Rox (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "e75097242af98281914e2aba4b6e9ddc",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "The Sean Joyce Foundation (Red) vs. Nielsen Eye Center (Orange)",
+            "team": "The Sean Joyce Foundation  vs. Nielsen Eye Center (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "76b77e5a78431cb83f0a4aa003c4e4d3",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Summit's Place (Green) vs. Hope and Future Home Care Services (Blue)",
+            "team": "Summit's Place  vs. Hope and Future Home Care Services (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "45469daf88c9bd5e17df126446eff788",
+            "date": "2026-10-17",
+            "start": "15:00",
+            "end": "16:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Travel (Lamb-Williams) vs. Stoughton",
+            "team": "3/4 Girls Travel  vs. Stoughton",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "5b5e4dfa4686702425bcc41ceb1af320",
+            "date": "2026-10-17",
+            "start": "13:45",
+            "end": "14:45",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Travel (Casavant) vs. Rockland",
+            "team": "3/4 Girls Travel  vs. Rockland",
+            "coach": "Casavant",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "0ece5f508d77621ce58e5446bbc21537",
+            "date": "2026-10-17",
+            "start": "12:30",
+            "end": "13:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Boys Travel (Osward) vs. Sharon",
+            "team": "3/4 Boys Travel  vs. Sharon",
+            "coach": "Osward",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "260abb350c60db4daf9bc5bec4b605eb",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Abington Bank (Red) vs. Wm. Perry Trucking (Orange)",
+            "team": "Abington Bank  vs. Wm. Perry Trucking (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "39728518759111be3b792263648a9891",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Troupe Waste & Recycling (Green) vs. Edwards Built Pavements (Blue)",
+            "team": "Troupe Waste & Recycling  vs. Edwards Built Pavements (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1841faa0ac7450c51a844110a8ada559",
+            "date": "2026-10-17",
+            "start": "09:45",
+            "end": "10:45",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+            "team": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "92b9ac0d81b59dda05500a71cde6628a",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+            "team": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+            "coach": "",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "f3af5687163538c40286f307f06dbda1",
+            "date": "2026-10-17",
+            "start": "09:45",
+            "end": "10:45",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+            "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "5ba2a8f2672dc2e9ead11d50d7547fec",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "The Red House Academy (Red) vs. Undercover Undercoaters Bridgewater (Orange)",
+            "team": "The Red House Academy  vs. Undercover Undercoaters Bridgewater (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "de2e0e326d1c8b9328e5e9b26e943376",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Holbrook Community Center (Green) vs. Avon Septic and Pumping (Blue)",
+            "team": "Holbrook Community Center  vs. Avon Septic and Pumping (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-HST": [
+          {
+            "event_id": "f14224cf94d43a01919b7bb14d618d27",
+            "date": "2026-10-17",
+            "start": "16:00",
+            "end": "17:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+            "team": "5/6 Boys Travel  vs. Sharon",
+            "coach": "Walsh",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "fcd28a9082b52fc70e37a1be16e8ba8b",
+            "date": "2026-10-17",
+            "start": "18:00",
+            "end": "19:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Girls Travel (Casavant) vs. Raynham",
+            "team": "5/6 Girls Travel  vs. Raynham",
+            "coach": "Casavant",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "614c51628c7e16df3b525410d97b2d5f",
+            "date": "2026-10-17",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
+            "team": "5/6 Girls Travel  vs. Sharon",
+            "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -4616,6 +7390,240 @@
           "title": ""
         },
         {
+          "field": "H-SuSS",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 8:30 AM Session Practice",
+          "team": "Mini Kickers 8:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "Hornets Nest Solutions LLC (Red) vs. Wm. Perry Auto Repair (Orange)",
+          "team": "Hornets Nest Solutions LLC  vs. Wm. Perry Auto Repair (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "Summit's Place (Green) vs. Hope and Future Home Care Services (Blue)",
+          "team": "Summit's Place  vs. Hope and Future Home Care Services (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+          "team": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+          "coach": "",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "09:30",
+          "end": "10:30",
+          "start_12": "9:30 AM",
+          "end_12": "10:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 9:30 AM Session Practice",
+          "team": "Mini Kickers 9:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "09:45",
+          "end": "10:45",
+          "start_12": "9:45 AM",
+          "end_12": "10:45 AM",
+          "type": "game",
+          "title": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+          "team": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "09:45",
+          "end": "10:45",
+          "start_12": "9:45 AM",
+          "end_12": "10:45 AM",
+          "type": "game",
+          "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+          "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "10:30",
+          "end": "11:30",
+          "start_12": "10:30 AM",
+          "end_12": "11:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 10:30 AM Session Practice",
+          "team": "Mini Kickers 10:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "www.slamyourday.com (Green) vs. Brockton Rox (Blue)",
+          "team": "www.slamyourday.com  vs. Brockton Rox (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "The Sean Joyce Foundation (Red) vs. Nielsen Eye Center (Orange)",
+          "team": "The Sean Joyce Foundation  vs. Nielsen Eye Center (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Abington Bank (Red) vs. Wm. Perry Trucking (Orange)",
+          "team": "Abington Bank  vs. Wm. Perry Trucking (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Troupe Waste & Recycling (Green) vs. Edwards Built Pavements (Blue)",
+          "team": "Troupe Waste & Recycling  vs. Edwards Built Pavements (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "The Red House Academy (Red) vs. Undercover Undercoaters Bridgewater (Orange)",
+          "team": "The Red House Academy  vs. Undercover Undercoaters Bridgewater (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Holbrook Community Center (Green) vs. Avon Septic and Pumping (Blue)",
+          "team": "Holbrook Community Center  vs. Avon Septic and Pumping (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "11:30",
+          "end": "12:30",
+          "start_12": "11:30 AM",
+          "end_12": "12:30 PM",
+          "type": "practice",
+          "title": "Mini Kickers 11:30 AM Session Practice",
+          "team": "Mini Kickers 11:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "12:30",
+          "end": "13:30",
+          "start_12": "12:30 PM",
+          "end_12": "1:30 PM",
+          "type": "game",
+          "title": "3/4 Boys Travel (Osward) vs. Sharon",
+          "team": "3/4 Boys Travel  vs. Sharon",
+          "coach": "Osward",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "13:45",
+          "end": "14:45",
+          "start_12": "1:45 PM",
+          "end_12": "2:45 PM",
+          "type": "game",
+          "title": "3/4 Girls Travel (Casavant) vs. Rockland",
+          "team": "3/4 Girls Travel  vs. Rockland",
+          "coach": "Casavant",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "15:00",
+          "end": "16:00",
+          "start_12": "3:00 PM",
+          "end_12": "4:00 PM",
+          "type": "game",
+          "title": "3/4 Girls Travel (Lamb-Williams) vs. Stoughton",
+          "team": "3/4 Girls Travel  vs. Stoughton",
+          "coach": "Lamb-Williams",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
           "field": "H-SJ4",
           "start": "16:00",
           "end": "19:00",
@@ -4641,11 +7649,115 @@
           "end_12": "7:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST",
+          "start": "16:00",
+          "end": "17:00",
+          "start_12": "4:00 PM",
+          "end_12": "5:00 PM",
+          "type": "game",
+          "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+          "team": "5/6 Boys Travel  vs. Sharon",
+          "coach": "Walsh",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "game",
+          "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
+          "team": "5/6 Girls Travel  vs. Sharon",
+          "coach": "Baird-Miller",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST",
+          "start": "18:00",
+          "end": "19:00",
+          "start_12": "6:00 PM",
+          "end_12": "7:00 PM",
+          "type": "game",
+          "title": "5/6 Girls Travel (Casavant) vs. Raynham",
+          "team": "5/6 Girls Travel  vs. Raynham",
+          "coach": "Casavant",
+          "grade": "5/6",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
+          {
+            "type": "game",
+            "start": "08:30",
+            "end": "09:30",
+            "start_12": "8:30 AM",
+            "end_12": "9:30 AM",
+            "fields": [
+              "H-Su1",
+              "H-SJ3",
+              "H-SJ4"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "09:45",
+            "end": "10:45",
+            "start_12": "9:45 AM",
+            "end_12": "10:45 AM",
+            "fields": [
+              "H-Su1",
+              "H-Su2"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "11:00",
+            "end": "12:00",
+            "start_12": "11:00 AM",
+            "end_12": "12:00 PM",
+            "fields": [
+              "H-Su1",
+              "H-Su2",
+              "H-SJ4"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "12:30",
+            "end": "13:30",
+            "start_12": "12:30 PM",
+            "end_12": "1:30 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "13:45",
+            "end": "14:45",
+            "start_12": "1:45 PM",
+            "end_12": "2:45 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "15:00",
+            "end": "16:00",
+            "start_12": "3:00 PM",
+            "end_12": "4:00 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
           {
             "type": "free",
             "start": "16:00",
@@ -5021,7 +8133,24 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "6d7914c32fb3dcad6df72e92a9a68912",
+            "date": "2026-10-12",
+            "start": "17:30",
+            "end": "19:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Ball) Practice",
+            "team": "3/4 Boys Travel",
+            "coach": "Ball",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -5133,6 +8262,19 @@
           "title": ""
         },
         {
+          "field": "H-HST1",
+          "start": "17:30",
+          "end": "19:00",
+          "start_12": "5:30 PM",
+          "end_12": "7:00 PM",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Ball) Practice",
+          "team": "3/4 Boys Travel",
+          "coach": "Ball",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -5163,10 +8305,20 @@
       "complex_timeline": {
         "TURF": [
           {
-            "type": "free",
+            "type": "practice",
             "start": "18:00",
-            "end": "21:00",
+            "end": "19:00",
             "start_12": "6:00 PM",
+            "end_12": "7:00 PM",
+            "fields": [
+              "H-HST1"
+            ]
+          },
+          {
+            "type": "free",
+            "start": "19:00",
+            "end": "21:00",
+            "start_12": "7:00 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
@@ -5407,7 +8559,86 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "5168e51c6b7cc7541f01ef67062db4d2",
+            "date": "2026-10-13",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Boys Travel (Collins) Practice",
+            "team": "7/8 Boys Travel",
+            "coach": "Collins",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "b21c3e6823c235955118285522acbcb2",
+            "date": "2026-10-13",
+            "start": "17:00",
+            "end": "18:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Lamb-Williams) Practice",
+            "team": "3/4 Girls Travel",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "80c6b649c67d285d539e9dee9c6f370f",
+            "date": "2026-10-13",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Wm. Perry Trucking (Orange) Practice",
+            "team": "Wm. Perry Trucking",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "23804043be68967801e1e4ff47153076",
+            "date": "2026-10-13",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "The Sean Joyce Foundation (Red) Practice",
+            "team": "The Sean Joyce Foundation",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "231dc1360e1e0d8ad0f787bc03a13245",
+            "date": "2026-10-13",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. Practice",
+            "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc.",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -5519,6 +8750,58 @@
           "title": ""
         },
         {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:30",
+          "start_12": "5:00 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "3/4 Girls Travel (Lamb-Williams) Practice",
+          "team": "3/4 Girls Travel",
+          "coach": "Lamb-Williams",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "The Sean Joyce Foundation (Red) Practice",
+          "team": "The Sean Joyce Foundation",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Wm. Perry Trucking (Orange) Practice",
+          "team": "Wm. Perry Trucking",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. Practice",
+          "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc.",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -5544,29 +8827,63 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Boys Travel (Collins) Practice",
+          "team": "7/8 Boys Travel",
+          "coach": "Collins",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
-              "H-HST1",
               "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
+              "H-HST1"
             ]
           }
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "17:30",
+            "end": "18:30",
+            "start_12": "5:30 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su1",
+              "H-Su2",
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -5793,7 +9110,132 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "1917cb8c5b20502d41aae9b53acd9317",
+            "date": "2026-10-14",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Girls Travel (Casavant) Practice",
+            "team": "5/6 Girls Travel",
+            "coach": "Casavant",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "e505b39c25747c57f57d4071e24c564a",
+            "date": "2026-10-14",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Walsh) Practice",
+            "team": "5/6 Boys Travel",
+            "coach": "Walsh",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-HST2": [
+          {
+            "event_id": "f1bd4e35ded94dc2c453cfa5b41e0a48",
+            "date": "2026-10-14",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST2",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Girls Travel (Caldwell) Practice",
+            "team": "7/8 Girls Travel",
+            "coach": "Caldwell",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "5d9eac87b9de5744aea710e55660ad18",
+            "date": "2026-10-14",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Summit's Place (Green) Practice",
+            "team": "Summit's Place",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "2142f02b2d7710345c2a5d3099f2ad42",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "www.slamyourday.com (Green) Practice",
+            "team": "www.slamyourday.com",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "802c7bb3b41dcc15908b6845bdec0be3",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Troupe Waste & Recycling (Green) Practice",
+            "team": "Troupe Waste & Recycling",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "da0b5651d0bfe7c7e9500853a14da5fd",
+            "date": "2026-10-14",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Edwards Built Pavements (Blue) Practice",
+            "team": "Edwards Built Pavements",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "7e99bb7c9825b52ce74c2d703de9d73d",
+            "date": "2026-10-14",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Wm. Perry Auto Repair (Orange) Practice",
+            "team": "Wm. Perry Auto Repair",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -5905,6 +9347,71 @@
           "title": ""
         },
         {
+          "field": "H-SJ3",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Summit's Place (Green) Practice",
+          "team": "Summit's Place",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "www.slamyourday.com (Green) Practice",
+          "team": "www.slamyourday.com",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Troupe Waste & Recycling (Green) Practice",
+          "team": "Troupe Waste & Recycling",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Edwards Built Pavements (Blue) Practice",
+          "team": "Edwards Built Pavements",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Wm. Perry Auto Repair (Orange) Practice",
+          "team": "Wm. Perry Auto Repair",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -5930,18 +9437,66 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Boys Travel (Walsh) Practice",
+          "team": "5/6 Boys Travel",
+          "coach": "Walsh",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "5/6 Girls Travel (Casavant) Practice",
+          "team": "5/6 Girls Travel",
+          "coach": "Casavant",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST2",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Girls Travel (Caldwell) Practice",
+          "team": "7/8 Girls Travel",
+          "coach": "Caldwell",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
-              "H-HST",
+              "H-HST"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
               "H-HST1",
               "H-HST2"
             ]
@@ -5949,10 +9504,20 @@
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -6179,7 +9744,160 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-HST1": [
+          {
+            "event_id": "71ea6358ca420d7ef6725859c412fd85",
+            "date": "2026-10-15",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Girls Travel (Baird-Miller) Practice",
+            "team": "5/6 Girls Travel",
+            "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "67d14f2ea1f3a975d7523a10b12e6a27",
+            "date": "2026-10-15",
+            "start": "19:30",
+            "end": "21:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "7/8 Boys Travel (Mills) Practice",
+            "team": "7/8 Boys Travel",
+            "coach": "Mills",
+            "grade": "7/8",
+            "source": "ICS"
+          }
+        ],
+        "H-HST2": [
+          {
+            "event_id": "6689105b54f151f60639578750463703",
+            "date": "2026-10-15",
+            "start": "18:00",
+            "end": "19:30",
+            "field": "H-HST2",
+            "field_group": "TURF",
+            "type": "practice",
+            "title": "5/6 Boys Travel (Ayers) Practice",
+            "team": "5/6 Boys Travel",
+            "coach": "Ayers",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "27c0875879755815919d1e87a9cddac3",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Team 1 - Edwards Built Pavements Practice",
+            "team": "3/4 Girls Team 1 - Edwards Built Pavements",
+            "coach": "",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1b5221dbf88efbc718543024bc73b10a",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "5/6/7 Girls Team 1 - Best Collision Practice",
+            "team": "5/6/7 Girls Team 1 - Best Collision",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "b7a3f25abe9be3aa9e8d0248b503a9b2",
+            "date": "2026-10-15",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Hornets Nest Solutions LLC (Red) Practice",
+            "team": "Hornets Nest Solutions LLC",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "19de43033adbbae103bab621f3131007",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "The Red House Academy (Red) Practice",
+            "team": "The Red House Academy",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "0bf6bf18d647bd99b0e8f279813e232c",
+            "date": "2026-10-15",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Avon Septic and Pumping (Blue) Practice",
+            "team": "Avon Septic and Pumping",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "d1c3a51bbbd077667a76a3eebfa6088c",
+            "date": "2026-10-15",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Hope and Future Home Care Services (Blue) Practice",
+            "team": "Hope and Future Home Care Services",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "7fa76857a9c4e40b2c271a4a0c97c697",
+            "date": "2026-10-15",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Abington Bank (Red) Practice",
+            "team": "Abington Bank",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -6291,6 +10009,97 @@
           "title": ""
         },
         {
+          "field": "H-Su2",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Abington Bank (Red) Practice",
+          "team": "Abington Bank",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "3/4 Girls Team 1 - Edwards Built Pavements Practice",
+          "team": "3/4 Girls Team 1 - Edwards Built Pavements",
+          "coach": "",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "5/6/7 Girls Team 1 - Best Collision Practice",
+          "team": "5/6/7 Girls Team 1 - Best Collision",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "The Red House Academy (Red) Practice",
+          "team": "The Red House Academy",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Hope and Future Home Care Services (Blue) Practice",
+          "team": "Hope and Future Home Care Services",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Hornets Nest Solutions LLC (Red) Practice",
+          "team": "Hornets Nest Solutions LLC",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Avon Septic and Pumping (Blue) Practice",
+          "team": "Avon Septic and Pumping",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
           "field": "H-HST",
           "start": "18:00",
           "end": "21:00",
@@ -6316,29 +10125,88 @@
           "end_12": "9:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST1",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Girls Travel (Baird-Miller) Practice",
+          "team": "5/6 Girls Travel",
+          "coach": "Baird-Miller",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST2",
+          "start": "18:00",
+          "end": "19:30",
+          "start_12": "6:00 PM",
+          "end_12": "7:30 PM",
+          "type": "practice",
+          "title": "5/6 Boys Travel (Ayers) Practice",
+          "team": "5/6 Boys Travel",
+          "coach": "Ayers",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST1",
+          "start": "19:30",
+          "end": "21:00",
+          "start_12": "7:30 PM",
+          "end_12": "9:00 PM",
+          "type": "practice",
+          "title": "7/8 Boys Travel (Mills) Practice",
+          "team": "7/8 Boys Travel",
+          "coach": "Mills",
+          "grade": "7/8",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [
           {
             "type": "free",
-            "start": "18:00",
+            "start": "19:30",
             "end": "21:00",
-            "start_12": "6:00 PM",
+            "start_12": "7:30 PM",
             "end_12": "9:00 PM",
             "fields": [
               "H-HST",
-              "H-HST1",
               "H-HST2"
+            ]
+          },
+          {
+            "type": "practice",
+            "start": "19:30",
+            "end": "21:00",
+            "start_12": "7:30 PM",
+            "end_12": "9:00 PM",
+            "fields": [
+              "H-HST1"
             ]
           }
         ],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su1",
+              "H-SJ4"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -6550,7 +10418,86 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-Su2": [
+          {
+            "event_id": "b47812431e76f53b8e1f4158fead2912",
+            "date": "2026-10-16",
+            "start": "17:00",
+            "end": "18:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Boys Travel (Osward) Practice",
+            "team": "3/4 Boys Travel",
+            "coach": "Osward",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "3ada53d67d7b213b01fc84af78b203c7",
+            "date": "2026-10-16",
+            "start": "16:30",
+            "end": "17:30",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Holbrook Community Center (Green) Practice",
+            "team": "Holbrook Community Center",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "3d49cc683f56d3ce43b740a147e061e7",
+            "date": "2026-10-16",
+            "start": "16:30",
+            "end": "18:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "3/4 Girls Travel (Casavant) Practice",
+            "team": "3/4 Girls Travel",
+            "coach": "Casavant",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "3a527c0d1afce16615cf47690b920ea9",
+            "date": "2026-10-16",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Nielsen Eye Center (Orange) Practice",
+            "team": "Nielsen Eye Center",
+            "coach": "Orange",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "e6cb84a1df5eea58888b30b64be162f8",
+            "date": "2026-10-16",
+            "start": "17:30",
+            "end": "18:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Brockton Rox (Blue) Practice",
+            "team": "Brockton Rox",
+            "coach": "Blue",
+            "grade": "",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -6660,16 +10607,92 @@
           "end_12": "7:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-Su2",
+          "start": "16:30",
+          "end": "17:30",
+          "start_12": "4:30 PM",
+          "end_12": "5:30 PM",
+          "type": "practice",
+          "title": "Holbrook Community Center (Green) Practice",
+          "team": "Holbrook Community Center",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "16:30",
+          "end": "18:00",
+          "start_12": "4:30 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "3/4 Girls Travel (Casavant) Practice",
+          "team": "3/4 Girls Travel",
+          "coach": "Casavant",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "17:00",
+          "end": "18:30",
+          "start_12": "5:00 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "3/4 Boys Travel (Osward) Practice",
+          "team": "3/4 Boys Travel",
+          "coach": "Osward",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "practice",
+          "title": "Nielsen Eye Center (Orange) Practice",
+          "team": "Nielsen Eye Center",
+          "coach": "Orange",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "17:30",
+          "end": "18:30",
+          "start_12": "5:30 PM",
+          "end_12": "6:30 PM",
+          "type": "practice",
+          "title": "Brockton Rox (Blue) Practice",
+          "team": "Brockton Rox",
+          "coach": "Blue",
+          "grade": "",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
           {
+            "type": "practice",
+            "start": "18:00",
+            "end": "18:30",
+            "start_12": "6:00 PM",
+            "end_12": "6:30 PM",
+            "fields": [
+              "H-Su2",
+              "H-SJ3"
+            ]
+          },
+          {
             "type": "free",
-            "start": "16:00",
+            "start": "18:30",
             "end": "19:00",
-            "start_12": "4:00 PM",
+            "start_12": "6:30 PM",
             "end_12": "7:00 PM",
             "fields": [
               "H-Su1",
@@ -6881,7 +10904,314 @@
           }
         ]
       },
-      "events": {},
+      "events": {
+        "H-SuSS": [
+          {
+            "event_id": "5dec9352d1945b4149a099b1b2853b69",
+            "date": "2026-10-17",
+            "start": "10:30",
+            "end": "11:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 10:30 AM Session Practice",
+            "team": "Mini Kickers 10:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "268c0d0b15be06e4ee98858613699949",
+            "date": "2026-10-17",
+            "start": "09:30",
+            "end": "10:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 9:30 AM Session Practice",
+            "team": "Mini Kickers 9:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "8d2c161e961f357cfcd3017ff1e5b59f",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 8:30 AM Session Practice",
+            "team": "Mini Kickers 8:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "513f9c7e87bd089bbf7419086f134fc5",
+            "date": "2026-10-17",
+            "start": "11:30",
+            "end": "12:30",
+            "field": "H-SuSS",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "practice",
+            "title": "Mini Kickers 11:30 AM Session Practice",
+            "team": "Mini Kickers 11:30 AM Session",
+            "coach": "",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ4": [
+          {
+            "event_id": "046d4648ca801a9a6b1d9949fac1986b",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Hornets Nest Solutions LLC (Red) vs. Wm. Perry Auto Repair (Orange)",
+            "team": "Hornets Nest Solutions LLC  vs. Wm. Perry Auto Repair (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1d68c0250621caabab05561d2d80429b",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "www.slamyourday.com (Green) vs. Brockton Rox (Blue)",
+            "team": "www.slamyourday.com  vs. Brockton Rox (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "e75097242af98281914e2aba4b6e9ddc",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-SJ4",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "The Sean Joyce Foundation (Red) vs. Nielsen Eye Center (Orange)",
+            "team": "The Sean Joyce Foundation  vs. Nielsen Eye Center (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-SJ3": [
+          {
+            "event_id": "76b77e5a78431cb83f0a4aa003c4e4d3",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Summit's Place (Green) vs. Hope and Future Home Care Services (Blue)",
+            "team": "Summit's Place  vs. Hope and Future Home Care Services (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "45469daf88c9bd5e17df126446eff788",
+            "date": "2026-10-17",
+            "start": "15:00",
+            "end": "16:00",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Travel (Lamb-Williams) vs. Stoughton",
+            "team": "3/4 Girls Travel  vs. Stoughton",
+            "coach": "Lamb-Williams",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "5b5e4dfa4686702425bcc41ceb1af320",
+            "date": "2026-10-17",
+            "start": "13:45",
+            "end": "14:45",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Travel (Casavant) vs. Rockland",
+            "team": "3/4 Girls Travel  vs. Rockland",
+            "coach": "Casavant",
+            "grade": "3/4",
+            "source": "ICS"
+          },
+          {
+            "event_id": "0ece5f508d77621ce58e5446bbc21537",
+            "date": "2026-10-17",
+            "start": "12:30",
+            "end": "13:30",
+            "field": "H-SJ3",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Boys Travel (Osward) vs. Sharon",
+            "team": "3/4 Boys Travel  vs. Sharon",
+            "coach": "Osward",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su1": [
+          {
+            "event_id": "260abb350c60db4daf9bc5bec4b605eb",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Abington Bank (Red) vs. Wm. Perry Trucking (Orange)",
+            "team": "Abington Bank  vs. Wm. Perry Trucking (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "39728518759111be3b792263648a9891",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Troupe Waste & Recycling (Green) vs. Edwards Built Pavements (Blue)",
+            "team": "Troupe Waste & Recycling  vs. Edwards Built Pavements (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "1841faa0ac7450c51a844110a8ada559",
+            "date": "2026-10-17",
+            "start": "09:45",
+            "end": "10:45",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+            "team": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "92b9ac0d81b59dda05500a71cde6628a",
+            "date": "2026-10-17",
+            "start": "08:30",
+            "end": "09:30",
+            "field": "H-Su1",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+            "team": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+            "coach": "",
+            "grade": "3/4",
+            "source": "ICS"
+          }
+        ],
+        "H-Su2": [
+          {
+            "event_id": "f3af5687163538c40286f307f06dbda1",
+            "date": "2026-10-17",
+            "start": "09:45",
+            "end": "10:45",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+            "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+            "coach": "",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "5ba2a8f2672dc2e9ead11d50d7547fec",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "The Red House Academy (Red) vs. Undercover Undercoaters Bridgewater (Orange)",
+            "team": "The Red House Academy  vs. Undercover Undercoaters Bridgewater (Orange)",
+            "coach": "Red",
+            "grade": "",
+            "source": "ICS"
+          },
+          {
+            "event_id": "de2e0e326d1c8b9328e5e9b26e943376",
+            "date": "2026-10-17",
+            "start": "11:00",
+            "end": "12:00",
+            "field": "H-Su2",
+            "field_group": "SUMNER/SEAN JOYCE",
+            "type": "game",
+            "title": "Holbrook Community Center (Green) vs. Avon Septic and Pumping (Blue)",
+            "team": "Holbrook Community Center  vs. Avon Septic and Pumping (Blue)",
+            "coach": "Green",
+            "grade": "",
+            "source": "ICS"
+          }
+        ],
+        "H-HST": [
+          {
+            "event_id": "f14224cf94d43a01919b7bb14d618d27",
+            "date": "2026-10-17",
+            "start": "16:00",
+            "end": "17:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+            "team": "5/6 Boys Travel  vs. Sharon",
+            "coach": "Walsh",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "fcd28a9082b52fc70e37a1be16e8ba8b",
+            "date": "2026-10-17",
+            "start": "18:00",
+            "end": "19:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Girls Travel (Casavant) vs. Raynham",
+            "team": "5/6 Girls Travel  vs. Raynham",
+            "coach": "Casavant",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "614c51628c7e16df3b525410d97b2d5f",
+            "date": "2026-10-17",
+            "start": "17:00",
+            "end": "18:00",
+            "field": "H-HST",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
+            "team": "5/6 Girls Travel  vs. Sharon",
+            "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          }
+        ]
+      },
       "blocks": {},
       "merged": [
         {
@@ -6966,6 +11296,240 @@
           "title": ""
         },
         {
+          "field": "H-SuSS",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 8:30 AM Session Practice",
+          "team": "Mini Kickers 8:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "Hornets Nest Solutions LLC (Red) vs. Wm. Perry Auto Repair (Orange)",
+          "team": "Hornets Nest Solutions LLC  vs. Wm. Perry Auto Repair (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "Summit's Place (Green) vs. Hope and Future Home Care Services (Blue)",
+          "team": "Summit's Place  vs. Hope and Future Home Care Services (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "08:30",
+          "end": "09:30",
+          "start_12": "8:30 AM",
+          "end_12": "9:30 AM",
+          "type": "game",
+          "title": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+          "team": "3/4 Girls Team 1 - Edwards Built Pavements vs. 3/4 Girls Team 2",
+          "coach": "",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "09:30",
+          "end": "10:30",
+          "start_12": "9:30 AM",
+          "end_12": "10:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 9:30 AM Session Practice",
+          "team": "Mini Kickers 9:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "09:45",
+          "end": "10:45",
+          "start_12": "9:45 AM",
+          "end_12": "10:45 AM",
+          "type": "game",
+          "title": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+          "team": "5/6/7 Girls Team 1 - Best Collision vs. 5/6/7 Girls Team 2",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "09:45",
+          "end": "10:45",
+          "start_12": "9:45 AM",
+          "end_12": "10:45 AM",
+          "type": "game",
+          "title": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+          "team": "5/6/7 Boys Rec Team 1 - StormCare Roofing Inc. vs. 5/6/7 Boys RecTeam 2",
+          "coach": "",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "10:30",
+          "end": "11:30",
+          "start_12": "10:30 AM",
+          "end_12": "11:30 AM",
+          "type": "practice",
+          "title": "Mini Kickers 10:30 AM Session Practice",
+          "team": "Mini Kickers 10:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "www.slamyourday.com (Green) vs. Brockton Rox (Blue)",
+          "team": "www.slamyourday.com  vs. Brockton Rox (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ4",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "The Sean Joyce Foundation (Red) vs. Nielsen Eye Center (Orange)",
+          "team": "The Sean Joyce Foundation  vs. Nielsen Eye Center (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Abington Bank (Red) vs. Wm. Perry Trucking (Orange)",
+          "team": "Abington Bank  vs. Wm. Perry Trucking (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su1",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Troupe Waste & Recycling (Green) vs. Edwards Built Pavements (Blue)",
+          "team": "Troupe Waste & Recycling  vs. Edwards Built Pavements (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "The Red House Academy (Red) vs. Undercover Undercoaters Bridgewater (Orange)",
+          "team": "The Red House Academy  vs. Undercover Undercoaters Bridgewater (Orange)",
+          "coach": "Red",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-Su2",
+          "start": "11:00",
+          "end": "12:00",
+          "start_12": "11:00 AM",
+          "end_12": "12:00 PM",
+          "type": "game",
+          "title": "Holbrook Community Center (Green) vs. Avon Septic and Pumping (Blue)",
+          "team": "Holbrook Community Center  vs. Avon Septic and Pumping (Blue)",
+          "coach": "Green",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SuSS",
+          "start": "11:30",
+          "end": "12:30",
+          "start_12": "11:30 AM",
+          "end_12": "12:30 PM",
+          "type": "practice",
+          "title": "Mini Kickers 11:30 AM Session Practice",
+          "team": "Mini Kickers 11:30 AM Session",
+          "coach": "",
+          "grade": "",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "12:30",
+          "end": "13:30",
+          "start_12": "12:30 PM",
+          "end_12": "1:30 PM",
+          "type": "game",
+          "title": "3/4 Boys Travel (Osward) vs. Sharon",
+          "team": "3/4 Boys Travel  vs. Sharon",
+          "coach": "Osward",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "13:45",
+          "end": "14:45",
+          "start_12": "1:45 PM",
+          "end_12": "2:45 PM",
+          "type": "game",
+          "title": "3/4 Girls Travel (Casavant) vs. Rockland",
+          "team": "3/4 Girls Travel  vs. Rockland",
+          "coach": "Casavant",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
+          "field": "H-SJ3",
+          "start": "15:00",
+          "end": "16:00",
+          "start_12": "3:00 PM",
+          "end_12": "4:00 PM",
+          "type": "game",
+          "title": "3/4 Girls Travel (Lamb-Williams) vs. Stoughton",
+          "team": "3/4 Girls Travel  vs. Stoughton",
+          "coach": "Lamb-Williams",
+          "grade": "3/4",
+          "source": "ICS"
+        },
+        {
           "field": "H-SJ4",
           "start": "16:00",
           "end": "19:00",
@@ -6991,11 +11555,115 @@
           "end_12": "7:00 PM",
           "type": "free",
           "title": ""
+        },
+        {
+          "field": "H-HST",
+          "start": "16:00",
+          "end": "17:00",
+          "start_12": "4:00 PM",
+          "end_12": "5:00 PM",
+          "type": "game",
+          "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+          "team": "5/6 Boys Travel  vs. Sharon",
+          "coach": "Walsh",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST",
+          "start": "17:00",
+          "end": "18:00",
+          "start_12": "5:00 PM",
+          "end_12": "6:00 PM",
+          "type": "game",
+          "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
+          "team": "5/6 Girls Travel  vs. Sharon",
+          "coach": "Baird-Miller",
+          "grade": "5/6",
+          "source": "ICS"
+        },
+        {
+          "field": "H-HST",
+          "start": "18:00",
+          "end": "19:00",
+          "start_12": "6:00 PM",
+          "end_12": "7:00 PM",
+          "type": "game",
+          "title": "5/6 Girls Travel (Casavant) vs. Raynham",
+          "team": "5/6 Girls Travel  vs. Raynham",
+          "coach": "Casavant",
+          "grade": "5/6",
+          "source": "ICS"
         }
       ],
       "complex_timeline": {
         "TURF": [],
         "SUMNER/SEAN JOYCE": [
+          {
+            "type": "game",
+            "start": "08:30",
+            "end": "09:30",
+            "start_12": "8:30 AM",
+            "end_12": "9:30 AM",
+            "fields": [
+              "H-Su1",
+              "H-SJ3",
+              "H-SJ4"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "09:45",
+            "end": "10:45",
+            "start_12": "9:45 AM",
+            "end_12": "10:45 AM",
+            "fields": [
+              "H-Su1",
+              "H-Su2"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "11:00",
+            "end": "12:00",
+            "start_12": "11:00 AM",
+            "end_12": "12:00 PM",
+            "fields": [
+              "H-Su1",
+              "H-Su2",
+              "H-SJ4"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "12:30",
+            "end": "13:30",
+            "start_12": "12:30 PM",
+            "end_12": "1:30 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "13:45",
+            "end": "14:45",
+            "start_12": "1:45 PM",
+            "end_12": "2:45 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
+          {
+            "type": "game",
+            "start": "15:00",
+            "end": "16:00",
+            "start_12": "3:00 PM",
+            "end_12": "4:00 PM",
+            "fields": [
+              "H-SJ3"
+            ]
+          },
           {
             "type": "free",
             "start": "16:00",
