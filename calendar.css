@@ -527,3 +527,8 @@ body {
 .day-time-nav button:hover {
   background: #eaeaea;
 }
+
+.week-day-col.today {
+  border: 2px solid #ff9800;
+  background-color: rgba(255, 152, 0, 0.15);
+}
