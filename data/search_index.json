@@ -4,8 +4,17 @@
     "JOYCE": null,
     "TURF": [
       {
-        "type": "free",
+        "type": "practice",
         "start": "18:00",
+        "end": "19:00",
+        "fields": [
+          "H-HST",
+          "H-HST1"
+        ]
+      },
+      {
+        "type": "free",
+        "start": "19:00",
         "end": "21:00",
         "fields": [
           "H-HST",
