@@ -398,16 +398,26 @@ function renderWeekTimeline() {
             "block-admin"
           );
 
-          const height = endY - startY;
+          // NEW horizontal timeline logic for Week View
+          const startMin = timeToMin(b.start);
+          const endMin = timeToMin(b.end);
+          
+          const left = (startMin - 480);   // 480 = 08:00 in minutes
+          const width = endMin - startMin;
+          
           block.style.position = "absolute";
-          block.style.top = `${startY}px`;
-          block.style.height = `${height}px`;
+          block.style.left = `${left}px`;
+          block.style.width = `${width}px`;
+          
+          // vertical stacking for overlapping blocks
+          block.style.top = `${laneIndex * 60}px`;
+          block.style.height = "50px";
+          
+          block.style.borderRadius = "6px";
+          block.style.padding = "4px";
+          block.style.boxSizing = "border-box";
+          block.style.overflow = "hidden";
 
-          const fieldScale = b.fields.length / maxFields;
-          const scaledWidth = Math.max(baseWidth * fieldScale, baseWidth * 0.4);
-
-          block.style.left = `${laneIndex * baseWidth}%`;
-          block.style.width = `${scaledWidth}%`;
 
           const durationMin = timeToMin(b.end) - timeToMin(b.start);
 
