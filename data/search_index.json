@@ -10,7 +10,6 @@
         "start_12": "6:00 PM",
         "end_12": "7:00 PM",
         "fields": [
-          "H-HST",
           "H-HST1"
         ]
       },
@@ -49,7 +48,6 @@
         "start_12": "7:30 PM",
         "end_12": "9:00 PM",
         "fields": [
-          "H-HST",
           "H-HST1"
         ]
       }
@@ -76,7 +74,6 @@
         "start_12": "6:00 PM",
         "end_12": "7:30 PM",
         "fields": [
-          "H-HST",
           "H-HST1"
         ]
       }
@@ -103,7 +100,6 @@
         "start_12": "7:30 PM",
         "end_12": "9:00 PM",
         "fields": [
-          "H-HST",
           "H-HST1"
         ]
       }
@@ -137,9 +133,7 @@
         "start_12": "4:00 PM",
         "end_12": "7:00 PM",
         "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2"
+          "H-HST"
         ]
       },
       {
