@@ -276,18 +276,24 @@ function renderDayCalendar(dayData) {
  ****************************************************/
 function getWeekRange(date) {
   const d = new Date(date);
-  const day = d.getDay(); // 0 = Sunday
-  const sunday = new Date(d);
-  sunday.setDate(d.getDate() - day);
+  const dow = d.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+
+  // Shift so Monday becomes the first day of the week
+  const diffToMonday = (dow === 0 ? -6 : 1 - dow);
+
+  const monday = new Date(d);
+  monday.setDate(d.getDate() + diffToMonday);
 
   const days = [];
   for (let i = 0; i < 7; i++) {
-    const dt = new Date(sunday);
-    dt.setDate(sunday.getDate() + i);
+    const dt = new Date(monday);
+    dt.setDate(monday.getDate() + i);
     days.push(dt.toISOString().slice(0, 10)); // YYYY-MM-DD
   }
+
   return days;
 }
+
 
 function renderWeekTimeline() {
   const container = document.getElementById("view-container");
