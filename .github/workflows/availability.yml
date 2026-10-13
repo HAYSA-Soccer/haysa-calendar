@@ -25,8 +25,6 @@ jobs:
       - name: Fetch season window
         id: season
         run: |
-          echo "Fetching season window..."
-
           RAW=$(curl -sSL "$WEBAPP_URL?mode=season_window")
           CLEAN=$(echo "$RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$CLEAN" ]; then CLEAN="$RAW"; fi
@@ -39,9 +37,6 @@ jobs:
           START=$(echo "$CLEAN" | jq -r '.season_start')
           END=$(echo "$CLEAN" | jq -r '.season_end')
 
-          echo "Season start: $START"
-          echo "Season end:   $END"
-
           echo "season_start=$START" >> $GITHUB_OUTPUT
           echo "season_end=$END" >> $GITHUB_OUTPUT
 
@@ -50,14 +45,9 @@ jobs:
           START="${{ steps.season.outputs.season_start }}"
           END="${{ steps.season.outputs.season_end }}"
 
-          echo "------------------------------------------------------------"
-          echo "Building availability from $START through $END"
-          echo "------------------------------------------------------------"
-
           mkdir -p data/tmp_days data/tmp_search
 
           # Fetch fields
-          echo "Fetching field map..."
           FIELDS_RAW=$(curl -sSL "$WEBAPP_URL?mode=fields")
           FIELDS_CLEAN=$(echo "$FIELDS_RAW" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
           if [ -z "$FIELDS_CLEAN" ]; then FIELDS_CLEAN="$FIELDS_RAW"; fi
@@ -66,17 +56,10 @@ jobs:
             echo "❌ Fields JSON invalid"
             exit 1
           fi
-          FIELDS_JSON="$FIELDS_CLEAN"
-          echo "✔ Field map OK"
 
           CURRENT="$START"
 
           while [ "$(date -d "$CURRENT" +%Y-%m-%d)" != "$(date -d "$END + 1 day" +%Y-%m-%d)" ]; do
-            echo ""
-            echo "------------------------------------------------------------"
-            echo "Processing date: $CURRENT"
-            echo "------------------------------------------------------------"
-
             RAW_DAY=$(curl -sSL "$WEBAPP_URL?mode=day_calendar&date=$CURRENT")
             CLEAN_DAY=$(echo "$RAW_DAY" | sed -n 's/.*<pre>\(.*\)<\/pre>.*/\1/p')
             if [ -z "$CLEAN_DAY" ]; then CLEAN_DAY="$RAW_DAY"; fi
@@ -86,12 +69,8 @@ jobs:
               exit 1
             fi
 
-            echo "✔ JSON OK for $CURRENT"
-
-            # Save day JSON
             echo "$CLEAN_DAY" > "data/tmp_days/${CURRENT}.json"
 
-            # Build search index for this day
             COMPLEXES=$(echo "$CLEAN_DAY" | jq -r '.complex_timeline | keys[]')
             DAY_SEARCH="{}"
 
@@ -102,22 +81,11 @@ jobs:
 
             echo "$DAY_SEARCH" > "data/tmp_search/${CURRENT}.json"
 
-            echo "✔ Completed: $CURRENT"
-
             CURRENT=$(date -d "$CURRENT + 1 day" +%Y-%m-%d)
           done
 
-          echo ""
-          echo "------------------------------------------------------------"
-          echo "All dates processed. Building final JSON files..."
-          echo "------------------------------------------------------------"
+          DAYS_JSON=$(jq -s 'reduce .[] as $d ({}; .[$d.date] = $d)' data/tmp_days/*.json)
 
-          # Build days.json
-          DAYS_JSON=$(jq -s '
-            reduce .[] as $d ({}; .[$d.date] = $d)
-          ' data/tmp_days/*.json)
-
-          # Build weeks.json
           WEEKS_JSON=$(jq -s '
             reduce .[] as $d ({}; 
               .[(($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y")) 
@@ -127,7 +95,6 @@ jobs:
             )
           ' data/tmp_days/*.json)
 
-          # Build months.json
           MONTHS_JSON=$(jq -s '
             reduce .[] as $d ({}; 
               .[($d.date | strptime("%Y-%m-%d") | mktime | strftime("%Y-%m"))] 
@@ -135,7 +102,6 @@ jobs:
             )
           ' data/tmp_days/*.json)
 
-          # Build search_index.json
           SEARCH_JSON="{}"
           for f in data/tmp_search/*.json; do
             d=$(basename "$f" .json)
@@ -143,11 +109,10 @@ jobs:
             SEARCH_JSON=$(echo "$SEARCH_JSON" | jq --arg d "$d" --argjson v "$s" '.[$d] = $v')
           done
 
-          # Final merge
           FINAL_JSON=$(jq -n \
             --arg start "$START" \
             --arg end "$END" \
-            --argjson fields "$FIELDS_JSON" \
+            --argjson fields "$FIELDS_CLEAN" \
             --argjson days "$DAYS_JSON" \
             --argjson weeks "$WEEKS_JSON" \
             --argjson months "$MONTHS_JSON" \
@@ -164,8 +129,6 @@ jobs:
 
           echo "$FINAL_JSON"  > data/availability.json
           echo "$SEARCH_JSON" > data/search_index.json
-
-          echo "✔ Final JSON files written."
 
       - name: Commit updated JSON
         run: |
