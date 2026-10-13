@@ -113,42 +113,7 @@
   "2026-10-17": {
     "SUMNER/SEAN": null,
     "JOYCE": null,
-    "TURF": [
-      {
-        "type": "free",
-        "start": "09:00",
-        "end": "16:00",
-        "start_12": "9:00 AM",
-        "end_12": "4:00 PM",
-        "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2"
-        ]
-      },
-      {
-        "type": "practice",
-        "start": "16:00",
-        "end": "19:00",
-        "start_12": "4:00 PM",
-        "end_12": "7:00 PM",
-        "fields": [
-          "H-HST"
-        ]
-      },
-      {
-        "type": "free",
-        "start": "19:00",
-        "end": "21:00",
-        "start_12": "7:00 PM",
-        "end_12": "9:00 PM",
-        "fields": [
-          "H-HST",
-          "H-HST1",
-          "H-HST2"
-        ]
-      }
-    ]
+    "TURF": []
   },
   "2026-10-18": {
     "SUMNER/SEAN": null,
