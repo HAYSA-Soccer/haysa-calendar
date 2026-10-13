@@ -6,7 +6,7 @@ let SEARCH = null;         // search_index.json
 
 let currentDate = null;
 let currentView = "day";
-let SELECTED_MODE = "practice"; // practice/game
+let SELECTED_MODE = "practice"; // practice/game (reserved if you expand modes later)
 let SELECTED_COMPLEXES = new Set();
 
 const HOURS = [
@@ -50,24 +50,6 @@ function insertTimestamp() {
 
   const now = new Date();
   tsEl.textContent = `Data last updated: ${now.toLocaleString()}`;
-}
-
-/****************************************************
- * EVENT TITLES HELPER
- ****************************************************/
-function getEventTitlesForWindow(dayData, window) {
-  const titles = [];
-
-  window.fields.forEach(fieldId => {
-    const events = dayData.events[fieldId] || [];
-    events.forEach(ev => {
-      if (ev.start === window.start && ev.end === window.end) {
-        titles.push(ev.title);
-      }
-    });
-  });
-
-  return titles;
 }
 
 /****************************************************
@@ -169,7 +151,7 @@ function renderDayView() {
   };
 
   const dayData = AVAIL.days[currentDate];
-  if (!dayData) {
+  if (!dayData || !dayData.complex_timeline) {
     document.getElementById("dayResults").innerHTML = `<p>No data for ${currentDate}</p>`;
     return;
   }
@@ -177,6 +159,9 @@ function renderDayView() {
   renderDayCalendar(dayData);
 }
 
+/****************************************************
+ * DAY CALENDAR (complex_timeline)
+ ****************************************************/
 function renderDayCalendar(dayData) {
   const container = document.getElementById("dayResults");
   if (!container) return;
@@ -203,7 +188,7 @@ function renderDayCalendar(dayData) {
   });
 
   visibleComplexes.forEach(cx => {
-    const windows = dayData.complex_timeline[cx];
+    const blocks = dayData.complex_timeline[cx];
 
     const section = document.createElement("div");
     section.className = `complex-section complex-accent-${cx.replace(/\s/g, "\\ ")}`;
@@ -217,64 +202,38 @@ function renderDayCalendar(dayData) {
 
     section.appendChild(title);
 
-    windows.forEach(w => {
+    blocks.forEach(b => {
       const card = document.createElement("div");
       card.className = "day-window-card";
-      card.dataset.start = w.start;
+      card.dataset.start = b.start;
 
-      const txt = (w.title || "").toLowerCase();
+      card.classList.add(
+        b.type === "free" ? "block-free" :
+        b.type === "practice" ? "block-practice" :
+        b.type === "game" ? "block-game" :
+        "block-admin"
+      );
 
-      if (w.type === "free") {
-        card.classList.add("block-free");
-      } else if (w.type === "practice" || txt.includes("practice")) {
-        card.classList.add("block-practice");
-      } else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
-        card.classList.add("block-game");
-      } else if (w.source === "blocks") {
-        if (txt.includes("game") || txt.includes("practice")) {
-          card.classList.add("block-game");
-        } else {
-          card.classList.add("block-admin");
-        }
-      } else {
-        card.classList.add("block-admin");
-      }
-
-      const durationMin = timeToMin(w.end) - timeToMin(w.start);
-
-      let labelHTML;
-      if (w.type === "free") {
-        labelHTML = "Availability";
-      } else if (w.type === "practice" || txt.includes("practice")) {
-        labelHTML = w.title || "Practice";
-      } else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
-        labelHTML = w.title || "Game";
-      } else if (w.source === "blocks") {
-        if (txt.includes("game")) labelHTML = "Game";
-        else if (txt.includes("practice")) labelHTML = "Practice";
-        else labelHTML = "Blocked";
-      } else {
-        labelHTML = "Blocked";
-      }
+      const durationMin = timeToMin(b.end) - timeToMin(b.start);
 
       const header = document.createElement("div");
       header.className = "day-window-header";
       header.innerHTML = `
-        ${labelHTML}
+        ${b.type.charAt(0).toUpperCase() + b.type.slice(1)}
         <span class="day-badge">${durationMin} min</span>
-        <span class="day-badge">${w.fields.length} fields</span>
+        <span class="day-badge">${b.fields.length} fields</span>
       `;
       card.appendChild(header);
 
       const sub = document.createElement("div");
       sub.className = "day-window-sub";
-      sub.textContent = `${w.start}–${w.end}`;
+      sub.textContent = `${b.start_12}–${b.end_12}`;
       card.appendChild(sub);
 
       const fieldWrap = document.createElement("div");
       fieldWrap.className = "day-window-fields";
 
-      w.fields.forEach(f => {
+      b.fields.forEach(f => {
         const chip = document.createElement("span");
         chip.className = "field-chip";
         chip.textContent = f;
@@ -287,9 +246,7 @@ function renderDayCalendar(dayData) {
         const tip = document.createElement("div");
         tip.className = "week-block-tooltip";
 
-        tip.textContent = w.title
-          ? w.title
-          : `${labelHTML} • ${w.start}–${w.end} • ${w.fields.length} fields`;
+        tip.textContent = `${b.type.toUpperCase()} • ${b.start_12}–${b.end_12} • ${b.fields.length} fields`;
 
         document.body.appendChild(tip);
 
@@ -315,7 +272,7 @@ function renderDayCalendar(dayData) {
 }
 
 /****************************************************
- * WEEK VIEW (STATIC JSON)
+ * WEEK VIEW (STATIC JSON + complex_timeline)
  ****************************************************/
 function getWeekRange(date) {
   const d = new Date(date);
@@ -374,7 +331,7 @@ function renderWeekTimeline() {
       body.appendChild(lbl);
     });
 
-    if (!dayData) {
+    if (!dayData || !dayData.complex_timeline) {
       const emptyMsg = document.createElement("div");
       emptyMsg.className = "week-empty";
       emptyMsg.textContent = "No data";
@@ -391,84 +348,69 @@ function renderWeekTimeline() {
     });
 
     visibleComplexes.forEach(cx => {
-      const windows = dayData.complex_timeline[cx];
-      const maxFields = Math.max(...windows.map(win => win.fields.length));
+      const blocks = dayData.complex_timeline[cx];
+      const maxFields = Math.max(...blocks.map(b => b.fields.length));
 
       const laneAssignments = [];
 
-      windows.forEach(w => {
-        const startY = timeToY(w.start);
-        const endY = timeToY(w.end);
+      blocks.forEach(b => {
+        const startY = timeToY(b.start);
+        const endY = timeToY(b.end);
 
         let laneIndex = 0;
         while (
           laneAssignments[laneIndex] &&
-          laneAssignments[laneIndex].some(b => !(endY <= b.startY || startY >= b.endY))
+          laneAssignments[laneIndex].some(existing => !(endY <= existing.startY || startY >= existing.endY))
         ) {
           laneIndex++;
         }
 
         if (!laneAssignments[laneIndex]) laneAssignments[laneIndex] = [];
-        laneAssignments[laneIndex].push({ startY, endY, w });
+        laneAssignments[laneIndex].push({ startY, endY, b });
       });
 
       laneAssignments.forEach((lane, laneIndex) => {
         const baseWidth = 100 / laneAssignments.length;
 
-        lane.forEach(({ startY, endY, w }) => {
+        lane.forEach(({ startY, endY, b }) => {
           const block = document.createElement("div");
           block.className = "week-block";
 
-          const txt = (w.title || "").toLowerCase();
-
-          if (w.type === "free") {
-            block.classList.add("block-free");
-          } else if (w.type === "practice" || txt.includes("practice")) {
-            block.classList.add("block-practice");
-          } else if (w.type === "game" || txt.includes("vs") || txt.includes("game")) {
-            block.classList.add("block-game");
-          } else if (w.source === "blocks") {
-            if (txt.includes("game") || txt.includes("practice")) {
-              block.classList.add("block-game");
-            } else {
-              block.classList.add("block-admin");
-            }
-          } else {
-            block.classList.add("block-admin");
-          }
+          block.classList.add(
+            b.type === "free" ? "block-free" :
+            b.type === "practice" ? "block-practice" :
+            b.type === "game" ? "block-game" :
+            "block-admin"
+          );
 
           const height = endY - startY;
           block.style.position = "absolute";
           block.style.top = `${startY}px`;
           block.style.height = `${height}px`;
 
-          const fieldScale = w.fields.length / maxFields;
+          const fieldScale = b.fields.length / maxFields;
           const scaledWidth = Math.max(baseWidth * fieldScale, baseWidth * 0.4);
 
           block.style.left = `${laneIndex * baseWidth}%`;
           block.style.width = `${scaledWidth}%`;
 
-          const durationMin = timeToMin(w.end) - timeToMin(w.start);
-          const titles = getEventTitlesForWindow(dayData, w);
-          const labelHTML = titles.length ? titles.join("<br>") : "";
+          const durationMin = timeToMin(b.end) - timeToMin(b.start);
 
           block.innerHTML = `
             <div class="label">
-              ${labelHTML}
+              ${b.type.toUpperCase()}
               <span class="week-badge">${durationMin} min</span>
-              <span class="week-badge">${w.fields.length} fields</span>
+              <span class="week-badge">${b.fields.length} fields</span>
             </div>
-            <div class="sub">${w.start}–${w.end}</div>
-            <div class="fields">${w.fields.join(", ")}</div>
+            <div class="sub">${b.start_12}–${b.end_12}</div>
+            <div class="fields">${b.fields.join(", ")}</div>
           `;
 
           block.addEventListener("mouseenter", () => {
             const tip = document.createElement("div");
             tip.className = "week-block-tooltip";
 
-            tip.textContent = titles.length
-              ? titles.join(" | ")
-              : `${w.start}–${w.end} • ${w.fields.length} fields`;
+            tip.textContent = `${b.type.toUpperCase()} • ${b.start_12}–${b.end_12} • ${b.fields.length} fields`;
 
             document.body.appendChild(tip);
 
@@ -616,7 +558,7 @@ function renderSearchCard(w, isFull) {
   return `
     <div class="search-card ${isFull ? "full-match" : ""}">
       <div class="search-header">
-        ${w.start} – ${w.end} (${w.fields.length} fields)
+        ${w.start_12} – ${w.end_12} (${w.fields.length} fields)
         ${isFull ? `<span class="full-tag">FULL MATCH</span>` : ""}
       </div>
       <ul class="search-field-list">
