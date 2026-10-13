@@ -299,11 +299,18 @@ function renderWeekTimeline() {
   const timeline = document.createElement("div");
   timeline.className = "week-timeline";
 
+  const todayStr = new Date().toISOString().slice(0, 10);
+
   days.forEach(dateStr => {
     const dayData = AVAIL.days[dateStr] || null;
 
     const dayCol = document.createElement("div");
     dayCol.className = "week-day-col";
+
+    // ⭐ Highlight today
+    if (dateStr === todayStr) {
+      dayCol.classList.add("today");
+    }
 
     const dt = new Date(dateStr);
     const dow = dt.toLocaleDateString("en-US", { weekday: "short" });
@@ -316,9 +323,6 @@ function renderWeekTimeline() {
       <div class="week-date">${fmt}</div>
     `;
     dayCol.appendChild(header);
-
-    const todayStr = new Date().toISOString().slice(0, 10);
-    if (dateStr === todayStr) dayCol.classList.add("today");
 
     const body = document.createElement("div");
     body.className = "week-day-body";
@@ -430,7 +434,7 @@ function renderWeekTimeline() {
 
           block.addEventListener("click", () => {
             currentDate = dateStr;
-            switchView("day");
+            switchView("week");
           });
 
           body.appendChild(block);
@@ -444,6 +448,7 @@ function renderWeekTimeline() {
 
   container.appendChild(timeline);
 }
+
 
 /****************************************************
  * MONTH VIEW (STATIC JSON)
