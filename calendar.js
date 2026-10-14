@@ -207,12 +207,13 @@ function getWeekRange(dateStr) {
 
 // ---- COMPLEX FILTERS ----
 function extractComplexFromSurface(surfaceName) {
-  if (surfaceName.includes("Holbrook High School Turf")) return "TURF";
+  if (surfaceName.includes("Turf")) return "TURF";
   if (surfaceName.includes("Sumner")) return "SUMNER/SEAN JOYCE";
   if (surfaceName.includes("Brookville")) return "BROOKVILLE";
   if (surfaceName.includes("Butler")) return "BUTLER";
   return null;
 }
+
 
 function renderComplexFilters() {
   const bar = document.getElementById("complex-filters");
@@ -271,10 +272,9 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  // Render blocks (simple, flat)
+  // Render blocks
   Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
 
-    // Respect complex filters
     if (SELECTED_COMPLEXES.size > 0 &&
         !SELECTED_COMPLEXES.has(complexName)) {
       return;
@@ -294,6 +294,18 @@ function renderDayTimeline(dayData) {
     });
   });
 }
+
+
+function buildBlockLabel(block) {
+  const parts = [];
+  parts.push(`${block.start}–${block.end}`);
+  if (block.fields?.length) parts.push(block.fields.join(", "));
+  if (block.team) parts.push(block.team);
+  if (block.notes) parts.push(block.notes);
+  return parts.join(" | ");
+}
+
+
 
 
 function buildBlockLabel(block) {
