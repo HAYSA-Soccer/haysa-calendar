@@ -214,7 +214,6 @@ function extractComplexFromSurface(surfaceName) {
   return null;
 }
 
-
 function renderComplexFilters() {
   const bar = document.getElementById("complex-filters");
   if (!bar || !AVAIL) return;
@@ -249,7 +248,7 @@ function renderComplexFilters() {
   });
 }
 
-
+// ---- AVAILABILITY PER FIELD ----
 function buildFieldAvailability(dayData) {
   const availability = {}; // fieldId -> array of { start, end }
 
@@ -276,13 +275,13 @@ function buildFieldAvailability(dayData) {
 
   // Build availability windows per field
   Object.keys(blocked).forEach(fid => {
-    let start = 8 * 60;   // 08:00
-    let end = 21 * 60;    // 21:00
+    const dayStart = 8 * 60;   // 08:00
+    const dayEnd = 21 * 60;    // 21:00
 
-    let cursor = start;
+    let cursor = dayStart;
 
-    while (cursor < end) {
-      // Find next blocked window
+    while (cursor < dayEnd) {
+      // Find next blocked window covering cursor
       const nextBlock = blocked[fid].find(b =>
         b.startMin <= cursor && b.endMin > cursor
       );
@@ -296,7 +295,7 @@ function buildFieldAvailability(dayData) {
       const availStart = cursor;
 
       // Move cursor until blocked or end of day
-      while (cursor < end) {
+      while (cursor < dayEnd) {
         const overlappingBlock = blocked[fid].find(b =>
           b.startMin <= cursor && b.endMin > cursor
         );
@@ -316,74 +315,42 @@ function buildFieldAvailability(dayData) {
   return availability;
 }
 
+// ---- MERGE AVAILABILITY ACROSS FIELDS ----
+function mergeAvailabilityAcrossFields(fieldAvailability) {
+  const merged = []; // array of { start, end, fields }
 
-function buildFieldAvailability(dayData) {
-  const availability = {}; // fieldId -> array of { start, end }
-
-  // Initialize each field with an empty list
-  Object.values(FIELD_MAP).forEach(f => {
-    availability[f.id] = [];
-  });
-
-  // Mark blocked windows per field
-  const blocked = {}; // fieldId -> array of { startMin, endMin }
-  Object.values(FIELD_MAP).forEach(f => blocked[f.id] = []);
-
-  Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
-    blocks.forEach(block => {
-      if (!block.fields) return;
-      const startMin = timeToMin(block.start);
-      const endMin = timeToMin(block.end);
-
-      block.fields.forEach(fid => {
-        blocked[fid].push({ startMin, endMin });
+  const windows = [];
+  Object.entries(fieldAvailability).forEach(([fid, avails]) => {
+    avails.forEach(a => {
+      windows.push({
+        start: a.start,
+        end: a.end,
+        field: fid
       });
     });
   });
 
-  // Build availability windows per field
-  Object.keys(blocked).forEach(fid => {
-    let start = 8 * 60;   // 08:00
-    let end = 21 * 60;    // 21:00
+  windows.sort((a, b) => timeToMin(a.start) - timeToMin(b.start));
 
-    let cursor = start;
-
-    while (cursor < end) {
-      // Find next blocked window
-      const nextBlock = blocked[fid].find(b =>
-        b.startMin <= cursor && b.endMin > cursor
-      );
-
-      if (nextBlock) {
-        cursor = nextBlock.endMin; // skip blocked
-        continue;
-      }
-
-      // Start availability window
-      const availStart = cursor;
-
-      // Move cursor until blocked or end of day
-      while (cursor < end) {
-        const overlappingBlock = blocked[fid].find(b =>
-          b.startMin <= cursor && b.endMin > cursor
-        );
-        if (overlappingBlock) break;
-        cursor++;
-      }
-
-      const availEnd = cursor;
-
-      availability[fid].push({
-        start: `${String(Math.floor(availStart / 60)).padStart(2, "0")}:${String(availStart % 60).padStart(2, "0")}`,
-        end: `${String(Math.floor(availEnd / 60)).padStart(2, "0")}:${String(availEnd % 60).padStart(2, "0")}`
+  windows.forEach(w => {
+    const existing = merged.find(m =>
+      m.start === w.start && m.end === w.end
+    );
+    if (existing) {
+      existing.fields.push(w.field);
+    } else {
+      merged.push({
+        start: w.start,
+        end: w.end,
+        fields: [w.field]
       });
     }
   });
 
-  return availability;
+  return merged;
 }
 
-
+// ---- DAY TIMELINE RENDERER ----
 function renderDayTimeline(dayData) {
   const timelineEl = document.getElementById("dayTimeline");
   if (!timelineEl) return;
@@ -449,7 +416,7 @@ function renderDayTimeline(dayData) {
   });
 }
 
-
+// ---- BLOCK LABEL BUILDER ----
 function buildBlockLabel(block) {
   const parts = [];
 
@@ -463,17 +430,5 @@ function buildBlockLabel(block) {
   if (block.team) parts.push(block.team);
   if (block.notes) parts.push(block.notes);
 
-  return parts.join(" | ");
-}
-
-
-
-
-function buildBlockLabel(block) {
-  const parts = [];
-  parts.push(`${block.start}–${block.end}`);
-  if (block.fields?.length) parts.push(block.fields.join(", "));
-  if (block.team) parts.push(block.team);
-  if (block.notes) parts.push(block.notes);
   return parts.join(" | ");
 }
