@@ -94,7 +94,6 @@ function initNav() {
 }
 
 function switchView(view) {
-  // Hide all timeline containers
   document.getElementById("dayTimeline").style.display = "none";
   document.getElementById("weekTimeline").style.display = "none";
   document.getElementById("monthTimeline").style.display = "none";
@@ -152,14 +151,9 @@ function renderDayView() {
     return;
   }
 
-  // Render the timeline
   renderDayTimeline(dayData);
-
-  // ⭐ THIS IS THE LINE YOU NEED ⭐
   document.getElementById("dayTimeline").style.display = "block";
 }
-
-
 
 // ---- WEEK VIEW SHELL ----
 function renderWeekTimeline() {
@@ -168,11 +162,6 @@ function renderWeekTimeline() {
 
   container.innerHTML = `<h2>Week View</h2>`;
   const weekEl = document.getElementById("weekTimeline");
-  weekEl.innerHTML = "";
-
-  const days = getWeekRange(currentDate);
-
-  // Placeholder — real timeline comes later
   weekEl.innerHTML = `<p>Week timeline will go here.</p>`;
 }
 
@@ -220,7 +209,6 @@ function renderComplexFilters() {
 
   bar.innerHTML = "";
 
-  // Build a unique list of complexes from FIELD_MAP
   const complexes = new Set();
   Object.values(FIELD_MAP).forEach(f => {
     const loc = extractComplexFromSurface(f.name);
@@ -252,12 +240,10 @@ function renderComplexFilters() {
 function buildFieldAvailability(dayData) {
   const availability = {}; // fieldId -> array of { start, end }
 
-  // Initialize each field with an empty list
   Object.values(FIELD_MAP).forEach(f => {
     availability[f.id] = [];
   });
 
-  // Mark blocked windows per field
   const blocked = {}; // fieldId -> array of { startMin, endMin }
   Object.values(FIELD_MAP).forEach(f => blocked[f.id] = []);
 
@@ -273,28 +259,23 @@ function buildFieldAvailability(dayData) {
     });
   });
 
-  // Build availability windows per field
   Object.keys(blocked).forEach(fid => {
-    const dayStart = 8 * 60;   // 08:00
-    const dayEnd = 21 * 60;    // 21:00
-
+    const dayStart = 8 * 60;
+    const dayEnd = 21 * 60;
     let cursor = dayStart;
 
     while (cursor < dayEnd) {
-      // Find next blocked window covering cursor
       const nextBlock = blocked[fid].find(b =>
         b.startMin <= cursor && b.endMin > cursor
       );
 
       if (nextBlock) {
-        cursor = nextBlock.endMin; // skip blocked
+        cursor = nextBlock.endMin;
         continue;
       }
 
-      // Start availability window
       const availStart = cursor;
 
-      // Move cursor until blocked or end of day
       while (cursor < dayEnd) {
         const overlappingBlock = blocked[fid].find(b =>
           b.startMin <= cursor && b.endMin > cursor
@@ -315,55 +296,69 @@ function buildFieldAvailability(dayData) {
   return availability;
 }
 
-// ---- MERGE AVAILABILITY ACROSS FIELDS ----
-function mergeAvailabilityAcrossFields(fieldAvailability) {
-  const merged = []; // array of { start, end, fields }
+// ---- OVERLAP HELPERS ----
+function overlaps(a, b) {
+  const aStart = timeToMin(a.start);
+  const aEnd = timeToMin(a.end);
+  const bStart = timeToMin(b.start);
+  const bEnd = timeToMin(b.end);
+  return aStart < bEnd && bStart < aEnd;
+}
 
-  const windows = [];
-  Object.entries(fieldAvailability).forEach(([fid, avails]) => {
-    avails.forEach(a => {
-      windows.push({
-        start: a.start,
-        end: a.end,
-        field: fid
-      });
-    });
-  });
+function assignLanes(blocks) {
+  const lanes = [];
 
-  windows.sort((a, b) => timeToMin(a.start) - timeToMin(b.start));
+  blocks.forEach(block => {
+    let placed = false;
 
-  windows.forEach(w => {
-    const existing = merged.find(m =>
-      m.start === w.start && m.end === w.end
-    );
-    if (existing) {
-      existing.fields.push(w.field);
-    } else {
-      merged.push({
-        start: w.start,
-        end: w.end,
-        fields: [w.field]
-      });
+    for (const lane of lanes) {
+      if (!lane.some(b => overlaps(b, block))) {
+        lane.push(block);
+        block.laneIndex = lanes.indexOf(lane);
+        placed = true;
+        break;
+      }
+    }
+
+    if (!placed) {
+      lanes.push([block]);
+      block.laneIndex = lanes.length - 1;
     }
   });
 
-  return merged;
+  return lanes.length;
 }
 
-// ---- DAY TIMELINE RENDERER ----
+// ---- DAY TIMELINE RENDERER WITH FIELD LANES ----
 function renderDayTimeline(dayData) {
   const timelineEl = document.getElementById("dayTimeline");
   if (!timelineEl) return;
 
+  // Determine which fields to show based on selected complexes
+  let fieldIds = Object.values(FIELD_MAP).map(f => f.id);
+  if (SELECTED_COMPLEXES.size > 0) {
+    fieldIds = fieldIds.filter(fid => {
+      const f = FIELD_MAP[fid];
+      const cx = extractComplexFromSurface(f.name);
+      return cx && SELECTED_COMPLEXES.has(cx);
+    });
+  }
+
+  if (fieldIds.length === 0) {
+    timelineEl.innerHTML = `<p>No fields selected.</p>`;
+    return;
+  }
+
+  timelineEl.style.setProperty("--field-columns", `repeat(${fieldIds.length}, 1fr)`);
+
+  // Build header + lanes
   timelineEl.innerHTML = `
     <div class="time-ruler"></div>
-    <div class="timeline-column"></div>
+    ${fieldIds.map(fid => `<div class="field-lane" data-field="${fid}"></div>`).join("")}
   `;
 
   const ruler = timelineEl.querySelector(".time-ruler");
-  const column = timelineEl.querySelector(".timeline-column");
 
-  // Time labels
   HOURS.forEach(h => {
     const y = timeToY(h);
     const label = document.createElement("div");
@@ -373,35 +368,52 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  // ---- BUILD AVAILABILITY ----
   const fieldAvailability = buildFieldAvailability(dayData);
-  const mergedAvailability = mergeAvailabilityAcrossFields(fieldAvailability);
 
-  // ---- RENDER AVAILABILITY FIRST ----
-  mergedAvailability.forEach(av => {
-    const top = timeToY(av.start);
-    const height = timeToY(av.end) - top;
+  // Render availability per field lane
+  fieldIds.forEach(fid => {
+    const lane = timelineEl.querySelector(`.field-lane[data-field="${fid}"]`);
+    if (!lane) return;
 
-    const div = document.createElement("div");
-    div.className = "timeline-block block-available";
-    div.style.top = `${top}px`;
-    div.style.height = `${height}px`;
+    (fieldAvailability[fid] || []).forEach(av => {
+      const top = timeToY(av.start);
+      const height = timeToY(av.end) - top;
 
-    const names = av.fields.map(fid => FIELD_MAP[fid]?.name || fid);
+      const div = document.createElement("div");
+      div.className = "timeline-block block-available";
+      div.style.top = `${top}px`;
+      div.style.height = `${height}px`;
+      div.textContent = `${av.start}–${av.end}`;
 
-    div.textContent = `Available: ${names.join(", ")} | ${av.start}–${av.end}`;
-    column.appendChild(div);
+      lane.appendChild(div);
+    });
   });
 
-  // ---- RENDER EVENTS ON TOP ----
+  // Collect events per field for lane assignment
+  const eventsByField = {};
+  fieldIds.forEach(fid => eventsByField[fid] = []);
+
   Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
-
-    if (SELECTED_COMPLEXES.size > 0 &&
-        !SELECTED_COMPLEXES.has(complexName)) {
-      return;
-    }
-
     blocks.forEach(block => {
+      if (!block.fields) return;
+      block.fields.forEach(fid => {
+        if (!eventsByField[fid]) return;
+        eventsByField[fid].push(block);
+      });
+    });
+  });
+
+  // Assign lanes and render events per field
+  fieldIds.forEach(fid => {
+    const laneBlocks = eventsByField[fid];
+    if (!laneBlocks || laneBlocks.length === 0) return;
+
+    assignLanes(laneBlocks);
+
+    const lane = timelineEl.querySelector(`.field-lane[data-field="${fid}"]`);
+    if (!lane) return;
+
+    laneBlocks.forEach(block => {
       const top = timeToY(block.start);
       const height = timeToY(block.end) - top;
 
@@ -410,8 +422,13 @@ function renderDayTimeline(dayData) {
       div.style.top = `${top}px`;
       div.style.height = `${height}px`;
 
+      const laneOffset = block.laneIndex || 0;
+      const laneWidthPct = 1 / (laneOffset + 1);
+      div.style.left = `${10 + laneOffset * 20}px`;
+      div.style.right = `10px`;
+
       div.textContent = buildBlockLabel(block);
-      column.appendChild(div);
+      lane.appendChild(div);
     });
   });
 }
@@ -419,7 +436,6 @@ function renderDayTimeline(dayData) {
 // ---- BLOCK LABEL BUILDER ----
 function buildBlockLabel(block) {
   const parts = [];
-
   parts.push(`${block.start}–${block.end}`);
 
   if (block.fields?.length) {
