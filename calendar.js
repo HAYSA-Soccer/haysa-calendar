@@ -302,13 +302,39 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  // Placeholder: blocks will be added here in Phase 2
-  // For now, just show the structure
-  const placeholder = document.createElement("div");
-  placeholder.className = "timeline-block";
-  placeholder.style.top = "100px";
-  placeholder.style.height = "60px";
-  placeholder.style.background = "#e0e0e0";
-  placeholder.textContent = "Timeline structure ready.";
-  column.appendChild(placeholder);
+  // Render real blocks
+  dayData.complex_timeline.forEach(complex => {
+
+    // Skip if user filtered out this complex
+    if (SELECTED_COMPLEXES.size > 0 &&
+        !SELECTED_COMPLEXES.has(complex.name)) {
+      return;
+    }
+
+    complex.blocks.forEach(block => {
+      const top = timeToY(block.start);
+      const bottom = timeToY(block.end);
+      const height = bottom - top;
+
+      const div = document.createElement("div");
+      div.className = `timeline-block block-${block.type}`;
+      div.style.top = `${top}px`;
+      div.style.height = `${height}px`;
+
+      // Build label
+      let label = `${block.start}–${block.end}`;
+      if (block.fields?.length) {
+        label += ` | ${block.fields.join(", ")}`;
+      }
+      if (block.team) {
+        label += ` | ${block.team}`;
+      }
+      if (block.notes) {
+        label += ` | ${block.notes}`;
+      }
+
+      div.textContent = label;
+      column.appendChild(div);
+    });
+  });
 }
