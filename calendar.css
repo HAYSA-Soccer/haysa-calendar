@@ -605,3 +605,20 @@ body {
   font-size: 14px;
   overflow: hidden;
 }
+
+/* ---- BLOCK COLORS ---- */
+.block-available {
+  background: #21c521; /* light green */
+  border: 1px solid #8bc98b;
+}
+
+.block-practice {
+  background: #9a9a9a; /* light blue */
+  border: 1px solid #7aa0ff;
+}
+
+.block-game {
+  background: #0000cd; /* light red */
+  border: 1px solid #ff8a8a;
+}
+
