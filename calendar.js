@@ -22,6 +22,17 @@ function timeToMin(timeStr) {
   return h * 60 + m;
 }
 
+// Human-readable date formatting
+function formatHumanDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
 // ---- INITIALIZE APP ----
 document.addEventListener("DOMContentLoaded", () => {
   loadAvailability().then(() => {
@@ -33,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ---- LOAD availability.json ----
 async function loadAvailability() {
-  const resp = await fetch("data/availability.json");   // <-- UPDATED
+  const resp = await fetch("data/availability.json");
   AVAIL = await resp.json();
 
   // Build FIELD_MAP from AVAIL.fields
@@ -46,6 +57,7 @@ async function loadAvailability() {
   }
 }
 
+// Build field map from availability.json
 function buildFieldMap(fieldsArray) {
   const map = {};
 
@@ -69,11 +81,6 @@ function buildFieldMap(fieldsArray) {
 
   return map;
 }
-
-
-
-
-
 
 // ---- NAV + VIEW SWITCHING ----
 function initNav() {
@@ -108,11 +115,6 @@ function switchView(view) {
   }
 }
 
-
-
-
-
-
 // ---- DAY VIEW SHELL ----
 function renderDayView() {
   const container = document.getElementById("view-container");
@@ -121,9 +123,9 @@ function renderDayView() {
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
-      <button id="prevDay">← Previous</button>
-      <span>${currentDate}</span>
-      <button id="nextDay">Next →</button>
+      <button id="prevDay">← Previous Day</button>
+      <span class="day-date">${formatHumanDate(currentDate)}</span>
+      <button id="nextDay">Next Day →</button>
     </div>
   `;
 
@@ -145,17 +147,14 @@ function renderDayView() {
 
   const dayData = AVAIL.days[currentDate];
   if (!dayData || !dayData.complex_timeline) {
-    document.getElementById("dayTimeline").innerHTML = `<p>No data for ${currentDate}</p>`;
+    document.getElementById("dayTimeline").innerHTML =
+      `<p>No data for ${formatHumanDate(currentDate)}</p>`;
     return;
   }
 
-  // Placeholder — we will build this next
+  // Placeholder — timeline engine comes next
   document.getElementById("dayTimeline").innerHTML = `<p>Day timeline will go here.</p>`;
 }
-
-
-
-
 
 // ---- WEEK VIEW SHELL ----
 function renderWeekTimeline() {
@@ -172,11 +171,7 @@ function renderWeekTimeline() {
   weekEl.innerHTML = `<p>Week timeline will go here.</p>`;
 }
 
-
-
-
-
-
+// ---- MONTH + SEARCH PLACEHOLDERS ----
 function renderMonthView() {
   const container = document.getElementById("view-container");
   if (!container) return;
@@ -189,9 +184,7 @@ function renderSearchView() {
   container.innerHTML = `<h2>Search View (placeholder)</h2>`;
 }
 
-
-
-
+// ---- WEEK RANGE HELPER ----
 function getWeekRange(dateStr) {
   const d = new Date(dateStr);
   const day = d.getDay(); // 0 = Sun
@@ -207,7 +200,14 @@ function getWeekRange(dateStr) {
   return days;
 }
 
-
+// ---- COMPLEX FILTERS ----
+function extractComplexFromSurface(surfaceName) {
+  if (surfaceName.includes("Holbrook High School Turf")) return "TURF";
+  if (surfaceName.includes("Sumner")) return "SUMNER/SEAN JOYCE";
+  if (surfaceName.includes("Brookville")) return "BROOKVILLE";
+  if (surfaceName.includes("Butler")) return "BUTLER";
+  return null;
+}
 
 function renderComplexFilters() {
   const bar = document.getElementById("complex-filters");
@@ -215,9 +215,14 @@ function renderComplexFilters() {
 
   bar.innerHTML = "";
 
-  const complexes = Object.keys(AVAIL.complexes || {});
+  // Build a unique list of complexes from FIELD_MAP
+  const complexes = new Set();
+  Object.values(FIELD_MAP).forEach(f => {
+    const loc = extractComplexFromSurface(f.name);
+    if (loc) complexes.add(loc);
+  });
 
-  complexes.forEach(cx => {
+  [...complexes].forEach(cx => {
     const btn = document.createElement("button");
     btn.className = "complex-btn";
     btn.textContent = cx;
@@ -237,17 +242,3 @@ function renderComplexFilters() {
     bar.appendChild(btn);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
