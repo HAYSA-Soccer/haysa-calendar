@@ -563,17 +563,18 @@ body {
 }
 
 /* ---- DAY TIMELINE LAYOUT ---- */
+/* ---- DAY TIMELINE LAYOUT ---- */
 #dayTimeline {
   position: relative;
   display: grid;
-  grid-template-columns: 60px 1fr;   /* time ruler + timeline */
+  grid-template-columns: 90px 1fr;   /* wider time ruler + timeline */
   height: calc(100vh - 180px);       /* fills screen below header */
-  overflow-y: scroll;                /* vertical scroll */
+  overflow-y: auto;                  /* vertical scroll */
   border-top: 1px solid #ddd;
   background: #fafafa;
 }
 
-/* Time ruler column */
+/* ---- TIME RULER COLUMN ---- */
 .time-ruler {
   position: relative;
   padding-top: 10px;
@@ -586,25 +587,26 @@ body {
   font-size: 14px;
   color: #555;
   text-align: right;
-  padding-right: 6px;
+  padding-right: 8px;                /* clearer spacing */
 }
 
-/* Timeline column */
+/* ---- TIMELINE COLUMN ---- */
 .timeline-column {
   position: relative;
   background: white;
 }
 
-/* Blocks will go here later */
+/* ---- EVENT / AVAILABILITY BLOCKS ---- */
 .timeline-block {
   position: absolute;
-  left: 10px;
+  left: 100px;                       /* push blocks outside time ruler */
   right: 10px;
   border-radius: 6px;
   padding: 6px;
   font-size: 14px;
   overflow: hidden;
 }
+
 
 /* ---- BLOCK COLORS ---- */
 .block-available {
