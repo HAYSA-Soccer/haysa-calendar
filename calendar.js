@@ -140,6 +140,8 @@ function renderDayView() {
     </div>
   `;
 
+  console.log("nextDay exists?", document.getElementById("nextDay"));
+
   const prevBtn = document.getElementById("prevDay");
   const nextBtn = document.getElementById("nextDay");
   const dateSpan = container.querySelector(".day-date");
