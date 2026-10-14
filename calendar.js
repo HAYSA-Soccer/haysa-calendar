@@ -298,10 +298,17 @@ function renderDayTimeline(dayData) {
 
 function buildBlockLabel(block) {
   const parts = [];
+
   parts.push(`${block.start}–${block.end}`);
-  if (block.fields?.length) parts.push(block.fields.join(", "));
+
+  if (block.fields?.length) {
+    const names = block.fields.map(id => FIELD_MAP[id]?.name || id);
+    parts.push(names.join(", "));
+  }
+
   if (block.team) parts.push(block.team);
   if (block.notes) parts.push(block.notes);
+
   return parts.join(" | ");
 }
 
