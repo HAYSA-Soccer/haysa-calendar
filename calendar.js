@@ -128,8 +128,10 @@ function switchView(view) {
 // ---- DAY VIEW SHELL ----
 function renderDayView() {
   const container = document.getElementById("view-container");
-  if (!container || !AVAIL) return;
+  const dayTimeline = document.getElementById("dayTimeline");
+  if (!container || !AVAIL || !dayTimeline) return;
 
+  // Render header + controls once per call
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
@@ -141,13 +143,21 @@ function renderDayView() {
 
   const prevBtn = document.getElementById("prevDay");
   const nextBtn = document.getElementById("nextDay");
+  const dateSpan = container.querySelector(".day-date");
 
   if (prevBtn) {
     prevBtn.onclick = () => {
       const d = new Date(currentDate);
       d.setDate(d.getDate() - 1);
       currentDate = formatDateKey(d);
-      renderDayView();
+      if (dateSpan) dateSpan.textContent = formatHumanDate(currentDate);
+      const dayData = AVAIL.days[currentDate];
+      if (!dayData) {
+        dayTimeline.innerHTML =
+          `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+      } else {
+        renderDayTimeline(dayData);
+      }
       renderComplexFilters();
     };
   }
@@ -157,27 +167,28 @@ function renderDayView() {
       const d = new Date(currentDate);
       d.setDate(d.getDate() + 1);
       currentDate = formatDateKey(d);
-      renderDayView();
+      if (dateSpan) dateSpan.textContent = formatHumanDate(currentDate);
+      const dayData = AVAIL.days[currentDate];
+      if (!dayData) {
+        dayTimeline.innerHTML =
+          `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+      } else {
+        renderDayTimeline(dayData);
+      }
       renderComplexFilters();
     };
   }
 
   const dayData = AVAIL.days[currentDate];
-  const dayTimeline = document.getElementById("dayTimeline");
-
   if (!dayData) {
-    if (dayTimeline) {
-      dayTimeline.innerHTML =
-        `<p>No data for ${formatHumanDate(currentDate)}</p>`;
-      dayTimeline.style.display = "block";
-    }
+    dayTimeline.innerHTML =
+      `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+    dayTimeline.style.display = "block";
     return;
   }
 
   renderDayTimeline(dayData);
-  if (dayTimeline) {
-    dayTimeline.style.display = "block";
-  }
+  dayTimeline.style.display = "block";
 }
 
 // ---- WEEK VIEW SHELL ----
