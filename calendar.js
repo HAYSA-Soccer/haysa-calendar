@@ -154,8 +154,42 @@ function renderDayView() {
   }
 
   // Placeholder — timeline engine comes next
-  renderDayTimeline(dayData);
-}
+  // Render real blocks
+dayData.complex_timeline.forEach(complex => {
+
+  // Skip if user filtered out this complex
+  if (SELECTED_COMPLEXES.size > 0 &&
+      !SELECTED_COMPLEXES.has(complex.name)) {
+    return;
+  }
+
+  complex.blocks.forEach(block => {
+    const top = timeToY(block.start);
+    const bottom = timeToY(block.end);
+    const height = bottom - top;
+
+    const div = document.createElement("div");
+    div.className = `timeline-block block-${block.type}`;
+    div.style.top = `${top}px`;
+    div.style.height = `${height}px`;
+
+    // Build label
+    let label = `${block.start}–${block.end}`;
+    if (block.fields?.length) {
+      label += ` | ${block.fields.join(", ")}`;
+    }
+    if (block.team) {
+      label += ` | ${block.team}`;
+    }
+    if (block.notes) {
+      label += ` | ${block.notes}`;
+    }
+
+    div.textContent = label;
+    column.appendChild(div);
+  });
+});
+
 
 // ---- WEEK VIEW SHELL ----
 function renderWeekTimeline() {
