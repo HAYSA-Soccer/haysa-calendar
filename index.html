@@ -27,21 +27,6 @@
   <!-- Complex filter buttons -->
   <div id="complex-filters" class="complex-filter-bar"></div>
 
-  <!-- Scheduling mode + enhanced view -->
-  <section class="mode-bar">
-    <div class="mode-controls">
-      <label for="schedModeSelect">Scheduling Mode:</label>
-      <select id="schedModeSelect">
-        <option value="practice">Practice</option>
-        <option value="game">Game</option>
-      </select>
-    </div>
-
-    <button id="enhancedDayBtn" class="enhanced-btn">
-      Enhanced Day View
-    </button>
-  </section>
-
   <!-- Main content (this gets replaced by renderDayView, renderWeekView, etc.) -->
   <main id="view-container"></main>
 
@@ -52,20 +37,6 @@
   <div id="searchTimeline" style="display:none;"></div>
 
   <script src="calendar.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const btn = document.getElementById("enhancedDayBtn");
-      if (btn) {
-        btn.addEventListener("click", () => {
-          if (typeof renderEnhancedDayView === "function") {
-            renderEnhancedDayView();
-          } else {
-            alert("Enhanced Day View is not yet available.");
-          }
-        });
-      }
-    });
-  </script>
 
 </body>
 </html>
