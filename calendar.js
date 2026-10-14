@@ -123,11 +123,12 @@ function renderDayView() {
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
-      <button id="prevDay">← Previous Day</button>
+      <button id="prevDay">←</button>
       <span class="day-date">${formatHumanDate(currentDate)}</span>
-      <button id="nextDay">Next Day →</button>
+      <button id="nextDay">→</button>
     </div>
   `;
+
 
   document.getElementById("prevDay").onclick = () => {
     const d = new Date(currentDate);
