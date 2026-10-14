@@ -33,10 +33,11 @@ function timeToMin(timeStr) {
   return h * 60 + m;
 }
 
-// Human-readable date formatting
+// Human-readable date formatting (NO timezone shift)
 function formatHumanDate(dateStr) {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("en-US", {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const dt = new Date(y, m - 1, d); // local date, no UTC shift
+  return dt.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -131,6 +132,7 @@ function renderDayView() {
   const dayTimeline = document.getElementById("dayTimeline");
   if (!container || !AVAIL || !dayTimeline) return;
 
+  // Controls (prev/next + date)
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
@@ -140,55 +142,48 @@ function renderDayView() {
     </div>
   `;
 
-  console.log("nextDay exists?", document.getElementById("nextDay"));
-
   const prevBtn = document.getElementById("prevDay");
   const nextBtn = document.getElementById("nextDay");
   const dateSpan = container.querySelector(".day-date");
 
-  prevBtn.onclick = () => {
+  const updateDay = () => {
+    const dayData = AVAIL.days[currentDate];
+    dateSpan.textContent = formatHumanDate(currentDate);
+
+    if (!dayData) {
+      // Preserve timeline structure, just show message
+      dayTimeline.innerHTML = `
+        <div class="time-ruler"></div>
+        <div class="timeline-column">
+          <p>No data for ${formatHumanDate(currentDate)}</p>
+        </div>
+      `;
+      dayTimeline.style.display = "block";
+      return;
+    }
+
+    renderDayTimeline(dayData);
+    dayTimeline.style.display = "block";
+  };
+
+  prevBtn.addEventListener("click", () => {
     const d = new Date(currentDate);
     d.setDate(d.getDate() - 1);
     currentDate = formatDateKey(d);
-
-    dateSpan.textContent = formatHumanDate(currentDate);
-
-    const dayData = AVAIL.days[currentDate];
-    if (!dayData) {
-      dayTimeline.innerHTML = `<p>No data for ${formatHumanDate(currentDate)}</p>`;
-    } else {
-      renderDayTimeline(dayData);
-    }
-
+    updateDay();
     renderComplexFilters();
-  };
+  });
 
-  nextBtn.onclick = () => {
+  nextBtn.addEventListener("click", () => {
     const d = new Date(currentDate);
     d.setDate(d.getDate() + 1);
     currentDate = formatDateKey(d);
-
-    dateSpan.textContent = formatHumanDate(currentDate);
-
-    const dayData = AVAIL.days[currentDate];
-    if (!dayData) {
-      dayTimeline.innerHTML = `<p>No data for ${formatHumanDate(currentDate)}</p>`;
-    } else {
-      renderDayTimeline(dayData);
-    }
-
+    updateDay();
     renderComplexFilters();
-  };
+  });
 
-  const dayData = AVAIL.days[currentDate];
-  if (!dayData) {
-    dayTimeline.innerHTML = `<p>No data for ${formatHumanDate(currentDate)}</p>`;
-    dayTimeline.style.display = "block";
-    return;
-  }
-
-  renderDayTimeline(dayData);
-  dayTimeline.style.display = "block";
+  // Initial render for currentDate
+  updateDay();
 }
 
 // ---- WEEK VIEW SHELL ----
@@ -218,10 +213,11 @@ function renderSearchView() {
 
 // ---- WEEK RANGE HELPER ----
 function getWeekRange(dateStr) {
-  const d = new Date(dateStr);
-  const day = d.getDay(); // 0 = Sun
-  const sunday = new Date(d);
-  sunday.setDate(d.getDate() - day);
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const base = new Date(y, m - 1, d);
+  const day = base.getDay(); // 0 = Sun
+  const sunday = new Date(base);
+  sunday.setDate(base.getDate() - day);
 
   const days = [];
   for (let i = 0; i < 7; i++) {
@@ -482,7 +478,12 @@ function renderDayTimeline(dayData) {
   const fieldIds = getVisibleFieldIds(dayData);
 
   if (fieldIds.length === 0) {
-    timelineEl.innerHTML = `<p>No fields selected.</p>`;
+    timelineEl.innerHTML = `
+      <div class="time-ruler"></div>
+      <div class="timeline-column">
+        <p>No fields selected.</p>
+      </div>
+    `;
     return;
   }
 
@@ -513,7 +514,7 @@ function renderDayTimeline(dayData) {
 
   const laneWidth = 720 / totalLaneCount;
 
-  // Availability lane (rightmost)
+  // Availability lane (rightmost, beside events)
   const availLaneIndex = totalLaneCount - 1;
 
   availWindows.forEach(win => {
