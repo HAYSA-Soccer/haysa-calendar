@@ -1222,16 +1222,7 @@
         ],
         "H-Su2A": [],
         "H-Su2B": [],
-        "H-SJ3": [
-          {
-            "start": "16:00",
-            "end": "17:00"
-          },
-          {
-            "start": "18:00",
-            "end": "19:00"
-          }
-        ],
+        "H-SJ3": [],
         "H-SJ3A": [],
         "H-SJ3B": [],
         "H-SJ4": [
@@ -1422,15 +1413,6 @@
           "title": ""
         },
         {
-          "field": "H-SJ3",
-          "start": "16:00",
-          "end": "17:00",
-          "start_12": "4:00 PM",
-          "end_12": "5:00 PM",
-          "type": "free",
-          "title": ""
-        },
-        {
           "field": "H-SJ4",
           "start": "16:00",
           "end": "17:30",
@@ -1541,15 +1523,6 @@
         },
         {
           "field": "H-Su2",
-          "start": "18:00",
-          "end": "19:00",
-          "start_12": "6:00 PM",
-          "end_12": "7:00 PM",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3",
           "start": "18:00",
           "end": "19:00",
           "start_12": "6:00 PM",
@@ -2365,7 +2338,7 @@
             "source": "ICS"
           },
           {
-            "event_id": "0ece5f508d77621ce58e5446bbc21537",
+            "event_id": "9bca82c2dd16bbc3a14410ef54a226ab",
             "date": "2026-10-17",
             "start": "12:30",
             "end": "13:30",
@@ -2517,20 +2490,6 @@
         ],
         "H-HST1": [
           {
-            "event_id": "f14224cf94d43a01919b7bb14d618d27",
-            "date": "2026-10-17",
-            "start": "16:00",
-            "end": "17:00",
-            "field": "H-HST1",
-            "field_group": "TURF",
-            "type": "game",
-            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
-            "team": "5/6 Boys Travel  vs. Sharon",
-            "coach": "Walsh",
-            "grade": "5/6",
-            "source": "ICS"
-          },
-          {
             "event_id": "fcd28a9082b52fc70e37a1be16e8ba8b",
             "date": "2026-10-17",
             "start": "18:00",
@@ -2555,6 +2514,20 @@
             "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
             "team": "5/6 Girls Travel  vs. Sharon",
             "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "9b73b255d6186665165b66a8c28442fc",
+            "date": "2026-10-17",
+            "start": "16:00",
+            "end": "17:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+            "team": "5/6 Boys Travel  vs. Sharon",
+            "coach": "Walsh",
             "grade": "5/6",
             "source": "ICS"
           }
@@ -4257,16 +4230,7 @@
         ],
         "H-Su2A": [],
         "H-Su2B": [],
-        "H-SJ3": [
-          {
-            "start": "16:00",
-            "end": "17:00"
-          },
-          {
-            "start": "18:00",
-            "end": "19:00"
-          }
-        ],
+        "H-SJ3": [],
         "H-SJ3A": [],
         "H-SJ3B": [],
         "H-SJ4": [
@@ -4457,15 +4421,6 @@
           "title": ""
         },
         {
-          "field": "H-SJ3",
-          "start": "16:00",
-          "end": "17:00",
-          "start_12": "4:00 PM",
-          "end_12": "5:00 PM",
-          "type": "free",
-          "title": ""
-        },
-        {
           "field": "H-SJ4",
           "start": "16:00",
           "end": "17:30",
@@ -4576,15 +4531,6 @@
         },
         {
           "field": "H-Su2",
-          "start": "18:00",
-          "end": "19:00",
-          "start_12": "6:00 PM",
-          "end_12": "7:00 PM",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3",
           "start": "18:00",
           "end": "19:00",
           "start_12": "6:00 PM",
@@ -5400,7 +5346,7 @@
             "source": "ICS"
           },
           {
-            "event_id": "0ece5f508d77621ce58e5446bbc21537",
+            "event_id": "9bca82c2dd16bbc3a14410ef54a226ab",
             "date": "2026-10-17",
             "start": "12:30",
             "end": "13:30",
@@ -5552,20 +5498,6 @@
         ],
         "H-HST1": [
           {
-            "event_id": "f14224cf94d43a01919b7bb14d618d27",
-            "date": "2026-10-17",
-            "start": "16:00",
-            "end": "17:00",
-            "field": "H-HST1",
-            "field_group": "TURF",
-            "type": "game",
-            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
-            "team": "5/6 Boys Travel  vs. Sharon",
-            "coach": "Walsh",
-            "grade": "5/6",
-            "source": "ICS"
-          },
-          {
             "event_id": "fcd28a9082b52fc70e37a1be16e8ba8b",
             "date": "2026-10-17",
             "start": "18:00",
@@ -5590,6 +5522,20 @@
             "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
             "team": "5/6 Girls Travel  vs. Sharon",
             "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "9b73b255d6186665165b66a8c28442fc",
+            "date": "2026-10-17",
+            "start": "16:00",
+            "end": "17:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+            "team": "5/6 Boys Travel  vs. Sharon",
+            "coach": "Walsh",
             "grade": "5/6",
             "source": "ICS"
           }
@@ -7293,16 +7239,7 @@
         ],
         "H-Su2A": [],
         "H-Su2B": [],
-        "H-SJ3": [
-          {
-            "start": "16:00",
-            "end": "17:00"
-          },
-          {
-            "start": "18:00",
-            "end": "19:00"
-          }
-        ],
+        "H-SJ3": [],
         "H-SJ3A": [],
         "H-SJ3B": [],
         "H-SJ4": [
@@ -7493,15 +7430,6 @@
           "title": ""
         },
         {
-          "field": "H-SJ3",
-          "start": "16:00",
-          "end": "17:00",
-          "start_12": "4:00 PM",
-          "end_12": "5:00 PM",
-          "type": "free",
-          "title": ""
-        },
-        {
           "field": "H-SJ4",
           "start": "16:00",
           "end": "17:30",
@@ -7612,15 +7540,6 @@
         },
         {
           "field": "H-Su2",
-          "start": "18:00",
-          "end": "19:00",
-          "start_12": "6:00 PM",
-          "end_12": "7:00 PM",
-          "type": "free",
-          "title": ""
-        },
-        {
-          "field": "H-SJ3",
           "start": "18:00",
           "end": "19:00",
           "start_12": "6:00 PM",
@@ -8436,7 +8355,7 @@
             "source": "ICS"
           },
           {
-            "event_id": "0ece5f508d77621ce58e5446bbc21537",
+            "event_id": "9bca82c2dd16bbc3a14410ef54a226ab",
             "date": "2026-10-17",
             "start": "12:30",
             "end": "13:30",
@@ -8588,20 +8507,6 @@
         ],
         "H-HST1": [
           {
-            "event_id": "f14224cf94d43a01919b7bb14d618d27",
-            "date": "2026-10-17",
-            "start": "16:00",
-            "end": "17:00",
-            "field": "H-HST1",
-            "field_group": "TURF",
-            "type": "game",
-            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
-            "team": "5/6 Boys Travel  vs. Sharon",
-            "coach": "Walsh",
-            "grade": "5/6",
-            "source": "ICS"
-          },
-          {
             "event_id": "fcd28a9082b52fc70e37a1be16e8ba8b",
             "date": "2026-10-17",
             "start": "18:00",
@@ -8626,6 +8531,20 @@
             "title": "5/6 Girls Travel (Baird-Miller) vs. Sharon",
             "team": "5/6 Girls Travel  vs. Sharon",
             "coach": "Baird-Miller",
+            "grade": "5/6",
+            "source": "ICS"
+          },
+          {
+            "event_id": "9b73b255d6186665165b66a8c28442fc",
+            "date": "2026-10-17",
+            "start": "16:00",
+            "end": "17:00",
+            "field": "H-HST1",
+            "field_group": "TURF",
+            "type": "game",
+            "title": "5/6 Boys Travel (Walsh) vs. Sharon",
+            "team": "5/6 Boys Travel  vs. Sharon",
+            "coach": "Walsh",
             "grade": "5/6",
             "source": "ICS"
           }
