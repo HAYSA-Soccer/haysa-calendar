@@ -42,15 +42,14 @@
     </button>
   </section>
 
-  <!-- Main content -->
-  <main id="view-container">
+  <!-- Main content (this gets replaced by renderDayView, renderWeekView, etc.) -->
+  <main id="view-container"></main>
 
-    <div id="dayTimeline" style="display:none"></div>
-    <div id="weekTimeline" style="display:none"></div>
-    <div id="monthTimeline" style="display:none"></div>
-    <div id="searchTimeline" style="display:none"></div>
-
-  </main>
+  <!-- TIMELINE CONTAINERS (must NOT be inside view-container) -->
+  <div id="dayTimeline" style="display:none;"></div>
+  <div id="weekTimeline" style="display:none;"></div>
+  <div id="monthTimeline" style="display:none;"></div>
+  <div id="searchTimeline" style="display:none;"></div>
 
   <script src="calendar.js"></script>
   <script>
