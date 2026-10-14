@@ -11,6 +11,9 @@ let AVAIL = null;
 let currentDate = formatDateKey(new Date());
 const SELECTED_COMPLEXES = new Set();
 
+const DAY_START_MIN = 8 * 60;   // 08:00
+const DAY_END_MIN   = 21 * 60;  // 21:00
+
 // Time helpers
 const HOURS = [
   "08:00", "09:00", "10:00", "11:00",
@@ -29,7 +32,6 @@ function timeToMin(timeStr) {
   const [h, m] = timeStr.split(":").map(Number);
   return h * 60 + m;
 }
-
 
 // Human-readable date formatting
 function formatHumanDate(dateStr) {
@@ -137,32 +139,45 @@ function renderDayView() {
     </div>
   `;
 
-    document.getElementById("prevDay").onclick = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() - 1);
-    currentDate = formatDateKey(d);
-    renderDayView();
-    renderComplexFilters();
-  };
-  
-  document.getElementById("nextDay").onclick = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() + 1);
-    currentDate = formatDateKey(d);
-    renderDayView();
-    renderComplexFilters();
-  };
+  const prevBtn = document.getElementById("prevDay");
+  const nextBtn = document.getElementById("nextDay");
 
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      const d = new Date(currentDate);
+      d.setDate(d.getDate() - 1);
+      currentDate = formatDateKey(d);
+      renderDayView();
+      renderComplexFilters();
+    };
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      const d = new Date(currentDate);
+      d.setDate(d.getDate() + 1);
+      currentDate = formatDateKey(d);
+      renderDayView();
+      renderComplexFilters();
+    };
+  }
 
   const dayData = AVAIL.days[currentDate];
+  const dayTimeline = document.getElementById("dayTimeline");
+
   if (!dayData) {
-    document.getElementById("dayTimeline").innerHTML =
-      `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+    if (dayTimeline) {
+      dayTimeline.innerHTML =
+        `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+      dayTimeline.style.display = "block";
+    }
     return;
   }
 
   renderDayTimeline(dayData);
-  document.getElementById("dayTimeline").style.display = "block";
+  if (dayTimeline) {
+    dayTimeline.style.display = "block";
+  }
 }
 
 // ---- WEEK VIEW SHELL ----
@@ -172,7 +187,9 @@ function renderWeekTimeline() {
 
   container.innerHTML = `<h2>Week View</h2>`;
   const weekEl = document.getElementById("weekTimeline");
-  weekEl.innerHTML = `<p>Week timeline will go here.</p>`;
+  if (weekEl) {
+    weekEl.innerHTML = `<p>Week timeline will go here.</p>`;
+  }
 }
 
 // ---- MONTH + SEARCH PLACEHOLDERS ----
@@ -199,7 +216,7 @@ function getWeekRange(dateStr) {
   for (let i = 0; i < 7; i++) {
     const dt = new Date(sunday);
     dt.setDate(sunday.getDate() + i);
-    days.push(dt.toISOString().slice(0, 10));
+    days.push(formatDateKey(dt));
   }
   return days;
 }
@@ -315,27 +332,61 @@ function assignOverlapLanes(events) {
   return lanes.length;
 }
 
-// Compute global availability windows from dayData.availability
-// Availability "nests" around events and lists all free fields
+// Compute global availability windows from dayData.availability,
+// subtracting events (including half-field occupancy affecting full fields)
 function computeGlobalAvailability(dayData, fieldIds) {
-  const dayStart = 8 * 60;
-  const dayEnd = 21 * 60;
   const availMap = dayData.availability || {};
+  const eventsByField = dayData.events || {};
+
+  // Minute-by-minute occupied map
+  const occupied = {};
+  for (let m = DAY_START_MIN; m <= DAY_END_MIN; m++) {
+    occupied[m] = new Set();
+  }
+
+  // Mark occupied minutes by events
+  Object.values(eventsByField).forEach(arr => {
+    arr.forEach(ev => {
+      const s = timeToMin(ev.start);
+      const e = timeToMin(ev.end);
+      for (let m = s; m < e; m++) {
+        if (m >= DAY_START_MIN && m <= DAY_END_MIN) {
+          occupied[m].add(ev.field);
+        }
+      }
+    });
+  });
+
+  // If a half is occupied, mark parent full field as occupied too
+  Object.values(FIELD_MAP).forEach(f => {
+    if (f.halves && f.halves.length > 0) {
+      for (let m = DAY_START_MIN; m <= DAY_END_MIN; m++) {
+        f.halves.forEach(hid => {
+          if (occupied[m].has(hid)) {
+            occupied[m].add(f.id);
+          }
+        });
+      }
+    }
+  });
 
   const windows = [];
   let currentStart = null;
   let currentFieldIds = null;
 
-  for (let m = dayStart; m <= dayEnd; m++) {
+  for (let m = DAY_START_MIN; m <= DAY_END_MIN; m++) {
     const minuteFields = [];
 
     fieldIds.forEach(fid => {
       const arr = availMap[fid] || [];
-      const isFree = arr.some(win => {
+      const isInAvailWindow = arr.some(win => {
         const s = timeToMin(win.start);
         const e = timeToMin(win.end);
         return m >= s && m < e;
       });
+
+      const isFree = isInAvailWindow && !occupied[m].has(fid);
+
       if (isFree) minuteFields.push(fid);
     });
 
@@ -373,7 +424,7 @@ function computeGlobalAvailability(dayData, fieldIds) {
   if (currentStart !== null) {
     windows.push({
       startMin: currentStart,
-      endMin: dayEnd,
+      endMin: DAY_END_MIN,
       fieldIds: currentFieldIds
     });
   }
@@ -455,7 +506,7 @@ function renderDayTimeline(dayData) {
   const availLaneIndex = totalLaneCount - 1;
 
   availWindows.forEach(win => {
-    const top = win.startMin - 8 * 60;
+    const top = win.startMin - DAY_START_MIN;
     const height = win.endMin - win.startMin;
 
     const div = document.createElement("div");
@@ -479,9 +530,8 @@ function renderDayTimeline(dayData) {
 
   // Event blocks (each in its lane)
   events.forEach(ev => {
-    const top = ev.startMin - 8 * 60;
+    const top = ev.startMin - DAY_START_MIN;
     const height = ev.endMin - ev.startMin;
-
     const left = ev.laneIndex * laneWidth;
 
     const div = document.createElement("div");
