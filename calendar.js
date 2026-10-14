@@ -131,7 +131,6 @@ function renderDayView() {
   const dayTimeline = document.getElementById("dayTimeline");
   if (!container || !AVAIL || !dayTimeline) return;
 
-  // Render header + controls once per call
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
@@ -145,44 +144,43 @@ function renderDayView() {
   const nextBtn = document.getElementById("nextDay");
   const dateSpan = container.querySelector(".day-date");
 
-  if (prevBtn) {
-    prevBtn.onclick = () => {
-      const d = new Date(currentDate);
-      d.setDate(d.getDate() - 1);
-      currentDate = formatDateKey(d);
-      if (dateSpan) dateSpan.textContent = formatHumanDate(currentDate);
-      const dayData = AVAIL.days[currentDate];
-      if (!dayData) {
-        dayTimeline.innerHTML =
-          `<p>No data for ${formatHumanDate(currentDate)}</p>`;
-      } else {
-        renderDayTimeline(dayData);
-      }
-      renderComplexFilters();
-    };
-  }
+  prevBtn.onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() - 1);
+    currentDate = formatDateKey(d);
 
-  if (nextBtn) {
-    nextBtn.onclick = () => {
-      const d = new Date(currentDate);
-      d.setDate(d.getDate() + 1);
-      currentDate = formatDateKey(d);
-      if (dateSpan) dateSpan.textContent = formatHumanDate(currentDate);
-      const dayData = AVAIL.days[currentDate];
-      if (!dayData) {
-        dayTimeline.innerHTML =
-          `<p>No data for ${formatHumanDate(currentDate)}</p>`;
-      } else {
-        renderDayTimeline(dayData);
-      }
-      renderComplexFilters();
-    };
-  }
+    dateSpan.textContent = formatHumanDate(currentDate);
+
+    const dayData = AVAIL.days[currentDate];
+    if (!dayData) {
+      dayTimeline.innerHTML = `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+    } else {
+      renderDayTimeline(dayData);
+    }
+
+    renderComplexFilters();
+  };
+
+  nextBtn.onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() + 1);
+    currentDate = formatDateKey(d);
+
+    dateSpan.textContent = formatHumanDate(currentDate);
+
+    const dayData = AVAIL.days[currentDate];
+    if (!dayData) {
+      dayTimeline.innerHTML = `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+    } else {
+      renderDayTimeline(dayData);
+    }
+
+    renderComplexFilters();
+  };
 
   const dayData = AVAIL.days[currentDate];
   if (!dayData) {
-    dayTimeline.innerHTML =
-      `<p>No data for ${formatHumanDate(currentDate)}</p>`;
+    dayTimeline.innerHTML = `<p>No data for ${formatHumanDate(currentDate)}</p>`;
     dayTimeline.style.display = "block";
     return;
   }
