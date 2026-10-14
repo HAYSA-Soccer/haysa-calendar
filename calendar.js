@@ -154,7 +154,7 @@ function renderDayView() {
   }
 
   // Placeholder — timeline engine comes next
-  document.getElementById("dayTimeline").innerHTML = `<p>Day timeline will go here.</p>`;
+  renderDayTimeline(dayData);
 }
 
 // ---- WEEK VIEW SHELL ----
@@ -242,4 +242,39 @@ function renderComplexFilters() {
 
     bar.appendChild(btn);
   });
+}
+
+
+function renderDayTimeline(dayData) {
+  const timelineEl = document.getElementById("dayTimeline");
+  if (!timelineEl) return;
+
+  // Clear previous content
+  timelineEl.innerHTML = `
+    <div class="time-ruler"></div>
+    <div class="timeline-column"></div>
+  `;
+
+  const ruler = timelineEl.querySelector(".time-ruler");
+  const column = timelineEl.querySelector(".timeline-column");
+
+  // Build time ruler labels
+  HOURS.forEach(h => {
+    const y = timeToY(h);
+    const label = document.createElement("div");
+    label.className = "time-label";
+    label.style.top = `${y}px`;
+    label.textContent = h;
+    ruler.appendChild(label);
+  });
+
+  // Placeholder: blocks will be added here in Phase 2
+  // For now, just show the structure
+  const placeholder = document.createElement("div");
+  placeholder.className = "timeline-block";
+  placeholder.style.top = "100px";
+  placeholder.style.height = "60px";
+  placeholder.style.background = "#e0e0e0";
+  placeholder.textContent = "Timeline structure ready.";
+  column.appendChild(placeholder);
 }
