@@ -483,7 +483,7 @@ body {
 #dayTimeline {
   position: relative;
   display: grid;
-  grid-template-columns: 100px auto;
+  grid-template-columns: 100px var(--field-columns, repeat(4, 1fr));
   height: 780px;
   background: #fafafa;
   border-top: 1px solid #ddd;
@@ -510,12 +510,11 @@ body {
 }
 
 /****************************************************
- * TIMELINE COLUMN (RIGHT COLUMN)
+ * FIELD LANES (RIGHT COLUMNS)
  ****************************************************/
-.timeline-column {
+.field-lane {
   position: relative;
   background: white;
-  min-width: 600px;
   border-left: 1px solid #ddd;
 }
 
@@ -524,8 +523,6 @@ body {
  ****************************************************/
 .timeline-block {
   position: absolute;
-  left: 10px;
-  right: 10px;
   border-radius: 6px;
   padding: 6px;
   font-size: 14px;
