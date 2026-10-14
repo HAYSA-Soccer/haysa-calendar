@@ -237,7 +237,7 @@ function renderComplexFilters() {
 }
 
 /* ------------------------------------------------------------------
-   DAY VIEW REWRITE: SINGLE-LANE TIMELINE + NESTLED AVAILABILITY
+   DAY VIEW: TRUE CALENDAR LAYOUT (LANES + GLOBAL AVAILABILITY)
 ------------------------------------------------------------------- */
 
 // Get the list of fields to consider, honoring complex filters
@@ -267,13 +267,42 @@ function collectEventsForDay(dayData, fieldIds) {
         ...ev,
         startMin: timeToMin(ev.start),
         endMin: timeToMin(ev.end),
-        fields: [ev.field] // so buildBlockLabel still works
+        fields: [ev.field] // keep compatibility with block label
       });
     });
   });
 
   events.sort((a, b) => a.startMin - b.startMin || a.endMin - b.endMin);
   return events;
+}
+
+// Assign overlap lanes (dynamic horizontal lanes)
+function assignOverlapLanes(events) {
+  const lanes = [];
+
+  events.forEach(ev => {
+    let placed = false;
+
+    for (let i = 0; i < lanes.length; i++) {
+      const lane = lanes[i];
+      const conflict = lane.some(other =>
+        !(ev.endMin <= other.startMin || ev.startMin >= other.endMin)
+      );
+      if (!conflict) {
+        lane.push(ev);
+        ev.laneIndex = i;
+        placed = true;
+        break;
+      }
+    }
+
+    if (!placed) {
+      lanes.push([ev]);
+      ev.laneIndex = lanes.length - 1;
+    }
+  });
+
+  return lanes.length;
 }
 
 // Compute global availability windows from dayData.availability
@@ -343,74 +372,14 @@ function computeGlobalAvailability(dayData, fieldIds) {
   return windows.filter(w => w.fieldIds && w.fieldIds.length > 0);
 }
 
-// ---- DAY TIMELINE RENDERER (SINGLE LANE) ----
-function renderDayTimeline(dayData) {
-  const timelineEl = document.getElementById("dayTimeline");
-  if (!timelineEl) return;
-
-  const fieldIds = getVisibleFieldIds(dayData);
-
-  if (fieldIds.length === 0) {
-    timelineEl.innerHTML = `<p>No fields selected.</p>`;
-    return;
-  }
-
-  const events = collectEventsForDay(dayData, fieldIds);
-  const availWindows = computeGlobalAvailability(dayData, fieldIds);
-
-  // Clear and build single-lane layout
-  timelineEl.innerHTML = `
-    <div class="time-ruler"></div>
-    <div class="timeline-column"></div>
-  `;
-
-  const ruler = timelineEl.querySelector(".time-ruler");
-  const column = timelineEl.querySelector(".timeline-column");
-
-  // Time labels
-  HOURS.forEach(h => {
-    const y = timeToY(h);
-    const label = document.createElement("div");
-    label.className = "time-label";
-    label.style.top = `${y}px`;
-    label.textContent = h;
-    ruler.appendChild(label);
-  });
-
-  // Availability blocks (green), nestling around events
-  availWindows.forEach(win => {
-    const top = win.startMin - 8 * 60;
-    const height = win.endMin - win.startMin;
-
-    const div = document.createElement("div");
-    div.className = "timeline-block block-available";
-    div.style.top = `${top}px`;
-    div.style.height = `${height}px`;
-
-    const startStr = `${String(Math.floor(win.startMin / 60)).padStart(2, "0")}:${String(win.startMin % 60).padStart(2, "0")}`;
-    const endStr = `${String(Math.floor(win.endMin / 60)).padStart(2, "0")}:${String(win.endMin % 60).padStart(2, "0")}`;
-
-    const fieldNames = win.fieldIds
-      .map(fid => FIELD_MAP[fid]?.name || fid)
-      .join(", ");
-
-    div.textContent = `Available: ${fieldNames} | ${startStr}–${endStr}`;
-    column.appendChild(div);
-  });
-
-  // Event blocks on top (practice/game/admin)
-  events.forEach(ev => {
-    const top = ev.startMin - 8 * 60;
-    const height = ev.endMin - ev.startMin;
-
-    const div = document.createElement("div");
-    div.className = `timeline-block block-${ev.type}`;
-    div.style.top = `${top}px`;
-    div.style.height = `${height}px`;
-
-    div.textContent = buildBlockLabel(ev);
-    column.appendChild(div);
-  });
+// 12-hour formatting helper
+function formatTime12(min) {
+  let h = Math.floor(min / 60);
+  let m = min % 60;
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12;
+  if (h === 0) h = 12;
+  return `${h}:${String(m).padStart(2, "0")} ${ampm}`;
 }
 
 // ---- BLOCK LABEL BUILDER ----
@@ -431,4 +400,82 @@ function buildBlockLabel(block) {
   if (block.title && !parts.includes(block.title)) parts.push(block.title);
 
   return parts.join(" | ");
+}
+
+// ---- DAY TIMELINE RENDERER (TRUE CALENDAR LAYOUT) ----
+function renderDayTimeline(dayData) {
+  const timelineEl = document.getElementById("dayTimeline");
+  if (!timelineEl) return;
+
+  const fieldIds = getVisibleFieldIds(dayData);
+
+  if (fieldIds.length === 0) {
+    timelineEl.innerHTML = `<p>No fields selected.</p>`;
+    return;
+  }
+
+  const events = collectEventsForDay(dayData, fieldIds);
+  const laneCount = events.length > 0 ? assignOverlapLanes(events) : 1;
+  const availWindows = computeGlobalAvailability(dayData, fieldIds);
+
+  // Clear and build layout
+  timelineEl.innerHTML = `
+    <div class="time-ruler"></div>
+    <div class="timeline-column"></div>
+  `;
+
+  const ruler = timelineEl.querySelector(".time-ruler");
+  const column = timelineEl.querySelector(".timeline-column");
+
+  // Time labels
+  HOURS.forEach(h => {
+    const y = timeToY(h);
+    const label = document.createElement("div");
+    label.className = "time-label";
+    label.style.top = `${y}px`;
+    label.textContent = h;
+    ruler.appendChild(label);
+  });
+
+  // Availability blocks (behind events)
+  availWindows.forEach(win => {
+    const top = win.startMin - 8 * 60;
+    const height = win.endMin - win.startMin;
+
+    const div = document.createElement("div");
+    div.className = "timeline-block block-available";
+    div.style.top = `${top}px`;
+    div.style.height = `${height}px`;
+    div.style.zIndex = 1;
+
+    const startStr = formatTime12(win.startMin);
+    const endStr = formatTime12(win.endMin);
+
+    const fieldNames = win.fieldIds
+      .map(fid => FIELD_MAP[fid]?.name || fid)
+      .join(", ");
+
+    div.textContent = `Available: ${fieldNames} | ${startStr}–${endStr}`;
+    column.appendChild(div);
+  });
+
+  // Event blocks (in lanes)
+  events.forEach(ev => {
+    const top = ev.startMin - 8 * 60;
+    const height = ev.endMin - ev.startMin;
+
+    const laneWidth = 720 / laneCount;
+    const left = ev.laneIndex * laneWidth;
+
+    const div = document.createElement("div");
+    div.className = `timeline-block block-${ev.type}`;
+    div.style.top = `${top}px`;
+    div.style.height = `${height}px`;
+    div.style.left = `${left}px`;
+    div.style.width = `${laneWidth - 8}px`;
+    div.style.zIndex = 5;
+
+    div.textContent = buildBlockLabel(ev);
+    column.appendChild(div);
+  });
 }
