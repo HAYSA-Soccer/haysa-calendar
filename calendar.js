@@ -25,7 +25,7 @@ const HOURS = [
 function timeToY(timeStr) {
   const [h, m] = timeStr.split(":").map(Number);
   const minutes = (h - 8) * 60 + m; // 08:00 = top
-  return minutes; // 1 px per minute, 780px total
+  return minutes;
 }
 
 function timeToMin(timeStr) {
@@ -36,7 +36,7 @@ function timeToMin(timeStr) {
 // Human-readable date formatting (NO timezone shift)
 function formatHumanDate(dateStr) {
   const [y, m, d] = dateStr.split("-").map(Number);
-  const dt = new Date(y, m - 1, d); // local date, no UTC shift
+  const dt = new Date(y, m - 1, d);
   return dt.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -49,7 +49,8 @@ function formatHumanDate(dateStr) {
 document.addEventListener("DOMContentLoaded", () => {
   loadAvailability().then(() => {
     initNav();
-    renderDayView();
+    initDayControls();   // controls created ONCE
+    renderDayTimeline(AVAIL.days[currentDate]);
     renderComplexFilters();
   });
 });
@@ -59,32 +60,28 @@ async function loadAvailability() {
   const resp = await fetch("data/availability.json");
   AVAIL = await resp.json();
 
-  // Build FIELD_MAP from AVAIL.fields
   window.FIELD_MAP = buildFieldMap(AVAIL.fields);
 
-  // Timestamp display
   const tsEl = document.getElementById("dataTimestamp");
   if (tsEl && AVAIL.generated_at) {
     tsEl.textContent = `Data as of ${AVAIL.generated_at}`;
   }
 }
 
-// Build field map from availability.json
+// Build field map
 function buildFieldMap(fieldsArray) {
   const map = {};
 
-  // First pass: basic field objects
   fieldsArray.forEach(f => {
     map[f.id] = {
       id: f.id,
-      parent: f.name === f.id ? null : f.name,   // parent field ID
-      type: f.complex,                           // "full" or "half"
-      name: f.surface,                           // display name
-      halves: []                                 // will fill in second pass
+      parent: f.name === f.id ? null : f.name,
+      type: f.complex,
+      name: f.surface,
+      halves: []
     };
   });
 
-  // Second pass: attach half fields to their parent
   Object.values(map).forEach(f => {
     if (f.parent && map[f.parent]) {
       map[f.parent].halves.push(f.id);
@@ -112,8 +109,8 @@ function switchView(view) {
   document.getElementById("searchTimeline").style.display = "none";
 
   if (view === "day") {
-    renderDayView();
     document.getElementById("dayTimeline").style.display = "block";
+    renderDayTimeline(AVAIL.days[currentDate]);
   } else if (view === "week") {
     renderWeekTimeline();
     document.getElementById("weekTimeline").style.display = "block";
@@ -126,13 +123,10 @@ function switchView(view) {
   }
 }
 
-// ---- DAY VIEW SHELL ----
-function renderDayView() {
+// ---- DAY CONTROLS (created ONCE) ----
+function initDayControls() {
   const container = document.getElementById("view-container");
-  const dayTimeline = document.getElementById("dayTimeline");
-  if (!container || !AVAIL || !dayTimeline) return;
 
-  // Controls (prev/next + date)
   container.innerHTML = `
     <h2>Day View</h2>
     <div class="controls">
@@ -146,31 +140,12 @@ function renderDayView() {
   const nextBtn = document.getElementById("nextDay");
   const dateSpan = container.querySelector(".day-date");
 
-  const updateDay = () => {
-    const dayData = AVAIL.days[currentDate];
-    dateSpan.textContent = formatHumanDate(currentDate);
-
-    if (!dayData) {
-      // Preserve timeline structure, just show message
-      dayTimeline.innerHTML = `
-        <div class="time-ruler"></div>
-        <div class="timeline-column">
-          <p>No data for ${formatHumanDate(currentDate)}</p>
-        </div>
-      `;
-      dayTimeline.style.display = "block";
-      return;
-    }
-
-    renderDayTimeline(dayData);
-    dayTimeline.style.display = "block";
-  };
-
   prevBtn.addEventListener("click", () => {
     const d = new Date(currentDate);
     d.setDate(d.getDate() - 1);
     currentDate = formatDateKey(d);
-    updateDay();
+    dateSpan.textContent = formatHumanDate(currentDate);
+    renderDayTimeline(AVAIL.days[currentDate]);
     renderComplexFilters();
   });
 
@@ -178,54 +153,27 @@ function renderDayView() {
     const d = new Date(currentDate);
     d.setDate(d.getDate() + 1);
     currentDate = formatDateKey(d);
-    updateDay();
+    dateSpan.textContent = formatHumanDate(currentDate);
+    renderDayTimeline(AVAIL.days[currentDate]);
     renderComplexFilters();
   });
-
-  // Initial render for currentDate
-  updateDay();
 }
 
-// ---- WEEK VIEW SHELL ----
+// ---- WEEK / MONTH / SEARCH ----
 function renderWeekTimeline() {
   const container = document.getElementById("view-container");
-  if (!container || !AVAIL) return;
-
   container.innerHTML = `<h2>Week View</h2>`;
-  const weekEl = document.getElementById("weekTimeline");
-  if (weekEl) {
-    weekEl.innerHTML = `<p>Week timeline will go here.</p>`;
-  }
+  document.getElementById("weekTimeline").innerHTML = `<p>Week timeline will go here.</p>`;
 }
 
-// ---- MONTH + SEARCH PLACEHOLDERS ----
 function renderMonthView() {
   const container = document.getElementById("view-container");
-  if (!container) return;
   container.innerHTML = `<h2>Month View (placeholder)</h2>`;
 }
 
 function renderSearchView() {
   const container = document.getElementById("view-container");
-  if (!container) return;
   container.innerHTML = `<h2>Search View (placeholder)</h2>`;
-}
-
-// ---- WEEK RANGE HELPER ----
-function getWeekRange(dateStr) {
-  const [y, m, d] = dateStr.split("-").map(Number);
-  const base = new Date(y, m - 1, d);
-  const day = base.getDay(); // 0 = Sun
-  const sunday = new Date(base);
-  sunday.setDate(base.getDate() - day);
-
-  const days = [];
-  for (let i = 0; i < 7; i++) {
-    const dt = new Date(sunday);
-    dt.setDate(sunday.getDate() + i);
-    days.push(formatDateKey(dt));
-  }
-  return days;
 }
 
 // ---- COMPLEX FILTERS ----
@@ -239,8 +187,6 @@ function extractComplexFromSurface(surfaceName) {
 
 function renderComplexFilters() {
   const bar = document.getElementById("complex-filters");
-  if (!bar || !AVAIL) return;
-
   bar.innerHTML = "";
 
   const complexes = new Set();
@@ -261,8 +207,7 @@ function renderComplexFilters() {
       } else {
         SELECTED_COMPLEXES.add(cx);
       }
-      renderDayView();
-      renderWeekTimeline();
+      renderDayTimeline(AVAIL.days[currentDate]); // ← ONLY timeline updates
       renderComplexFilters();
     });
 
@@ -274,8 +219,8 @@ function renderComplexFilters() {
    DAY VIEW: TRUE CALENDAR LAYOUT (LANES + GLOBAL AVAILABILITY)
 ------------------------------------------------------------------- */
 
-// Get the list of fields to consider, honoring complex filters
 function getVisibleFieldIds(dayData) {
+  if (!dayData) return [];
   let fieldIds = dayData.fields.map(f => f.id);
 
   if (SELECTED_COMPLEXES.size > 0) {
@@ -290,7 +235,6 @@ function getVisibleFieldIds(dayData) {
   return fieldIds;
 }
 
-// Flatten events for the day across visible fields
 function collectEventsForDay(dayData, fieldIds) {
   const events = [];
   const eventsByField = dayData.events || {};
@@ -301,7 +245,7 @@ function collectEventsForDay(dayData, fieldIds) {
         ...ev,
         startMin: timeToMin(ev.start),
         endMin: timeToMin(ev.end),
-        fields: [ev.field] // keep compatibility with block label
+        fields: [ev.field]
       });
     });
   });
@@ -310,7 +254,6 @@ function collectEventsForDay(dayData, fieldIds) {
   return events;
 }
 
-// Assign overlap lanes (dynamic horizontal lanes)
 function assignOverlapLanes(events) {
   const lanes = [];
 
@@ -339,19 +282,15 @@ function assignOverlapLanes(events) {
   return lanes.length;
 }
 
-// Compute global availability windows from dayData.availability,
-// subtracting events (including half-field occupancy affecting full fields)
 function computeGlobalAvailability(dayData, fieldIds) {
   const availMap = dayData.availability || {};
   const eventsByField = dayData.events || {};
 
-  // Minute-by-minute occupied map
   const occupied = {};
   for (let m = DAY_START_MIN; m <= DAY_END_MIN; m++) {
     occupied[m] = new Set();
   }
 
-  // Mark occupied minutes by events
   Object.values(eventsByField).forEach(arr => {
     arr.forEach(ev => {
       const s = timeToMin(ev.start);
@@ -364,7 +303,6 @@ function computeGlobalAvailability(dayData, fieldIds) {
     });
   });
 
-  // If a half is occupied, mark parent full field as occupied too
   Object.values(FIELD_MAP).forEach(f => {
     if (f.halves && f.halves.length > 0) {
       for (let m = DAY_START_MIN; m <= DAY_END_MIN; m++) {
@@ -436,11 +374,9 @@ function computeGlobalAvailability(dayData, fieldIds) {
     });
   }
 
-  // Only keep windows where at least one field is free
   return windows.filter(w => w.fieldIds && w.fieldIds.length > 0);
 }
 
-// 12-hour formatting helper
 function formatTime12(min) {
   let h = Math.floor(min / 60);
   let m = min % 60;
@@ -450,7 +386,6 @@ function formatTime12(min) {
   return `${h}:${String(m).padStart(2, "0")} ${ampm}`;
 }
 
-// ---- BLOCK LABEL BUILDER ----
 function buildBlockLabel(block) {
   const parts = [];
   parts.push(`${block.start}–${block.end}`);
@@ -470,10 +405,19 @@ function buildBlockLabel(block) {
   return parts.join(" | ");
 }
 
-// ---- DAY TIMELINE RENDERER (TRUE CALENDAR LAYOUT) ----
+// ---- DAY TIMELINE RENDERER ----
 function renderDayTimeline(dayData) {
   const timelineEl = document.getElementById("dayTimeline");
-  if (!timelineEl) return;
+
+  if (!dayData) {
+    timelineEl.innerHTML = `
+      <div class="time-ruler"></div>
+      <div class="timeline-column">
+        <p>No data for this date.</p>
+      </div>
+    `;
+    return;
+  }
 
   const fieldIds = getVisibleFieldIds(dayData);
 
@@ -491,9 +435,8 @@ function renderDayTimeline(dayData) {
   const eventLaneCount = events.length > 0 ? assignOverlapLanes(events) : 1;
   const availWindows = computeGlobalAvailability(dayData, fieldIds);
 
-  const totalLaneCount = eventLaneCount + 1; // +1 for availability lane
+  const totalLaneCount = eventLaneCount + 1;
 
-  // Clear and build layout
   timelineEl.innerHTML = `
     <div class="time-ruler"></div>
     <div class="timeline-column"></div>
@@ -502,7 +445,6 @@ function renderDayTimeline(dayData) {
   const ruler = timelineEl.querySelector(".time-ruler");
   const column = timelineEl.querySelector(".timeline-column");
 
-  // Time labels
   HOURS.forEach(h => {
     const y = timeToY(h);
     const label = document.createElement("div");
@@ -513,8 +455,6 @@ function renderDayTimeline(dayData) {
   });
 
   const laneWidth = 720 / totalLaneCount;
-
-  // Availability lane (rightmost, beside events)
   const availLaneIndex = totalLaneCount - 1;
 
   availWindows.forEach(win => {
@@ -527,7 +467,6 @@ function renderDayTimeline(dayData) {
     div.style.height = `${height}px`;
     div.style.left = `${availLaneIndex * laneWidth}px`;
     div.style.width = `${laneWidth - 8}px`;
-    div.style.zIndex = 3;
 
     const startStr = formatTime12(win.startMin);
     const endStr = formatTime12(win.endMin);
@@ -540,7 +479,6 @@ function renderDayTimeline(dayData) {
     column.appendChild(div);
   });
 
-  // Event blocks (each in its lane)
   events.forEach(ev => {
     const top = ev.startMin - DAY_START_MIN;
     const height = ev.endMin - ev.startMin;
@@ -552,7 +490,6 @@ function renderDayTimeline(dayData) {
     div.style.height = `${height}px`;
     div.style.left = `${left}px`;
     div.style.width = `${laneWidth - 8}px`;
-    div.style.zIndex = 5;
 
     div.textContent = buildBlockLabel(ev);
     column.appendChild(div);
