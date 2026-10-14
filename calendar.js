@@ -250,6 +250,140 @@ function renderComplexFilters() {
 }
 
 
+function buildFieldAvailability(dayData) {
+  const availability = {}; // fieldId -> array of { start, end }
+
+  // Initialize each field with an empty list
+  Object.values(FIELD_MAP).forEach(f => {
+    availability[f.id] = [];
+  });
+
+  // Mark blocked windows per field
+  const blocked = {}; // fieldId -> array of { startMin, endMin }
+  Object.values(FIELD_MAP).forEach(f => blocked[f.id] = []);
+
+  Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
+    blocks.forEach(block => {
+      if (!block.fields) return;
+      const startMin = timeToMin(block.start);
+      const endMin = timeToMin(block.end);
+
+      block.fields.forEach(fid => {
+        blocked[fid].push({ startMin, endMin });
+      });
+    });
+  });
+
+  // Build availability windows per field
+  Object.keys(blocked).forEach(fid => {
+    let start = 8 * 60;   // 08:00
+    let end = 21 * 60;    // 21:00
+
+    let cursor = start;
+
+    while (cursor < end) {
+      // Find next blocked window
+      const nextBlock = blocked[fid].find(b =>
+        b.startMin <= cursor && b.endMin > cursor
+      );
+
+      if (nextBlock) {
+        cursor = nextBlock.endMin; // skip blocked
+        continue;
+      }
+
+      // Start availability window
+      const availStart = cursor;
+
+      // Move cursor until blocked or end of day
+      while (cursor < end) {
+        const overlappingBlock = blocked[fid].find(b =>
+          b.startMin <= cursor && b.endMin > cursor
+        );
+        if (overlappingBlock) break;
+        cursor++;
+      }
+
+      const availEnd = cursor;
+
+      availability[fid].push({
+        start: `${String(Math.floor(availStart / 60)).padStart(2, "0")}:${String(availStart % 60).padStart(2, "0")}`,
+        end: `${String(Math.floor(availEnd / 60)).padStart(2, "0")}:${String(availEnd % 60).padStart(2, "0")}`
+      });
+    }
+  });
+
+  return availability;
+}
+
+
+function buildFieldAvailability(dayData) {
+  const availability = {}; // fieldId -> array of { start, end }
+
+  // Initialize each field with an empty list
+  Object.values(FIELD_MAP).forEach(f => {
+    availability[f.id] = [];
+  });
+
+  // Mark blocked windows per field
+  const blocked = {}; // fieldId -> array of { startMin, endMin }
+  Object.values(FIELD_MAP).forEach(f => blocked[f.id] = []);
+
+  Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
+    blocks.forEach(block => {
+      if (!block.fields) return;
+      const startMin = timeToMin(block.start);
+      const endMin = timeToMin(block.end);
+
+      block.fields.forEach(fid => {
+        blocked[fid].push({ startMin, endMin });
+      });
+    });
+  });
+
+  // Build availability windows per field
+  Object.keys(blocked).forEach(fid => {
+    let start = 8 * 60;   // 08:00
+    let end = 21 * 60;    // 21:00
+
+    let cursor = start;
+
+    while (cursor < end) {
+      // Find next blocked window
+      const nextBlock = blocked[fid].find(b =>
+        b.startMin <= cursor && b.endMin > cursor
+      );
+
+      if (nextBlock) {
+        cursor = nextBlock.endMin; // skip blocked
+        continue;
+      }
+
+      // Start availability window
+      const availStart = cursor;
+
+      // Move cursor until blocked or end of day
+      while (cursor < end) {
+        const overlappingBlock = blocked[fid].find(b =>
+          b.startMin <= cursor && b.endMin > cursor
+        );
+        if (overlappingBlock) break;
+        cursor++;
+      }
+
+      const availEnd = cursor;
+
+      availability[fid].push({
+        start: `${String(Math.floor(availStart / 60)).padStart(2, "0")}:${String(availStart % 60).padStart(2, "0")}`,
+        end: `${String(Math.floor(availEnd / 60)).padStart(2, "0")}:${String(availEnd % 60).padStart(2, "0")}`
+      });
+    }
+  });
+
+  return availability;
+}
+
+
 function renderDayTimeline(dayData) {
   const timelineEl = document.getElementById("dayTimeline");
   if (!timelineEl) return;
@@ -272,7 +406,27 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  // Render blocks
+  // ---- BUILD AVAILABILITY ----
+  const fieldAvailability = buildFieldAvailability(dayData);
+  const mergedAvailability = mergeAvailabilityAcrossFields(fieldAvailability);
+
+  // ---- RENDER AVAILABILITY FIRST ----
+  mergedAvailability.forEach(av => {
+    const top = timeToY(av.start);
+    const height = timeToY(av.end) - top;
+
+    const div = document.createElement("div");
+    div.className = "timeline-block block-available";
+    div.style.top = `${top}px`;
+    div.style.height = `${height}px`;
+
+    const names = av.fields.map(fid => FIELD_MAP[fid]?.name || fid);
+
+    div.textContent = `Available: ${names.join(", ")} | ${av.start}–${av.end}`;
+    column.appendChild(div);
+  });
+
+  // ---- RENDER EVENTS ON TOP ----
   Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
 
     if (SELECTED_COMPLEXES.size > 0 &&
