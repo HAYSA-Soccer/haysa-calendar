@@ -249,7 +249,6 @@ function renderDayTimeline(dayData) {
   const timelineEl = document.getElementById("dayTimeline");
   if (!timelineEl) return;
 
-  // Clear previous content
   timelineEl.innerHTML = `
     <div class="time-ruler"></div>
     <div class="timeline-column"></div>
@@ -258,7 +257,7 @@ function renderDayTimeline(dayData) {
   const ruler = timelineEl.querySelector(".time-ruler");
   const column = timelineEl.querySelector(".timeline-column");
 
-  // Build time ruler labels
+  // Time labels
   HOURS.forEach(h => {
     const y = timeToY(h);
     const label = document.createElement("div");
@@ -268,10 +267,10 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  // Render real blocks
+  // Render blocks (simple, flat)
   Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
 
-    // Skip if user filtered out this complex
+    // Respect complex filters
     if (SELECTED_COMPLEXES.size > 0 &&
         !SELECTED_COMPLEXES.has(complexName)) {
       return;
@@ -279,28 +278,25 @@ function renderDayTimeline(dayData) {
 
     blocks.forEach(block => {
       const top = timeToY(block.start);
-      const bottom = timeToY(block.end);
-      const height = bottom - top;
+      const height = timeToY(block.end) - top;
 
       const div = document.createElement("div");
       div.className = `timeline-block block-${block.type}`;
       div.style.top = `${top}px`;
       div.style.height = `${height}px`;
 
-      // Build label
-      let label = `${block.start}–${block.end}`;
-      if (block.fields?.length) {
-        label += ` | ${block.fields.join(", ")}`;
-      }
-      if (block.team) {
-        label += ` | ${block.team}`;
-      }
-      if (block.notes) {
-        label += ` | ${block.notes}`;
-      }
-
-      div.textContent = label;
+      div.textContent = buildBlockLabel(block);
       column.appendChild(div);
     });
   });
+}
+
+
+function buildBlockLabel(block) {
+  const parts = [];
+  parts.push(`${block.start}–${block.end}`);
+  if (block.fields?.length) parts.push(block.fields.join(", "));
+  if (block.team) parts.push(block.team);
+  if (block.notes) parts.push(block.notes);
+  return parts.join(" | ");
 }
