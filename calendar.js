@@ -69,3 +69,185 @@ function buildFieldMap(fieldsArray) {
 
   return map;
 }
+
+
+
+
+
+
+// ---- NAV + VIEW SWITCHING ----
+function initNav() {
+  const navButtons = document.querySelectorAll(".nav button");
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const view = btn.getAttribute("data-view");
+      switchView(view);
+    });
+  });
+}
+
+function switchView(view) {
+  // Hide all timeline containers
+  document.getElementById("dayTimeline").style.display = "none";
+  document.getElementById("weekTimeline").style.display = "none";
+  document.getElementById("monthTimeline").style.display = "none";
+  document.getElementById("searchTimeline").style.display = "none";
+
+  if (view === "day") {
+    renderDayView();
+    document.getElementById("dayTimeline").style.display = "block";
+  } else if (view === "week") {
+    renderWeekTimeline();
+    document.getElementById("weekTimeline").style.display = "block";
+  } else if (view === "month") {
+    renderMonthView();
+    document.getElementById("monthTimeline").style.display = "block";
+  } else if (view === "search") {
+    renderSearchView();
+    document.getElementById("searchTimeline").style.display = "block";
+  }
+}
+
+
+
+
+
+
+// ---- DAY VIEW SHELL ----
+function renderDayView() {
+  const container = document.getElementById("view-container");
+  if (!container || !AVAIL) return;
+
+  container.innerHTML = `
+    <h2>Day View</h2>
+    <div class="controls">
+      <button id="prevDay">← Previous</button>
+      <span>${currentDate}</span>
+      <button id="nextDay">Next →</button>
+    </div>
+  `;
+
+  document.getElementById("prevDay").onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() - 1);
+    currentDate = d.toISOString().split("T")[0];
+    renderDayView();
+    renderComplexFilters();
+  };
+
+  document.getElementById("nextDay").onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() + 1);
+    currentDate = d.toISOString().split("T")[0];
+    renderDayView();
+    renderComplexFilters();
+  };
+
+  const dayData = AVAIL.days[currentDate];
+  if (!dayData || !dayData.complex_timeline) {
+    document.getElementById("dayTimeline").innerHTML = `<p>No data for ${currentDate}</p>`;
+    return;
+  }
+
+  // Placeholder — we will build this next
+  document.getElementById("dayTimeline").innerHTML = `<p>Day timeline will go here.</p>`;
+}
+
+
+
+
+
+// ---- WEEK VIEW SHELL ----
+function renderWeekTimeline() {
+  const container = document.getElementById("view-container");
+  if (!container || !AVAIL) return;
+
+  container.innerHTML = `<h2>Week View</h2>`;
+  const weekEl = document.getElementById("weekTimeline");
+  weekEl.innerHTML = "";
+
+  const days = getWeekRange(currentDate);
+
+  // Placeholder — real timeline comes later
+  weekEl.innerHTML = `<p>Week timeline will go here.</p>`;
+}
+
+
+
+
+
+
+function renderMonthView() {
+  const container = document.getElementById("view-container");
+  if (!container) return;
+  container.innerHTML = `<h2>Month View (placeholder)</h2>`;
+}
+
+function renderSearchView() {
+  const container = document.getElementById("view-container");
+  if (!container) return;
+  container.innerHTML = `<h2>Search View (placeholder)</h2>`;
+}
+
+
+
+
+function getWeekRange(dateStr) {
+  const d = new Date(dateStr);
+  const day = d.getDay(); // 0 = Sun
+  const sunday = new Date(d);
+  sunday.setDate(d.getDate() - day);
+
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const dt = new Date(sunday);
+    dt.setDate(sunday.getDate() + i);
+    days.push(dt.toISOString().slice(0, 10));
+  }
+  return days;
+}
+
+
+
+function renderComplexFilters() {
+  const bar = document.getElementById("complex-filters");
+  if (!bar || !AVAIL) return;
+
+  bar.innerHTML = "";
+
+  const complexes = Object.keys(AVAIL.complexes || {});
+
+  complexes.forEach(cx => {
+    const btn = document.createElement("button");
+    btn.className = "complex-btn";
+    btn.textContent = cx;
+    if (SELECTED_COMPLEXES.has(cx)) btn.classList.add("active");
+
+    btn.addEventListener("click", () => {
+      if (SELECTED_COMPLEXES.has(cx)) {
+        SELECTED_COMPLEXES.delete(cx);
+      } else {
+        SELECTED_COMPLEXES.add(cx);
+      }
+      renderDayView();
+      renderWeekTimeline();
+      renderComplexFilters();
+    });
+
+    bar.appendChild(btn);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
