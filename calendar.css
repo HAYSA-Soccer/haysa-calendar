@@ -95,7 +95,7 @@ body {
 }
 
 /****************************************************
- * BLOCK TYPES (SHARED)
+ * SHARED BLOCK TYPES (legacy card view)
  ****************************************************/
 .block-free {
   background: #d9ffd9;
@@ -209,7 +209,9 @@ body {
   border-bottom: 1px solid #d0d0d0;
 }
 
-/* Stacked timeline body */
+/****************************************************
+ * WEEK BLOCKS — STACKED LAYOUT
+ ****************************************************/
 .week-day-body {
   padding: 10px;
   display: flex;
@@ -224,9 +226,6 @@ body {
   border-radius: 0 0 6px 6px;
 }
 
-/****************************************************
- * WEEK BLOCKS — FIXED VISIBILITY + STACKED LAYOUT
- ****************************************************/
 .week-block {
   border-radius: 6px;
   padding: 6px 8px;
@@ -235,16 +234,14 @@ body {
   overflow: hidden;
   box-sizing: border-box;
   border: 1px solid rgba(0,0,0,0.15);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-
-  /* FIX: visible text + neutral background */
   background: #f3f3f3;
   color: #222;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /****************************************************
- * TYPE COLORS (when blocks have types)
+ * WEEK BLOCK TYPE COLORS
  ****************************************************/
 .week-block.block-free {
   background: #4caf50;
@@ -267,120 +264,16 @@ body {
 }
 
 /****************************************************
- * BLOCK LABELS
+ * WEEK BLOCK LABELS
  ****************************************************/
 .week-block .label {
   font-weight: 600;
   font-size: 13px;
-  color: inherit;
 }
 
 .week-block .sub {
   font-size: 11px;
   opacity: 0.85;
-  color: inherit;
-}
-
-/****************************************************
- * TIMESTAMP
- ****************************************************/
-#dataTimestamp {
-  font-size: 14px;
-  color: #555;
-  padding: 8px 20px;
-  font-style: italic;
-}
-
-.week-day-body {
-  position: relative;
-  background: #fafafa;
-  border-radius: 0 0 6px 6px;
-  height: 780px; /* 13 hours * 60px */
-}
-
-.week-time-label {
-  position: absolute;
-  left: -45px;
-  width: 40px;
-  text-align: right;
-  font-size: 12px;
-  color: #555;
-}
-
-.week-block {
-  position: absolute;
-  border-radius: 6px;
-  padding: 4px;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: box-shadow 0.15s ease;
-}
-
-.week-block:hover {
-  box-shadow: 0 0 8px rgba(0,0,0,0.25);
-}
-
-.week-block-tooltip {
-  position: absolute;
-  background: #222;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  z-index: 9999;
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-
-/* --- WEEK BLOCK BASE STYLE --- */
-.week-block {
-  position: absolute;
-  border-radius: 8px;
-  padding: 6px 8px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-family: system-ui, sans-serif;
-  color: #fff;
-  overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.15);
-  transition: box-shadow 0.15s ease, transform 0.1s ease;
-}
-
-/* Hover polish */
-.week-block:hover {
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  transform: translateY(-2px);
-}
-
-/* --- TYPE COLORS --- */
-.week-block.block-free {
-  background: linear-gradient(135deg, #4caf50, #43a047);
-}
-
-.week-block.block-practice {
-  background: linear-gradient(135deg, #9e9e9e, #757575);
-}
-
-.week-block.block-game {
-  background: linear-gradient(135deg, #007bff, #005fcc);
-}
-
-.week-block.block-admin {
-  background: linear-gradient(135deg, #c0392b, #a93226);
-}
-
-/* --- LABELS --- */
-.week-block .label {
-  font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 2px;
-}
-
-.week-block .sub {
-  font-size: 12px;
-  opacity: 0.9;
-  margin-bottom: 4px;
 }
 
 .week-block .fields {
@@ -389,17 +282,9 @@ body {
   line-height: 1.2;
 }
 
-/* --- BADGES --- */
-.week-badge {
-  display: inline-block;
-  background: rgba(255,255,255,0.25);
-  padding: 2px 6px;
-  border-radius: 6px;
-  font-size: 10px;
-  margin-left: 6px;
-}
-
-/* --- TOOLTIP --- */
+/****************************************************
+ * WEEK BLOCK TOOLTIP
+ ****************************************************/
 .week-block-tooltip {
   position: absolute;
   background: #222;
@@ -413,7 +298,9 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-
+/****************************************************
+ * DAY WINDOW CARDS (legacy)
+ ****************************************************/
 .day-window-card {
   border-radius: 8px;
   padding: 8px 10px;
@@ -448,13 +335,11 @@ body {
 .day-window-header {
   font-weight: 600;
   font-size: 14px;
-  margin-bottom: 4px;
 }
 
 .day-window-sub {
   font-size: 12px;
   opacity: 0.9;
-  margin-bottom: 6px;
 }
 
 .day-window-fields {
@@ -472,8 +357,9 @@ body {
   margin-left: 6px;
 }
 
-
-/* --- FIELD CHIPS --- */
+/****************************************************
+ * FIELD CHIPS
+ ****************************************************/
 .field-chip {
   display: inline-block;
   background: rgba(255,255,255,0.25);
@@ -483,12 +369,13 @@ body {
   margin: 2px 4px 2px 0;
 }
 
-/* --- COMPLEX ACCENT BAR --- */
+/****************************************************
+ * COMPLEX ACCENT BAR
+ ****************************************************/
 .day-window-card {
   border-left: 6px solid rgba(255,255,255,0.35);
 }
 
-/* Accent colors per complex */
 .complex-accent-TURF .day-window-card {
   border-left-color: #4caf50;
 }
@@ -497,7 +384,9 @@ body {
   border-left-color: #007bff;
 }
 
-/* --- COLLAPSIBLE COMPLEX SECTIONS --- */
+/****************************************************
+ * COLLAPSIBLE COMPLEX SECTIONS
+ ****************************************************/
 .complex-section.collapsed .day-window-card {
   display: none;
 }
@@ -508,7 +397,9 @@ body {
   opacity: 0.7;
 }
 
-/* --- JUMP TO TIME NAV --- */
+/****************************************************
+ * JUMP TO TIME NAV
+ ****************************************************/
 .day-time-nav {
   margin-bottom: 12px;
   padding: 6px 0;
@@ -528,15 +419,12 @@ body {
   background: #eaeaea;
 }
 
-.week-day-col.today {
-  border: 2px solid #ff9800;
-  background-color: rgba(255, 152, 0, 0.15);
-}
-
-/* ---- DAY VIEW HEADER (MOBILE-OPTIMIZED) ---- */
+/****************************************************
+ * DAY VIEW HEADER (MOBILE-OPTIMIZED)
+ ****************************************************/
 .controls {
   display: grid;
-  grid-template-columns: 80px 1fr 80px; /* ← fixed tap zones */
+  grid-template-columns: 80px 1fr 80px;
   align-items: center;
   padding: 12px 0;
   position: sticky;
@@ -545,53 +433,46 @@ body {
   z-index: 10;
 }
 
-/* Huge tap zones */
 .controls button {
-  width: 100%;                 /* ← fills the 80px zone */
-  padding: 18px 0;             /* ← tall tap area */
-  font-size: 26px;             /* ← large arrows */
+  width: 100%;
+  padding: 18px 0;
+  font-size: 26px;
   border-radius: 12px;
   cursor: pointer;
   touch-action: manipulation;
 }
 
-/* Centered date */
 .day-date {
   font-size: 22px;
   font-weight: 700;
   text-align: center;
 }
 
-
-
-/* ---- BLOCK COLORS (based on TYPE, not source) ---- */
-
-/* Availability */
+/****************************************************
+ * BLOCK COLORS (TYPE-BASED)
+ ****************************************************/
 .block-available {
-  background: #c8f7c5;          /* soft green */
+  background: #c8f7c5;
   border: 1px solid #7ac27a;
   z-index: 1;
 }
 
-/* Practice */
 .block-practice {
-  background: #9e9e9e;          /* neutral gray */
+  background: #9e9e9e;
   border: 1px solid #7a7a7a;
   color: white;
   z-index: 2;
 }
 
-/* Game */
 .block-game {
-  background: #4a6fa5;          /* strong blue */
+  background: #4a6fa5;
   border: 1px solid #3a5a85;
   color: white;
   z-index: 3;
 }
 
-/* Admin (true admin blocks only) */
 .block-admin {
-  background: #ffd8a8;          /* soft orange */
+  background: #ffd8a8;
   border: 1px solid #e6a96b;
   z-index: 4;
 }
@@ -602,8 +483,8 @@ body {
 #dayTimeline {
   position: relative;
   display: grid;
-  grid-template-columns: 100px auto;   /* left = time ruler, right = blocks */
-  height: 780px;                       /* 13 hours * 60px */
+  grid-template-columns: 100px auto;
+  height: 780px;
   background: #fafafa;
   border-top: 1px solid #ddd;
   overflow-y: auto;
@@ -632,9 +513,9 @@ body {
  * TIMELINE COLUMN (RIGHT COLUMN)
  ****************************************************/
 .timeline-column {
-  position: relative;        /* blocks anchor HERE */
+  position: relative;
   background: white;
-  min-width: 600px;          /* prevents collapse */
+  min-width: 600px;
   border-left: 1px solid #ddd;
 }
 
@@ -643,7 +524,7 @@ body {
  ****************************************************/
 .timeline-block {
   position: absolute;
-  left: 10px;                /* inside timeline column */
+  left: 10px;
   right: 10px;
   border-radius: 6px;
   padding: 6px;
@@ -651,4 +532,3 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
-
