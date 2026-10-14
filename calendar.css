@@ -534,52 +534,34 @@ body {
 }
 
 /* ---- DAY VIEW HEADER ---- */
+/* ---- DAY VIEW HEADER (MOBILE OPTIMIZED) ---- */
 .controls {
   display: flex;
   align-items: center;
-  justify-content: space-between;   /* lock arrows left/right */
-  padding: 12px 0;
+  justify-content: space-between;
+  padding: 16px 0;
   position: sticky;
   top: 0;
   background: white;
   z-index: 10;
 }
 
-/* Large, easy-to-tap arrow buttons */
+/* Massive tap targets */
 .controls button {
-  padding: 14px 20px;               /* bigger tap area */
-  font-size: 22px;                  /* bigger arrows */
-  border-radius: 10px;              /* thumb-friendly */
+  padding: 18px 26px;          /* ← BIGGER tap area */
+  font-size: 26px;             /* ← BIGGER arrows */
+  border-radius: 14px;         /* ← thumb-friendly */
   cursor: pointer;
   flex-shrink: 0;
-  margin: 0 6px;                    /* pull inward from screen edges */
+  margin: 0 12px;              /* ← pulls buttons inward from screen edges */
+  touch-action: manipulation;  /* ← reduces tap delay on mobile */
 }
 
-/* Centered, readable date */
+/* Centered date */
 .day-date {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   text-align: center;
-  flex-grow: 1;                     /* keeps date centered */
-}
-
-/* ---- COMPLEX FILTER BAR ---- */
-.complex-filter-bar {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;                 /* horizontal scroll on mobile */
-  padding: 10px 0;
-}
-
-.complex-btn {
-  padding: 10px 14px;
-  font-size: 16px;
-  border-radius: 8px;
-  white-space: nowrap;              /* prevents wrapping */
-  cursor: pointer;
-}
-
-.complex-btn.active {
-  background: #007bff;
-  color: white;
+  flex-grow: 1;
+  padding: 0 10px;
 }
