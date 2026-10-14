@@ -152,9 +152,13 @@ function renderDayView() {
     return;
   }
 
-  // Call the timeline renderer
+  // Render the timeline
   renderDayTimeline(dayData);
+
+  // ⭐ THIS IS THE LINE YOU NEED ⭐
+  document.getElementById("dayTimeline").style.display = "block";
 }
+
 
 
 // ---- WEEK VIEW SHELL ----
