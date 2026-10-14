@@ -145,7 +145,7 @@ function renderDayView() {
   };
 
   const dayData = AVAIL.days[currentDate];
-  if (!dayData || !dayData.complex_timeline) {
+  if (!dayData) {
     document.getElementById("dayTimeline").innerHTML =
       `<p>No data for ${formatHumanDate(currentDate)}</p>`;
     return;
@@ -236,129 +236,138 @@ function renderComplexFilters() {
   });
 }
 
-// ---- AVAILABILITY PER FIELD ----
-function buildFieldAvailability(dayData) {
-  const availability = {}; // fieldId -> array of { start, end }
+/* ------------------------------------------------------------------
+   DAY VIEW REWRITE: SINGLE-LANE TIMELINE + NESTLED AVAILABILITY
+------------------------------------------------------------------- */
 
-  Object.values(FIELD_MAP).forEach(f => {
-    availability[f.id] = [];
-  });
+// Get the list of fields to consider, honoring complex filters
+function getVisibleFieldIds(dayData) {
+  let fieldIds = dayData.fields.map(f => f.id);
 
-  const blocked = {}; // fieldId -> array of { startMin, endMin }
-  Object.values(FIELD_MAP).forEach(f => blocked[f.id] = []);
-
-  Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
-    blocks.forEach(block => {
-      if (!block.fields) return;
-      const startMin = timeToMin(block.start);
-      const endMin = timeToMin(block.end);
-
-      block.fields.forEach(fid => {
-        blocked[fid].push({ startMin, endMin });
-      });
-    });
-  });
-
-  Object.keys(blocked).forEach(fid => {
-    const dayStart = 8 * 60;
-    const dayEnd = 21 * 60;
-    let cursor = dayStart;
-
-    while (cursor < dayEnd) {
-      const nextBlock = blocked[fid].find(b =>
-        b.startMin <= cursor && b.endMin > cursor
-      );
-
-      if (nextBlock) {
-        cursor = nextBlock.endMin;
-        continue;
-      }
-
-      const availStart = cursor;
-
-      while (cursor < dayEnd) {
-        const overlappingBlock = blocked[fid].find(b =>
-          b.startMin <= cursor && b.endMin > cursor
-        );
-        if (overlappingBlock) break;
-        cursor++;
-      }
-
-      const availEnd = cursor;
-
-      availability[fid].push({
-        start: `${String(Math.floor(availStart / 60)).padStart(2, "0")}:${String(availStart % 60).padStart(2, "0")}`,
-        end: `${String(Math.floor(availEnd / 60)).padStart(2, "0")}:${String(availEnd % 60).padStart(2, "0")}`
-      });
-    }
-  });
-
-  return availability;
-}
-
-// ---- OVERLAP HELPERS ----
-function overlaps(a, b) {
-  const aStart = timeToMin(a.start);
-  const aEnd = timeToMin(a.end);
-  const bStart = timeToMin(b.start);
-  const bEnd = timeToMin(b.end);
-  return aStart < bEnd && bStart < aEnd;
-}
-
-function assignLanes(blocks) {
-  const lanes = [];
-
-  blocks.forEach(block => {
-    let placed = false;
-
-    for (const lane of lanes) {
-      if (!lane.some(b => overlaps(b, block))) {
-        lane.push(block);
-        block.laneIndex = lanes.indexOf(lane);
-        placed = true;
-        break;
-      }
-    }
-
-    if (!placed) {
-      lanes.push([block]);
-      block.laneIndex = lanes.length - 1;
-    }
-  });
-
-  return lanes.length;
-}
-
-// ---- DAY TIMELINE RENDERER WITH FIELD LANES ----
-function renderDayTimeline(dayData) {
-  const timelineEl = document.getElementById("dayTimeline");
-  if (!timelineEl) return;
-
-  // Determine which fields to show based on selected complexes
-  let fieldIds = Object.values(FIELD_MAP).map(f => f.id);
   if (SELECTED_COMPLEXES.size > 0) {
     fieldIds = fieldIds.filter(fid => {
       const f = FIELD_MAP[fid];
+      if (!f) return false;
       const cx = extractComplexFromSurface(f.name);
       return cx && SELECTED_COMPLEXES.has(cx);
     });
   }
+
+  return fieldIds;
+}
+
+// Flatten events for the day across visible fields
+function collectEventsForDay(dayData, fieldIds) {
+  const events = [];
+  const eventsByField = dayData.events || {};
+
+  fieldIds.forEach(fid => {
+    (eventsByField[fid] || []).forEach(ev => {
+      events.push({
+        ...ev,
+        startMin: timeToMin(ev.start),
+        endMin: timeToMin(ev.end),
+        fields: [ev.field] // so buildBlockLabel still works
+      });
+    });
+  });
+
+  events.sort((a, b) => a.startMin - b.startMin || a.endMin - b.endMin);
+  return events;
+}
+
+// Compute global availability windows from dayData.availability
+// Availability "nests" around events and lists all free fields
+function computeGlobalAvailability(dayData, fieldIds) {
+  const dayStart = 8 * 60;
+  const dayEnd = 21 * 60;
+  const availMap = dayData.availability || {};
+
+  const windows = [];
+  let currentStart = null;
+  let currentFieldIds = null;
+
+  for (let m = dayStart; m <= dayEnd; m++) {
+    const minuteFields = [];
+
+    fieldIds.forEach(fid => {
+      const arr = availMap[fid] || [];
+      const isFree = arr.some(win => {
+        const s = timeToMin(win.start);
+        const e = timeToMin(win.end);
+        return m >= s && m < e;
+      });
+      if (isFree) minuteFields.push(fid);
+    });
+
+    const key = minuteFields.join("|");
+
+    if (minuteFields.length === 0) {
+      if (currentStart !== null) {
+        windows.push({
+          startMin: currentStart,
+          endMin: m,
+          fieldIds: currentFieldIds
+        });
+        currentStart = null;
+        currentFieldIds = null;
+      }
+    } else {
+      if (currentStart === null) {
+        currentStart = m;
+        currentFieldIds = [...minuteFields];
+      } else {
+        const prevKey = currentFieldIds.join("|");
+        if (key !== prevKey) {
+          windows.push({
+            startMin: currentStart,
+            endMin: m,
+            fieldIds: currentFieldIds
+          });
+          currentStart = m;
+          currentFieldIds = [...minuteFields];
+        }
+      }
+    }
+  }
+
+  if (currentStart !== null) {
+    windows.push({
+      startMin: currentStart,
+      endMin: dayEnd,
+      fieldIds: currentFieldIds
+    });
+  }
+
+  // Only keep windows where at least one field is free
+  return windows.filter(w => w.fieldIds && w.fieldIds.length > 0);
+}
+
+// ---- DAY TIMELINE RENDERER (SINGLE LANE) ----
+function renderDayTimeline(dayData) {
+  const timelineEl = document.getElementById("dayTimeline");
+  if (!timelineEl) return;
+
+  const fieldIds = getVisibleFieldIds(dayData);
 
   if (fieldIds.length === 0) {
     timelineEl.innerHTML = `<p>No fields selected.</p>`;
     return;
   }
 
-  timelineEl.style.setProperty("--field-columns", `repeat(${fieldIds.length}, 1fr)`);
+  const events = collectEventsForDay(dayData, fieldIds);
+  const availWindows = computeGlobalAvailability(dayData, fieldIds);
 
-  // Build header + lanes
+  // Clear and build single-lane layout
   timelineEl.innerHTML = `
     <div class="time-ruler"></div>
-    ${fieldIds.map(fid => `<div class="field-lane" data-field="${fid}"></div>`).join("")}
+    <div class="timeline-column"></div>
   `;
 
   const ruler = timelineEl.querySelector(".time-ruler");
+  const column = timelineEl.querySelector(".timeline-column");
 
+  // Time labels
   HOURS.forEach(h => {
     const y = timeToY(h);
     const label = document.createElement("div");
@@ -368,68 +377,39 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  const fieldAvailability = buildFieldAvailability(dayData);
+  // Availability blocks (green), nestling around events
+  availWindows.forEach(win => {
+    const top = win.startMin - 8 * 60;
+    const height = win.endMin - win.startMin;
 
-  // Render availability per field lane
-  fieldIds.forEach(fid => {
-    const lane = timelineEl.querySelector(`.field-lane[data-field="${fid}"]`);
-    if (!lane) return;
+    const div = document.createElement("div");
+    div.className = "timeline-block block-available";
+    div.style.top = `${top}px`;
+    div.style.height = `${height}px`;
 
-    (fieldAvailability[fid] || []).forEach(av => {
-      const top = timeToY(av.start);
-      const height = timeToY(av.end) - top;
+    const startStr = `${String(Math.floor(win.startMin / 60)).padStart(2, "0")}:${String(win.startMin % 60).padStart(2, "0")}`;
+    const endStr = `${String(Math.floor(win.endMin / 60)).padStart(2, "0")}:${String(win.endMin % 60).padStart(2, "0")}`;
 
-      const div = document.createElement("div");
-      div.className = "timeline-block block-available";
-      div.style.top = `${top}px`;
-      div.style.height = `${height}px`;
-      div.textContent = `${av.start}–${av.end}`;
+    const fieldNames = win.fieldIds
+      .map(fid => FIELD_MAP[fid]?.name || fid)
+      .join(", ");
 
-      lane.appendChild(div);
-    });
+    div.textContent = `Available: ${fieldNames} | ${startStr}–${endStr}`;
+    column.appendChild(div);
   });
 
-  // Collect events per field for lane assignment
-  const eventsByField = {};
-  fieldIds.forEach(fid => eventsByField[fid] = []);
+  // Event blocks on top (practice/game/admin)
+  events.forEach(ev => {
+    const top = ev.startMin - 8 * 60;
+    const height = ev.endMin - ev.startMin;
 
-  Object.entries(dayData.complex_timeline).forEach(([complexName, blocks]) => {
-    blocks.forEach(block => {
-      if (!block.fields) return;
-      block.fields.forEach(fid => {
-        if (!eventsByField[fid]) return;
-        eventsByField[fid].push(block);
-      });
-    });
-  });
+    const div = document.createElement("div");
+    div.className = `timeline-block block-${ev.type}`;
+    div.style.top = `${top}px`;
+    div.style.height = `${height}px`;
 
-  // Assign lanes and render events per field
-  fieldIds.forEach(fid => {
-    const laneBlocks = eventsByField[fid];
-    if (!laneBlocks || laneBlocks.length === 0) return;
-
-    assignLanes(laneBlocks);
-
-    const lane = timelineEl.querySelector(`.field-lane[data-field="${fid}"]`);
-    if (!lane) return;
-
-    laneBlocks.forEach(block => {
-      const top = timeToY(block.start);
-      const height = timeToY(block.end) - top;
-
-      const div = document.createElement("div");
-      div.className = `timeline-block block-${block.type}`;
-      div.style.top = `${top}px`;
-      div.style.height = `${height}px`;
-
-      const laneOffset = block.laneIndex || 0;
-      const laneWidthPct = 1 / (laneOffset + 1);
-      div.style.left = `${10 + laneOffset * 20}px`;
-      div.style.right = `10px`;
-
-      div.textContent = buildBlockLabel(block);
-      lane.appendChild(div);
-    });
+    div.textContent = buildBlockLabel(ev);
+    column.appendChild(div);
   });
 }
 
@@ -441,10 +421,14 @@ function buildBlockLabel(block) {
   if (block.fields?.length) {
     const names = block.fields.map(id => FIELD_MAP[id]?.name || id);
     parts.push(names.join(", "));
+  } else if (block.field) {
+    const name = FIELD_MAP[block.field]?.name || block.field;
+    parts.push(name);
   }
 
   if (block.team) parts.push(block.team);
   if (block.notes) parts.push(block.notes);
+  if (block.title && !parts.includes(block.title)) parts.push(block.title);
 
   return parts.join(" | ");
 }
