@@ -533,35 +533,32 @@ body {
   background-color: rgba(255, 152, 0, 0.15);
 }
 
-/* ---- DAY VIEW HEADER ---- */
-/* ---- DAY VIEW HEADER (MOBILE OPTIMIZED) ---- */
+/* ---- DAY VIEW HEADER (MOBILE-OPTIMIZED) ---- */
 .controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px; /* ← fixed tap zones */
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
+  padding: 12px 0;
   position: sticky;
   top: 0;
   background: white;
   z-index: 10;
 }
 
-/* Massive tap targets */
+/* Huge tap zones */
 .controls button {
-  padding: 18px 26px;          /* ← BIGGER tap area */
-  font-size: 26px;             /* ← BIGGER arrows */
-  border-radius: 14px;         /* ← thumb-friendly */
+  width: 100%;                 /* ← fills the 80px zone */
+  padding: 18px 0;             /* ← tall tap area */
+  font-size: 26px;             /* ← large arrows */
+  border-radius: 12px;
   cursor: pointer;
-  flex-shrink: 0;
-  margin: 0 12px;              /* ← pulls buttons inward from screen edges */
-  touch-action: manipulation;  /* ← reduces tap delay on mobile */
+  touch-action: manipulation;
 }
 
 /* Centered date */
 .day-date {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   text-align: center;
-  flex-grow: 1;
-  padding: 0 10px;
 }
+
