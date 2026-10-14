@@ -1,6 +1,14 @@
+// ---- DATE KEY HELPER (NO TIMEZONE SHIFT) ----
+function formatDateKey(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 // ---- GLOBAL STATE ----
 let AVAIL = null;
-let currentDate = new Date().toISOString().slice(0, 10);
+let currentDate = formatDateKey(new Date());
 const SELECTED_COMPLEXES = new Set();
 
 // Time helpers
@@ -21,6 +29,7 @@ function timeToMin(timeStr) {
   const [h, m] = timeStr.split(":").map(Number);
   return h * 60 + m;
 }
+
 
 // Human-readable date formatting
 function formatHumanDate(dateStr) {
@@ -128,21 +137,22 @@ function renderDayView() {
     </div>
   `;
 
-  document.getElementById("prevDay").onclick = () => {
+    document.getElementById("prevDay").onclick = () => {
     const d = new Date(currentDate);
     d.setDate(d.getDate() - 1);
-    currentDate = d.toISOString().split("T")[0];
+    currentDate = formatDateKey(d);
+    renderDayView();
+    renderComplexFilters();
+  };
+  
+  document.getElementById("nextDay").onclick = () => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() + 1);
+    currentDate = formatDateKey(d);
     renderDayView();
     renderComplexFilters();
   };
 
-  document.getElementById("nextDay").onclick = () => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() + 1);
-    currentDate = d.toISOString().split("T")[0];
-    renderDayView();
-    renderComplexFilters();
-  };
 
   const dayData = AVAIL.days[currentDate];
   if (!dayData) {
@@ -415,8 +425,10 @@ function renderDayTimeline(dayData) {
   }
 
   const events = collectEventsForDay(dayData, fieldIds);
-  const laneCount = events.length > 0 ? assignOverlapLanes(events) : 1;
+  const eventLaneCount = events.length > 0 ? assignOverlapLanes(events) : 1;
   const availWindows = computeGlobalAvailability(dayData, fieldIds);
+
+  const totalLaneCount = eventLaneCount + 1; // +1 for availability lane
 
   // Clear and build layout
   timelineEl.innerHTML = `
@@ -437,7 +449,11 @@ function renderDayTimeline(dayData) {
     ruler.appendChild(label);
   });
 
-  // Availability blocks (behind events)
+  const laneWidth = 720 / totalLaneCount;
+
+  // Availability lane (rightmost)
+  const availLaneIndex = totalLaneCount - 1;
+
   availWindows.forEach(win => {
     const top = win.startMin - 8 * 60;
     const height = win.endMin - win.startMin;
@@ -446,7 +462,9 @@ function renderDayTimeline(dayData) {
     div.className = "timeline-block block-available";
     div.style.top = `${top}px`;
     div.style.height = `${height}px`;
-    div.style.zIndex = 1;
+    div.style.left = `${availLaneIndex * laneWidth}px`;
+    div.style.width = `${laneWidth - 8}px`;
+    div.style.zIndex = 3;
 
     const startStr = formatTime12(win.startMin);
     const endStr = formatTime12(win.endMin);
@@ -459,12 +477,11 @@ function renderDayTimeline(dayData) {
     column.appendChild(div);
   });
 
-  // Event blocks (in lanes)
+  // Event blocks (each in its lane)
   events.forEach(ev => {
     const top = ev.startMin - 8 * 60;
     const height = ev.endMin - ev.startMin;
 
-    const laneWidth = 720 / laneCount;
     const left = ev.laneIndex * laneWidth;
 
     const div = document.createElement("div");
